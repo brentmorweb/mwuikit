@@ -35,17 +35,30 @@
     .pages-shell {
       width: 100%;
       margin: 0;
-      padding: 40px 32px 80px;
+      padding: 32px 32px 80px;
       display: flex;
       flex-direction: column;
       gap: 24px;
       box-sizing: border-box;
     }
 
+    .pages-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 8px;
+      background: linear-gradient(180deg, var(--pages-bg) 75%, rgba(245, 247, 251, 0));
+      backdrop-filter: blur(6px);
+    }
+
     .pages-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
+      gap: 24px;
     }
 
     .pages-header h1 {
@@ -53,6 +66,44 @@
       font-size: 32px;
       font-weight: 700;
       letter-spacing: -0.02em;
+    }
+
+    .pages-header p {
+      margin: 6px 0 0;
+      color: var(--pages-muted);
+    }
+
+    .pages-header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      min-width: 280px;
+    }
+
+    .quick-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--pages-accent);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .icon-button:hover {
+      background: rgba(37, 99, 235, 0.16);
+      border-color: rgba(37, 99, 235, 0.24);
     }
 
     .pages-actions {
@@ -63,16 +114,25 @@
 
     .search-input {
       position: relative;
+      display: inline-flex;
+      align-items: center;
     }
 
     .search-input input {
-      width: 220px;
-      padding: 10px 12px 10px 38px;
+      width: 260px;
+      padding: 10px 76px 10px 38px;
       border-radius: 10px;
       border: 1px solid var(--pages-border);
       background: #fff;
       font-size: 14px;
       color: var(--pages-text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input input:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.55);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
     }
 
     .search-input i {
@@ -82,6 +142,20 @@
       transform: translateY(-50%);
       color: var(--pages-muted);
       font-size: 14px;
+      pointer-events: none;
+    }
+
+    .shortcut-hint {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--pages-muted);
+      background: #f3f4f6;
+      border-radius: 8px;
+      padding: 4px 8px;
     }
 
     .pill-button {
@@ -97,6 +171,12 @@
       border: 1px solid var(--pages-border);
       background: #fff;
       cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pill-button:hover {
+      border-color: rgba(37, 99, 235, 0.5);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.12);
     }
 
     .pill-button.primary {
@@ -104,6 +184,89 @@
       border-color: var(--pages-accent);
       color: #fff;
       box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+    }
+
+    .pages-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 14px;
+      padding: 6px;
+      background: rgba(37, 99, 235, 0.08);
+      overflow-x: auto;
+    }
+
+    .tab-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--pages-text);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .tab-button .tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(37, 99, 235, 0.18);
+      color: var(--pages-accent);
+    }
+
+    .tab-button.active {
+      background: #fff;
+      color: var(--pages-accent);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.18);
+    }
+
+    .tab-button.active .tab-badge {
+      background: var(--pages-accent);
+      color: #fff;
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-chips[hidden] {
+      display: none;
+    }
+
+    .chip-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--pages-accent);
+      font-weight: 600;
+      font-size: 12px;
+      border: none;
+    }
+
+    .chip-button span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip-button i {
+      font-size: 11px;
+      color: var(--pages-accent);
     }
 
     .pages-card {
@@ -214,6 +377,145 @@
       color: var(--pages-chip-color);
       font-weight: 600;
       font-size: 12px;
+    }
+
+    body.search-mode .pages-card,
+    body.search-mode .pages-table,
+    body.search-mode .dialog,
+    body.search-mode .filter-chips,
+    body.search-mode .pages-tabs {
+      filter: blur(2px);
+      opacity: 0.6;
+      transition: filter 0.2s ease, opacity 0.2s ease;
+    }
+
+    .search-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.32);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 15;
+    }
+
+    body.search-mode .search-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .filters-drawer {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.32);
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 32px;
+      box-sizing: border-box;
+      z-index: 40;
+    }
+
+    .filters-drawer[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .drawer-panel {
+      width: 320px;
+      max-width: 100%;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.28);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .drawer-close {
+      background: transparent;
+      border: none;
+      color: var(--pages-muted);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 6px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .drawer-close:hover {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--pages-text);
+    }
+
+    .drawer-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .drawer-group h3 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--pages-text);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .drawer-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .drawer-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--pages-text);
+    }
+
+    .drawer-option input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--pages-border);
+      accent-color: var(--pages-accent);
+    }
+
+    .drawer-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-footer button {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pages-accent);
+      background: rgba(37, 99, 235, 0.1);
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .drawer-footer span {
+      font-size: 12px;
+      color: var(--pages-muted);
     }
 
     .avatar {
@@ -383,18 +685,47 @@
 
     @media (max-width: 960px) {
       .pages-shell {
-        padding: 0 16px 40px;
+        padding: 12px 16px 48px;
+      }
+
+      .pages-toolbar {
+        position: sticky;
+        top: 0;
+        padding-top: 8px;
+        gap: 12px;
       }
 
       .pages-header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 16px;
+      }
+
+      .pages-header-right {
+        width: 100%;
+        align-items: stretch;
+      }
+
+      .quick-actions {
+        align-self: flex-end;
       }
 
       .pages-actions {
         width: 100%;
-        justify-content: flex-end;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .search-input input {
+        width: 100%;
+      }
+
+      .pages-tabs {
+        flex-wrap: wrap;
       }
 
       .pages-card {
@@ -404,25 +735,49 @@
       .dialog {
         width: 100%;
       }
+
+      .drawer-panel {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="pages-shell">
-    <div class="pages-header">
-      <div>
-        <h1>Pages</h1>
-        <p style="margin: 6px 0 0; color: var(--pages-muted);">Track publishing activity across all experiences.</p>
-      </div>
-      <div class="pages-actions">
-        <div class="search-input">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-          <input type="search" placeholder="Search" aria-label="Search pages">
+    <div class="search-overlay" aria-hidden="true"></div>
+    <div class="pages-toolbar">
+      <div class="pages-header">
+        <div>
+          <h1>Pages</h1>
+          <p>Track publishing activity across all experiences.</p>
         </div>
-        <button class="pill-button" type="button"><i class="fa-solid fa-sliders" aria-hidden="true"></i>Filters</button>
-        <button class="pill-button" type="button"><i class="fa-solid fa-eye" aria-hidden="true"></i>New view</button>
-        <button class="pill-button primary" type="button" id="newButton"><i class="fa-solid fa-plus" aria-hidden="true"></i>New</button>
+        <div class="pages-header-right">
+          <div class="quick-actions" aria-label="History and view controls">
+            <button class="icon-button" type="button" title="Undo" aria-label="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
+            <button class="icon-button" type="button" title="Redo" aria-label="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
+            <button class="icon-button" type="button" title="Toggle view" aria-label="Toggle view"><i class="fa-solid fa-table-cells" aria-hidden="true"></i></button>
+          </div>
+          <div class="pages-actions">
+            <div class="search-input">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input type="search" id="pagesSearch" placeholder="Search pages" aria-label="Search pages">
+              <span class="shortcut-hint" aria-hidden="true">⌘ /</span>
+            </div>
+            <button class="pill-button" type="button" id="filtersButton"><i class="fa-solid fa-sliders" aria-hidden="true"></i>Filters</button>
+            <button class="pill-button primary" type="button" id="newButton"><i class="fa-solid fa-plus" aria-hidden="true"></i>New</button>
+          </div>
+        </div>
       </div>
+
+      <nav class="pages-tabs" role="tablist" aria-label="Page status scopes">
+        <button class="tab-button active" type="button" role="tab" aria-selected="true" data-status-tab="all">All <span class="tab-badge" data-status-count="all">0</span></button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="published">Published <span class="tab-badge" data-status-count="published">0</span></button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="unpublished">Unpublished <span class="tab-badge" data-status-count="unpublished">0</span></button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="draft">Drafts <span class="tab-badge" data-status-count="draft">0</span></button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">0</span></button>
+      </nav>
+
+      <div class="filter-chips" id="filterChips" hidden aria-live="polite"></div>
     </div>
 
     <div class="pages-card">
@@ -761,6 +1116,31 @@
     </div>
   </div>
 
+  <div class="filters-drawer" id="filtersDrawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="filtersDrawerTitle">
+      <div class="drawer-header">
+        <h2 id="filtersDrawerTitle">Filters</h2>
+        <button class="drawer-close" type="button" aria-label="Close filters">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="drawer-groups">
+        <div class="drawer-group">
+          <h3>Authors</h3>
+          <div class="drawer-options" id="authorFilterOptions"></div>
+        </div>
+        <div class="drawer-group">
+          <h3>Types</h3>
+          <div class="drawer-options" id="typeFilterOptions"></div>
+        </div>
+      </div>
+      <div class="drawer-footer">
+        <button type="button" id="clearFiltersButton">Clear filters</button>
+        <span>Filters apply instantly</span>
+      </div>
+    </div>
+  </div>
+
   <div class="dialog-backdrop" id="newDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="newDialogTitle">
     <div class="dialog">
       <div class="dialog-header">
@@ -790,38 +1170,400 @@
 
   <script>
     (function () {
+      const state = {
+        status: 'all',
+        search: '',
+        searchRaw: '',
+        authors: new Set(),
+        types: new Set(),
+      };
+
+      const searchInput = document.getElementById('pagesSearch');
+      const filterChips = document.getElementById('filterChips');
+      const tabButtons = document.querySelectorAll('[data-status-tab]');
+      const countBadges = document.querySelectorAll('[data-status-count]');
+      const filtersButton = document.getElementById('filtersButton');
+      const filtersDrawer = document.getElementById('filtersDrawer');
+      const drawerCloseButton = filtersDrawer?.querySelector('.drawer-close');
+      const authorOptions = document.getElementById('authorFilterOptions');
+      const typeOptions = document.getElementById('typeFilterOptions');
+      const clearFiltersButton = document.getElementById('clearFiltersButton');
+      const searchOverlay = document.querySelector('.search-overlay');
       const newButton = document.getElementById('newButton');
       const dialog = document.getElementById('newDialog');
-      const closeButton = dialog.querySelector('.dialog-close');
-      const optionButtons = dialog.querySelectorAll('.dialog-option');
+      const dialogCloseButton = dialog?.querySelector('.dialog-close');
+      const optionButtons = dialog ? dialog.querySelectorAll('.dialog-option') : [];
 
-      if (!newButton || !dialog || !closeButton) {
-        return;
+      const tableRows = Array.from(document.querySelectorAll('.pages-table tbody tr')).filter((row) => !row.classList.contains('group-row'));
+      const groupRows = Array.from(document.querySelectorAll('.pages-table tbody tr.group-row'));
+
+      const normaliseStatus = (value) => {
+        const status = value.toLowerCase();
+        if (status.includes('unpublished')) return 'unpublished';
+        if (status.includes('scheduled')) return 'scheduled';
+        if (status.includes('draft')) return 'draft';
+        if (status.includes('publish')) return 'published';
+        return 'all';
+      };
+
+      const rowData = tableRows.map((row) => {
+        const statusText = row.querySelector('td:nth-child(2) .badge')?.textContent.trim() || '';
+        const typeText = row.querySelector('td:nth-child(3) .chip')?.textContent.trim() || '';
+        const authorText = row.querySelector('td:nth-child(4) .meta strong')?.textContent.trim() || '';
+        const searchText = row.textContent.toLowerCase();
+        return {
+          element: row,
+          status: normaliseStatus(statusText),
+          type: typeText,
+          author: authorText,
+          searchText,
+        };
+      });
+
+      const syncBodyScrollState = () => {
+        const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
+        const dialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
+        document.body.style.overflow = drawerOpen || dialogOpen ? 'hidden' : '';
+      };
+
+      const matchesBaseFilters = (item) => {
+        const searchMatch = !state.search || item.searchText.includes(state.search);
+        const authorMatch = state.authors.size === 0 || state.authors.has(item.author);
+        const typeMatch = state.types.size === 0 || state.types.has(item.type);
+        return searchMatch && authorMatch && typeMatch;
+      };
+
+      const updateGroupRowsVisibility = () => {
+        groupRows.forEach((groupRow) => {
+          let sibling = groupRow.nextElementSibling;
+          let hasVisible = false;
+          while (sibling && !sibling.classList.contains('group-row')) {
+            if (sibling.style.display !== 'none') {
+              hasVisible = true;
+              break;
+            }
+            sibling = sibling.nextElementSibling;
+          }
+          groupRow.style.display = hasVisible ? '' : 'none';
+        });
+      };
+
+      const updateCounts = (baseMatches) => {
+        const counts = { all: 0, published: 0, unpublished: 0, draft: 0, scheduled: 0 };
+        rowData.forEach((item) => {
+          if (!baseMatches.get(item)) {
+            return;
+          }
+          const key = item.status !== 'all' && Object.prototype.hasOwnProperty.call(counts, item.status)
+            ? item.status
+            : null;
+          if (key) {
+            counts[key] += 1;
+          }
+          counts.all += 1;
+        });
+
+        countBadges.forEach((badge) => {
+          const key = badge.dataset.statusCount;
+          if (!key) {
+            return;
+          }
+          badge.textContent = counts[key] ?? 0;
+        });
+      };
+
+      const renderChips = () => {
+        if (!filterChips) {
+          return;
+        }
+
+        const chips = [];
+
+        if (state.search) {
+          chips.push({ type: 'search', value: state.searchRaw });
+        }
+
+        state.authors.forEach((value) => {
+          chips.push({ type: 'author', value });
+        });
+
+        state.types.forEach((value) => {
+          chips.push({ type: 'type', value });
+        });
+
+        filterChips.innerHTML = '';
+
+        if (chips.length === 0) {
+          filterChips.hidden = true;
+          return;
+        }
+
+        filterChips.hidden = false;
+
+        chips.forEach((chip) => {
+          const button = document.createElement('button');
+          const labelPrefix = chip.type === 'search' ? 'Search' : chip.type === 'author' ? 'Author' : 'Type';
+          const label = `${labelPrefix}: ${chip.value}`;
+          button.type = 'button';
+          button.className = 'chip-button';
+          button.dataset.chipType = chip.type;
+          button.dataset.chipValue = chip.value;
+          button.setAttribute('aria-label', `Remove ${label}`);
+          button.innerHTML = `<span>${label}</span><i class="fa-solid fa-xmark" aria-hidden="true"></i>`;
+          filterChips.appendChild(button);
+        });
+      };
+
+      const updateRows = () => {
+        const baseMatches = new Map();
+
+        rowData.forEach((item) => {
+          const matchesBase = matchesBaseFilters(item);
+          baseMatches.set(item, matchesBase);
+          const matchesStatus = state.status === 'all' || item.status === state.status;
+          item.element.style.display = matchesBase && matchesStatus ? '' : 'none';
+        });
+
+        updateGroupRowsVisibility();
+        updateCounts(baseMatches);
+        renderChips();
+      };
+
+      const focusSearchInput = () => {
+        if (!searchInput) {
+          return;
+        }
+        searchInput.focus();
+        searchInput.select();
+      };
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (event) => {
+          const rawValue = event.target.value.trim();
+          if (rawValue.length >= 3) {
+            state.search = rawValue.toLowerCase();
+            state.searchRaw = rawValue;
+          } else {
+            state.search = '';
+            state.searchRaw = '';
+          }
+          updateRows();
+        });
+
+        searchInput.addEventListener('focus', () => {
+          document.body.classList.add('search-mode');
+        });
+
+        searchInput.addEventListener('blur', () => {
+          window.requestAnimationFrame(() => {
+            if (document.activeElement !== searchInput) {
+              document.body.classList.remove('search-mode');
+            }
+          });
+        });
       }
 
-      const openDialog = () => {
-        dialog.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        closeButton.focus();
-      };
+      if (searchOverlay) {
+        searchOverlay.addEventListener('click', () => {
+          searchInput?.blur();
+        });
+      }
 
-      const closeDialog = () => {
-        dialog.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        newButton.focus();
-      };
-
-      newButton.addEventListener('click', openDialog);
-      closeButton.addEventListener('click', closeDialog);
-
-      dialog.addEventListener('click', (event) => {
-        if (event.target === dialog) {
-          closeDialog();
+      document.addEventListener('keydown', (event) => {
+        if ((event.metaKey || event.ctrlKey) && event.key === '/') {
+          event.preventDefault();
+          focusSearchInput();
         }
       });
 
+      if (filterChips) {
+        filterChips.addEventListener('click', (event) => {
+          const target = event.target.closest('.chip-button');
+          if (!target) {
+            return;
+          }
+          const { chipType, chipValue } = target.dataset;
+          if (!chipType || !chipValue) {
+            return;
+          }
+
+          if (chipType === 'search') {
+            if (searchInput) {
+              searchInput.value = '';
+            }
+            state.search = '';
+            state.searchRaw = '';
+          } else if (chipType === 'author') {
+            state.authors.delete(chipValue);
+          } else if (chipType === 'type') {
+            state.types.delete(chipValue);
+          }
+
+          syncFilterCheckboxes();
+          updateRows();
+        });
+      }
+
+      tabButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const status = button.dataset.statusTab;
+          if (!status || status === state.status) {
+            return;
+          }
+
+          state.status = status;
+
+          tabButtons.forEach((tab) => {
+            const isActive = tab === button;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+
+          updateRows();
+        });
+      });
+
+      const buildFilterOptions = (container, values, type) => {
+        if (!container) {
+          return [];
+        }
+
+        container.innerHTML = '';
+        const checkboxes = [];
+
+        values.forEach((value) => {
+          if (!value) {
+            return;
+          }
+          const label = document.createElement('label');
+          label.className = 'drawer-option';
+
+          const input = document.createElement('input');
+          input.type = 'checkbox';
+          input.value = value;
+          input.dataset.filterType = type;
+
+          const text = document.createElement('span');
+          text.textContent = value;
+
+          input.addEventListener('change', () => {
+            const targetSet = type === 'author' ? state.authors : state.types;
+            if (input.checked) {
+              targetSet.add(value);
+            } else {
+              targetSet.delete(value);
+            }
+            updateRows();
+          });
+
+          label.append(input, text);
+          container.appendChild(label);
+          checkboxes.push(input);
+        });
+
+        return checkboxes;
+      };
+
+      const authorValues = Array.from(new Set(rowData.map((item) => item.author))).filter(Boolean).sort();
+      const typeValues = Array.from(new Set(rowData.map((item) => item.type))).filter(Boolean).sort();
+
+      const authorCheckboxes = buildFilterOptions(authorOptions, authorValues, 'author');
+      const typeCheckboxes = buildFilterOptions(typeOptions, typeValues, 'type');
+
+      const syncFilterCheckboxes = () => {
+        authorCheckboxes.forEach((checkbox) => {
+          checkbox.checked = state.authors.has(checkbox.value);
+        });
+        typeCheckboxes.forEach((checkbox) => {
+          checkbox.checked = state.types.has(checkbox.value);
+        });
+      };
+
+      const openDrawer = () => {
+        if (!filtersDrawer) {
+          return;
+        }
+        filtersDrawer.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        const firstInput = filtersDrawer.querySelector('input');
+        if (firstInput) {
+          firstInput.focus();
+        }
+      };
+
+      const closeDrawer = () => {
+        if (!filtersDrawer) {
+          return;
+        }
+        filtersDrawer.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        filtersButton?.focus();
+      };
+
+      if (filtersButton) {
+        filtersButton.addEventListener('click', () => {
+          if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
+            closeDrawer();
+          } else {
+            openDrawer();
+          }
+        });
+      }
+
+      drawerCloseButton?.addEventListener('click', closeDrawer);
+
+      filtersDrawer?.addEventListener('click', (event) => {
+        if (event.target === filtersDrawer) {
+          closeDrawer();
+        }
+      });
+
+      if (clearFiltersButton) {
+        clearFiltersButton.addEventListener('click', () => {
+          state.authors.clear();
+          state.types.clear();
+          syncFilterCheckboxes();
+          updateRows();
+        });
+      }
+
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && dialog.getAttribute('aria-hidden') === 'false') {
+        if (event.key === 'Escape') {
+          if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeDrawer();
+            return;
+          }
+          if (dialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeDialog();
+          }
+        }
+      });
+
+      const openDialog = () => {
+        if (!dialog) {
+          return;
+        }
+        dialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        dialogCloseButton?.focus();
+      };
+
+      const closeDialog = () => {
+        if (!dialog) {
+          return;
+        }
+        dialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        newButton?.focus();
+      };
+
+      newButton?.addEventListener('click', openDialog);
+      dialogCloseButton?.addEventListener('click', closeDialog);
+
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) {
           closeDialog();
         }
       });
@@ -830,9 +1572,19 @@
         button.addEventListener('click', () => {
           const action = button.dataset.action;
           closeDialog();
-          console.log(`Create new ${action}`);
+          if (action) {
+            console.log(`Create new ${action}`);
+          }
         });
       });
+
+      const initialise = () => {
+        updateRows();
+        syncFilterCheckboxes();
+        syncBodyScrollState();
+      };
+
+      initialise();
     })();
   </script>
 </body>
