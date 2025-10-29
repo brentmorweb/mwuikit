@@ -277,10 +277,82 @@
       overflow: hidden;
     }
 
+    .bulk-actions-bar {
+      position: sticky;
+      top: 86px;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--pages-border);
+      background: #fff;
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.16);
+    }
+
+    .bulk-actions-bar.is-active {
+      display: flex;
+    }
+
+    .bulk-summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .bulk-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .bulk-actions button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--pages-border);
+      background: #fff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    }
+
+    .bulk-actions button:hover {
+      border-color: rgba(37, 99, 235, 0.5);
+      color: var(--pages-accent);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    .bulk-actions .bulk-clear {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    .bulk-actions .bulk-clear:hover {
+      border-color: #ef4444;
+      color: #b91c1c;
+      box-shadow: 0 12px 24px rgba(239, 68, 68, 0.15);
+    }
+
     table.pages-table {
       width: 100%;
       border-collapse: collapse;
       min-width: 960px;
+    }
+
+    .pages-table colgroup col.checkbox-col {
+      width: 48px;
+    }
+
+    .pages-table colgroup col.wide {
+      width: 240px;
     }
 
     .pages-table thead th {
@@ -293,6 +365,11 @@
       color: var(--pages-muted);
       background: #f9fafc;
       border-bottom: 1px solid var(--pages-border);
+    }
+
+    .pages-table thead th.checkbox-cell {
+      padding-left: 20px;
+      padding-right: 12px;
     }
 
     .pages-table tbody tr:not(.group-row) {
@@ -311,11 +388,34 @@
       color: var(--pages-text);
     }
 
+    .pages-table tbody td.checkbox-cell {
+      padding-left: 20px;
+      padding-right: 12px;
+    }
+
     .title-cell {
       display: flex;
       align-items: center;
       gap: 16px;
       font-weight: 600;
+    }
+
+    .title-cell .home-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--pages-accent);
+      font-size: 14px;
+    }
+
+    .title-cell .title-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .subtitle {
@@ -364,6 +464,172 @@
       color: var(--pages-chip-color);
       font-weight: 600;
       font-size: 12px;
+    }
+
+    .checkbox {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+    }
+
+    .checkbox input {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 1.5px solid var(--pages-border);
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .checkbox input:hover {
+      border-color: rgba(37, 99, 235, 0.6);
+    }
+
+    .checkbox input:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.28);
+    }
+
+    .checkbox input::after {
+      content: '';
+      width: 10px;
+      height: 6px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) scale(0);
+      transform-origin: center;
+      transition: transform 0.2s ease;
+      display: block;
+    }
+
+    .checkbox input:checked {
+      background: var(--pages-accent);
+      border-color: var(--pages-accent);
+    }
+
+    .checkbox input:checked::after {
+      transform: rotate(-45deg) scale(1);
+    }
+
+    .checkbox input:indeterminate {
+      background: rgba(37, 99, 235, 0.12);
+      border-color: rgba(37, 99, 235, 0.5);
+    }
+
+    .checkbox input:indeterminate::after {
+      width: 8px;
+      height: 0;
+      border: none;
+      border-radius: 999px;
+      background: var(--pages-accent);
+      transform: scale(1);
+    }
+
+    .sort-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: transparent;
+      font: inherit;
+      color: inherit;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .sort-button .sort-indicator {
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .sort-button.is-active .sort-indicator {
+      opacity: 1;
+    }
+
+    .sort-button[data-direction='asc'] .sort-indicator {
+      transform: rotate(0deg);
+    }
+
+    .sort-button[data-direction='desc'] .sort-indicator {
+      transform: rotate(180deg);
+    }
+
+    .title-button,
+    .status-pill,
+    .author-filter,
+    .reports-button {
+      border: none;
+      background: transparent;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .status-pill {
+      display: inline-flex;
+    }
+
+    .author-filter {
+      display: inline-flex;
+    }
+
+    .title-button {
+      font-weight: 700;
+    }
+
+    .title-button:hover,
+    .title-button:focus-visible {
+      color: var(--pages-accent);
+    }
+
+    .status-pill:focus-visible,
+    .author-filter:focus-visible,
+    .reports-button:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+      border-radius: 10px;
+    }
+
+    .author-filter .avatar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-filter:hover .avatar span,
+    .author-filter:focus-visible .avatar span {
+      background: rgba(37, 99, 235, 0.14);
+    }
+
+    .reports-button {
+      display: inline-flex;
+    }
+
+    .page-row.is-selected {
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .page-row.is-selected:hover {
+      background: rgba(37, 99, 235, 0.12);
+    }
+
+    .page-row.is-filter-hidden,
+    .page-row.is-collapsed {
+      display: none !important;
     }
 
     body.search-mode .pages-card,
@@ -544,10 +810,51 @@
       border-bottom: 1px solid var(--pages-border);
     }
 
+    .group-row.is-filter-hidden {
+      display: none;
+    }
+
     .folder-header {
       display: flex;
       align-items: center;
       gap: 14px;
+    }
+
+    .folder-toggle {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+
+    .folder-toggle:focus-visible {
+      outline: none;
+    }
+
+    .folder-toggle:focus-visible .folder-name {
+      text-decoration: underline;
+    }
+
+    .folder-caret {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--pages-accent);
+      transition: transform 0.2s ease;
+      font-size: 12px;
+    }
+
+    .folder-toggle[aria-expanded='false'] .folder-caret {
+      transform: rotate(-90deg);
     }
 
     .folder-icon {
@@ -560,6 +867,21 @@
       background: rgba(37, 99, 235, 0.14);
       color: var(--pages-accent);
       font-size: 16px;
+    }
+
+    .folder-icon[data-color='purple'] {
+      background: rgba(124, 58, 237, 0.16);
+      color: #7c3aed;
+    }
+
+    .folder-icon[data-color='teal'] {
+      background: rgba(13, 148, 136, 0.18);
+      color: #0f766e;
+    }
+
+    .folder-icon[data-color='amber'] {
+      background: rgba(217, 119, 6, 0.2);
+      color: #b45309;
     }
 
     .folder-details {
@@ -580,13 +902,50 @@
       font-weight: 500;
     }
 
+    .folder-count {
+      font-weight: 600;
+    }
+
     .page-row[data-folder] td:first-child {
       padding-left: 56px;
+    }
+
+    .page-row[data-folder] td.checkbox-cell {
+      padding-left: 48px;
+    }
+
+    .folder-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .group-row:hover .folder-actions,
+    .group-row:focus-within .folder-actions {
+      opacity: 1;
+    }
+
+    .folder-actions button {
+      border: none;
+      background: transparent;
+      color: var(--pages-muted);
+      padding: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .folder-actions button:hover {
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--pages-accent);
     }
 
     .actions {
       display: flex;
       justify-content: flex-end;
+      gap: 6px;
     }
 
     .actions button {
@@ -602,6 +961,36 @@
     .actions button:hover {
       background: rgba(37, 99, 235, 0.12);
       color: var(--pages-accent);
+    }
+
+    .reports-metric {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pages-muted);
+    }
+
+    .reports-metric strong {
+      font-size: 14px;
+      color: var(--pages-text);
+    }
+
+    .metric-trend {
+      font-weight: 600;
+    }
+
+    .metric-trend.positive {
+      color: #047857;
+    }
+
+    .metric-trend.negative {
+      color: #b91c1c;
+    }
+
+    .metric-trend.neutral {
+      color: var(--pages-muted);
     }
 
     .dialog-backdrop {
@@ -680,6 +1069,141 @@
     .dialog-option:hover {
       border-color: var(--pages-accent);
       box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16);
+    }
+
+    .folder-dialog {
+      max-width: 420px;
+    }
+
+    .folder-dialog form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .form-field input[type='text'] {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--pages-border);
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-field input[type='text']:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.5);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 10px;
+    }
+
+    .color-swatch {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .color-swatch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .color-swatch span {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+
+    .color-swatch[data-color='blue'] {
+      background: rgba(37, 99, 235, 0.18);
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    .color-swatch[data-color='purple'] {
+      background: rgba(124, 58, 237, 0.18);
+      border-color: rgba(124, 58, 237, 0.4);
+    }
+
+    .color-swatch[data-color='teal'] {
+      background: rgba(13, 148, 136, 0.18);
+      border-color: rgba(13, 148, 136, 0.4);
+    }
+
+    .color-swatch[data-color='amber'] {
+      background: rgba(217, 119, 6, 0.18);
+      border-color: rgba(217, 119, 6, 0.4);
+    }
+
+    .color-swatch input:checked + span,
+    .color-swatch input:focus-visible + span {
+      outline: 2px solid rgba(15, 23, 42, 0.2);
+      outline-offset: 2px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .checkbox-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--pages-text);
+    }
+
+    .checkbox-option input {
+      width: 16px;
+      height: 16px;
+    }
+
+    .dialog-actions button {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--pages-border);
+      background: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .dialog-actions button:hover {
+      border-color: rgba(37, 99, 235, 0.6);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    .dialog-actions .primary {
+      background: var(--pages-accent);
+      color: #fff;
+      border-color: var(--pages-accent);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.18);
+    }
+
+    .dialog-actions .primary:hover {
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.22);
     }
 
     .dialog-option .icon-circle {
@@ -799,355 +1323,605 @@
       </nav>
 
       <div class="filter-chips" id="filterChips" hidden aria-live="polite"></div>
+      <div class="bulk-actions-bar" id="bulkActionsBar" aria-hidden="true">
+        <div class="bulk-summary">
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+          <span id="selectionCount">0 selected</span>
+        </div>
+        <div class="bulk-actions" role="group" aria-label="Bulk actions">
+          <button type="button" data-bulk-action="publish"><i class="fa-solid fa-globe" aria-hidden="true"></i>Publish</button>
+          <button type="button" data-bulk-action="unpublish"><i class="fa-solid fa-toggle-off" aria-hidden="true"></i>Unpublish</button>
+          <button type="button" data-bulk-action="move"><i class="fa-solid fa-folder-arrow-down" aria-hidden="true"></i>Move to Folder</button>
+          <button type="button" data-bulk-action="archive"><i class="fa-solid fa-box-archive" aria-hidden="true"></i>Archive</button>
+          <button type="button" data-bulk-action="delete"><i class="fa-solid fa-trash-can" aria-hidden="true"></i>Delete</button>
+          <button type="button" class="bulk-clear" id="clearSelectionButton"><i class="fa-solid fa-xmark" aria-hidden="true"></i>Clear Selection</button>
+        </div>
+      </div>
     </div>
 
     <div class="pages-card">
       <table class="pages-table">
+        <colgroup>
+          <col class="checkbox-col">
+          <col class="wide">
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+        </colgroup>
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Author</th>
-            <th>Reports</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Actions</th>
+            <th scope="col" class="checkbox-cell">
+              <label class="checkbox" aria-label="Select all pages">
+                <input type="checkbox" id="masterCheckbox">
+              </label>
+            </th>
+            <th scope="col">Title</th>
+            <th scope="col">
+              <button type="button" class="sort-button" data-sort-key="status" data-direction="desc">
+                <span>Status</span>
+                <span class="sort-indicator" aria-hidden="true">▲</span>
+              </button>
+            </th>
+            <th scope="col">
+              <button type="button" class="sort-button" data-sort-key="type" data-direction="asc">
+                <span>Type</span>
+                <span class="sort-indicator" aria-hidden="true">▲</span>
+              </button>
+            </th>
+            <th scope="col">
+              <button type="button" class="sort-button" data-sort-key="author" data-direction="asc">
+                <span>Author</span>
+                <span class="sort-indicator" aria-hidden="true">▲</span>
+              </button>
+            </th>
+            <th scope="col">
+              <button type="button" class="sort-button" data-sort-key="reports" data-direction="desc">
+                <span>Reports</span>
+                <span class="sort-indicator" aria-hidden="true">▲</span>
+              </button>
+            </th>
+            <th scope="col">
+              <button type="button" class="sort-button" data-sort-key="created" data-direction="desc">
+                <span>Created</span>
+                <span class="sort-indicator" aria-hidden="true">▲</span>
+              </button>
+            </th>
+            <th scope="col">
+              <button type="button" class="sort-button" data-sort-key="modified" data-direction="desc">
+                <span>Modified</span>
+                <span class="sort-indicator" aria-hidden="true">▲</span>
+              </button>
+            </th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="group-row" data-folder="website">
+          <tr class="group-row" data-folder="website" data-folder-total="3" data-folder-name="Website" data-folder-color="blue">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-folder-checkbox data-folder-id="website" aria-label="Select folder Website">
+              </label>
+            </td>
             <td colspan="8">
               <div class="folder-header">
-                <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-folder-tree"></i></span>
-                <div class="folder-details">
-                  <span class="folder-name">Website</span>
-                  <span class="group-meta">Folder · 3 pages</span>
+                <button type="button" class="folder-toggle" data-folder-toggle="website" aria-expanded="true">
+                  <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                  <span class="folder-icon" data-color="blue" aria-hidden="true"><i class="fa-solid fa-folder-tree"></i></span>
+                  <div class="folder-details">
+                    <span class="folder-name">Website</span>
+                    <span class="group-meta"><span class="folder-count" data-folder-count>3 pages</span></span>
+                  </div>
+                </button>
+                <div class="folder-actions" role="group" aria-label="Website folder actions">
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
           </tr>
-          <tr class="page-row" data-folder="website">
+          <tr class="page-row" data-folder="website" data-page-id="homepage-2025" data-status="published" data-type="Landing" data-author="John Lee" data-title="Homepage 2025" data-created="2025-01-05" data-modified="2025-07-20" data-report-value="2400" data-report-trend="18" data-report-direction="up">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Homepage 2025">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Homepage 2025
+                <span class="home-icon" aria-hidden="true"><i class="fa-solid fa-house"></i></span>
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="homepage-2025">Homepage 2025</button>
                   <span class="subtitle">Main landing experience</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge published">Published</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
             <td><span class="chip">Landing</span></td>
             <td>
-              <div class="avatar">
-                <span>JL</span>
-                <div class="meta">
-                  <strong>John Lee</strong>
-                  <span>Product</span>
+              <button type="button" class="author-filter" data-author-filter="John Lee" title="Filter by John Lee">
+                <div class="avatar">
+                  <span>JL</span>
+                  <div class="meta">
+                    <strong>John Lee</strong>
+                    <span>Product</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>2.4K views</strong>
-                <span>+18% vs last week</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="homepage-2025">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>2.4K views</strong>
+                  <span class="metric-trend positive">+18% vs last week</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 05, 2025</td>
-            <td>Jul 20, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 05, 2025</td>
+            <td data-modified-label>Jul 20, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="website">
+          <tr class="page-row" data-folder="website" data-page-id="style-guide" data-status="unpublished" data-type="Style Guide" data-author="Alice Moore" data-title="Style Guide – Color & Typography" data-created="2025-01-07" data-modified="2025-07-18" data-report-value="385" data-report-trend="0" data-report-direction="neutral">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Style Guide – Color & Typography">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Style Guide – Color & Typography
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="style-guide">Style Guide – Color & Typography</button>
                   <span class="subtitle">Design system foundations</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge unpublished">Unpublished</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="unpublished"><span class="badge unpublished">Unpublished</span></button>
+            </td>
             <td><span class="chip">Style Guide</span></td>
             <td>
-              <div class="avatar">
-                <span>AM</span>
-                <div class="meta">
-                  <strong>Alice Moore</strong>
-                  <span>Design</span>
+              <button type="button" class="author-filter" data-author-filter="Alice Moore" title="Filter by Alice Moore">
+                <div class="avatar">
+                  <span>AM</span>
+                  <div class="meta">
+                    <strong>Alice Moore</strong>
+                    <span>Design</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>385 views</strong>
-                <span>New entry</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="style-guide">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>385 views</strong>
+                  <span class="metric-trend neutral">New entry</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 07, 2025</td>
-            <td>Jul 18, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 07, 2025</td>
+            <td data-modified-label>Jul 18, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="website">
+          <tr class="page-row" data-folder="website" data-page-id="homepage-test" data-status="unpublished" data-type="Content" data-author="Ryan Chen" data-title="_Test" data-created="2025-01-11" data-modified="2025-07-15" data-report-value="0" data-report-trend="0" data-report-direction="neutral">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select _Test">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  _Test
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="homepage-test">_Test</button>
                   <span class="subtitle">Internal draft for hero copy</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge unpublished">Unpublished</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="unpublished"><span class="badge unpublished">Unpublished</span></button>
+            </td>
             <td><span class="chip">Content</span></td>
             <td>
-              <div class="avatar">
-                <span>RC</span>
-                <div class="meta">
-                  <strong>Ryan Chen</strong>
-                  <span>Copywriting</span>
+              <button type="button" class="author-filter" data-author-filter="Ryan Chen" title="Filter by Ryan Chen">
+                <div class="avatar">
+                  <span>RC</span>
+                  <div class="meta">
+                    <strong>Ryan Chen</strong>
+                    <span>Copywriting</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>--</strong>
-                <span>Not tracked</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="homepage-test">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>--</strong>
+                  <span class="metric-trend neutral">Not tracked</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 11, 2025</td>
-            <td>Jul 15, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 11, 2025</td>
+            <td data-modified-label>Jul 15, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="group-row" data-folder="solutions">
+          <tr class="group-row" data-folder="solutions" data-folder-total="5" data-folder-name="Solutions" data-folder-color="purple">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-folder-checkbox data-folder-id="solutions" aria-label="Select folder Solutions">
+              </label>
+            </td>
             <td colspan="8">
               <div class="folder-header">
-                <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-folder-open"></i></span>
-                <div class="folder-details">
-                  <span class="folder-name">Solutions</span>
-                  <span class="group-meta">Folder · 5 pages</span>
+                <button type="button" class="folder-toggle" data-folder-toggle="solutions" aria-expanded="true">
+                  <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                  <span class="folder-icon" data-color="purple" aria-hidden="true"><i class="fa-solid fa-folder-open"></i></span>
+                  <div class="folder-details">
+                    <span class="folder-name">Solutions</span>
+                    <span class="group-meta"><span class="folder-count" data-folder-count>5 pages</span></span>
+                  </div>
+                </button>
+                <div class="folder-actions" role="group" aria-label="Solutions folder actions">
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
           </tr>
-          <tr class="page-row" data-folder="solutions">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-higher-ed" data-status="published" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Higher Education" data-created="2025-01-12" data-modified="2025-07-15" data-report-value="1600" data-report-trend="9" data-report-direction="up">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Hospitals &amp; Higher Education">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Hospitals & Higher Education
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="solutions-higher-ed">Hospitals &amp; Higher Education</button>
                   <span class="subtitle">Industry solutions overview</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge published">Published</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
             <td><span class="chip">Landing</span></td>
             <td>
-              <div class="avatar">
-                <span>JL</span>
-                <div class="meta">
-                  <strong>John Lee</strong>
-                  <span>Product</span>
+              <button type="button" class="author-filter" data-author-filter="John Lee" title="Filter by John Lee">
+                <div class="avatar">
+                  <span>JL</span>
+                  <div class="meta">
+                    <strong>John Lee</strong>
+                    <span>Product</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>1.6K views</strong>
-                <span>+9% vs last week</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="solutions-higher-ed">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>1.6K views</strong>
+                  <span class="metric-trend positive">+9% vs last week</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 12, 2025</td>
-            <td>Jul 15, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 12, 2025</td>
+            <td data-modified-label>Jul 15, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="solutions">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-nonprofit" data-status="unpublished" data-type="Landing" data-author="Alice Moore" data-title="Nonprofit &amp; Organizations" data-created="2025-01-13" data-modified="2025-07-10" data-report-value="385" data-report-trend="0" data-report-direction="neutral">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Nonprofit &amp; Organizations">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Nonprofit & Organizations
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="solutions-nonprofit">Nonprofit &amp; Organizations</button>
                   <span class="subtitle">Partnership overview</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge unpublished">Unpublished</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="unpublished"><span class="badge unpublished">Unpublished</span></button>
+            </td>
             <td><span class="chip">Landing</span></td>
             <td>
-              <div class="avatar">
-                <span>AM</span>
-                <div class="meta">
-                  <strong>Alice Moore</strong>
-                  <span>Design</span>
+              <button type="button" class="author-filter" data-author-filter="Alice Moore" title="Filter by Alice Moore">
+                <div class="avatar">
+                  <span>AM</span>
+                  <div class="meta">
+                    <strong>Alice Moore</strong>
+                    <span>Design</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>385 views</strong>
-                <span>Flat vs last week</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="solutions-nonprofit">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>385 views</strong>
+                  <span class="metric-trend neutral">Flat vs last week</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 13, 2025</td>
-            <td>Jul 10, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 13, 2025</td>
+            <td data-modified-label>Jul 10, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="solutions">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-associations" data-status="draft" data-type="Content" data-author="Ryan Chen" data-title="Associations &amp; Memberships" data-created="2025-01-19" data-modified="2025-07-09" data-report-value="0" data-report-trend="0" data-report-direction="neutral">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Associations &amp; Memberships">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Associations & Memberships
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="solutions-associations">Associations &amp; Memberships</button>
                   <span class="subtitle">Engagement programs</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge draft">Draft</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="draft"><span class="badge draft">Draft</span></button>
+            </td>
             <td><span class="chip">Content</span></td>
             <td>
-              <div class="avatar">
-                <span>RC</span>
-                <div class="meta">
-                  <strong>Ryan Chen</strong>
-                  <span>Copywriting</span>
+              <button type="button" class="author-filter" data-author-filter="Ryan Chen" title="Filter by Ryan Chen">
+                <div class="avatar">
+                  <span>RC</span>
+                  <div class="meta">
+                    <strong>Ryan Chen</strong>
+                    <span>Copywriting</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>--</strong>
-                <span>Not tracked</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="solutions-associations">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>--</strong>
+                  <span class="metric-trend neutral">Not tracked</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 19, 2025</td>
-            <td>Jul 09, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 19, 2025</td>
+            <td data-modified-label>Jul 09, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="solutions">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-healthcare" data-status="scheduled" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Healthcare" data-created="2025-01-22" data-modified="2025-07-08" data-report-value="995" data-report-trend="4" data-report-direction="up">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Hospitals &amp; Healthcare">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Hospitals & Healthcare
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="solutions-healthcare">Hospitals &amp; Healthcare</button>
                   <span class="subtitle">Care teams landing</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge scheduled">Scheduled</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="scheduled"><span class="badge scheduled">Scheduled</span></button>
+            </td>
             <td><span class="chip">Landing</span></td>
             <td>
-              <div class="avatar">
-                <span>JL</span>
-                <div class="meta">
-                  <strong>John Lee</strong>
-                  <span>Product</span>
+              <button type="button" class="author-filter" data-author-filter="John Lee" title="Filter by John Lee">
+                <div class="avatar">
+                  <span>JL</span>
+                  <div class="meta">
+                    <strong>John Lee</strong>
+                    <span>Product</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>995 views</strong>
-                <span>+4% vs last week</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="solutions-healthcare">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>995 views</strong>
+                  <span class="metric-trend positive">+4% vs last week</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 22, 2025</td>
-            <td>Jul 08, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 22, 2025</td>
+            <td data-modified-label>Jul 08, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="solutions">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-docs" data-status="published" data-type="Docs" data-author="Alice Moore" data-title="Solutions – All Docs" data-created="2025-01-25" data-modified="2025-07-05" data-report-value="712" data-report-trend="2" data-report-direction="up">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Solutions – All Docs">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Solutions – All Docs
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="solutions-docs">Solutions – All Docs</button>
                   <span class="subtitle">Shared resources hub</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge published">Published</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
             <td><span class="chip">Docs</span></td>
             <td>
-              <div class="avatar">
-                <span>AM</span>
-                <div class="meta">
-                  <strong>Alice Moore</strong>
-                  <span>Design</span>
+              <button type="button" class="author-filter" data-author-filter="Alice Moore" title="Filter by Alice Moore">
+                <div class="avatar">
+                  <span>AM</span>
+                  <div class="meta">
+                    <strong>Alice Moore</strong>
+                    <span>Design</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>712 views</strong>
-                <span>+2% vs last week</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="solutions-docs">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>712 views</strong>
+                  <span class="metric-trend positive">+2% vs last week</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 25, 2025</td>
-            <td>Jul 05, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 25, 2025</td>
+            <td data-modified-label>Jul 05, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="group-row" data-folder="our-work">
+          <tr class="group-row" data-folder="our-work" data-folder-total="2" data-folder-name="Our Work" data-folder-color="amber">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-folder-checkbox data-folder-id="our-work" aria-label="Select folder Our Work">
+              </label>
+            </td>
             <td colspan="8">
               <div class="folder-header">
-                <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
-                <div class="folder-details">
-                  <span class="folder-name">Our Work</span>
-                  <span class="group-meta">Folder · 2 pages</span>
+                <button type="button" class="folder-toggle" data-folder-toggle="our-work" aria-expanded="true">
+                  <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                  <span class="folder-icon" data-color="amber" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+                  <div class="folder-details">
+                    <span class="folder-name">Our Work</span>
+                    <span class="group-meta"><span class="folder-count" data-folder-count>2 pages</span></span>
+                  </div>
+                </button>
+                <div class="folder-actions" role="group" aria-label="Our Work folder actions">
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
           </tr>
-          <tr class="page-row" data-folder="our-work">
+          <tr class="page-row" data-folder="our-work" data-page-id="case-studies" data-status="published" data-type="Portfolio" data-author="Ryan Chen" data-title="Case Studies Overview" data-created="2025-01-27" data-modified="2025-07-03" data-report-value="2100" data-report-trend="22" data-report-direction="up">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Case Studies Overview">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Case Studies Overview
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="case-studies">Case Studies Overview</button>
                   <span class="subtitle">All customer stories</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge published">Published</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
             <td><span class="chip">Portfolio</span></td>
             <td>
-              <div class="avatar">
-                <span>RC</span>
-                <div class="meta">
-                  <strong>Ryan Chen</strong>
-                  <span>Copywriting</span>
+              <button type="button" class="author-filter" data-author-filter="Ryan Chen" title="Filter by Ryan Chen">
+                <div class="avatar">
+                  <span>RC</span>
+                  <div class="meta">
+                    <strong>Ryan Chen</strong>
+                    <span>Copywriting</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>2.1K views</strong>
-                <span>+22% vs last week</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="case-studies">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>2.1K views</strong>
+                  <span class="metric-trend positive">+22% vs last week</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 27, 2025</td>
-            <td>Jul 03, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 27, 2025</td>
+            <td data-modified-label>Jul 03, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
-          <tr class="page-row" data-folder="our-work">
+          <tr class="page-row" data-folder="our-work" data-page-id="show-our-work" data-status="unpublished" data-type="Media" data-author="Alice Moore" data-title="Show Our Work" data-created="2025-01-28" data-modified="2025-07-02" data-report-value="385" data-report-trend="0" data-report-direction="neutral">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Show Our Work">
+              </label>
+            </td>
             <td>
               <div class="title-cell">
-                <div>
-                  Show Our Work
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="show-our-work">Show Our Work</button>
                   <span class="subtitle">Visual production portfolio</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge unpublished">Unpublished</span></td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="unpublished"><span class="badge unpublished">Unpublished</span></button>
+            </td>
             <td><span class="chip">Media</span></td>
             <td>
-              <div class="avatar">
-                <span>AM</span>
-                <div class="meta">
-                  <strong>Alice Moore</strong>
-                  <span>Design</span>
+              <button type="button" class="author-filter" data-author-filter="Alice Moore" title="Filter by Alice Moore">
+                <div class="avatar">
+                  <span>AM</span>
+                  <div class="meta">
+                    <strong>Alice Moore</strong>
+                    <span>Design</span>
+                  </div>
                 </div>
-              </div>
+              </button>
             </td>
             <td>
-              <div class="meta">
-                <strong>385 views</strong>
-                <span>New entry</span>
-              </div>
+              <button type="button" class="reports-button" data-report-drawer="show-our-work">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>385 views</strong>
+                  <span class="metric-trend neutral">New entry</span>
+                </div>
+              </button>
             </td>
-            <td>Jan 28, 2025</td>
-            <td>Jul 02, 2025</td>
-            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
+            <td data-created-label>Jan 28, 2025</td>
+            <td data-modified-label>Jul 02, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1206,15 +1980,67 @@
     </div>
   </div>
 
-  <script>
+  <div class="dialog-backdrop" id="folderSettingsDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="folderDialogTitle">
+    <div class="dialog folder-dialog">
+      <div class="dialog-header">
+        <h2 id="folderDialogTitle">Folder settings</h2>
+        <button class="dialog-close" type="button" aria-label="Close folder settings">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="folderSettingsForm">
+        <div class="form-field">
+          <label for="folderNameInput">Folder name</label>
+          <input type="text" id="folderNameInput" name="folderName" required>
+        </div>
+        <div class="form-field">
+          <label>Accent color</label>
+          <div class="color-swatches">
+            <label class="color-swatch" data-color="blue">
+              <input type="radio" name="folderColor" value="blue" aria-label="Blue">
+              <span aria-hidden="true"></span>
+            </label>
+            <label class="color-swatch" data-color="purple">
+              <input type="radio" name="folderColor" value="purple" aria-label="Purple">
+              <span aria-hidden="true"></span>
+            </label>
+            <label class="color-swatch" data-color="teal">
+              <input type="radio" name="folderColor" value="teal" aria-label="Teal">
+              <span aria-hidden="true"></span>
+            </label>
+            <label class="color-swatch" data-color="amber">
+              <input type="radio" name="folderColor" value="amber" aria-label="Amber">
+              <span aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Permissions</label>
+          <label class="checkbox-option"><input type="checkbox" name="folderPermissions" value="edit" checked>Team can edit</label>
+          <label class="checkbox-option"><input type="checkbox" name="folderPermissions" value="view">Guests can view</label>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" data-folder-dialog-action="cancel">Cancel</button>
+          <button type="submit" class="primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <script>
     (function () {
+      const folderStateStorageKey = 'mw-pages-folder-state';
       const state = {
         status: 'all',
         search: '',
         searchRaw: '',
         authors: new Set(),
         types: new Set(),
+        sortKey: 'modified',
+        sortDirection: 'desc',
       };
+
+      const selection = new Set();
 
       const searchInput = document.getElementById('pagesSearch');
       const filterChips = document.getElementById('filterChips');
@@ -1232,69 +2058,114 @@
       const dialogCloseButton = dialog?.querySelector('.dialog-close');
       const optionButtons = dialog ? dialog.querySelectorAll('.dialog-option') : [];
 
-      const tableRows = Array.from(document.querySelectorAll('.pages-table tbody tr')).filter((row) => !row.classList.contains('group-row'));
-      const groupRows = Array.from(document.querySelectorAll('.pages-table tbody tr.group-row'));
+      const masterCheckbox = document.getElementById('masterCheckbox');
+      const bulkBar = document.getElementById('bulkActionsBar');
+      const selectionCount = document.getElementById('selectionCount');
+      const clearSelectionButton = document.getElementById('clearSelectionButton');
+      const bulkActionButtons = document.querySelectorAll('[data-bulk-action]');
+      const sortButtons = document.querySelectorAll('.sort-button');
 
-      const normaliseStatus = (value) => {
-        const status = value.toLowerCase();
-        if (status.includes('unpublished')) return 'unpublished';
-        if (status.includes('scheduled')) return 'scheduled';
-        if (status.includes('draft')) return 'draft';
-        if (status.includes('publish')) return 'published';
-        return 'all';
-      };
+      const folderSettingsDialog = document.getElementById('folderSettingsDialog');
+      const folderDialogClose = folderSettingsDialog?.querySelector('.dialog-close');
+      const folderSettingsForm = document.getElementById('folderSettingsForm');
+      const folderNameInput = document.getElementById('folderNameInput');
+      const folderColorRadios = folderSettingsForm ? folderSettingsForm.querySelectorAll('input[name="folderColor"]') : [];
+      const folderDialogCancel = folderSettingsDialog?.querySelector('[data-folder-dialog-action="cancel"]');
 
-      const rowData = tableRows.map((row) => {
-        const statusText = row.querySelector('td:nth-child(2) .badge')?.textContent.trim() || '';
-        const typeText = row.querySelector('td:nth-child(3) .chip')?.textContent.trim() || '';
-        const authorText = row.querySelector('td:nth-child(4) .meta strong')?.textContent.trim() || '';
-        const searchText = row.textContent.toLowerCase();
+      const pageRows = Array.from(document.querySelectorAll('.page-row'));
+      const folderRows = Array.from(document.querySelectorAll('.group-row'));
+      const folderToggleButtons = document.querySelectorAll('[data-folder-toggle]');
+      const folderCheckboxes = Array.from(document.querySelectorAll('[data-folder-checkbox]'));
+
+      const pageRowById = new Map(pageRows.map((row) => [row.dataset.pageId, row]));
+      const folderRowById = new Map(folderRows.map((row) => [row.dataset.folder, row]));
+
+      const folderMembers = new Map();
+      pageRows.forEach((row) => {
+        const folderId = row.dataset.folder || '_root';
+        if (!folderMembers.has(folderId)) {
+          folderMembers.set(folderId, []);
+        }
+        folderMembers.get(folderId).push(row);
+      });
+
+      const rowData = pageRows.map((row) => {
+        const { pageId = '', status = 'all', type = '', author = '' } = row.dataset;
         return {
           element: row,
-          status: normaliseStatus(statusText),
-          type: typeText,
-          author: authorText,
-          searchText,
+          pageId,
+          status,
+          type,
+          author,
+          searchText: row.textContent.toLowerCase(),
         };
       });
 
-      const syncBodyScrollState = () => {
-        const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
-        const dialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
-        document.body.style.overflow = drawerOpen || dialogOpen ? 'hidden' : '';
-      };
+      const folderState = (() => {
+        try {
+          const stored = localStorage.getItem(folderStateStorageKey);
+          if (!stored) {
+            return {};
+          }
+          const parsed = JSON.parse(stored);
+          return typeof parsed === 'object' && parsed !== null ? parsed : {};
+        } catch (error) {
+          console.warn('Unable to parse folder state', error);
+          return {};
+        }
+      })();
 
-      const matchesBaseFilters = (item) => {
+      let activeFolderId = null;
+
+      function syncBodyScrollState() {
+        const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
+        const createDialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
+        const folderDialogOpen = folderSettingsDialog?.getAttribute('aria-hidden') === 'false';
+        document.body.style.overflow = drawerOpen || createDialogOpen || folderDialogOpen ? 'hidden' : '';
+      }
+
+      function matchesBaseFilters(item) {
         const searchMatch = !state.search || item.searchText.includes(state.search);
         const authorMatch = state.authors.size === 0 || state.authors.has(item.author);
         const typeMatch = state.types.size === 0 || state.types.has(item.type);
         return searchMatch && authorMatch && typeMatch;
-      };
+      }
 
-      const updateGroupRowsVisibility = () => {
-        groupRows.forEach((groupRow) => {
-          let sibling = groupRow.nextElementSibling;
-          let hasVisible = false;
-          while (sibling && !sibling.classList.contains('group-row')) {
-            if (sibling.style.display !== 'none') {
-              hasVisible = true;
-              break;
-            }
-            sibling = sibling.nextElementSibling;
-          }
-          groupRow.style.display = hasVisible ? '' : 'none';
+      function updateGroupRowsVisibility() {
+        folderRows.forEach((folderRow) => {
+          const folderId = folderRow.dataset.folder || '_root';
+          const members = folderMembers.get(folderId) || [];
+          const hasVisible = members.some((row) => !row.classList.contains('is-filter-hidden'));
+          folderRow.classList.toggle('is-filter-hidden', !hasVisible);
         });
-      };
+      }
 
-      const updateCounts = (baseMatches) => {
+      function updateFolderCounts() {
+        folderRows.forEach((folderRow) => {
+          const folderId = folderRow.dataset.folder || '_root';
+          const members = folderMembers.get(folderId) || [];
+          const visibleCount = members.filter((row) => !row.classList.contains('is-filter-hidden')).length;
+          const totalAttr = Number(folderRow.dataset.folderTotal || members.length);
+          const total = Number.isNaN(totalAttr) ? members.length : totalAttr;
+          const label = folderRow.querySelector('[data-folder-count]');
+          if (!label) {
+            return;
+          }
+          const text =
+            visibleCount !== total
+              ? `${visibleCount} of ${total} pages`
+              : `${total} page${total === 1 ? '' : 's'}`;
+          label.textContent = text;
+        });
+      }
+
+      function updateCounts(baseMatches) {
         const counts = { all: 0, published: 0, unpublished: 0, draft: 0, scheduled: 0 };
         rowData.forEach((item) => {
           if (!baseMatches.get(item)) {
             return;
           }
-          const key = item.status !== 'all' && Object.prototype.hasOwnProperty.call(counts, item.status)
-            ? item.status
-            : null;
+          const key = counts[item.status] !== undefined ? item.status : null;
           if (key) {
             counts[key] += 1;
           }
@@ -1308,9 +2179,9 @@
           }
           badge.textContent = counts[key] ?? 0;
         });
-      };
+      }
 
-      const renderChips = () => {
+      function renderChips() {
         if (!filterChips) {
           return;
         }
@@ -1350,30 +2221,375 @@
           button.innerHTML = `<span>${label}</span><i class="fa-solid fa-xmark" aria-hidden="true"></i>`;
           filterChips.appendChild(button);
         });
-      };
+      }
 
-      const updateRows = () => {
+      function getRowsInScope() {
+        return pageRows.filter(
+          (row) => !row.classList.contains('is-filter-hidden') && !row.classList.contains('is-collapsed')
+        );
+      }
+
+      function setPageSelection(row, shouldSelect) {
+        const checkbox = row.querySelector('[data-row-checkbox]');
+        const pageId = row.dataset.pageId;
+        if (!checkbox || !pageId) {
+          return;
+        }
+        checkbox.checked = shouldSelect;
+        row.classList.toggle('is-selected', shouldSelect);
+        if (shouldSelect) {
+          selection.add(pageId);
+        } else {
+          selection.delete(pageId);
+        }
+      }
+
+      function updateMasterCheckbox() {
+        if (!masterCheckbox) {
+          return;
+        }
+        const scopeRows = getRowsInScope();
+        const total = scopeRows.length;
+        const selectedInScope = scopeRows.filter((row) => selection.has(row.dataset.pageId)).length;
+        masterCheckbox.disabled = total === 0;
+        masterCheckbox.checked = total > 0 && selectedInScope === total;
+        masterCheckbox.indeterminate = selectedInScope > 0 && selectedInScope < total;
+        if (total === 0) {
+          masterCheckbox.indeterminate = false;
+          masterCheckbox.checked = false;
+        }
+      }
+
+      function updateFolderCheckboxes() {
+        folderCheckboxes.forEach((checkbox) => {
+          const folderId = checkbox.dataset.folderId || '_root';
+          const members = folderMembers.get(folderId) || [];
+          const scopedMembers = members.filter((row) => !row.classList.contains('is-filter-hidden'));
+          const total = scopedMembers.length;
+          const selectedCount = scopedMembers.filter((row) => selection.has(row.dataset.pageId)).length;
+          checkbox.disabled = total === 0;
+          checkbox.checked = total > 0 && selectedCount === total;
+          checkbox.indeterminate = selectedCount > 0 && selectedCount < total;
+          if (total === 0) {
+            checkbox.indeterminate = false;
+            checkbox.checked = false;
+          }
+        });
+      }
+
+      function updateBulkBar() {
+        if (!bulkBar || !selectionCount) {
+          return;
+        }
+        const count = selection.size;
+        const label = count === 1 ? '1 selected' : `${count} selected`;
+        selectionCount.textContent = label;
+        const isActive = count > 0;
+        bulkBar.classList.toggle('is-active', isActive);
+        bulkBar.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        bulkActionButtons.forEach((button) => {
+          button.disabled = count === 0;
+        });
+        if (clearSelectionButton) {
+          clearSelectionButton.disabled = count === 0;
+        }
+      }
+
+      function getSortValue(row, key) {
+        switch (key) {
+          case 'status': {
+            const order = { published: 0, scheduled: 1, draft: 2, unpublished: 3 };
+            return order[row.dataset.status] ?? 99;
+          }
+          case 'type':
+            return (row.dataset.type || '').toLowerCase();
+          case 'author':
+            return (row.dataset.author || '').toLowerCase();
+          case 'reports':
+            return Number(row.dataset.reportValue || 0);
+          case 'created':
+            return Date.parse(row.dataset.created || 0);
+          case 'modified':
+            return Date.parse(row.dataset.modified || 0);
+          case 'title':
+            return (row.dataset.title || '').toLowerCase();
+          default:
+            return 0;
+        }
+      }
+
+      function compareRows(a, b, key, direction) {
+        const valueA = getSortValue(a, key);
+        const valueB = getSortValue(b, key);
+        let result;
+        if (
+          typeof valueA === 'number' &&
+          typeof valueB === 'number' &&
+          !Number.isNaN(valueA) &&
+          !Number.isNaN(valueB)
+        ) {
+          result = valueA - valueB;
+        } else {
+          result = String(valueA).localeCompare(String(valueB), undefined, {
+            numeric: true,
+            sensitivity: 'base',
+          });
+        }
+        return direction === 'asc' ? result : -result;
+      }
+
+      function getNextGroupRow(folderRow) {
+        let sibling = folderRow.nextElementSibling;
+        while (sibling && !sibling.classList.contains('group-row')) {
+          sibling = sibling.nextElementSibling;
+        }
+        return sibling;
+      }
+
+      function applySort() {
+        if (!state.sortKey) {
+          return;
+        }
+        folderRows.forEach((folderRow) => {
+          const folderId = folderRow.dataset.folder || '_root';
+          const members = folderMembers.get(folderId) || [];
+          if (members.length === 0) {
+            return;
+          }
+          const sorted = members
+            .slice()
+            .sort((a, b) => compareRows(a, b, state.sortKey, state.sortDirection));
+          const tbody = folderRow.parentElement;
+          const marker = getNextGroupRow(folderRow);
+          sorted.forEach((row) => {
+            tbody.insertBefore(row, marker);
+          });
+          folderMembers.set(folderId, sorted);
+        });
+      }
+
+      function updateSortIndicators() {
+        sortButtons.forEach((button) => {
+          const key = button.dataset.sortKey;
+          const isActive = key === state.sortKey;
+          button.classList.toggle('is-active', isActive);
+          const indicator = button.querySelector('.sort-indicator');
+          if (indicator) {
+            indicator.textContent = isActive ? (state.sortDirection === 'asc' ? '▲' : '▼') : '▲';
+          }
+          const headerCell = button.closest('th');
+          if (headerCell) {
+            headerCell.setAttribute(
+              'aria-sort',
+              isActive ? (state.sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'
+            );
+          }
+        });
+      }
+
+      function setFolderExpanded(folderId, expanded, persist = true) {
+        const toggle = document.querySelector(`[data-folder-toggle="${folderId}"]`);
+        const members = folderMembers.get(folderId) || [];
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        }
+        members.forEach((row) => {
+          row.classList.toggle('is-collapsed', !expanded);
+          if (expanded) {
+            row.removeAttribute('aria-hidden');
+          } else {
+            row.setAttribute('aria-hidden', 'true');
+          }
+        });
+        if (persist) {
+          folderState[folderId] = expanded;
+          try {
+            localStorage.setItem(folderStateStorageKey, JSON.stringify(folderState));
+          } catch (error) {
+            console.warn('Unable to persist folder state', error);
+          }
+        }
+        updateMasterCheckbox();
+        updateBulkBar();
+      }
+
+      function updateRows() {
         const baseMatches = new Map();
 
         rowData.forEach((item) => {
           const matchesBase = matchesBaseFilters(item);
           baseMatches.set(item, matchesBase);
           const matchesStatus = state.status === 'all' || item.status === state.status;
-          item.element.style.display = matchesBase && matchesStatus ? '' : 'none';
+          const shouldShow = matchesBase && matchesStatus;
+          item.element.classList.toggle('is-filter-hidden', !shouldShow);
+          if (!shouldShow && selection.has(item.pageId)) {
+            setPageSelection(item.element, false);
+          }
         });
 
         updateGroupRowsVisibility();
+        updateFolderCounts();
         updateCounts(baseMatches);
         renderChips();
-      };
+        updateFolderCheckboxes();
+        updateMasterCheckbox();
+        updateBulkBar();
+      }
 
-      const focusSearchInput = () => {
+      function focusSearchInput() {
         if (!searchInput) {
           return;
         }
         searchInput.focus();
         searchInput.select();
-      };
+      }
+
+      function buildFilterOptions(container, values, type) {
+        if (!container) {
+          return [];
+        }
+
+        container.innerHTML = '';
+        const checkboxes = [];
+
+        values.forEach((value) => {
+          if (!value) {
+            return;
+          }
+          const label = document.createElement('label');
+          label.className = 'drawer-option';
+
+          const input = document.createElement('input');
+          input.type = 'checkbox';
+          input.value = value;
+          input.dataset.filterType = type;
+
+          const text = document.createElement('span');
+          text.textContent = value;
+
+          input.addEventListener('change', () => {
+            const targetSet = type === 'author' ? state.authors : state.types;
+            if (input.checked) {
+              targetSet.add(value);
+            } else {
+              targetSet.delete(value);
+            }
+            updateRows();
+          });
+
+          label.append(input, text);
+          container.appendChild(label);
+          checkboxes.push(input);
+        });
+
+        return checkboxes;
+      }
+
+      const authorValues = Array.from(new Set(rowData.map((item) => item.author)))
+        .filter(Boolean)
+        .sort();
+      const typeValues = Array.from(new Set(rowData.map((item) => item.type)))
+        .filter(Boolean)
+        .sort();
+
+      const authorCheckboxes = buildFilterOptions(authorOptions, authorValues, 'author');
+      const typeCheckboxes = buildFilterOptions(typeOptions, typeValues, 'type');
+
+      function syncFilterCheckboxes() {
+        authorCheckboxes.forEach((checkbox) => {
+          checkbox.checked = state.authors.has(checkbox.value);
+        });
+        typeCheckboxes.forEach((checkbox) => {
+          checkbox.checked = state.types.has(checkbox.value);
+        });
+      }
+
+      function openDrawer() {
+        if (!filtersDrawer) {
+          return;
+        }
+        filtersDrawer.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        const firstInput = filtersDrawer.querySelector('input');
+        if (firstInput) {
+          firstInput.focus();
+        }
+      }
+
+      function closeDrawer() {
+        if (!filtersDrawer) {
+          return;
+        }
+        filtersDrawer.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        filtersButton?.focus();
+      }
+
+      function openDialog() {
+        if (!dialog) {
+          return;
+        }
+        dialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        dialogCloseButton?.focus();
+      }
+
+      function closeDialog() {
+        if (!dialog) {
+          return;
+        }
+        dialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        newButton?.focus();
+      }
+
+      function openFolderDialog(folderId) {
+        if (!folderSettingsDialog) {
+          return;
+        }
+        const folderRow = folderRowById.get(folderId);
+        if (!folderRow) {
+          return;
+        }
+        activeFolderId = folderId;
+        const currentName =
+          folderRow.dataset.folderName ||
+          folderRow.querySelector('.folder-name')?.textContent?.trim() ||
+          '';
+        if (folderNameInput) {
+          folderNameInput.value = currentName;
+        }
+        const currentColor = folderRow.dataset.folderColor || 'blue';
+        folderColorRadios.forEach((radio) => {
+          radio.checked = radio.value === currentColor;
+        });
+        folderSettingsDialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        window.requestAnimationFrame(() => {
+          folderNameInput?.focus();
+        });
+      }
+
+      function closeFolderDialog() {
+        if (!folderSettingsDialog) {
+          return;
+        }
+        folderSettingsDialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        activeFolderId = null;
+      }
+
+      function clearSelection() {
+        Array.from(selection).forEach((pageId) => {
+          const row = pageRowById.get(pageId);
+          if (row) {
+            setPageSelection(row, false);
+          }
+        });
+        updateMasterCheckbox();
+        updateFolderCheckboxes();
+        updateBulkBar();
+      }
 
       if (searchInput) {
         searchInput.addEventListener('input', (event) => {
@@ -1411,6 +2627,22 @@
         if ((event.metaKey || event.ctrlKey) && event.key === '/') {
           event.preventDefault();
           focusSearchInput();
+        }
+        if (event.key === 'Escape') {
+          if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeDrawer();
+            return;
+          }
+          if (dialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeDialog();
+            return;
+          }
+          if (folderSettingsDialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeFolderDialog();
+          }
         }
       });
 
@@ -1461,83 +2693,6 @@
         });
       });
 
-      const buildFilterOptions = (container, values, type) => {
-        if (!container) {
-          return [];
-        }
-
-        container.innerHTML = '';
-        const checkboxes = [];
-
-        values.forEach((value) => {
-          if (!value) {
-            return;
-          }
-          const label = document.createElement('label');
-          label.className = 'drawer-option';
-
-          const input = document.createElement('input');
-          input.type = 'checkbox';
-          input.value = value;
-          input.dataset.filterType = type;
-
-          const text = document.createElement('span');
-          text.textContent = value;
-
-          input.addEventListener('change', () => {
-            const targetSet = type === 'author' ? state.authors : state.types;
-            if (input.checked) {
-              targetSet.add(value);
-            } else {
-              targetSet.delete(value);
-            }
-            updateRows();
-          });
-
-          label.append(input, text);
-          container.appendChild(label);
-          checkboxes.push(input);
-        });
-
-        return checkboxes;
-      };
-
-      const authorValues = Array.from(new Set(rowData.map((item) => item.author))).filter(Boolean).sort();
-      const typeValues = Array.from(new Set(rowData.map((item) => item.type))).filter(Boolean).sort();
-
-      const authorCheckboxes = buildFilterOptions(authorOptions, authorValues, 'author');
-      const typeCheckboxes = buildFilterOptions(typeOptions, typeValues, 'type');
-
-      const syncFilterCheckboxes = () => {
-        authorCheckboxes.forEach((checkbox) => {
-          checkbox.checked = state.authors.has(checkbox.value);
-        });
-        typeCheckboxes.forEach((checkbox) => {
-          checkbox.checked = state.types.has(checkbox.value);
-        });
-      };
-
-      const openDrawer = () => {
-        if (!filtersDrawer) {
-          return;
-        }
-        filtersDrawer.setAttribute('aria-hidden', 'false');
-        syncBodyScrollState();
-        const firstInput = filtersDrawer.querySelector('input');
-        if (firstInput) {
-          firstInput.focus();
-        }
-      };
-
-      const closeDrawer = () => {
-        if (!filtersDrawer) {
-          return;
-        }
-        filtersDrawer.setAttribute('aria-hidden', 'true');
-        syncBodyScrollState();
-        filtersButton?.focus();
-      };
-
       if (filtersButton) {
         filtersButton.addEventListener('click', () => {
           if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
@@ -1565,38 +2720,6 @@
         });
       }
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
-            event.preventDefault();
-            closeDrawer();
-            return;
-          }
-          if (dialog?.getAttribute('aria-hidden') === 'false') {
-            event.preventDefault();
-            closeDialog();
-          }
-        }
-      });
-
-      const openDialog = () => {
-        if (!dialog) {
-          return;
-        }
-        dialog.setAttribute('aria-hidden', 'false');
-        syncBodyScrollState();
-        dialogCloseButton?.focus();
-      };
-
-      const closeDialog = () => {
-        if (!dialog) {
-          return;
-        }
-        dialog.setAttribute('aria-hidden', 'true');
-        syncBodyScrollState();
-        newButton?.focus();
-      };
-
       newButton?.addEventListener('click', openDialog);
       dialogCloseButton?.addEventListener('click', closeDialog);
 
@@ -1616,7 +2739,183 @@
         });
       });
 
+      folderDialogClose?.addEventListener('click', closeFolderDialog);
+      folderDialogCancel?.addEventListener('click', closeFolderDialog);
+      folderSettingsDialog?.addEventListener('click', (event) => {
+        if (event.target === folderSettingsDialog) {
+          closeFolderDialog();
+        }
+      });
+
+      folderSettingsForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!activeFolderId) {
+          closeFolderDialog();
+          return;
+        }
+        const folderRow = folderRowById.get(activeFolderId);
+        if (!folderRow) {
+          closeFolderDialog();
+          return;
+        }
+        const newName = folderNameInput?.value.trim();
+        if (newName) {
+          const nameElement = folderRow.querySelector('.folder-name');
+          if (nameElement) {
+            nameElement.textContent = newName;
+          }
+          folderRow.dataset.folderName = newName;
+          const folderCheckbox = folderRow.querySelector('[data-folder-checkbox]');
+          folderCheckbox?.setAttribute('aria-label', `Select folder ${newName}`);
+          const actionsGroup = folderRow.querySelector('.folder-actions');
+          actionsGroup?.setAttribute('aria-label', `${newName} folder actions`);
+        }
+        const selectedColor = Array.from(folderColorRadios).find((radio) => radio.checked)?.value;
+        if (selectedColor) {
+          const icon = folderRow.querySelector('.folder-icon');
+          if (icon) {
+            icon.setAttribute('data-color', selectedColor);
+          }
+          folderRow.dataset.folderColor = selectedColor;
+        }
+        closeFolderDialog();
+      });
+
+      pageRows.forEach((row) => {
+        const checkbox = row.querySelector('[data-row-checkbox]');
+        if (!checkbox) {
+          return;
+        }
+        checkbox.addEventListener('change', () => {
+          setPageSelection(row, checkbox.checked);
+          updateMasterCheckbox();
+          updateFolderCheckboxes();
+          updateBulkBar();
+        });
+      });
+
+      masterCheckbox?.addEventListener('change', () => {
+        if (!masterCheckbox) {
+          return;
+        }
+        const scopeRows = getRowsInScope();
+        scopeRows.forEach((row) => {
+          setPageSelection(row, masterCheckbox.checked);
+        });
+        updateMasterCheckbox();
+        updateFolderCheckboxes();
+        updateBulkBar();
+      });
+
+      folderCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+          const folderId = checkbox.dataset.folderId || '_root';
+          const members = folderMembers.get(folderId) || [];
+          const scopedMembers = members.filter((row) => !row.classList.contains('is-filter-hidden'));
+          if (scopedMembers.length === 0) {
+            checkbox.checked = false;
+            checkbox.indeterminate = false;
+            return;
+          }
+          scopedMembers.forEach((row) => {
+            setPageSelection(row, checkbox.checked);
+          });
+          updateMasterCheckbox();
+          updateFolderCheckboxes();
+          updateBulkBar();
+        });
+      });
+
+      clearSelectionButton?.addEventListener('click', clearSelection);
+
+      bulkActionButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const action = button.dataset.bulkAction;
+          if (!action || selection.size === 0) {
+            return;
+          }
+          console.log(`Bulk ${action}`, Array.from(selection));
+        });
+      });
+
+      sortButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const key = button.dataset.sortKey;
+          if (!key) {
+            return;
+          }
+          if (state.sortKey === key) {
+            state.sortDirection = state.sortDirection === 'asc' ? 'desc' : 'asc';
+          } else {
+            state.sortKey = key;
+            state.sortDirection =
+              key === 'type' || key === 'author' || key === 'title' ? 'asc' : 'desc';
+          }
+          applySort();
+          updateSortIndicators();
+        });
+      });
+
+      folderToggleButtons.forEach((button) => {
+        const folderId = button.dataset.folderToggle;
+        const expanded =
+          folderState[folderId] !== undefined ? Boolean(folderState[folderId]) : true;
+        setFolderExpanded(folderId, expanded, false);
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          setFolderExpanded(folderId, !isExpanded);
+        });
+        button.addEventListener('dblclick', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          openFolderDialog(folderId);
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        const titleButton = event.target.closest('[data-open-page]');
+        if (titleButton) {
+          const pageId = titleButton.dataset.openPage;
+          console.log('Open page editor for', pageId);
+        }
+        const statusButton = event.target.closest('[data-status-action]');
+        if (statusButton) {
+          const statusValue = statusButton.dataset.statusAction;
+          const row = statusButton.closest('.page-row');
+          console.log('Open publish settings for', row?.dataset.pageId, statusValue);
+        }
+        const authorButton = event.target.closest('[data-author-filter]');
+        if (authorButton) {
+          const author = authorButton.dataset.authorFilter;
+          if (author) {
+            state.authors.clear();
+            state.authors.add(author);
+            syncFilterCheckboxes();
+            updateRows();
+          }
+        }
+        const reportButton = event.target.closest('[data-report-drawer]');
+        if (reportButton) {
+          const pageId = reportButton.dataset.reportDrawer;
+          console.log('Open analytics for', pageId);
+        }
+        const folderActionButton = event.target.closest('[data-folder-action]');
+        if (folderActionButton) {
+          const action = folderActionButton.dataset.folderAction;
+          const folderRow = folderActionButton.closest('.group-row');
+          const folderId = folderRow?.dataset.folder;
+          if (action === 'rename' && folderId) {
+            openFolderDialog(folderId);
+          } else if (action && folderId) {
+            console.log(`Folder ${action}`, folderId);
+          }
+        }
+      });
+
       const initialise = () => {
+        applySort();
+        updateSortIndicators();
         updateRows();
         syncFilterCheckboxes();
         syncBodyScrollState();
@@ -1625,5 +2924,6 @@
       initialise();
     })();
   </script>
+
 </body>
 </html>
