@@ -23,6 +23,8 @@
       --pages-badge-scheduled: #fee2e2;
       --pages-chip-bg: #eef2ff;
       --pages-chip-color: #4338ca;
+      --pages-sticky-offset: 86px;
+      --pages-bulk-bar-offset: 0px;
     }
 
     body {
@@ -274,12 +276,11 @@
       border: 1px solid var(--pages-border);
       background: var(--pages-card-bg);
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-      overflow: hidden;
     }
 
     .bulk-actions-bar {
       position: sticky;
-      top: 86px;
+      top: var(--pages-sticky-offset);
       z-index: 30;
       display: none;
       align-items: center;
@@ -365,6 +366,10 @@
       color: var(--pages-muted);
       background: #f9fafc;
       border-bottom: 1px solid var(--pages-border);
+      position: sticky;
+      top: calc(var(--pages-sticky-offset) + var(--pages-bulk-bar-offset));
+      z-index: 10;
+      box-shadow: 0 6px 12px rgba(15, 23, 42, 0.04);
     }
 
     .pages-table thead th.checkbox-cell {
@@ -2292,6 +2297,17 @@
         if (clearSelectionButton) {
           clearSelectionButton.disabled = count === 0;
         }
+        syncBulkBarOffset();
+      }
+
+      function syncBulkBarOffset() {
+        if (!bulkBar) {
+          return;
+        }
+        const offset = bulkBar.classList.contains('is-active')
+          ? bulkBar.getBoundingClientRect().height + 16
+          : 0;
+        document.body.style.setProperty('--pages-bulk-bar-offset', `${offset}px`);
       }
 
       function getSortValue(row, key) {
@@ -2842,6 +2858,8 @@
         });
       });
 
+      window.addEventListener('resize', syncBulkBarOffset);
+
       sortButtons.forEach((button) => {
         button.addEventListener('click', () => {
           const key = button.dataset.sortKey;
@@ -2923,6 +2941,7 @@
         updateRows();
         syncFilterCheckboxes();
         syncBodyScrollState();
+        syncBulkBarOffset();
       };
 
       initialise();
