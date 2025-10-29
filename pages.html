@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="mw-tokens.css">
   <link rel="stylesheet" href="mw-base.css">
   <link rel="stylesheet" href="mw-components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS4vKEq1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       color-scheme: light;
@@ -32,12 +33,13 @@
     }
 
     .pages-shell {
-      max-width: 1180px;
-      margin: 40px auto;
-      padding: 0 32px 80px;
+      width: 100%;
+      margin: 0;
+      padding: 40px 32px 80px;
       display: flex;
       flex-direction: column;
       gap: 24px;
+      box-sizing: border-box;
     }
 
     .pages-header {
@@ -65,13 +67,21 @@
 
     .search-input input {
       width: 220px;
-      padding: 10px 12px 10px 36px;
+      padding: 10px 12px 10px 38px;
       border-radius: 10px;
       border: 1px solid var(--pages-border);
-      background: #fff url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="%236b7280"%3E%3Cpath stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"/%3E%3C/svg%3E') no-repeat 10px center;
-      background-size: 18px;
+      background: #fff;
       font-size: 14px;
       color: var(--pages-text);
+    }
+
+    .search-input i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--pages-muted);
+      font-size: 14px;
     }
 
     .pill-button {
@@ -275,6 +285,102 @@
       color: var(--pages-accent);
     }
 
+    .dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .dialog-backdrop[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .dialog {
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px;
+      min-width: 320px;
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .dialog-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .dialog-close {
+      background: transparent;
+      border: none;
+      color: var(--pages-muted);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 6px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .dialog-close:hover {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--pages-text);
+    }
+
+    .dialog-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dialog-option {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border: 1px solid var(--pages-border);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .dialog-option:hover {
+      border-color: var(--pages-accent);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16);
+    }
+
+    .dialog-option .icon-circle {
+      background: #f8fafc;
+      color: var(--pages-text);
+      font-size: 20px;
+    }
+
+    .dialog-option span {
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .dialog-option small {
+      display: block;
+      color: var(--pages-muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
     @media (max-width: 960px) {
       .pages-shell {
         padding: 0 16px 40px;
@@ -294,6 +400,10 @@
       .pages-card {
         overflow-x: auto;
       }
+
+      .dialog {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -305,10 +415,13 @@
         <p style="margin: 6px 0 0; color: var(--pages-muted);">Track publishing activity across all experiences.</p>
       </div>
       <div class="pages-actions">
-        <div class="search-input"><input type="search" placeholder="Search" aria-label="Search pages"></div>
-        <button class="pill-button" type="button">Filters</button>
-        <button class="pill-button" type="button">New view</button>
-        <button class="pill-button primary" type="button">Create page</button>
+        <div class="search-input">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" placeholder="Search" aria-label="Search pages">
+        </div>
+        <button class="pill-button" type="button"><i class="fa-solid fa-sliders" aria-hidden="true"></i>Filters</button>
+        <button class="pill-button" type="button"><i class="fa-solid fa-eye" aria-hidden="true"></i>New view</button>
+        <button class="pill-button primary" type="button" id="newButton"><i class="fa-solid fa-plus" aria-hidden="true"></i>New</button>
       </div>
     </div>
 
@@ -330,7 +443,7 @@
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🏠</div>
+                <div class="icon-circle"><i class="fa-solid fa-house" aria-hidden="true"></i></div>
                 <div>
                   Homepage 2025
                   <span class="subtitle">Main landing experience</span>
@@ -356,12 +469,12 @@
             </td>
             <td>Jan 05, 2025</td>
             <td>Jul 20, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🎨</div>
+                <div class="icon-circle"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
                 <div>
                   Style Guide – Color & Typography
                   <span class="subtitle">Design system foundations</span>
@@ -387,12 +500,12 @@
             </td>
             <td>Jan 07, 2025</td>
             <td>Jul 18, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">✏️</div>
+                <div class="icon-circle"><i class="fa-solid fa-pen" aria-hidden="true"></i></div>
                 <div>
                   _Test
                   <span class="subtitle">Internal draft for hero copy</span>
@@ -418,7 +531,7 @@
             </td>
             <td>Jan 11, 2025</td>
             <td>Jul 15, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr class="group-row">
             <td colspan="8">Solutions <span class="group-meta">6 pages</span></td>
@@ -426,7 +539,7 @@
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🏥</div>
+                <div class="icon-circle"><i class="fa-solid fa-hospital" aria-hidden="true"></i></div>
                 <div>
                   Hospitals & Higher Education
                   <span class="subtitle">Industry solutions overview</span>
@@ -452,12 +565,12 @@
             </td>
             <td>Jan 12, 2025</td>
             <td>Jul 15, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🏛️</div>
+                <div class="icon-circle"><i class="fa-solid fa-landmark" aria-hidden="true"></i></div>
                 <div>
                   Nonprofit & Organizations
                   <span class="subtitle">Partnership overview</span>
@@ -483,12 +596,12 @@
             </td>
             <td>Jan 13, 2025</td>
             <td>Jul 10, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🤝</div>
+                <div class="icon-circle"><i class="fa-solid fa-handshake" aria-hidden="true"></i></div>
                 <div>
                   Associations & Memberships
                   <span class="subtitle">Engagement programs</span>
@@ -514,12 +627,12 @@
             </td>
             <td>Jan 19, 2025</td>
             <td>Jul 09, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🧠</div>
+                <div class="icon-circle"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
                 <div>
                   Hospitals & Healthcare
                   <span class="subtitle">Care teams landing</span>
@@ -545,12 +658,12 @@
             </td>
             <td>Jan 22, 2025</td>
             <td>Jul 08, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">📄</div>
+                <div class="icon-circle"><i class="fa-regular fa-file-lines" aria-hidden="true"></i></div>
                 <div>
                   Solutions – All Docs
                   <span class="subtitle">Shared resources hub</span>
@@ -576,7 +689,7 @@
             </td>
             <td>Jan 25, 2025</td>
             <td>Jul 05, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr class="group-row">
             <td colspan="8">Our Work <span class="group-meta">4 pages</span></td>
@@ -584,7 +697,7 @@
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">📁</div>
+                <div class="icon-circle"><i class="fa-regular fa-folder-open" aria-hidden="true"></i></div>
                 <div>
                   Case Studies Overview
                   <span class="subtitle">All customer stories</span>
@@ -610,12 +723,12 @@
             </td>
             <td>Jan 27, 2025</td>
             <td>Jul 03, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
           <tr>
             <td>
               <div class="title-cell">
-                <div class="icon-circle">🎬</div>
+                <div class="icon-circle"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></div>
                 <div>
                   Show Our Work
                   <span class="subtitle">Visual production portfolio</span>
@@ -641,11 +754,86 @@
             </td>
             <td>Jan 28, 2025</td>
             <td>Jul 02, 2025</td>
-            <td class="actions"><button aria-label="Open actions">⋯</button></td>
+            <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+  <div class="dialog-backdrop" id="newDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="newDialogTitle">
+    <div class="dialog">
+      <div class="dialog-header">
+        <h2 id="newDialogTitle">Create new</h2>
+        <button class="dialog-close" type="button" aria-label="Close dialog">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="dialog-options">
+        <button class="dialog-option" type="button" data-action="folder">
+          <div class="icon-circle"><i class="fa-solid fa-folder-plus" aria-hidden="true"></i></div>
+          <div>
+            <span>New Folder</span>
+            <small>Organize pages into collections</small>
+          </div>
+        </button>
+        <button class="dialog-option" type="button" data-action="page">
+          <div class="icon-circle"><i class="fa-solid fa-file-circle-plus" aria-hidden="true"></i></div>
+          <div>
+            <span>New Page</span>
+            <small>Start a blank page draft</small>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const newButton = document.getElementById('newButton');
+      const dialog = document.getElementById('newDialog');
+      const closeButton = dialog.querySelector('.dialog-close');
+      const optionButtons = dialog.querySelectorAll('.dialog-option');
+
+      if (!newButton || !dialog || !closeButton) {
+        return;
+      }
+
+      const openDialog = () => {
+        dialog.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeButton.focus();
+      };
+
+      const closeDialog = () => {
+        dialog.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        newButton.focus();
+      };
+
+      newButton.addEventListener('click', openDialog);
+      closeButton.addEventListener('click', closeDialog);
+
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) {
+          closeDialog();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && dialog.getAttribute('aria-hidden') === 'false') {
+          closeDialog();
+        }
+      });
+
+      optionButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const action = button.dataset.action;
+          closeDialog();
+          console.log(`Create new ${action}`);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
