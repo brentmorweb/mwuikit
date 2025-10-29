@@ -1,0 +1,406 @@
+/* MW UI Kit – Components
+ *
+ * This file defines reusable UI components and patterns. Each
+ * component is namespaced for frontend (`mwui-front-*`) and backend
+ * (`mwui-backend-*`) contexts. Components inherit design tokens from
+ * the corresponding root block (`.mwui-front` or `.mwui-backend`) and
+ * share the same structure across namespaces.
+ */
+
+/* Buttons */
+.mwui-front-btn,
+.mwui-backend-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mw-spacing-xs);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  border-radius: var(--mw-radius);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mwui-front-btn:disabled,
+.mwui-backend-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mwui-front-btn-primary,
+.mwui-backend-btn-primary {
+  background-color: var(--mw-primary);
+  color: var(--mw-primary-contrast);
+}
+
+.mwui-front-btn-primary:hover,
+.mwui-backend-btn-primary:hover {
+  background-color: var(--mw-primary-hover);
+}
+
+.mwui-front-btn-primary:active,
+.mwui-backend-btn-primary:active {
+  background-color: var(--mw-primary-active);
+}
+
+.mwui-front-btn-secondary,
+.mwui-backend-btn-secondary {
+  background-color: var(--mw-secondary);
+  color: var(--mw-secondary-contrast);
+}
+
+.mwui-front-btn-secondary:hover,
+.mwui-backend-btn-secondary:hover {
+  background-color: var(--mw-secondary-hover);
+}
+
+.mwui-front-btn-secondary:active,
+.mwui-backend-btn-secondary:active {
+  background-color: var(--mw-secondary-active);
+}
+
+.mwui-front-btn-outlined,
+.mwui-backend-btn-outlined {
+  background-color: transparent;
+  color: var(--mw-primary);
+  border: var(--mw-border-width) solid var(--mw-primary);
+}
+
+.mwui-front-btn-outlined:hover,
+.mwui-backend-btn-outlined:hover {
+  background-color: var(--mw-primary-hover);
+  color: var(--mw-primary-contrast);
+}
+
+.mwui-front-btn-outlined:active,
+.mwui-backend-btn-outlined:active {
+  background-color: var(--mw-primary-active);
+  color: var(--mw-primary-contrast);
+}
+
+/* Inputs */
+.mwui-front-input,
+.mwui-backend-input,
+.mwui-front-select,
+.mwui-backend-select,
+.mwui-front-textarea,
+.mwui-backend-textarea {
+  width: 100%;
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  border: var(--mw-border-width) solid var(--mw-neutral-300);
+  border-radius: var(--mw-radius);
+  background-color: var(--mw-neutral-50);
+  color: var(--mw-neutral-900);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mwui-front-input:focus,
+.mwui-backend-input:focus,
+.mwui-front-select:focus,
+.mwui-backend-select:focus,
+.mwui-front-textarea:focus,
+.mwui-backend-textarea:focus {
+  outline: none;
+  border-color: var(--mw-primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.mwui-front-label,
+.mwui-backend-label {
+  display: block;
+  margin-bottom: var(--mw-spacing-xs);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mw-neutral-700);
+}
+
+/* Alerts */
+.mwui-front-alert,
+.mwui-backend-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mw-spacing-sm);
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  border-radius: var(--mw-radius);
+  margin-bottom: var(--mw-spacing-md);
+  font-size: 0.875rem;
+}
+
+.mwui-front-alert-success,
+.mwui-backend-alert-success {
+  background-color: var(--mw-success);
+  color: var(--mw-success-contrast);
+}
+
+.mwui-front-alert-info,
+.mwui-backend-alert-info {
+  background-color: var(--mw-info);
+  color: var(--mw-info-contrast);
+}
+
+.mwui-front-alert-warning,
+.mwui-backend-alert-warning {
+  background-color: var(--mw-warning);
+  color: var(--mw-warning-contrast);
+}
+
+.mwui-front-alert-danger,
+.mwui-backend-alert-danger {
+  background-color: var(--mw-danger);
+  color: var(--mw-danger-contrast);
+}
+
+/* Badges */
+.mwui-front-badge,
+.mwui-backend-badge {
+  display: inline-block;
+  padding: calc(var(--mw-spacing-xs) / 2) var(--mw-spacing-sm);
+  border-radius: var(--mw-radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.mwui-front-badge-primary,
+.mwui-backend-badge-primary {
+  background-color: var(--mw-primary);
+  color: var(--mw-primary-contrast);
+}
+
+.mwui-front-badge-secondary,
+.mwui-backend-badge-secondary {
+  background-color: var(--mw-secondary);
+  color: var(--mw-secondary-contrast);
+}
+
+.mwui-front-badge-success,
+.mwui-backend-badge-success {
+  background-color: var(--mw-success);
+  color: var(--mw-success-contrast);
+}
+
+.mwui-front-badge-info,
+.mwui-backend-badge-info {
+  background-color: var(--mw-info);
+  color: var(--mw-info-contrast);
+}
+
+.mwui-front-badge-warning,
+.mwui-backend-badge-warning {
+  background-color: var(--mw-warning);
+  color: var(--mw-warning-contrast);
+}
+
+.mwui-front-badge-danger,
+.mwui-backend-badge-danger {
+  background-color: var(--mw-danger);
+  color: var(--mw-danger-contrast);
+}
+
+/* Tables */
+.mwui-front-table,
+.mwui-backend-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-bottom: var(--mw-spacing-md);
+}
+
+.mwui-front-table th,
+.mwui-backend-table th {
+  text-align: left;
+  padding: var(--mw-spacing-sm);
+  border-bottom: var(--mw-border-width) solid var(--mw-neutral-300);
+  background-color: var(--mw-neutral-100);
+  font-weight: 600;
+  color: var(--mw-neutral-700);
+}
+
+.mwui-front-table td,
+.mwui-backend-table td {
+  padding: var(--mw-spacing-sm);
+  border-bottom: var(--mw-border-width) solid var(--mw-neutral-300);
+  color: var(--mw-neutral-700);
+}
+
+.mwui-front-table tr:nth-child(even),
+.mwui-backend-table tr:nth-child(even) {
+  background-color: var(--mw-neutral-100);
+}
+
+/* Navbar (top bar) */
+.mwui-backend-navbar,
+.mwui-front-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  background-color: var(--mw-primary);
+  color: var(--mw-primary-contrast);
+}
+
+.mwui-backend-navbar a,
+.mwui-front-navbar a {
+  color: inherit;
+  margin-right: var(--mw-spacing-md);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.mwui-backend-navbar a:last-child,
+.mwui-front-navbar a:last-child {
+  margin-right: 0;
+}
+
+/* Sidebar (backend) */
+.mwui-backend-sidebar {
+  width: 16rem;
+  flex-shrink: 0;
+  background-color: var(--mw-neutral-900);
+  color: var(--mw-neutral-200);
+  padding: var(--mw-spacing-lg) var(--mw-spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mw-spacing-sm);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.mwui-backend-sidebar a {
+  color: inherit;
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  border-radius: var(--mw-radius);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.mwui-backend-sidebar a:hover {
+  background-color: var(--mw-neutral-800);
+}
+
+.mwui-backend-shell {
+  display: flex;
+}
+
+.mwui-backend-content {
+  margin-left: 16rem;
+  padding: var(--mw-spacing-md) var(--mw-spacing-lg);
+  flex: 1;
+}
+
+/* Modal */
+.mwui-front-modal,
+.mwui-backend-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.mwui-front-modal-content,
+.mwui-backend-modal-content {
+  background-color: var(--mw-neutral-50);
+  border-radius: var(--mw-radius);
+  padding: var(--mw-spacing-lg);
+  max-width: 32rem;
+  width: 100%;
+  box-shadow: var(--mw-shadow-md);
+  position: relative;
+}
+
+.mwui-front-modal-close,
+.mwui-backend-modal-close {
+  position: absolute;
+  top: var(--mw-spacing-sm);
+  right: var(--mw-spacing-sm);
+  background: none;
+  border: none;
+  color: var(--mw-neutral-600);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Accordion */
+.mwui-front-accordion,
+.mwui-backend-accordion {
+  border: var(--mw-border-width) solid var(--mw-neutral-300);
+  border-radius: var(--mw-radius);
+}
+
+.mwui-front-accordion-item,
+.mwui-backend-accordion-item {
+  border-bottom: var(--mw-border-width) solid var(--mw-neutral-300);
+}
+
+.mwui-front-accordion-item:last-child,
+.mwui-backend-accordion-item:last-child {
+  border-bottom: none;
+}
+
+.mwui-front-accordion-header,
+.mwui-backend-accordion-header {
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--mw-neutral-100);
+  color: var(--mw-neutral-800);
+  font-weight: 500;
+}
+
+.mwui-front-accordion-panel,
+.mwui-backend-accordion-panel {
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  display: none;
+  background-color: var(--mw-neutral-50);
+  color: var(--mw-neutral-700);
+}
+
+/* Tabs */
+.mwui-front-tabs,
+.mwui-backend-tabs {
+  display: flex;
+  border-bottom: var(--mw-border-width) solid var(--mw-neutral-300);
+}
+
+.mwui-front-tab,
+.mwui-backend-tab {
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mw-neutral-600);
+  border-bottom: var(--mw-border-width) solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.mwui-front-tab.active,
+.mwui-backend-tab.active {
+  color: var(--mw-primary);
+  border-color: var(--mw-primary);
+}
+
+.mwui-front-tab-content,
+.mwui-backend-tab-content {
+  display: none;
+  padding: var(--mw-spacing-md) 0;
+}
+
+.mwui-front-tab-content.active,
+.mwui-backend-tab-content.active {
+  display: block;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MW UI Kit Demo</title>
+  <!-- Import design tokens and base/component styles -->
+  <link rel="stylesheet" href="mw-tokens.css">
+  <link rel="stylesheet" href="mw-base.css">
+  <link rel="stylesheet" href="mw-components.css">
+</head>
+<body>
+
+<!-- Frontend Demo -->
+<div class="mwui-front">
+  <header class="mwui-front-navbar">
+    <span>Front-end Navbar</span>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="mwui-front-container">
+    <h1>Front-end Components</h1>
+    <div class="mwui-front-card mwui-front-mb-md">
+      <h3>Buttons</h3>
+      <button class="mwui-front-btn mwui-front-btn-primary">Primary</button>
+      <button class="mwui-front-btn mwui-front-btn-secondary">Secondary</button>
+      <button class="mwui-front-btn mwui-front-btn-outlined">Outlined</button>
+    </div>
+    <div class="mwui-front-card mwui-front-mb-md">
+      <h3>Form</h3>
+      <label class="mwui-front-label" for="frontName">Name</label>
+      <input id="frontName" type="text" class="mwui-front-input mwui-front-mb-sm" placeholder="Enter your name">
+      <label class="mwui-front-label" for="frontEmail">Email</label>
+      <input id="frontEmail" type="email" class="mwui-front-input mwui-front-mb-sm" placeholder="Email address">
+      <button class="mwui-front-btn mwui-front-btn-primary">Submit</button>
+    </div>
+    <div class="mwui-front-card mwui-front-mb-md">
+      <h3>Alerts</h3>
+      <div class="mwui-front-alert mwui-front-alert-success mwui-front-mb-xs">Success alert</div>
+      <div class="mwui-front-alert mwui-front-alert-info mwui-front-mb-xs">Info alert</div>
+      <div class="mwui-front-alert mwui-front-alert-warning mwui-front-mb-xs">Warning alert</div>
+      <div class="mwui-front-alert mwui-front-alert-danger">Danger alert</div>
+    </div>
+    <div class="mwui-front-card mwui-front-mb-md">
+      <h3>Accordion</h3>
+      <div class="mwui-front-accordion">
+        <div class="mwui-front-accordion-item">
+          <div class="mwui-front-accordion-header">Section 1</div>
+          <div class="mwui-front-accordion-panel">Content for section 1</div>
+        </div>
+        <div class="mwui-front-accordion-item">
+          <div class="mwui-front-accordion-header">Section 2</div>
+          <div class="mwui-front-accordion-panel">Content for section 2</div>
+        </div>
+      </div>
+    </div>
+    <div class="mwui-front-card">
+      <h3>Tabs</h3>
+      <div class="mwui-front-tabs">
+        <div class="mwui-front-tab active" data-mw-tab-target="front-tab1">Tab 1</div>
+        <div class="mwui-front-tab" data-mw-tab-target="front-tab2">Tab 2</div>
+      </div>
+      <div id="front-tab1" class="mwui-front-tab-content active">
+        Content of front Tab 1.
+      </div>
+      <div id="front-tab2" class="mwui-front-tab-content">
+        Content of front Tab 2.
+      </div>
+    </div>
+  </main>
+</div>
+
+<hr/>
+
+<!-- Backend Demo -->
+<div class="mwui-backend">
+  <div class="mwui-backend-shell">
+    <aside class="mwui-backend-sidebar">
+      <a href="#">Dashboard</a>
+      <a href="#">Users</a>
+      <a href="#">Settings</a>
+    </aside>
+    <div class="mwui-backend-content">
+      <header class="mwui-backend-navbar">
+        <span>Backend Navbar</span>
+        <nav>
+          <a href="#">Help</a>
+          <a href="#">Logout</a>
+        </nav>
+      </header>
+      <h1>Backend Components</h1>
+      <div class="mwui-backend-card mwui-backend-mb-md">
+        <h3>Buttons</h3>
+        <button class="mwui-backend-btn mwui-backend-btn-primary">Primary</button>
+        <button class="mwui-backend-btn mwui-backend-btn-secondary">Secondary</button>
+        <button class="mwui-backend-btn mwui-backend-btn-outlined">Outlined</button>
+      </div>
+      <div class="mwui-backend-card mwui-backend-mb-md">
+        <h3>Form</h3>
+        <label class="mwui-backend-label" for="backendUser">Username</label>
+        <input id="backendUser" type="text" class="mwui-backend-input mwui-backend-mb-sm" placeholder="Username">
+        <label class="mwui-backend-label" for="backendPass">Password</label>
+        <input id="backendPass" type="password" class="mwui-backend-input mwui-backend-mb-sm" placeholder="Password">
+        <button class="mwui-backend-btn mwui-backend-btn-primary">Login</button>
+      </div>
+      <div class="mwui-backend-card mwui-backend-mb-md">
+        <h3>Alerts</h3>
+        <div class="mwui-backend-alert mwui-backend-alert-success mwui-backend-mb-xs">Success alert</div>
+        <div class="mwui-backend-alert mwui-backend-alert-info mwui-backend-mb-xs">Info alert</div>
+        <div class="mwui-backend-alert mwui-backend-alert-warning mwui-backend-mb-xs">Warning alert</div>
+        <div class="mwui-backend-alert mwui-backend-alert-danger">Danger alert</div>
+      </div>
+      <div class="mwui-backend-card mwui-backend-mb-md">
+        <h3>Accordion</h3>
+        <div class="mwui-backend-accordion">
+          <div class="mwui-backend-accordion-item">
+            <div class="mwui-backend-accordion-header">Section A</div>
+            <div class="mwui-backend-accordion-panel">Content for section A</div>
+          </div>
+          <div class="mwui-backend-accordion-item">
+            <div class="mwui-backend-accordion-header">Section B</div>
+            <div class="mwui-backend-accordion-panel">Content for section B</div>
+          </div>
+        </div>
+      </div>
+      <div class="mwui-backend-card">
+        <h3>Tabs</h3>
+        <div class="mwui-backend-tabs">
+          <div class="mwui-backend-tab active" data-mw-tab-target="back-tab1">Tab 1</div>
+          <div class="mwui-backend-tab" data-mw-tab-target="back-tab2">Tab 2</div>
+        </div>
+        <div id="back-tab1" class="mwui-backend-tab-content active">
+          Content of backend Tab 1.
+        </div>
+        <div id="back-tab2" class="mwui-backend-tab-content">
+          Content of backend Tab 2.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Import interactivity script -->
+<script src="mw-components.js"></script>
+</body>
+</html>
