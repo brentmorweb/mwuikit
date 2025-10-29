@@ -318,19 +318,6 @@
       font-weight: 600;
     }
 
-    .title-cell .icon-circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #eef2ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--pages-chip-color);
-    }
-
     .subtitle {
       display: block;
       font-size: 12px;
@@ -552,19 +539,49 @@
 
     .group-row td {
       padding: 18px 24px;
-      background: #f9fafc;
-      font-size: 13px;
-      font-weight: 700;
-      color: #1d4ed8;
+      background: #f4f6ff;
       border-top: 1px solid var(--pages-border);
       border-bottom: 1px solid var(--pages-border);
+    }
+
+    .folder-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .folder-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(37, 99, 235, 0.14);
+      color: var(--pages-accent);
+      font-size: 16px;
+    }
+
+    .folder-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .folder-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--pages-text);
     }
 
     .group-meta {
       font-size: 12px;
       color: var(--pages-muted);
-      margin-left: 12px;
       font-weight: 500;
+    }
+
+    .page-row[data-folder] td:first-child {
+      padding-left: 56px;
     }
 
     .actions {
@@ -732,6 +749,10 @@
         overflow-x: auto;
       }
 
+      .page-row[data-folder] td:first-child {
+        padding-left: 32px;
+      }
+
       .dialog {
         width: 100%;
       }
@@ -795,10 +816,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="group-row" data-folder="website">
+            <td colspan="8">
+              <div class="folder-header">
+                <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-folder-tree"></i></span>
+                <div class="folder-details">
+                  <span class="folder-name">Website</span>
+                  <span class="group-meta">Folder · 3 pages</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="page-row" data-folder="website">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-house" aria-hidden="true"></i></div>
                 <div>
                   Homepage 2025
                   <span class="subtitle">Main landing experience</span>
@@ -826,10 +857,9 @@
             <td>Jul 20, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="website">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
                 <div>
                   Style Guide – Color & Typography
                   <span class="subtitle">Design system foundations</span>
@@ -857,10 +887,9 @@
             <td>Jul 18, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="website">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-pen" aria-hidden="true"></i></div>
                 <div>
                   _Test
                   <span class="subtitle">Internal draft for hero copy</span>
@@ -888,13 +917,20 @@
             <td>Jul 15, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr class="group-row">
-            <td colspan="8">Solutions <span class="group-meta">6 pages</span></td>
+          <tr class="group-row" data-folder="solutions">
+            <td colspan="8">
+              <div class="folder-header">
+                <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-folder-open"></i></span>
+                <div class="folder-details">
+                  <span class="folder-name">Solutions</span>
+                  <span class="group-meta">Folder · 5 pages</span>
+                </div>
+              </div>
+            </td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="solutions">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-hospital" aria-hidden="true"></i></div>
                 <div>
                   Hospitals & Higher Education
                   <span class="subtitle">Industry solutions overview</span>
@@ -922,10 +958,9 @@
             <td>Jul 15, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="solutions">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-landmark" aria-hidden="true"></i></div>
                 <div>
                   Nonprofit & Organizations
                   <span class="subtitle">Partnership overview</span>
@@ -953,10 +988,9 @@
             <td>Jul 10, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="solutions">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-handshake" aria-hidden="true"></i></div>
                 <div>
                   Associations & Memberships
                   <span class="subtitle">Engagement programs</span>
@@ -984,10 +1018,9 @@
             <td>Jul 09, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="solutions">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
                 <div>
                   Hospitals & Healthcare
                   <span class="subtitle">Care teams landing</span>
@@ -1015,10 +1048,9 @@
             <td>Jul 08, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="solutions">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-regular fa-file-lines" aria-hidden="true"></i></div>
                 <div>
                   Solutions – All Docs
                   <span class="subtitle">Shared resources hub</span>
@@ -1046,13 +1078,20 @@
             <td>Jul 05, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr class="group-row">
-            <td colspan="8">Our Work <span class="group-meta">4 pages</span></td>
+          <tr class="group-row" data-folder="our-work">
+            <td colspan="8">
+              <div class="folder-header">
+                <span class="folder-icon" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+                <div class="folder-details">
+                  <span class="folder-name">Our Work</span>
+                  <span class="group-meta">Folder · 2 pages</span>
+                </div>
+              </div>
+            </td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="our-work">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-regular fa-folder-open" aria-hidden="true"></i></div>
                 <div>
                   Case Studies Overview
                   <span class="subtitle">All customer stories</span>
@@ -1080,10 +1119,9 @@
             <td>Jul 03, 2025</td>
             <td class="actions"><button aria-label="Open actions"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></button></td>
           </tr>
-          <tr>
+          <tr class="page-row" data-folder="our-work">
             <td>
               <div class="title-cell">
-                <div class="icon-circle"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></div>
                 <div>
                   Show Our Work
                   <span class="subtitle">Visual production portfolio</span>
