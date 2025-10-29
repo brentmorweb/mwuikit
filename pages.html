@@ -683,12 +683,12 @@
     }
 
     .drawer-panel {
-      width: 320px;
-      max-width: 100%;
+      width: 360px;
+      max-width: calc(100% - 32px);
       background: #fff;
-      border-radius: 18px;
+      border-radius: 20px;
       box-shadow: 0 24px 48px rgba(15, 23, 42, 0.28);
-      padding: 24px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
       gap: 24px;
@@ -698,11 +698,28 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
     }
 
-    .drawer-header h2 {
-      margin: 0;
+    .drawer-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .drawer-title span {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--pages-accent);
+      font-size: 16px;
     }
 
     .drawer-close {
@@ -721,58 +738,288 @@
       color: var(--pages-text);
     }
 
-    .drawer-groups {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .drawer-meta {
+      font-size: 13px;
+      color: var(--pages-muted);
     }
 
-    .drawer-group h3 {
-      margin: 0 0 12px;
+    .drawer-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .drawer-section {
+      border: 1px solid var(--pages-border);
+      border-radius: 14px;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+
+    .drawer-section + .drawer-section {
+      margin-top: 4px;
+    }
+
+    .section-toggle {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 14px;
       font-weight: 700;
-      color: var(--pages-text);
       letter-spacing: 0.02em;
       text-transform: uppercase;
+      color: var(--pages-muted);
+      cursor: pointer;
     }
 
-    .drawer-options {
+    .section-toggle .chevron {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.24);
+      color: var(--pages-muted);
+      transition: transform 0.2s ease;
+    }
+
+    .drawer-section[aria-expanded="false"] .chevron {
+      transform: rotate(-90deg);
+    }
+
+    .section-content {
+      padding: 0 18px 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .section-content[hidden] {
+      display: none;
+    }
+
+    .date-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .date-grid label {
       display: flex;
       flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--pages-muted);
+    }
+
+    .date-grid input[type="date"] {
+      border-radius: 10px;
+      border: 1px solid var(--pages-border);
+      padding: 8px 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--pages-text);
+      background: #fff;
+    }
+
+    .date-hint {
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .author-filter-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .author-filter-chip {
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .author-filter-chip .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .author-filter-chip[data-active="false"] .author-avatar {
+      opacity: 0.48;
+    }
+
+    .author-filter-chip[data-active="true"] .author-avatar {
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.24);
+      transform: translateY(-2px);
+    }
+
+    .author-avatar[data-color="blue"] {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+    }
+
+    .author-avatar[data-color="purple"] {
+      background: linear-gradient(135deg, #7c3aed, #c084fc);
+    }
+
+    .author-avatar[data-color="teal"] {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+    }
+
+    .filter-pill-group {
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
-    .drawer-option {
+    .filter-pill {
+      border-radius: 999px;
+      border: 1px solid var(--pages-border);
+      background: #fff;
+      padding: 6px 14px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--pages-muted);
+      transition: all 0.2s ease;
+    }
+
+    .filter-pill.is-active {
+      background: var(--pages-accent);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+    }
+
+    .type-chip-group {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .type-chip {
+      border: none;
+      border-radius: 12px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      background: #e2e8f0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .type-chip[data-active="false"] {
+      filter: grayscale(0.4);
+      opacity: 0.6;
+    }
+
+    .type-chip[data-active="true"] {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.18);
+    }
+
+    .type-chip[data-color="blue"] {
+      background: rgba(37, 99, 235, 0.15);
+      color: #1d4ed8;
+    }
+
+    .type-chip[data-color="amber"] {
+      background: rgba(217, 119, 6, 0.18);
+      color: #b45309;
+    }
+
+    .type-chip[data-color="pink"] {
+      background: rgba(219, 39, 119, 0.18);
+      color: #be185d;
+    }
+
+    .type-chip[data-color="emerald"] {
+      background: rgba(16, 185, 129, 0.18);
+      color: #047857;
+    }
+
+    .type-chip[data-color="violet"] {
+      background: rgba(139, 92, 246, 0.18);
+      color: #5b21b6;
+    }
+
+    .type-chip[data-color="slate"] {
+      background: rgba(100, 116, 139, 0.18);
+      color: #475569;
+    }
+
+    .report-checkboxes {
+      display: grid;
+      gap: 8px;
+    }
+
+    .report-checkbox {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      align-items: start;
       gap: 10px;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--pages-text);
     }
 
-    .drawer-option input[type="checkbox"] {
+    .report-checkbox input[type="checkbox"] {
       width: 16px;
       height: 16px;
+      margin-top: 2px;
       border-radius: 4px;
       border: 1px solid var(--pages-border);
       accent-color: var(--pages-accent);
+      cursor: pointer;
     }
 
     .drawer-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+    }
+
+    .drawer-footer > div {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .drawer-footer button {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--pages-accent);
-      background: rgba(37, 99, 235, 0.1);
-      border: none;
       border-radius: 999px;
-      padding: 8px 16px;
+      border: none;
+      font-weight: 600;
       cursor: pointer;
+      font-size: 13px;
+      padding: 10px 18px;
+    }
+
+    #clearFiltersButton {
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--pages-muted);
+    }
+
+    #applyFiltersButton {
+      background: var(--pages-accent);
+      color: #fff;
+      box-shadow: 0 14px 24px rgba(37, 99, 235, 0.22);
     }
 
     .drawer-footer span {
@@ -1432,7 +1679,7 @@
               </div>
             </td>
           </tr>
-          <tr class="page-row" data-folder="website" data-page-id="homepage-2025" data-status="published" data-type="Landing" data-author="John Lee" data-title="Homepage 2025" data-created="2025-01-05" data-modified="2025-07-20" data-report-value="2400" data-report-trend="18" data-report-direction="up">
+          <tr class="page-row" data-folder="website" data-page-id="homepage-2025" data-status="published" data-type="Landing" data-author="John Lee" data-title="Homepage 2025" data-created="2025-01-05" data-modified="2025-07-20" data-report-value="2400" data-report-trend="18" data-report-direction="up" data-report-issues="slow-speed">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Homepage 2025">
@@ -1480,7 +1727,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="website" data-page-id="style-guide" data-status="unpublished" data-type="Style Guide" data-author="Alice Moore" data-title="Style Guide – Color & Typography" data-created="2025-01-07" data-modified="2025-07-18" data-report-value="385" data-report-trend="0" data-report-direction="neutral">
+          <tr class="page-row" data-folder="website" data-page-id="style-guide" data-status="unpublished" data-type="Style Guide" data-author="Alice Moore" data-title="Style Guide – Color & Typography" data-created="2025-01-07" data-modified="2025-07-18" data-report-value="385" data-report-trend="0" data-report-direction="neutral" data-report-issues="meta-title meta-description">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Style Guide – Color & Typography">
@@ -1527,7 +1774,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="website" data-page-id="homepage-test" data-status="unpublished" data-type="Content" data-author="Ryan Chen" data-title="_Test" data-created="2025-01-11" data-modified="2025-07-15" data-report-value="0" data-report-trend="0" data-report-direction="neutral">
+          <tr class="page-row" data-folder="website" data-page-id="homepage-test" data-status="unpublished" data-type="Content" data-author="Ryan Chen" data-title="_Test" data-created="2025-01-11" data-modified="2025-07-15" data-report-value="0" data-report-trend="0" data-report-direction="neutral" data-report-issues="seo-low broken-links heading-hierarchy">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select _Test">
@@ -1598,7 +1845,7 @@
               </div>
             </td>
           </tr>
-          <tr class="page-row" data-folder="solutions" data-page-id="solutions-higher-ed" data-status="published" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Higher Education" data-created="2025-01-12" data-modified="2025-07-15" data-report-value="1600" data-report-trend="9" data-report-direction="up">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-higher-ed" data-status="published" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Higher Education" data-created="2025-01-12" data-modified="2025-07-15" data-report-value="1600" data-report-trend="9" data-report-direction="up" data-report-issues="low-engagement">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Hospitals &amp; Higher Education">
@@ -1645,7 +1892,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="solutions" data-page-id="solutions-nonprofit" data-status="unpublished" data-type="Landing" data-author="Alice Moore" data-title="Nonprofit &amp; Organizations" data-created="2025-01-13" data-modified="2025-07-10" data-report-value="385" data-report-trend="0" data-report-direction="neutral">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-nonprofit" data-status="unpublished" data-type="Landing" data-author="Alice Moore" data-title="Nonprofit &amp; Organizations" data-created="2025-01-13" data-modified="2025-07-10" data-report-value="385" data-report-trend="0" data-report-direction="neutral" data-report-issues="seo-low og-issues meta-description">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Nonprofit &amp; Organizations">
@@ -1692,7 +1939,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="solutions" data-page-id="solutions-associations" data-status="draft" data-type="Content" data-author="Ryan Chen" data-title="Associations &amp; Memberships" data-created="2025-01-19" data-modified="2025-07-09" data-report-value="0" data-report-trend="0" data-report-direction="neutral">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-associations" data-status="draft" data-type="Content" data-author="Ryan Chen" data-title="Associations &amp; Memberships" data-created="2025-01-19" data-modified="2025-07-09" data-report-value="0" data-report-trend="0" data-report-direction="neutral" data-report-issues="stale-edit heading-hierarchy">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Associations &amp; Memberships">
@@ -1739,7 +1986,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="solutions" data-page-id="solutions-healthcare" data-status="scheduled" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Healthcare" data-created="2025-01-22" data-modified="2025-07-08" data-report-value="995" data-report-trend="4" data-report-direction="up">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-healthcare" data-status="scheduled" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Healthcare" data-created="2025-01-22" data-modified="2025-07-08" data-report-value="995" data-report-trend="4" data-report-direction="up" data-report-issues="slow-speed broken-links">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Hospitals &amp; Healthcare">
@@ -1786,7 +2033,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="solutions" data-page-id="solutions-docs" data-status="published" data-type="Docs" data-author="Alice Moore" data-title="Solutions – All Docs" data-created="2025-01-25" data-modified="2025-07-05" data-report-value="712" data-report-trend="2" data-report-direction="up">
+          <tr class="page-row" data-folder="solutions" data-page-id="solutions-docs" data-status="published" data-type="Docs" data-author="Alice Moore" data-title="Solutions – All Docs" data-created="2025-01-25" data-modified="2025-07-05" data-report-value="712" data-report-trend="2" data-report-direction="up" data-report-issues="meta-title og-issues">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Solutions – All Docs">
@@ -1857,7 +2104,7 @@
               </div>
             </td>
           </tr>
-          <tr class="page-row" data-folder="our-work" data-page-id="case-studies" data-status="published" data-type="Portfolio" data-author="Ryan Chen" data-title="Case Studies Overview" data-created="2025-01-27" data-modified="2025-07-03" data-report-value="2100" data-report-trend="22" data-report-direction="up">
+          <tr class="page-row" data-folder="our-work" data-page-id="case-studies" data-status="published" data-type="Portfolio" data-author="Ryan Chen" data-title="Case Studies Overview" data-created="2025-01-27" data-modified="2025-07-03" data-report-value="2100" data-report-trend="22" data-report-direction="up" data-report-issues="low-engagement stale-edit">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Case Studies Overview">
@@ -1904,7 +2151,7 @@
               <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
             </td>
           </tr>
-          <tr class="page-row" data-folder="our-work" data-page-id="show-our-work" data-status="unpublished" data-type="Media" data-author="Alice Moore" data-title="Show Our Work" data-created="2025-01-28" data-modified="2025-07-02" data-report-value="385" data-report-trend="0" data-report-direction="neutral">
+          <tr class="page-row" data-folder="our-work" data-page-id="show-our-work" data-status="unpublished" data-type="Media" data-author="Alice Moore" data-title="Show Our Work" data-created="2025-01-28" data-modified="2025-07-02" data-report-value="385" data-report-trend="0" data-report-direction="neutral" data-report-issues="seo-low broken-links low-engagement">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Show Our Work">
@@ -1959,24 +2206,78 @@
   <div class="filters-drawer" id="filtersDrawer" aria-hidden="true">
     <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="filtersDrawerTitle">
       <div class="drawer-header">
-        <h2 id="filtersDrawerTitle">Filters</h2>
+        <div class="drawer-title" id="filtersDrawerTitle">
+          <span aria-hidden="true"><i class="fa-solid fa-filter"></i></span>
+          Filters
+        </div>
         <button class="drawer-close" type="button" aria-label="Close filters">
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="drawer-groups">
-        <div class="drawer-group">
-          <h3>Authors</h3>
-          <div class="drawer-options" id="authorFilterOptions"></div>
+      <div class="drawer-meta" id="activeFilterCount">No filters applied</div>
+      <div class="drawer-sections" role="presentation">
+        <div class="drawer-section" data-section="date" aria-expanded="true">
+          <button class="section-toggle" type="button" data-section-toggle="date" aria-controls="dateFilterSection">
+            Date
+            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="section-content" id="dateFilterSection">
+            <div class="date-grid">
+              <label for="filterStartDate">Start Date
+                <input type="date" id="filterStartDate" name="filterStartDate">
+              </label>
+              <label for="filterEndDate">End Date
+                <input type="date" id="filterEndDate" name="filterEndDate">
+              </label>
+            </div>
+            <div class="date-hint">Filters by last modified date. Leave one field blank for an open range.</div>
+          </div>
         </div>
-        <div class="drawer-group">
-          <h3>Types</h3>
-          <div class="drawer-options" id="typeFilterOptions"></div>
+        <div class="drawer-section" data-section="author" aria-expanded="true">
+          <button class="section-toggle" type="button" data-section-toggle="author" aria-controls="authorFilterSection">
+            Author
+            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="section-content" id="authorFilterSection">
+            <div class="author-filter-grid" id="authorFilterList" role="group" aria-label="Filter by author"></div>
+          </div>
+        </div>
+        <div class="drawer-section" data-section="status" aria-expanded="true">
+          <button class="section-toggle" type="button" data-section-toggle="status" aria-controls="statusFilterSection">
+            Status
+            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="section-content" id="statusFilterSection">
+            <div class="filter-pill-group" id="statusFilterPills" role="group" aria-label="Filter by status"></div>
+          </div>
+        </div>
+        <div class="drawer-section" data-section="type" aria-expanded="true">
+          <button class="section-toggle" type="button" data-section-toggle="type" aria-controls="typeFilterSection">
+            Type
+            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="section-content" id="typeFilterSection">
+            <div class="type-chip-group" id="typeFilterList" role="group" aria-label="Filter by type"></div>
+          </div>
+        </div>
+        <div class="drawer-section" data-section="report" aria-expanded="true">
+          <button class="section-toggle" type="button" data-section-toggle="report" aria-controls="reportFilterSection">
+            Report Card
+            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="section-content" id="reportFilterSection">
+            <div class="report-checkboxes" id="reportFilterList"></div>
+          </div>
         </div>
       </div>
       <div class="drawer-footer">
-        <button type="button" id="clearFiltersButton">Clear filters</button>
-        <span>Filters apply instantly</span>
+        <div>
+          <button type="button" id="clearFiltersButton">Clear all</button>
+        </div>
+        <div>
+          <button type="button" id="applyFiltersButton">Apply filters</button>
+          <span>Selections persist until cleared.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -2064,9 +2365,58 @@
         searchRaw: '',
         authors: new Set(),
         types: new Set(),
+        statuses: new Set(),
+        reportCards: new Set(),
+        dateStart: '',
+        dateEnd: '',
         sortKey: 'modified',
         sortDirection: 'desc',
       };
+
+      const AUTHOR_DETAILS = {
+        'John Lee': { color: 'blue', email: 'john.lee@mayweather.studio' },
+        'Alice Moore': { color: 'purple', email: 'alice.moore@mayweather.studio' },
+        'Ryan Chen': { color: 'teal', email: 'ryan.chen@mayweather.studio' },
+      };
+
+      const STATUS_OPTIONS = [
+        { value: 'published', label: 'Published' },
+        { value: 'unpublished', label: 'Unpublished' },
+        { value: 'draft', label: 'Draft' },
+        { value: 'scheduled', label: 'Scheduled' },
+      ];
+
+      const TYPE_STYLES = {
+        Landing: 'blue',
+        Blog: 'violet',
+        Event: 'amber',
+        'Style Guide': 'violet',
+        Application: 'emerald',
+        Portfolio: 'pink',
+        Contact: 'emerald',
+        Home: 'blue',
+        Content: 'slate',
+        Docs: 'slate',
+        Media: 'pink',
+      };
+
+      const REPORT_CARD_OPTIONS = [
+        { value: 'seo-low', label: 'SEO score less than 50%' },
+        { value: 'slow-speed', label: 'Slow page speed' },
+        { value: 'meta-title', label: 'Meta title issues' },
+        { value: 'meta-description', label: 'Meta description issues' },
+        { value: 'og-issues', label: 'OG (Open Graph) issues' },
+        { value: 'broken-links', label: 'Broken links' },
+        { value: 'heading-hierarchy', label: 'Improper heading hierarchy' },
+        { value: 'stale-edit', label: 'Edited more than 90 days ago' },
+        { value: 'low-engagement', label: 'Low engagement rate' },
+      ];
+
+      const dateFormatter = new Intl.DateTimeFormat(undefined, {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+      });
 
       function getAuthorInitials(name) {
         if (!name) {
@@ -2084,6 +2434,44 @@
         return firstChar ? firstChar.toUpperCase() : '';
       }
 
+      function getStatusLabel(value) {
+        const match = STATUS_OPTIONS.find((option) => option.value === value);
+        return match ? match.label : value;
+      }
+
+      function getReportLabel(value) {
+        const match = REPORT_CARD_OPTIONS.find((option) => option.value === value);
+        return match ? match.label : value;
+      }
+
+      function formatDateForDisplay(value) {
+        if (!value) {
+          return '';
+        }
+        const [year, month, day] = value.split('-');
+        if (!year || !month || !day) {
+          return value;
+        }
+        const date = new Date(Number(year), Number(month) - 1, Number(day));
+        if (Number.isNaN(date.getTime())) {
+          return value;
+        }
+        return dateFormatter.format(date);
+      }
+
+      function updateActiveFilterSummary(count) {
+        if (!activeFilterCount) {
+          return;
+        }
+        if (count === 0) {
+          activeFilterCount.textContent = 'No filters applied';
+        } else if (count === 1) {
+          activeFilterCount.textContent = '1 filter applied';
+        } else {
+          activeFilterCount.textContent = `${count} filters applied`;
+        }
+      }
+
       const selection = new Set();
 
       const searchInput = document.getElementById('pagesSearch');
@@ -2093,9 +2481,18 @@
       const filtersButton = document.getElementById('filtersButton');
       const filtersDrawer = document.getElementById('filtersDrawer');
       const drawerCloseButton = filtersDrawer?.querySelector('.drawer-close');
-      const authorOptions = document.getElementById('authorFilterOptions');
-      const typeOptions = document.getElementById('typeFilterOptions');
+      const authorFilterList = document.getElementById('authorFilterList');
+      const statusFilterPills = document.getElementById('statusFilterPills');
+      const typeFilterList = document.getElementById('typeFilterList');
+      const reportFilterList = document.getElementById('reportFilterList');
       const clearFiltersButton = document.getElementById('clearFiltersButton');
+      const applyFiltersButton = document.getElementById('applyFiltersButton');
+      const startDateInput = document.getElementById('filterStartDate');
+      const endDateInput = document.getElementById('filterEndDate');
+      const activeFilterCount = document.getElementById('activeFilterCount');
+      const sectionToggleButtons = filtersDrawer
+        ? Array.from(filtersDrawer.querySelectorAll('[data-section-toggle]'))
+        : [];
       const searchOverlay = document.querySelector('.search-overlay');
       const newButton = document.getElementById('newButton');
       const dialog = document.getElementById('newDialog');
@@ -2135,12 +2532,21 @@
 
       const rowData = pageRows.map((row) => {
         const { pageId = '', status = 'all', type = '', author = '' } = row.dataset;
+        const reportIssues = new Set(
+          (row.dataset.reportIssues || '')
+            .split(/\s+/)
+            .map((value) => value.trim())
+            .filter(Boolean)
+        );
         return {
           element: row,
           pageId,
           status,
           type,
           author,
+          created: row.dataset.created || '',
+          modified: row.dataset.modified || '',
+          reportIssues,
           searchText: row.textContent.toLowerCase(),
         };
       });
@@ -2169,10 +2575,47 @@
       }
 
       function matchesBaseFilters(item) {
-        const searchMatch = !state.search || item.searchText.includes(state.search);
-        const authorMatch = state.authors.size === 0 || state.authors.has(item.author);
-        const typeMatch = state.types.size === 0 || state.types.has(item.type);
-        return searchMatch && authorMatch && typeMatch;
+        if (state.search && !item.searchText.includes(state.search)) {
+          return false;
+        }
+
+        if (state.authors.size > 0 && !state.authors.has(item.author)) {
+          return false;
+        }
+
+        if (state.types.size > 0 && !state.types.has(item.type)) {
+          return false;
+        }
+
+        if (state.statuses.size > 0 && !state.statuses.has(item.status)) {
+          return false;
+        }
+
+        if (state.dateStart || state.dateEnd) {
+          const targetDate = item.modified || item.created;
+          if (!targetDate) {
+            return false;
+          }
+          if (state.dateStart && targetDate < state.dateStart) {
+            return false;
+          }
+          if (state.dateEnd && targetDate > state.dateEnd) {
+            return false;
+          }
+        }
+
+        if (state.reportCards.size > 0) {
+          if (item.reportIssues.size === 0) {
+            return false;
+          }
+          for (const value of state.reportCards) {
+            if (!item.reportIssues.has(value)) {
+              return false;
+            }
+          }
+        }
+
+        return true;
       }
 
       function updateGroupRowsVisibility() {
@@ -2244,10 +2687,23 @@
           chips.push({ type: 'type', value });
         });
 
+        state.statuses.forEach((value) => {
+          chips.push({ type: 'status', value });
+        });
+
+        state.reportCards.forEach((value) => {
+          chips.push({ type: 'report', value });
+        });
+
+        if (state.dateStart || state.dateEnd) {
+          chips.push({ type: 'date', value: { start: state.dateStart, end: state.dateEnd } });
+        }
+
         filterChips.innerHTML = '';
 
         if (chips.length === 0) {
           filterChips.hidden = true;
+          updateActiveFilterSummary(0);
           return;
         }
 
@@ -2255,14 +2711,61 @@
 
         chips.forEach((chip) => {
           const button = document.createElement('button');
-          const labelPrefix = chip.type === 'search' ? 'Search' : chip.type === 'author' ? 'Author' : 'Type';
-          const displayValue = chip.type === 'author' ? getAuthorInitials(chip.value) || chip.value : chip.value;
-          const visualLabel = `${labelPrefix}: ${displayValue}`;
-          const ariaLabelValue = chip.type === 'author' ? `${labelPrefix}: ${chip.value}` : visualLabel;
           button.type = 'button';
           button.className = 'chip-button';
           button.dataset.chipType = chip.type;
-          button.dataset.chipValue = chip.value;
+          let visualLabel = '';
+          let ariaLabelValue = '';
+
+          switch (chip.type) {
+            case 'search':
+              visualLabel = `Search: ${chip.value}`;
+              ariaLabelValue = visualLabel;
+              button.dataset.chipValue = chip.value;
+              break;
+            case 'author':
+              visualLabel = `Author: ${getAuthorInitials(chip.value) || chip.value}`;
+              ariaLabelValue = `Author: ${chip.value}`;
+              button.dataset.chipValue = chip.value;
+              break;
+            case 'type':
+              visualLabel = `Type: ${chip.value}`;
+              ariaLabelValue = visualLabel;
+              button.dataset.chipValue = chip.value;
+              break;
+            case 'status':
+              visualLabel = `Status: ${getStatusLabel(chip.value)}`;
+              ariaLabelValue = visualLabel;
+              button.dataset.chipValue = chip.value;
+              break;
+            case 'report':
+              visualLabel = `Report: ${getReportLabel(chip.value)}`;
+              ariaLabelValue = visualLabel;
+              button.dataset.chipValue = chip.value;
+              break;
+            case 'date': {
+              const startText = formatDateForDisplay(chip.value.start);
+              const endText = formatDateForDisplay(chip.value.end);
+              if (chip.value.start && chip.value.end) {
+                visualLabel = `Modified: ${startText} – ${endText}`;
+              } else if (chip.value.start) {
+                visualLabel = `Modified: From ${startText}`;
+              } else if (chip.value.end) {
+                visualLabel = `Modified: Through ${endText}`;
+              } else {
+                visualLabel = 'Modified date';
+              }
+              ariaLabelValue = visualLabel;
+              button.dataset.chipStart = chip.value.start || '';
+              button.dataset.chipEnd = chip.value.end || '';
+              break;
+            }
+            default:
+              visualLabel = chip.value;
+              ariaLabelValue = visualLabel;
+              button.dataset.chipValue = chip.value;
+          }
+
           button.setAttribute('aria-label', `Remove ${ariaLabelValue}`);
 
           const labelSpan = document.createElement('span');
@@ -2274,6 +2777,8 @@
           button.append(labelSpan, icon);
           filterChips.appendChild(button);
         });
+
+        updateActiveFilterSummary(chips.length);
       }
 
       function getRowsInScope() {
@@ -2513,70 +3018,210 @@
         searchInput.select();
       }
 
-      function buildFilterOptions(container, values, type) {
-        if (!container) {
-          return [];
+      const authorButtons = [];
+      const statusButtons = [];
+      const typeButtons = [];
+      const reportCheckboxes = [];
+
+      function renderAuthorFilters() {
+        if (!authorFilterList) {
+          return;
         }
+        authorFilterList.innerHTML = '';
+        authorButtons.length = 0;
 
-        container.innerHTML = '';
-        const checkboxes = [];
+        const authors = Array.from(new Set(rowData.map((item) => item.author)))
+          .filter(Boolean)
+          .sort();
 
-        values.forEach((value) => {
-          if (!value) {
-            return;
-          }
-          const label = document.createElement('label');
-          label.className = 'drawer-option';
+        authors.forEach((author) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'author-filter-chip';
+          button.dataset.authorValue = author;
+          button.dataset.active = state.authors.has(author) ? 'true' : 'false';
+
+          const avatar = document.createElement('span');
+          avatar.className = 'author-avatar';
+          const { color = 'blue', email } = AUTHOR_DETAILS[author] || {};
+          avatar.dataset.color = color;
+          avatar.textContent = getAuthorInitials(author) || author;
+
+          button.appendChild(avatar);
+          const tooltip = email ? `${author} · ${email}` : author;
+          button.title = tooltip;
+          button.setAttribute('aria-label', `Toggle filter for ${author}`);
+          button.setAttribute('aria-pressed', state.authors.has(author) ? 'true' : 'false');
+          button.setAttribute('data-active', state.authors.has(author) ? 'true' : 'false');
+
+          button.addEventListener('click', () => {
+            if (state.authors.has(author)) {
+              state.authors.delete(author);
+            } else {
+              state.authors.add(author);
+            }
+            updateRows();
+            syncFilterControls();
+          });
+
+          authorFilterList.appendChild(button);
+          authorButtons.push(button);
+        });
+      }
+
+      function renderStatusFilters() {
+        if (!statusFilterPills) {
+          return;
+        }
+        statusFilterPills.innerHTML = '';
+        statusButtons.length = 0;
+
+        STATUS_OPTIONS.forEach(({ value, label }) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'filter-pill';
+          button.textContent = label;
+          button.dataset.statusValue = value;
+          button.classList.toggle('is-active', state.statuses.has(value));
+
+          button.addEventListener('click', () => {
+            if (state.statuses.has(value)) {
+              state.statuses.delete(value);
+            } else {
+              state.statuses.add(value);
+            }
+            updateRows();
+            syncFilterControls();
+          });
+
+          statusFilterPills.appendChild(button);
+          statusButtons.push(button);
+        });
+      }
+
+      function renderTypeFilters() {
+        if (!typeFilterList) {
+          return;
+        }
+        typeFilterList.innerHTML = '';
+        typeButtons.length = 0;
+
+        const types = Array.from(new Set(rowData.map((item) => item.type)))
+          .filter(Boolean)
+          .sort();
+
+        types.forEach((type) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'type-chip';
+          button.dataset.typeValue = type;
+          button.dataset.color = TYPE_STYLES[type] || 'slate';
+          button.dataset.active = state.types.has(type) ? 'true' : 'false';
+          button.textContent = type;
+          button.addEventListener('click', () => {
+            if (state.types.has(type)) {
+              state.types.delete(type);
+            } else {
+              state.types.add(type);
+            }
+            updateRows();
+            syncFilterControls();
+          });
+          typeFilterList.appendChild(button);
+          typeButtons.push(button);
+        });
+      }
+
+      function renderReportFilters() {
+        if (!reportFilterList) {
+          return;
+        }
+        reportFilterList.innerHTML = '';
+        reportCheckboxes.length = 0;
+
+        REPORT_CARD_OPTIONS.forEach(({ value, label }) => {
+          const wrapper = document.createElement('label');
+          wrapper.className = 'report-checkbox';
 
           const input = document.createElement('input');
           input.type = 'checkbox';
           input.value = value;
-          input.dataset.filterType = type;
-
-          const text = document.createElement('span');
-          const displayValue = type === 'author' ? getAuthorInitials(value) || value : value;
-          text.textContent = displayValue;
-          if (type === 'author') {
-            label.title = value;
-            input.setAttribute('aria-label', `Filter by ${value}`);
-          }
-
+          input.checked = state.reportCards.has(value);
           input.addEventListener('change', () => {
-            const targetSet = type === 'author' ? state.authors : state.types;
             if (input.checked) {
-              targetSet.add(value);
+              state.reportCards.add(value);
             } else {
-              targetSet.delete(value);
+              state.reportCards.delete(value);
             }
             updateRows();
+            syncFilterControls();
           });
 
-          label.append(input, text);
-          container.appendChild(label);
-          checkboxes.push(input);
-        });
+          const text = document.createElement('span');
+          text.textContent = label;
 
-        return checkboxes;
-      }
-
-      const authorValues = Array.from(new Set(rowData.map((item) => item.author)))
-        .filter(Boolean)
-        .sort();
-      const typeValues = Array.from(new Set(rowData.map((item) => item.type)))
-        .filter(Boolean)
-        .sort();
-
-      const authorCheckboxes = buildFilterOptions(authorOptions, authorValues, 'author');
-      const typeCheckboxes = buildFilterOptions(typeOptions, typeValues, 'type');
-
-      function syncFilterCheckboxes() {
-        authorCheckboxes.forEach((checkbox) => {
-          checkbox.checked = state.authors.has(checkbox.value);
-        });
-        typeCheckboxes.forEach((checkbox) => {
-          checkbox.checked = state.types.has(checkbox.value);
+          wrapper.append(input, text);
+          reportFilterList.appendChild(wrapper);
+          reportCheckboxes.push(input);
         });
       }
+
+      function syncFilterControls() {
+        authorButtons.forEach((button) => {
+          const value = button.dataset.authorValue;
+          const isActive = value ? state.authors.has(value) : false;
+          button.dataset.active = isActive ? 'true' : 'false';
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        statusButtons.forEach((button) => {
+          const value = button.dataset.statusValue;
+          const isActive = value ? state.statuses.has(value) : false;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        typeButtons.forEach((button) => {
+          const value = button.dataset.typeValue;
+          const isActive = value ? state.types.has(value) : false;
+          button.dataset.active = isActive ? 'true' : 'false';
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        reportCheckboxes.forEach((checkbox) => {
+          checkbox.checked = state.reportCards.has(checkbox.value);
+        });
+
+        if (startDateInput) {
+          startDateInput.value = state.dateStart;
+        }
+        if (endDateInput) {
+          endDateInput.value = state.dateEnd;
+        }
+      }
+
+      renderAuthorFilters();
+      renderStatusFilters();
+      renderTypeFilters();
+      renderReportFilters();
+      syncFilterControls();
+
+      sectionToggleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const section = button.closest('.drawer-section');
+          if (!section) {
+            return;
+          }
+          const contentId = button.getAttribute('aria-controls');
+          const content = contentId ? document.getElementById(contentId) : section.querySelector('.section-content');
+          const expanded = section.getAttribute('aria-expanded') !== 'false';
+          const next = !expanded;
+          section.setAttribute('aria-expanded', next ? 'true' : 'false');
+          if (content) {
+            content.hidden = !next;
+          }
+        });
+      });
 
       function openDrawer() {
         if (!filtersDrawer) {
@@ -2747,10 +3392,11 @@
           if (!target) {
             return;
           }
-          const { chipType, chipValue } = target.dataset;
-          if (!chipType || !chipValue) {
+          const chipType = target.dataset.chipType;
+          if (!chipType) {
             return;
           }
+          const chipValue = target.dataset.chipValue || '';
 
           if (chipType === 'search') {
             if (searchInput) {
@@ -2762,9 +3408,16 @@
             state.authors.delete(chipValue);
           } else if (chipType === 'type') {
             state.types.delete(chipValue);
+          } else if (chipType === 'status') {
+            state.statuses.delete(chipValue);
+          } else if (chipType === 'report') {
+            state.reportCards.delete(chipValue);
+          } else if (chipType === 'date') {
+            state.dateStart = '';
+            state.dateEnd = '';
           }
 
-          syncFilterCheckboxes();
+          syncFilterControls();
           updateRows();
         });
       }
@@ -2808,12 +3461,37 @@
 
       if (clearFiltersButton) {
         clearFiltersButton.addEventListener('click', () => {
+          if (searchInput) {
+            searchInput.value = '';
+          }
+          state.search = '';
+          state.searchRaw = '';
           state.authors.clear();
           state.types.clear();
-          syncFilterCheckboxes();
+          state.statuses.clear();
+          state.reportCards.clear();
+          state.dateStart = '';
+          state.dateEnd = '';
+          syncFilterControls();
           updateRows();
         });
       }
+
+      startDateInput?.addEventListener('change', () => {
+        state.dateStart = startDateInput.value;
+        updateRows();
+        syncFilterControls();
+      });
+
+      endDateInput?.addEventListener('change', () => {
+        state.dateEnd = endDateInput.value;
+        updateRows();
+        syncFilterControls();
+      });
+
+      applyFiltersButton?.addEventListener('click', () => {
+        closeDrawer();
+      });
 
       newButton?.addEventListener('click', openDialog);
       dialogCloseButton?.addEventListener('click', closeDialog);
@@ -2988,7 +3666,7 @@
           if (author) {
             state.authors.clear();
             state.authors.add(author);
-            syncFilterCheckboxes();
+            syncFilterControls();
             updateRows();
           }
         }
@@ -3014,7 +3692,7 @@
         applySort();
         updateSortIndicators();
         updateRows();
-        syncFilterCheckboxes();
+        syncFilterControls();
         syncBodyScrollState();
         syncBulkBarOffset();
       };
