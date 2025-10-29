@@ -356,6 +356,14 @@
       width: 240px;
     }
 
+    .pages-table thead {
+      position: sticky;
+      top: calc(var(--pages-sticky-offset) + var(--pages-bulk-bar-offset));
+      z-index: 15;
+      background: #f9fafc;
+      box-shadow: 0 6px 12px rgba(15, 23, 42, 0.04);
+    }
+
     .pages-table thead th {
       text-align: left;
       padding: 18px 24px;
@@ -366,10 +374,6 @@
       color: var(--pages-muted);
       background: #f9fafc;
       border-bottom: 1px solid var(--pages-border);
-      position: sticky;
-      top: calc(var(--pages-sticky-offset) + var(--pages-bulk-bar-offset));
-      z-index: 10;
-      box-shadow: 0 6px 12px rgba(15, 23, 42, 0.04);
     }
 
     .pages-table thead th.checkbox-cell {
