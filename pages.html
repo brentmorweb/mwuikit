@@ -1410,7 +1410,7 @@
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="website" aria-expanded="true">
                   <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-                  <span class="folder-icon" data-color="blue" aria-hidden="true"><i class="fa-solid fa-folder-tree"></i></span>
+                  <span class="folder-icon" data-color="blue" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
                   <div class="folder-details">
                     <span class="folder-name">Website</span>
                     <span class="group-meta"><span class="folder-count" data-folder-count>3 pages</span></span>
@@ -1570,7 +1570,7 @@
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="solutions" aria-expanded="true">
                   <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-                  <span class="folder-icon" data-color="purple" aria-hidden="true"><i class="fa-solid fa-folder-open"></i></span>
+                  <span class="folder-icon" data-color="purple" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
                   <div class="folder-details">
                     <span class="folder-name">Solutions</span>
                     <span class="group-meta"><span class="folder-count" data-folder-count>5 pages</span></span>
@@ -1819,7 +1819,7 @@
               <div class="folder-header">
                 <button type="button" class="folder-toggle" data-folder-toggle="our-work" aria-expanded="true">
                   <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-                  <span class="folder-icon" data-color="amber" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+                  <span class="folder-icon" data-color="amber" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
                   <div class="folder-details">
                     <span class="folder-name">Our Work</span>
                     <span class="group-meta"><span class="folder-count" data-folder-count>2 pages</span></span>
@@ -2392,6 +2392,11 @@
         const members = folderMembers.get(folderId) || [];
         if (toggle) {
           toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+          const icon = toggle.querySelector('[data-folder-icon]');
+          if (icon) {
+            icon.classList.remove('fa-folder-open', 'fa-folder');
+            icon.classList.add(expanded ? 'fa-folder-open' : 'fa-folder');
+          }
         }
         members.forEach((row) => {
           row.classList.toggle('is-collapsed', !expanded);
