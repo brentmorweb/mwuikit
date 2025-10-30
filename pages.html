@@ -1678,6 +1678,226 @@
       font-size: 20px;
     }
 
+    .new-page-dialog {
+      position: relative;
+      width: min(520px, 100%);
+      padding: 36px;
+      gap: 28px;
+    }
+
+    .new-page-dialog .dialog-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      color: var(--pages-muted);
+    }
+
+    .new-page-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .new-page-header-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(14, 116, 144, 0.12));
+      color: var(--pages-accent);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 14px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    .new-page-header h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+    }
+
+    .new-page-header p {
+      margin: 10px 0 0;
+      color: var(--pages-muted);
+      line-height: 1.5;
+    }
+
+    .new-page-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .new-page-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .new-page-question {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .new-page-input,
+    .new-page-select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 15px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: #fff;
+      color: var(--pages-text);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .new-page-input:focus,
+    .new-page-select:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.55);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
+    }
+
+    .new-page-input::placeholder {
+      color: rgba(107, 114, 128, 0.8);
+    }
+
+    .new-page-select {
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, rgba(107, 114, 128, 0.6) 50%),
+        linear-gradient(135deg, rgba(107, 114, 128, 0.6) 50%, transparent 50%);
+      background-position: calc(100% - 22px) calc(50% + 3px), calc(100% - 16px) calc(50% + 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 44px;
+    }
+
+    .new-page-select:focus {
+      background-image: linear-gradient(45deg, transparent 50%, rgba(37, 99, 235, 0.8) 50%),
+        linear-gradient(135deg, rgba(37, 99, 235, 0.8) 50%, transparent 50%);
+    }
+
+    .new-page-type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .new-page-type-option {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      padding: 14px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      text-align: center;
+      background: rgba(241, 245, 249, 0.72);
+      color: var(--pages-text);
+    }
+
+    .new-page-type-option:hover,
+    .new-page-type-option:focus-visible {
+      border-color: rgba(37, 99, 235, 0.6);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.16);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .new-page-type-option.selected {
+      transform: translateY(-1px);
+      border-color: transparent;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+    }
+
+    .new-page-type-option.accent-blue {
+      background: rgba(37, 99, 235, 0.16);
+      color: #1d4ed8;
+    }
+
+    .new-page-type-option.accent-purple {
+      background: rgba(124, 58, 237, 0.16);
+      color: #6d28d9;
+    }
+
+    .new-page-type-option.accent-pink {
+      background: rgba(236, 72, 153, 0.16);
+      color: #db2777;
+    }
+
+    .new-page-type-option.accent-green {
+      background: rgba(16, 185, 129, 0.16);
+      color: #047857;
+    }
+
+    .new-page-type-option.accent-amber {
+      background: rgba(251, 191, 36, 0.2);
+      color: #b45309;
+    }
+
+    .new-page-type-option.accent-indigo {
+      background: rgba(99, 102, 241, 0.18);
+      color: #4338ca;
+    }
+
+    .new-page-type-option.accent-cyan {
+      background: rgba(6, 182, 212, 0.18);
+      color: #0e7490;
+    }
+
+    .new-page-type-option.accent-rose {
+      background: rgba(244, 114, 182, 0.18);
+      color: #be185d;
+    }
+
+    .new-page-type-option.accent-orange {
+      background: rgba(249, 115, 22, 0.2);
+      color: #c2410c;
+    }
+
+    .new-page-type-option.selected.accent-blue {
+      box-shadow: 0 16px 34px rgba(37, 99, 235, 0.28);
+    }
+
+    .new-page-type-option.selected.accent-purple {
+      box-shadow: 0 16px 34px rgba(124, 58, 237, 0.26);
+    }
+
+    .new-page-type-option.selected.accent-pink {
+      box-shadow: 0 16px 34px rgba(236, 72, 153, 0.28);
+    }
+
+    .new-page-type-option.selected.accent-green {
+      box-shadow: 0 16px 34px rgba(16, 185, 129, 0.26);
+    }
+
+    .new-page-type-option.selected.accent-amber {
+      box-shadow: 0 16px 34px rgba(245, 158, 11, 0.26);
+    }
+
+    .new-page-type-option.selected.accent-indigo {
+      box-shadow: 0 16px 34px rgba(99, 102, 241, 0.26);
+    }
+
+    .new-page-type-option.selected.accent-cyan {
+      box-shadow: 0 16px 34px rgba(6, 182, 212, 0.26);
+    }
+
+    .new-page-type-option.selected.accent-rose {
+      box-shadow: 0 16px 34px rgba(244, 114, 182, 0.28);
+    }
+
+    .new-page-type-option.selected.accent-orange {
+      box-shadow: 0 16px 34px rgba(249, 115, 22, 0.26);
+    }
+
+    .new-page-dialog .dialog-actions {
+      margin-top: 8px;
+    }
+
     .dialog-option span {
       font-weight: 600;
       color: var(--pages-text);
@@ -3016,6 +3236,90 @@
     </div>
   </div>
 
+  <div
+    class="dialog-backdrop"
+    id="newPageDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="newPageDialogTitle"
+    aria-describedby="newPageDialogDescription"
+  >
+    <div class="dialog new-page-dialog">
+      <button class="dialog-close" type="button" aria-label="Close new page dialog">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <div class="new-page-header">
+        <div class="new-page-header-icon" aria-hidden="true">
+          <i class="fa-solid fa-file-pen"></i>
+        </div>
+        <div>
+          <h2 id="newPageDialogTitle">New Page</h2>
+          <p id="newPageDialogDescription">
+            Praesent tristique mauris vitae lorem volutpat tristique. Nunc leo risus, dignissim ac semper in, interdum in neque.
+          </p>
+        </div>
+      </div>
+      <form class="new-page-form" id="newPageForm">
+        <div class="new-page-form-group">
+          <label class="new-page-question" for="newPageTitle">What is the page title?</label>
+          <input
+            class="new-page-input"
+            type="text"
+            id="newPageTitle"
+            name="title"
+            placeholder="Enter a title..."
+            autocomplete="off"
+            required
+          >
+        </div>
+        <div class="new-page-form-group">
+          <label class="new-page-question" for="newPageFolder">Choose a folder</label>
+          <select class="new-page-select" id="newPageFolder" name="folder">
+            <option value="unassigned">Unassigned</option>
+            <option value="marketing">Marketing</option>
+            <option value="product">Product</option>
+            <option value="engineering">Engineering</option>
+            <option value="support">Support</option>
+          </select>
+        </div>
+        <div class="new-page-form-group">
+          <span class="new-page-question">What is the page type?</span>
+          <div class="new-page-type-grid" role="radiogroup" aria-label="Page type">
+            <button type="button" class="new-page-type-option accent-blue" data-page-type="landing" role="radio" aria-checked="false">
+              Landing
+            </button>
+            <button type="button" class="new-page-type-option accent-purple" data-page-type="content" role="radio" aria-checked="false">
+              Content
+            </button>
+            <button type="button" class="new-page-type-option accent-pink" data-page-type="portfolio" role="radio" aria-checked="false">
+              Portfolio
+            </button>
+            <button type="button" class="new-page-type-option accent-green" data-page-type="contact" role="radio" aria-checked="false">
+              Contact
+            </button>
+            <button type="button" class="new-page-type-option accent-indigo" data-page-type="style-guide" role="radio" aria-checked="false">
+              Style Guide
+            </button>
+            <button type="button" class="new-page-type-option accent-cyan" data-page-type="application" role="radio" aria-checked="false">
+              Application
+            </button>
+            <button type="button" class="new-page-type-option accent-rose" data-page-type="blog" role="radio" aria-checked="false">
+              Blog
+            </button>
+            <button type="button" class="new-page-type-option accent-orange" data-page-type="event" role="radio" aria-checked="false">
+              Event
+            </button>
+          </div>
+          <input type="hidden" id="newPageTypeInput" name="type" value="">
+        </div>
+        <div class="dialog-actions">
+          <button type="submit" class="primary">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="dialog-backdrop" id="folderSettingsDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="folderDialogTitle">
     <div class="dialog folder-dialog">
       <div class="dialog-header">
@@ -3206,6 +3510,15 @@
       const dialog = document.getElementById('newDialog');
       const dialogCloseButton = dialog?.querySelector('.dialog-close');
       const optionButtons = dialog ? dialog.querySelectorAll('.dialog-option') : [];
+      const newPageDialog = document.getElementById('newPageDialog');
+      const newPageDialogCloseButton = newPageDialog?.querySelector('.dialog-close');
+      const newPageForm = document.getElementById('newPageForm');
+      const newPageTitleInput = document.getElementById('newPageTitle');
+      const newPageTypeInput = document.getElementById('newPageTypeInput');
+      const newPageTypeGrid = newPageDialog?.querySelector('.new-page-type-grid') || null;
+      const newPageTypeButtons = newPageDialog
+        ? Array.from(newPageDialog.querySelectorAll('[data-page-type]'))
+        : [];
 
       const masterCheckbox = document.getElementById('masterCheckbox');
       const bulkBar = document.getElementById('bulkActionsBar');
@@ -3298,7 +3611,9 @@
         const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
         const createDialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
         const folderDialogOpen = folderSettingsDialog?.getAttribute('aria-hidden') === 'false';
-        document.body.style.overflow = drawerOpen || createDialogOpen || folderDialogOpen ? 'hidden' : '';
+        const newPageDialogOpen = newPageDialog?.getAttribute('aria-hidden') === 'false';
+        document.body.style.overflow =
+          drawerOpen || createDialogOpen || folderDialogOpen || newPageDialogOpen ? 'hidden' : '';
       }
 
       function closeActionMenu(menu, { focusTrigger = false } = {}) {
@@ -4047,13 +4362,51 @@
         dialogCloseButton?.focus();
       }
 
-      function closeDialog() {
+      function closeDialog({ focusTrigger = true } = {}) {
         if (!dialog) {
           return;
         }
         dialog.setAttribute('aria-hidden', 'true');
         syncBodyScrollState();
-        newButton?.focus();
+        if (focusTrigger) {
+          newButton?.focus();
+        }
+      }
+
+      function resetNewPageDialog() {
+        if (newPageForm) {
+          newPageForm.reset();
+        }
+        if (newPageTypeInput) {
+          newPageTypeInput.value = '';
+        }
+        newPageTypeButtons.forEach((button) => {
+          button.classList.remove('selected');
+          button.setAttribute('aria-checked', 'false');
+        });
+      }
+
+      function openNewPageDialog() {
+        if (!newPageDialog) {
+          return;
+        }
+        resetNewPageDialog();
+        newPageDialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        window.requestAnimationFrame(() => {
+          newPageTitleInput?.focus();
+        });
+      }
+
+      function closeNewPageDialog({ focusTrigger = true } = {}) {
+        if (!newPageDialog) {
+          return;
+        }
+        newPageDialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        if (focusTrigger) {
+          newButton?.focus();
+        }
       }
 
       function openFolderDialog(folderId) {
@@ -4166,6 +4519,11 @@
           if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
             event.preventDefault();
             closeDrawer();
+            return;
+          }
+          if (newPageDialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeNewPageDialog();
             return;
           }
           if (dialog?.getAttribute('aria-hidden') === 'false') {
@@ -4300,11 +4658,102 @@
       optionButtons.forEach((button) => {
         button.addEventListener('click', () => {
           const action = button.dataset.action;
+          if (action === 'page') {
+            closeDialog({ focusTrigger: false });
+            window.requestAnimationFrame(() => {
+              openNewPageDialog();
+            });
+            return;
+          }
           closeDialog();
           if (action) {
             console.log(`Create new ${action}`);
           }
         });
+      });
+
+      newPageDialogCloseButton?.addEventListener('click', () => {
+        closeNewPageDialog();
+      });
+
+      newPageDialog?.addEventListener('click', (event) => {
+        if (event.target === newPageDialog) {
+          closeNewPageDialog();
+        }
+      });
+
+      function selectNewPageType(button, { focus = false } = {}) {
+        if (!button || newPageTypeButtons.length === 0) {
+          return;
+        }
+        const value = button.dataset.pageType || '';
+        newPageTypeButtons.forEach((typeButton) => {
+          const isCurrent = typeButton === button;
+          typeButton.classList.toggle('selected', isCurrent);
+          typeButton.setAttribute('aria-checked', isCurrent ? 'true' : 'false');
+        });
+        if (newPageTypeInput) {
+          newPageTypeInput.value = value;
+        }
+        if (focus) {
+          button.focus();
+        }
+      }
+
+      newPageTypeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selectNewPageType(button);
+        });
+        button.addEventListener('keydown', (event) => {
+          if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault();
+            selectNewPageType(button);
+          }
+        });
+      });
+
+      if (newPageTypeGrid && newPageTypeButtons.length > 0) {
+        newPageTypeGrid.addEventListener('keydown', (event) => {
+          const keys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+          if (!keys.includes(event.key)) {
+            return;
+          }
+          event.preventDefault();
+          const activeElement = document.activeElement;
+          const currentIndex = newPageTypeButtons.findIndex((button) => button.classList.contains('selected'));
+          let focusIndex = newPageTypeButtons.indexOf(activeElement);
+          if (focusIndex === -1) {
+            focusIndex = currentIndex >= 0 ? currentIndex : 0;
+          }
+          let targetIndex = focusIndex;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            targetIndex = (focusIndex + 1) % newPageTypeButtons.length;
+          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            targetIndex = (focusIndex - 1 + newPageTypeButtons.length) % newPageTypeButtons.length;
+          } else if (event.key === 'Home') {
+            targetIndex = 0;
+          } else if (event.key === 'End') {
+            targetIndex = newPageTypeButtons.length - 1;
+          }
+          const targetButton = newPageTypeButtons[targetIndex];
+          if (targetButton) {
+            selectNewPageType(targetButton, { focus: true });
+          }
+        });
+      }
+
+      newPageForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!newPageForm.checkValidity()) {
+          newPageForm.reportValidity();
+          return;
+        }
+        const formData = new FormData(newPageForm);
+        const title = formData.get('title');
+        const folder = formData.get('folder');
+        const type = formData.get('type');
+        console.log('Create new page', { title, folder, type });
+        closeNewPageDialog();
       });
 
       folderDialogClose?.addEventListener('click', closeFolderDialog);
