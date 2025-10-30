@@ -188,6 +188,16 @@
       box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
     }
 
+    .pages-tabs-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pages-tabs-row .quick-actions {
+      margin-left: auto;
+    }
+
     .pages-tabs {
       display: inline-flex;
       align-items: center;
@@ -1503,7 +1513,13 @@
         align-items: stretch;
       }
 
-      .quick-actions {
+      .pages-tabs-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .pages-tabs-row .quick-actions {
         align-self: flex-end;
       }
 
@@ -1552,11 +1568,6 @@
           <h1>Pages</h1>
         </div>
         <div class="pages-header-right">
-          <div class="quick-actions" aria-label="History and view controls">
-            <button class="icon-button" type="button" title="Undo" aria-label="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
-            <button class="icon-button" type="button" title="Redo" aria-label="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
-            <button class="icon-button" type="button" title="Toggle view" aria-label="Toggle view"><i class="fa-solid fa-table-cells" aria-hidden="true"></i></button>
-          </div>
           <div class="pages-actions">
             <div class="search-input">
               <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -1569,13 +1580,20 @@
         </div>
       </div>
 
-      <nav class="pages-tabs" role="tablist" aria-label="Page status scopes">
-        <button class="tab-button active" type="button" role="tab" aria-selected="true" data-status-tab="all">All <span class="tab-badge" data-status-count="all">0</span></button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="published">Published <span class="tab-badge" data-status-count="published">0</span></button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="unpublished">Unpublished <span class="tab-badge" data-status-count="unpublished">0</span></button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="draft">Drafts <span class="tab-badge" data-status-count="draft">0</span></button>
-        <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">0</span></button>
-      </nav>
+      <div class="pages-tabs-row">
+        <nav class="pages-tabs" role="tablist" aria-label="Page status scopes">
+          <button class="tab-button active" type="button" role="tab" aria-selected="true" data-status-tab="all">All <span class="tab-badge" data-status-count="all">0</span></button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="published">Published <span class="tab-badge" data-status-count="published">0</span></button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="unpublished">Unpublished <span class="tab-badge" data-status-count="unpublished">0</span></button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="draft">Drafts <span class="tab-badge" data-status-count="draft">0</span></button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">0</span></button>
+        </nav>
+        <div class="quick-actions" aria-label="History and view controls">
+          <button class="icon-button" type="button" title="Undo" aria-label="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
+          <button class="icon-button" type="button" title="Redo" aria-label="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
+          <button class="icon-button" type="button" title="Toggle view" aria-label="Toggle view"><i class="fa-solid fa-table-cells" aria-hidden="true"></i></button>
+        </div>
+      </div>
 
       <div class="filter-chips" id="filterChips" hidden aria-live="polite"></div>
       <div class="bulk-actions-bar" id="bulkActionsBar" aria-hidden="true">
