@@ -1729,6 +1729,114 @@
       gap: 24px;
     }
 
+    .new-page-tabs {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      padding: 6px;
+      border-radius: 18px;
+      background: rgba(148, 163, 184, 0.18);
+    }
+
+    .new-page-tab {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.65);
+      padding: 12px 16px;
+      text-align: left;
+      font-family: inherit;
+      color: var(--pages-muted);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
+        color 0.2s ease, transform 0.2s ease;
+    }
+
+    .new-page-tab:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    }
+
+    .new-page-tab:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.24);
+    }
+
+    .new-page-tab.is-active {
+      background: #fff;
+      border-color: rgba(37, 99, 235, 0.45);
+      color: var(--pages-text);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.14);
+    }
+
+    .new-page-tab.is-complete {
+      color: var(--pages-text);
+      border-color: rgba(59, 130, 246, 0.2);
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .new-page-tab-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      background: rgba(148, 163, 184, 0.32);
+      color: var(--pages-muted);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .new-page-tab-check {
+      display: none;
+      font-size: 14px;
+    }
+
+    .new-page-tab.is-active .new-page-tab-badge {
+      background: var(--pages-accent);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .new-page-tab.is-complete .new-page-tab-badge {
+      background: rgba(37, 99, 235, 0.16);
+      color: var(--pages-accent);
+    }
+
+    .new-page-tab.is-complete .new-page-tab-index {
+      display: none;
+    }
+
+    .new-page-tab.is-complete .new-page-tab-check {
+      display: inline-flex;
+    }
+
+    .new-page-tab-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .new-page-tab-title {
+      font-weight: 600;
+      color: inherit;
+    }
+
+    .new-page-tab-description {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pages-muted);
+    }
+
+    .new-page-tab.is-active .new-page-tab-description,
+    .new-page-tab.is-complete .new-page-tab-description {
+      color: rgba(37, 99, 235, 0.8);
+    }
+
     .new-page-step {
       display: flex;
       flex-direction: column;
@@ -3418,7 +3526,76 @@
         </div>
       </div>
       <form class="new-page-form" id="newPageForm">
-        <section class="new-page-step" data-step="details">
+        <div class="new-page-tabs" role="tablist" aria-label="New page steps">
+          <button
+            type="button"
+            class="new-page-tab is-active"
+            role="tab"
+            id="newPageTab-details"
+            data-step-tab
+            data-step-index="0"
+            aria-selected="true"
+            aria-controls="newPageStep-details"
+            tabindex="0"
+          >
+            <span class="new-page-tab-badge" aria-hidden="true">
+              <span class="new-page-tab-index">1</span>
+              <span class="new-page-tab-check"><i class="fa-solid fa-check"></i></span>
+            </span>
+            <span class="new-page-tab-text">
+              <span class="new-page-tab-title">Details</span>
+              <span class="new-page-tab-description">Title, folder, and type</span>
+            </span>
+          </button>
+          <button
+            type="button"
+            class="new-page-tab"
+            role="tab"
+            id="newPageTab-metadata"
+            data-step-tab
+            data-step-index="1"
+            aria-selected="false"
+            aria-controls="newPageStep-metadata"
+            tabindex="-1"
+          >
+            <span class="new-page-tab-badge" aria-hidden="true">
+              <span class="new-page-tab-index">2</span>
+              <span class="new-page-tab-check"><i class="fa-solid fa-check"></i></span>
+            </span>
+            <span class="new-page-tab-text">
+              <span class="new-page-tab-title">Metadata</span>
+              <span class="new-page-tab-description">Slug and SEO basics</span>
+            </span>
+          </button>
+          <button
+            type="button"
+            class="new-page-tab"
+            role="tab"
+            id="newPageTab-publishing"
+            data-step-tab
+            data-step-index="2"
+            aria-selected="false"
+            aria-controls="newPageStep-publishing"
+            tabindex="-1"
+          >
+            <span class="new-page-tab-badge" aria-hidden="true">
+              <span class="new-page-tab-index">3</span>
+              <span class="new-page-tab-check"><i class="fa-solid fa-check"></i></span>
+            </span>
+            <span class="new-page-tab-text">
+              <span class="new-page-tab-title">Publishing</span>
+              <span class="new-page-tab-description">Status, collaborators, access</span>
+            </span>
+          </button>
+        </div>
+        <section
+          class="new-page-step"
+          data-step="details"
+          id="newPageStep-details"
+          role="tabpanel"
+          aria-labelledby="newPageTab-details"
+          tabindex="0"
+        >
           <div class="new-page-form-group">
             <label class="new-page-question" for="newPageTitle">What is the page title?</label>
             <input
@@ -3472,7 +3649,16 @@
             <input type="hidden" id="newPageTypeInput" name="type" value="">
           </div>
         </section>
-        <section class="new-page-step" data-step="metadata" hidden aria-hidden="true">
+        <section
+          class="new-page-step"
+          data-step="metadata"
+          id="newPageStep-metadata"
+          role="tabpanel"
+          aria-labelledby="newPageTab-metadata"
+          hidden
+          aria-hidden="true"
+          tabindex="-1"
+        >
           <div class="new-page-form-group">
             <label class="new-page-question" for="newPageSlug">Slug</label>
             <input
@@ -3523,7 +3709,16 @@
             >
           </div>
         </section>
-        <section class="new-page-step" data-step="publishing" hidden aria-hidden="true">
+        <section
+          class="new-page-step"
+          data-step="publishing"
+          id="newPageStep-publishing"
+          role="tabpanel"
+          aria-labelledby="newPageTab-publishing"
+          hidden
+          aria-hidden="true"
+          tabindex="-1"
+        >
           <div class="new-page-form-group">
             <span class="new-page-question">Set publish status</span>
             <div
@@ -3795,6 +3990,9 @@
         : [];
       const newPageSteps = newPageForm
         ? Array.from(newPageForm.querySelectorAll('[data-step]'))
+        : [];
+      const newPageStepTabs = newPageForm
+        ? Array.from(newPageForm.querySelectorAll('[data-step-tab]'))
         : [];
       const newPagePrevButton = newPageForm?.querySelector('[data-new-page-nav="prev"]') || null;
       const newPageNextButton = newPageForm?.querySelector('[data-new-page-nav="next"]') || null;
@@ -5183,6 +5381,7 @@
           const isActive = index === newPageCurrentStepIndex;
           section.toggleAttribute('hidden', !isActive);
           section.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+          section.setAttribute('tabindex', isActive ? '0' : '-1');
           getNewPageStepControls(section).forEach((control) => {
             if (control instanceof HTMLInputElement && control.type === 'hidden') {
               return;
@@ -5194,6 +5393,16 @@
             }
           });
         });
+        if (newPageStepTabs.length > 0) {
+          newPageStepTabs.forEach((tab, index) => {
+            const isActive = index === newPageCurrentStepIndex;
+            const isComplete = index < newPageCurrentStepIndex;
+            tab.classList.toggle('is-active', isActive);
+            tab.classList.toggle('is-complete', isComplete);
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            tab.setAttribute('tabindex', isActive ? '0' : '-1');
+          });
+        }
         if (newPagePrevButton) {
           newPagePrevButton.toggleAttribute('hidden', newPageCurrentStepIndex === 0);
         }
@@ -5221,19 +5430,47 @@
         );
         if (focusTarget instanceof HTMLElement) {
           focusTarget.focus();
+          return;
+        }
+        if (section instanceof HTMLElement) {
+          section.focus();
         }
       }
 
-      function setNewPageStep(index) {
+      function setNewPageStep(index, { focusStep = true } = {}) {
         if (newPageSteps.length === 0) {
           return;
         }
         const clampedIndex = Math.max(0, Math.min(index, newPageSteps.length - 1));
         newPageCurrentStepIndex = clampedIndex;
         syncNewPageStepState();
-        window.requestAnimationFrame(() => {
-          focusNewPageStep(newPageSteps[newPageCurrentStepIndex]);
-        });
+        if (focusStep) {
+          window.requestAnimationFrame(() => {
+            focusNewPageStep(newPageSteps[newPageCurrentStepIndex]);
+          });
+        }
+      }
+
+      function handleNewPageStepTabChange(targetIndex, { fromKeyboard = false } = {}) {
+        if (newPageSteps.length === 0) {
+          return;
+        }
+        if (targetIndex < 0 || targetIndex >= newPageSteps.length) {
+          return;
+        }
+        if (targetIndex > newPageCurrentStepIndex + 1) {
+          return;
+        }
+        if (targetIndex === newPageCurrentStepIndex + 1 && !validateNewPageStep()) {
+          return;
+        }
+        setNewPageStep(targetIndex, { focusStep: !fromKeyboard });
+        if (fromKeyboard) {
+          const targetTab = newPageStepTabs[targetIndex];
+          if (targetTab) {
+            targetTab.focus();
+          }
+        }
       }
 
       function validateNewPageStep(stepIndex = newPageCurrentStepIndex) {
@@ -5326,6 +5563,30 @@
       if (newPageSteps.length > 0) {
         syncNewPageStepState();
       }
+
+      newPageStepTabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          handleNewPageStepTabChange(index);
+        });
+        tab.addEventListener('keydown', (event) => {
+          const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+          if (!keys.includes(event.key)) {
+            return;
+          }
+          event.preventDefault();
+          let targetIndex = index;
+          if (event.key === 'ArrowRight') {
+            targetIndex = (index + 1) % newPageStepTabs.length;
+          } else if (event.key === 'ArrowLeft') {
+            targetIndex = (index - 1 + newPageStepTabs.length) % newPageStepTabs.length;
+          } else if (event.key === 'Home') {
+            targetIndex = 0;
+          } else if (event.key === 'End') {
+            targetIndex = newPageStepTabs.length - 1;
+          }
+          handleNewPageStepTabChange(targetIndex, { fromKeyboard: true });
+        });
+      });
 
       newPageNextButton?.addEventListener('click', () => {
         if (!validateNewPageStep()) {
