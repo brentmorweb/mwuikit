@@ -1748,7 +1748,15 @@
         <div class="quick-actions" aria-label="History and view controls">
           <button class="icon-button" type="button" title="Undo" aria-label="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
           <button class="icon-button" type="button" title="Redo" aria-label="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
-          <button class="icon-button" type="button" title="Toggle view" aria-label="Toggle view"><i class="fa-solid fa-table-cells" aria-hidden="true"></i></button>
+          <button
+            class="icon-button"
+            type="button"
+            title="Toggle view"
+            aria-label="Toggle view"
+            data-folder-toggle-all
+          >
+            <i class="fa-solid fa-table-cells" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
 
@@ -3161,8 +3169,9 @@
 
       const pageRows = Array.from(document.querySelectorAll('.page-row'));
       const folderRows = Array.from(document.querySelectorAll('.group-row'));
-      const folderToggleButtons = document.querySelectorAll('[data-folder-toggle]');
+      const folderToggleButtons = Array.from(document.querySelectorAll('[data-folder-toggle]'));
       const folderCheckboxes = Array.from(document.querySelectorAll('[data-folder-checkbox]'));
+      const folderViewToggleButton = document.querySelector('[data-folder-toggle-all]');
       const actionMenus = Array.from(document.querySelectorAll('[data-action-menu]'));
 
       const pageRowById = new Map(pageRows.map((row) => [row.dataset.pageId, row]));
@@ -3661,6 +3670,31 @@
         });
       }
 
+      function updateFolderViewToggleButtonState() {
+        if (!folderViewToggleButton) {
+          return;
+        }
+
+        const availableToggles = folderToggleButtons.filter((button) => button.dataset.folderToggle);
+        if (availableToggles.length === 0) {
+          folderViewToggleButton.setAttribute('aria-label', 'Expand all folders');
+          folderViewToggleButton.setAttribute('title', 'Expand all folders');
+          folderViewToggleButton.setAttribute('aria-pressed', 'false');
+          folderViewToggleButton.disabled = true;
+          return;
+        }
+
+        folderViewToggleButton.disabled = false;
+
+        const allExpanded = availableToggles.every(
+          (button) => button.getAttribute('aria-expanded') === 'true'
+        );
+        const label = allExpanded ? 'Collapse all folders' : 'Expand all folders';
+        folderViewToggleButton.setAttribute('aria-label', label);
+        folderViewToggleButton.setAttribute('title', label);
+        folderViewToggleButton.setAttribute('aria-pressed', allExpanded ? 'true' : 'false');
+      }
+
       function setFolderExpanded(folderId, expanded, persist = true) {
         const toggle = document.querySelector(`[data-folder-toggle="${folderId}"]`);
         const members = folderMembers.get(folderId) || [];
@@ -3688,6 +3722,7 @@
             console.warn('Unable to persist folder state', error);
           }
         }
+        updateFolderViewToggleButtonState();
         updateMasterCheckbox();
         updateBulkBar();
       }
@@ -4401,6 +4436,22 @@
           openFolderDialog(folderId);
         });
       });
+
+      folderViewToggleButton?.addEventListener('click', (event) => {
+        event.preventDefault();
+        const availableToggles = folderToggleButtons.filter((button) => button.dataset.folderToggle);
+        const shouldExpand = availableToggles.some(
+          (toggleButton) => toggleButton.getAttribute('aria-expanded') !== 'true'
+        );
+        availableToggles.forEach((toggleButton) => {
+          const folderId = toggleButton.dataset.folderToggle;
+          if (folderId) {
+            setFolderExpanded(folderId, shouldExpand);
+          }
+        });
+      });
+
+      updateFolderViewToggleButtonState();
 
       document.addEventListener('click', (event) => {
         const menuElement = event.target.closest('[data-action-menu]');
