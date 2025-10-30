@@ -1237,6 +1237,82 @@
       color: var(--pages-accent);
     }
 
+    .action-menu {
+      position: relative;
+    }
+
+    .action-menu-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .action-menu-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 208px;
+      padding: 8px 0;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      z-index: 20;
+    }
+
+    .action-menu-dropdown[hidden] {
+      display: none;
+    }
+
+    .action-menu-item {
+      width: 100%;
+      padding: 10px 16px;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--pages-text);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .action-menu-item .fa-solid,
+    .action-menu-item .fa-regular {
+      font-size: 16px;
+      color: var(--pages-muted);
+      transition: color 0.2s ease;
+    }
+
+    .action-menu-item:hover {
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--pages-accent);
+    }
+
+    .action-menu-item:hover .fa-solid,
+    .action-menu-item:hover .fa-regular {
+      color: var(--pages-accent);
+    }
+
+    .action-menu-item.is-destructive {
+      color: #dc2626;
+    }
+
+    .action-menu-item.is-destructive .fa-solid {
+      color: #dc2626;
+    }
+
+    .action-menu-item.is-destructive:hover {
+      background: rgba(220, 38, 38, 0.12);
+      color: #b91c1c;
+    }
+
+    .action-menu-item.is-destructive:hover .fa-solid {
+      color: #b91c1c;
+    }
+
     .reports-metric {
       display: inline-flex;
       flex-direction: column;
@@ -1751,7 +1827,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="website" data-page-id="style-guide" data-status="unpublished" data-type="Style Guide" data-author="Alice Moore" data-title="Style Guide – Color & Typography" data-created="2025-01-07" data-modified="2025-07-18" data-report-value="385" data-report-trend="0" data-report-direction="neutral" data-report-issues="meta-title meta-description">
@@ -1799,7 +1921,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="website" data-page-id="homepage-test" data-status="unpublished" data-type="Content" data-author="Ryan Chen" data-title="_Test" data-created="2025-01-11" data-modified="2025-07-15" data-report-value="0" data-report-trend="0" data-report-direction="neutral" data-report-issues="seo-low broken-links heading-hierarchy">
@@ -1847,7 +2015,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="group-row" data-folder="solutions" data-folder-total="5" data-folder-name="Solutions" data-folder-color="purple">
@@ -1919,7 +2133,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="solutions" data-page-id="solutions-nonprofit" data-status="unpublished" data-type="Landing" data-author="Alice Moore" data-title="Nonprofit &amp; Organizations" data-created="2025-01-13" data-modified="2025-07-10" data-report-value="385" data-report-trend="0" data-report-direction="neutral" data-report-issues="seo-low og-issues meta-description">
@@ -1967,7 +2227,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="solutions" data-page-id="solutions-associations" data-status="draft" data-type="Content" data-author="Ryan Chen" data-title="Associations &amp; Memberships" data-created="2025-01-19" data-modified="2025-07-09" data-report-value="0" data-report-trend="0" data-report-direction="neutral" data-report-issues="stale-edit heading-hierarchy">
@@ -2015,7 +2321,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="solutions" data-page-id="solutions-healthcare" data-status="scheduled" data-type="Landing" data-author="John Lee" data-title="Hospitals &amp; Healthcare" data-created="2025-01-22" data-modified="2025-07-08" data-report-value="995" data-report-trend="4" data-report-direction="up" data-report-issues="slow-speed broken-links">
@@ -2063,7 +2415,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="solutions" data-page-id="solutions-docs" data-status="published" data-type="Docs" data-author="Alice Moore" data-title="Solutions – All Docs" data-created="2025-01-25" data-modified="2025-07-05" data-report-value="712" data-report-trend="2" data-report-direction="up" data-report-issues="meta-title og-issues">
@@ -2111,7 +2509,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="group-row" data-folder="our-work" data-folder-total="2" data-folder-name="Our Work" data-folder-color="amber">
@@ -2183,7 +2627,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr class="page-row" data-folder="our-work" data-page-id="show-our-work" data-status="unpublished" data-type="Media" data-author="Alice Moore" data-title="Show Our Work" data-created="2025-01-28" data-modified="2025-07-02" data-report-value="385" data-report-trend="0" data-report-direction="neutral" data-report-issues="seo-low broken-links low-engagement">
@@ -2231,7 +2721,53 @@
               <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
               <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
-              <button type="button" aria-label="More actions"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="archive"
+                  >
+                    <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+                    <span>Archive</span>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -2553,6 +3089,7 @@
       const folderRows = Array.from(document.querySelectorAll('.group-row'));
       const folderToggleButtons = document.querySelectorAll('[data-folder-toggle]');
       const folderCheckboxes = Array.from(document.querySelectorAll('[data-folder-checkbox]'));
+      const actionMenus = Array.from(document.querySelectorAll('[data-action-menu]'));
 
       const pageRowById = new Map(pageRows.map((row) => [row.dataset.pageId, row]));
       const folderRowById = new Map(folderRows.map((row) => [row.dataset.folder, row]));
@@ -2608,6 +3145,47 @@
         const createDialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
         const folderDialogOpen = folderSettingsDialog?.getAttribute('aria-hidden') === 'false';
         document.body.style.overflow = drawerOpen || createDialogOpen || folderDialogOpen ? 'hidden' : '';
+      }
+
+      function closeActionMenu(menu, { focusTrigger = false } = {}) {
+        if (!menu) {
+          return;
+        }
+        const trigger = menu.querySelector('[data-action-menu-trigger]');
+        const dropdown = menu.querySelector('[data-action-menu-dropdown]');
+        if (!trigger || !dropdown) {
+          return;
+        }
+        menu.dataset.open = 'false';
+        trigger.setAttribute('aria-expanded', 'false');
+        dropdown.hidden = true;
+        if (focusTrigger) {
+          trigger.focus({ preventScroll: true });
+        }
+      }
+
+      function openActionMenu(menu) {
+        if (!menu) {
+          return;
+        }
+        const trigger = menu.querySelector('[data-action-menu-trigger]');
+        const dropdown = menu.querySelector('[data-action-menu-dropdown]');
+        if (!trigger || !dropdown) {
+          return;
+        }
+        closeAllActionMenus(menu);
+        menu.dataset.open = 'true';
+        trigger.setAttribute('aria-expanded', 'true');
+        dropdown.hidden = false;
+      }
+
+      function closeAllActionMenus(exceptMenu = null) {
+        actionMenus.forEach((menu) => {
+          if (menu === exceptMenu) {
+            return;
+          }
+          closeActionMenu(menu);
+        });
       }
 
       function matchesBaseFilters(item) {
@@ -3419,6 +3997,7 @@
             event.preventDefault();
             closeFolderDialog();
           }
+          closeAllActionMenus();
         }
       });
 
@@ -3635,6 +4214,54 @@
         });
       });
 
+      actionMenus.forEach((menu) => {
+        const trigger = menu.querySelector('[data-action-menu-trigger]');
+        const dropdown = menu.querySelector('[data-action-menu-dropdown]');
+        if (!trigger || !dropdown) {
+          return;
+        }
+        closeActionMenu(menu);
+        trigger.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isOpen = menu.dataset.open === 'true';
+          if (isOpen) {
+            closeActionMenu(menu);
+          } else {
+            openActionMenu(menu);
+          }
+        });
+        trigger.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            closeActionMenu(menu);
+            return;
+          }
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            const isOpen = menu.dataset.open === 'true';
+            if (isOpen) {
+              closeActionMenu(menu);
+            } else {
+              openActionMenu(menu);
+            }
+            return;
+          }
+          if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            openActionMenu(menu);
+            dropdown.querySelector('[data-menu-action]')?.focus({ preventScroll: true });
+          }
+        });
+        dropdown.addEventListener('click', (event) => {
+          event.stopPropagation();
+        });
+        dropdown.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            closeActionMenu(menu, { focusTrigger: true });
+          }
+        });
+      });
+
       clearSelectionButton?.addEventListener('click', clearSelection);
 
       bulkActionButtons.forEach((button) => {
@@ -3685,6 +4312,21 @@
       });
 
       document.addEventListener('click', (event) => {
+        const menuElement = event.target.closest('[data-action-menu]');
+        if (!menuElement) {
+          closeAllActionMenus();
+        }
+        const actionMenuItem = event.target.closest('[data-menu-action]');
+        if (actionMenuItem) {
+          const action = actionMenuItem.dataset.menuAction;
+          const row = actionMenuItem.closest('.page-row');
+          if (action) {
+            console.log(`Page ${action}`, row?.dataset.pageId);
+          }
+          if (menuElement) {
+            closeActionMenu(menuElement);
+          }
+        }
         const titleButton = event.target.closest('[data-open-page]');
         if (titleButton) {
           const pageId = titleButton.dataset.openPage;
