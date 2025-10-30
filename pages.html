@@ -1741,6 +1741,157 @@
       gap: 12px;
     }
 
+    .new-page-status-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .new-page-status-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .new-page-status-option:hover,
+    .new-page-status-option:focus-within {
+      border-color: rgba(37, 99, 235, 0.5);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .new-page-status-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--pages-accent);
+      margin-right: 12px;
+    }
+
+    .new-page-status-label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .new-page-status-label small {
+      font-weight: 500;
+      color: var(--pages-muted);
+    }
+
+    .new-page-schedule-fields {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .new-page-schedule-fields input {
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 12px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--pages-text);
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .new-page-schedule-fields input:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.55);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
+    }
+
+    .new-page-collaborator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 520px) {
+      .new-page-collaborator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .new-page-collaborator-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .new-page-collaborator-option:hover,
+    .new-page-collaborator-option:focus-within {
+      border-color: rgba(37, 99, 235, 0.5);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .new-page-collaborator-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--pages-accent);
+    }
+
+    .new-page-collaborator-option .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+    }
+
+    .new-page-collaborator-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .new-page-collaborator-info .name {
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .new-page-collaborator-info .email {
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .new-page-permissions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .new-page-permissions .checkbox-option {
+      font-size: 14px;
+    }
+
+    .new-page-hint {
+      margin: 0;
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
     .new-page-question {
       font-size: 15px;
       font-weight: 600;
@@ -3372,6 +3523,61 @@
             >
           </div>
         </section>
+        <section class="new-page-step" data-step="publishing" hidden aria-hidden="true">
+          <div class="new-page-form-group">
+            <span class="new-page-question">Set publish status</span>
+            <div
+              class="new-page-status-options"
+              role="radiogroup"
+              aria-label="Initial status"
+              data-status-options
+            ></div>
+            <p class="new-page-hint">Choose how the page should be available after creation.</p>
+          </div>
+          <div class="new-page-form-group" data-schedule-wrapper hidden aria-hidden="true">
+            <span class="new-page-question">Schedule details</span>
+            <div class="new-page-schedule-fields">
+              <input
+                type="date"
+                id="newPageScheduleDate"
+                name="scheduleDate"
+                autocomplete="off"
+                disabled
+              >
+              <input
+                type="time"
+                id="newPageScheduleTime"
+                name="scheduleTime"
+                autocomplete="off"
+                disabled
+              >
+            </div>
+            <p class="new-page-hint">Pick a publish date and time for scheduled pages.</p>
+          </div>
+          <div class="new-page-form-group">
+            <span class="new-page-question">Collaborators</span>
+            <div class="new-page-collaborator-grid" data-collaborator-options></div>
+            <p class="new-page-hint" data-collaborator-helper>Select at least one collaborator.</p>
+          </div>
+          <div class="new-page-form-group">
+            <span class="new-page-question">Permissions</span>
+            <div class="new-page-permissions">
+              <label class="checkbox-option">
+                <input type="checkbox" id="newPageMirrorPermissions" name="pagePermissions" value="mirror" checked>
+                Mirror folder permissions
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pagePermissions" value="team-edit" checked>
+                Team can edit
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="pagePermissions" value="guest-view">
+                Guests can view
+              </label>
+            </div>
+            <p class="new-page-hint">Adjust access or keep it aligned with the selected folder.</p>
+          </div>
+        </section>
         <div class="dialog-actions">
           <button type="button" data-new-page-nav="prev" hidden>Back</button>
           <button type="button" class="primary" data-new-page-nav="next">Next</button>
@@ -3458,6 +3664,13 @@
         { value: 'draft', label: 'Draft' },
         { value: 'scheduled', label: 'Scheduled' },
       ];
+
+      const STATUS_DESCRIPTIONS = {
+        published: 'Visible immediately after creation',
+        unpublished: 'Keep offline but ready to go live later',
+        draft: 'Private to collaborators until published',
+        scheduled: 'Pick a date to automatically publish',
+      };
 
       const TYPE_STYLES = {
         Landing: 'blue',
@@ -3589,7 +3802,19 @@
       const newPageSlugInput = document.getElementById('newPageSlug');
       const newPageMetaTitleInput = document.getElementById('newPageMetaTitle');
       const newPageMetaDescriptionInput = document.getElementById('newPageMetaDescription');
+      const newPageStatusContainer =
+        newPageDialog?.querySelector('[data-status-options]') || null;
+      const newPageScheduleWrapper =
+        newPageDialog?.querySelector('[data-schedule-wrapper]') || null;
+      const newPageScheduleDateInput = document.getElementById('newPageScheduleDate');
+      const newPageScheduleTimeInput = document.getElementById('newPageScheduleTime');
+      const newPageCollaboratorContainer =
+        newPageDialog?.querySelector('[data-collaborator-options]') || null;
+      const newPageCollaboratorHelper =
+        newPageDialog?.querySelector('[data-collaborator-helper]') || null;
       let newPageCurrentStepIndex = 0;
+      const newPageStatusRadios = [];
+      const newPageCollaboratorCheckboxes = [];
 
       const masterCheckbox = document.getElementById('masterCheckbox');
       const bulkBar = document.getElementById('bulkActionsBar');
@@ -4346,6 +4571,169 @@
         });
       }
 
+      function getSelectedStatusValue() {
+        const selectedRadio = newPageStatusRadios.find((radio) => radio.checked);
+        return selectedRadio ? selectedRadio.value : '';
+      }
+
+      function syncScheduleState() {
+        const selectedStatus = getSelectedStatusValue();
+        const requiresSchedule = selectedStatus === 'scheduled';
+        if (newPageScheduleWrapper) {
+          newPageScheduleWrapper.toggleAttribute('hidden', !requiresSchedule);
+          newPageScheduleWrapper.setAttribute('aria-hidden', requiresSchedule ? 'false' : 'true');
+        }
+        const scheduleInputs = [newPageScheduleDateInput, newPageScheduleTimeInput];
+        scheduleInputs.forEach((input) => {
+          if (!input) {
+            return;
+          }
+          if (requiresSchedule) {
+            input.removeAttribute('disabled');
+            input.setAttribute('required', 'true');
+          } else {
+            input.value = '';
+            input.setCustomValidity('');
+            input.removeAttribute('required');
+            input.setAttribute('disabled', 'true');
+          }
+        });
+      }
+
+      function handleStatusChange() {
+        if (newPageStatusRadios.length > 0) {
+          newPageStatusRadios[0].setCustomValidity('');
+        }
+        syncScheduleState();
+        syncCreateButtonState();
+      }
+
+      function renderNewPageStatusOptions() {
+        if (!newPageStatusContainer) {
+          return;
+        }
+        newPageStatusContainer.innerHTML = '';
+        newPageStatusRadios.length = 0;
+        STATUS_OPTIONS.forEach(({ value, label }) => {
+          const optionLabel = document.createElement('label');
+          optionLabel.className = 'new-page-status-option';
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = 'status';
+          radio.value = value;
+          radio.required = true;
+          radio.checked = value === 'draft';
+          radio.defaultChecked = radio.checked;
+          optionLabel.appendChild(radio);
+
+          const textWrapper = document.createElement('span');
+          textWrapper.className = 'new-page-status-label';
+          const title = document.createElement('span');
+          title.textContent = label;
+          textWrapper.appendChild(title);
+          const descriptionText = STATUS_DESCRIPTIONS[value];
+          if (descriptionText) {
+            const description = document.createElement('small');
+            description.textContent = descriptionText;
+            textWrapper.appendChild(description);
+          }
+          optionLabel.appendChild(textWrapper);
+
+          radio.addEventListener('change', handleStatusChange);
+
+          newPageStatusContainer.appendChild(optionLabel);
+          newPageStatusRadios.push(radio);
+        });
+      }
+
+      function hasSelectedCollaborators() {
+        return newPageCollaboratorCheckboxes.some((checkbox) => checkbox.checked);
+      }
+
+      function setCollaboratorValidity() {
+        if (newPageCollaboratorCheckboxes.length === 0) {
+          return;
+        }
+        const hasSelection = hasSelectedCollaborators();
+        const message = hasSelection
+          ? 'Collaborators will be notified when the page is created.'
+          : 'Select at least one collaborator.';
+        newPageCollaboratorCheckboxes[0].setCustomValidity(
+          hasSelection ? '' : 'Select at least one collaborator.'
+        );
+        if (newPageCollaboratorHelper) {
+          newPageCollaboratorHelper.textContent = message;
+        }
+      }
+
+      function renderNewPageCollaboratorOptions() {
+        if (!newPageCollaboratorContainer) {
+          return;
+        }
+        newPageCollaboratorContainer.innerHTML = '';
+        newPageCollaboratorCheckboxes.length = 0;
+        const authors = Object.keys(AUTHOR_DETAILS)
+          .filter(Boolean)
+          .sort();
+        authors.forEach((name) => {
+          const { color = DEFAULT_AUTHOR_COLOR, email = '' } = AUTHOR_DETAILS[name] || {};
+          const optionLabel = document.createElement('label');
+          optionLabel.className = 'new-page-collaborator-option';
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = 'collaborators';
+          checkbox.value = name;
+          checkbox.defaultChecked = false;
+          optionLabel.appendChild(checkbox);
+
+          const avatar = document.createElement('span');
+          avatar.className = 'author-avatar';
+          avatar.dataset.color = color;
+          avatar.textContent = getAuthorInitials(name) || name;
+          optionLabel.appendChild(avatar);
+
+          const info = document.createElement('span');
+          info.className = 'new-page-collaborator-info';
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'name';
+          nameSpan.textContent = name;
+          info.appendChild(nameSpan);
+          if (email) {
+            const emailSpan = document.createElement('span');
+            emailSpan.className = 'email';
+            emailSpan.textContent = email;
+            info.appendChild(emailSpan);
+          }
+          optionLabel.appendChild(info);
+
+          checkbox.addEventListener('change', () => {
+            setCollaboratorValidity();
+            syncCreateButtonState();
+          });
+
+          newPageCollaboratorContainer.appendChild(optionLabel);
+          newPageCollaboratorCheckboxes.push(checkbox);
+        });
+        setCollaboratorValidity();
+      }
+
+      function syncCreateButtonState() {
+        if (!newPageSubmitButton) {
+          return;
+        }
+        const statusValue = getSelectedStatusValue();
+        const requiresSchedule = statusValue === 'scheduled';
+        const scheduleReady =
+          !requiresSchedule ||
+          Boolean(newPageScheduleDateInput?.value) && Boolean(newPageScheduleTimeInput?.value);
+        const collaboratorsReady = hasSelectedCollaborators();
+        const statusReady = Boolean(statusValue);
+        const shouldDisable = !(statusReady && scheduleReady && collaboratorsReady);
+        newPageSubmitButton.disabled = shouldDisable;
+      }
+
       function syncFilterControls() {
         authorButtons.forEach((button) => {
           const value = button.dataset.authorValue;
@@ -4384,6 +4772,10 @@
       renderStatusFilters();
       renderTypeFilters();
       renderReportFilters();
+      renderNewPageStatusOptions();
+      renderNewPageCollaboratorOptions();
+      syncScheduleState();
+      syncCreateButtonState();
       syncFilterControls();
 
       sectionToggleButtons.forEach((button) => {
@@ -4454,6 +4846,15 @@
             section.removeAttribute('aria-hidden');
           });
           newPageForm.reset();
+        }
+        newPageStatusRadios.forEach((radio) => {
+          radio.checked = radio.defaultChecked;
+        });
+        setCollaboratorValidity();
+        syncScheduleState();
+        syncCreateButtonState();
+        if (newPageStatusRadios.length > 0) {
+          newPageStatusRadios[0].setCustomValidity('');
         }
         if (newPageTypeInput) {
           newPageTypeInput.value = '';
@@ -4808,6 +5209,7 @@
             newPageCurrentStepIndex < newPageSteps.length - 1
           );
         }
+        syncCreateButtonState();
       }
 
       function focusNewPageStep(section) {
@@ -4876,6 +5278,36 @@
             }
           }
         }
+        if (section.dataset.step === 'publishing') {
+          const statusValue = getSelectedStatusValue();
+          if (newPageStatusRadios.length > 0) {
+            newPageStatusRadios[0].setCustomValidity(
+              statusValue ? '' : 'Please choose an initial status.'
+            );
+          }
+          if (statusValue === 'scheduled') {
+            if (newPageScheduleDateInput) {
+              const dateValue = newPageScheduleDateInput.value;
+              if (!dateValue) {
+                newPageScheduleDateInput.setCustomValidity('Select a publish date.');
+              } else {
+                newPageScheduleDateInput.setCustomValidity('');
+              }
+            }
+            if (newPageScheduleTimeInput) {
+              const timeValue = newPageScheduleTimeInput.value;
+              if (!timeValue) {
+                newPageScheduleTimeInput.setCustomValidity('Select a publish time.');
+              } else {
+                newPageScheduleTimeInput.setCustomValidity('');
+              }
+            }
+          } else {
+            newPageScheduleDateInput?.setCustomValidity('');
+            newPageScheduleTimeInput?.setCustomValidity('');
+          }
+          setCollaboratorValidity();
+        }
         let isValid = true;
         getNewPageStepControls(section)
           .filter((control) => !control.disabled)
@@ -4887,6 +5319,7 @@
               isValid = false;
             }
           });
+        syncCreateButtonState();
         return isValid;
       }
 
@@ -4915,6 +5348,16 @@
 
       newPageMetaDescriptionInput?.addEventListener('input', () => {
         newPageMetaDescriptionInput.setCustomValidity('');
+      });
+
+      newPageScheduleDateInput?.addEventListener('input', () => {
+        newPageScheduleDateInput.setCustomValidity('');
+        syncCreateButtonState();
+      });
+
+      newPageScheduleTimeInput?.addEventListener('input', () => {
+        newPageScheduleTimeInput.setCustomValidity('');
+        syncCreateButtonState();
       });
 
       function selectNewPageType(button, { focus = false } = {}) {
@@ -5008,10 +5451,29 @@
         const socialImage = formData.get('socialImage');
         const normalizedSocialImage =
           socialImage instanceof File && socialImage.name ? socialImage : null;
+        const statusValue = (formData.get('status') || '').toString().trim() || 'draft';
+        const scheduleDate = (formData.get('scheduleDate') || '').toString().trim();
+        const scheduleTime = (formData.get('scheduleTime') || '').toString().trim();
+        const scheduleAt =
+          statusValue === 'scheduled' && scheduleDate && scheduleTime
+            ? `${scheduleDate}T${scheduleTime}`
+            : null;
+        const collaborators = formData
+          .getAll('collaborators')
+          .map((value) => value.toString().trim())
+          .filter(Boolean);
+        const permissions = formData
+          .getAll('pagePermissions')
+          .map((value) => value.toString().trim())
+          .filter(Boolean);
         const payload = {
           title: (formData.get('title') || '').toString().trim(),
           folder: (formData.get('folder') || '').toString().trim(),
           type: (formData.get('type') || '').toString().trim(),
+          status: statusValue,
+          scheduleAt,
+          collaborators,
+          permissions,
           metadata: {
             slug: (formData.get('slug') || '').toString().trim(),
             metaTitle: (formData.get('metaTitle') || '').toString().trim(),
