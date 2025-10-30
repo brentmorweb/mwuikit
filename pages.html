@@ -108,6 +108,53 @@
       border-color: rgba(37, 99, 235, 0.24);
     }
 
+    [data-tooltip] {
+      position: relative;
+    }
+
+    [data-tooltip]::after,
+    [data-tooltip]::before {
+      pointer-events: none;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translate(-50%, -4px);
+      background: rgba(15, 23, 42, 0.95);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.2);
+      z-index: 30;
+    }
+
+    [data-tooltip]::before {
+      content: "";
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translate(-50%, -4px);
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
+      z-index: 29;
+    }
+
+    [data-tooltip]:hover::after,
+    [data-tooltip]:hover::before,
+    [data-tooltip]:focus-visible::after,
+    [data-tooltip]:focus-visible::before {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
     .pages-actions {
       display: flex;
       align-items: center;
@@ -1742,14 +1789,15 @@
           <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">0</span></button>
         </nav>
         <div class="quick-actions" aria-label="History and view controls">
-          <button class="icon-button" type="button" title="Undo" aria-label="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
-          <button class="icon-button" type="button" title="Redo" aria-label="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
+          <button class="icon-button" type="button" title="Undo" aria-label="Undo" data-tooltip="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
+          <button class="icon-button" type="button" title="Redo" aria-label="Redo" data-tooltip="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
           <button
             class="icon-button"
             type="button"
             title="Toggle view"
             aria-label="Toggle view"
             data-folder-toggle-all
+            data-tooltip="Toggle view"
           >
             <i class="fa-solid fa-table-cells" aria-hidden="true"></i>
           </button>
@@ -1851,9 +1899,9 @@
                   </div>
                 </button>
                 <div class="folder-actions" role="group" aria-label="Website folder actions">
-                  <button type="button" data-folder-action="rename" aria-label="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button type="button" data-folder-action="move" aria-label="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -1901,9 +1949,9 @@
             <td data-created-label>Jan 05, 2025</td>
             <td data-modified-label>Jul 20, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -1912,6 +1960,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -1995,9 +2044,9 @@
             <td data-created-label>Jan 07, 2025</td>
             <td data-modified-label>Jul 18, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2006,6 +2055,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2089,9 +2139,9 @@
             <td data-created-label>Jan 11, 2025</td>
             <td data-modified-label>Jul 15, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2100,6 +2150,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2158,9 +2209,9 @@
                   </div>
                 </button>
                 <div class="folder-actions" role="group" aria-label="Solutions folder actions">
-                  <button type="button" data-folder-action="rename" aria-label="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button type="button" data-folder-action="move" aria-label="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -2207,9 +2258,9 @@
             <td data-created-label>Jan 12, 2025</td>
             <td data-modified-label>Jul 15, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2218,6 +2269,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2301,9 +2353,9 @@
             <td data-created-label>Jan 13, 2025</td>
             <td data-modified-label>Jul 10, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2312,6 +2364,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2395,9 +2448,9 @@
             <td data-created-label>Jan 19, 2025</td>
             <td data-modified-label>Jul 09, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2406,6 +2459,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2489,9 +2543,9 @@
             <td data-created-label>Jan 22, 2025</td>
             <td data-modified-label>Jul 08, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2500,6 +2554,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2583,9 +2638,9 @@
             <td data-created-label>Jan 25, 2025</td>
             <td data-modified-label>Jul 05, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2594,6 +2649,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2652,9 +2708,9 @@
                   </div>
                 </button>
                 <div class="folder-actions" role="group" aria-label="Our Work folder actions">
-                  <button type="button" data-folder-action="rename" aria-label="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button type="button" data-folder-action="move" aria-label="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -2701,9 +2757,9 @@
             <td data-created-label>Jan 27, 2025</td>
             <td data-modified-label>Jul 03, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2712,6 +2768,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -2795,9 +2852,9 @@
             <td data-created-label>Jan 28, 2025</td>
             <td data-modified-label>Jul 02, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page"><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2806,6 +2863,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   data-action-menu-trigger
+                  data-tooltip="More actions"
                 >
                   <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
