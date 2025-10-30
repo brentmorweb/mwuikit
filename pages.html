@@ -485,6 +485,36 @@
       font-size: 12px;
     }
 
+    .chip[data-color="blue"] {
+      background: rgba(37, 99, 235, 0.14);
+      color: #1d4ed8;
+    }
+
+    .chip[data-color="violet"] {
+      background: rgba(139, 92, 246, 0.16);
+      color: #5b21b6;
+    }
+
+    .chip[data-color="amber"] {
+      background: rgba(217, 119, 6, 0.18);
+      color: #b45309;
+    }
+
+    .chip[data-color="emerald"] {
+      background: rgba(16, 185, 129, 0.18);
+      color: #047857;
+    }
+
+    .chip[data-color="pink"] {
+      background: rgba(219, 39, 119, 0.18);
+      color: #be185d;
+    }
+
+    .chip[data-color="slate"] {
+      background: rgba(148, 163, 184, 0.18);
+      color: #334155;
+    }
+
     .checkbox {
       position: relative;
       display: inline-flex;
@@ -891,6 +921,19 @@
       background: linear-gradient(135deg, #0f766e, #14b8a6);
     }
 
+    .author-avatar[data-color="amber"] {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #0f172a;
+    }
+
+    .author-avatar[data-color="pink"] {
+      background: linear-gradient(135deg, #db2777, #f472b6);
+    }
+
+    .author-avatar[data-color="slate"] {
+      background: linear-gradient(135deg, #475569, #94a3b8);
+    }
+
     .filter-pill-group {
       display: flex;
       flex-wrap: wrap;
@@ -1053,6 +1096,36 @@
       font-size: 13px;
       font-weight: 600;
       color: #374151;
+    }
+
+    .avatar span[data-color="blue"] {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+    }
+
+    .avatar span[data-color="purple"] {
+      background: linear-gradient(135deg, #7c3aed, #c084fc);
+      color: #fff;
+    }
+
+    .avatar span[data-color="teal"] {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+      color: #fff;
+    }
+
+    .avatar span[data-color="amber"] {
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      color: #0f172a;
+    }
+
+    .avatar span[data-color="pink"] {
+      background: linear-gradient(135deg, #db2777, #f472b6);
+      color: #fff;
+    }
+
+    .avatar span[data-color="slate"] {
+      background: linear-gradient(135deg, #475569, #94a3b8);
+      color: #f8fafc;
     }
 
     .meta {
@@ -2945,6 +3018,7 @@
         sortDirection: 'desc',
       };
 
+      const DEFAULT_AUTHOR_COLOR = 'slate';
       const AUTHOR_DETAILS = {
         'John Lee': { color: 'blue', email: 'john.lee@mayweather.studio' },
         'Alice Moore': { color: 'purple', email: 'alice.moore@mayweather.studio' },
@@ -3123,6 +3197,23 @@
           searchText: row.textContent.toLowerCase(),
         };
       });
+
+      function applyRowVisualStyles() {
+        rowData.forEach(({ element, type, author }) => {
+          const typeChip = element.querySelector('.chip');
+          if (typeChip) {
+            typeChip.dataset.color = TYPE_STYLES[type] || 'slate';
+          }
+
+          const avatarSpan = element.querySelector('.author-filter .avatar span');
+          if (avatarSpan) {
+            const { color = DEFAULT_AUTHOR_COLOR } = AUTHOR_DETAILS[author] || {};
+            avatarSpan.dataset.color = color;
+          }
+        });
+      }
+
+      applyRowVisualStyles();
 
       const folderState = (() => {
         try {
@@ -3657,7 +3748,7 @@
 
           const avatar = document.createElement('span');
           avatar.className = 'author-avatar';
-          const { color = 'blue', email } = AUTHOR_DETAILS[author] || {};
+          const { color = DEFAULT_AUTHOR_COLOR, email } = AUTHOR_DETAILS[author] || {};
           avatar.dataset.color = color;
           avatar.textContent = getAuthorInitials(author) || author;
 
