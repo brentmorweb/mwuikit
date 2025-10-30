@@ -1729,6 +1729,12 @@
       gap: 24px;
     }
 
+    .new-page-step {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
     .new-page-form-group {
       display: flex;
       flex-direction: column;
@@ -3261,60 +3267,115 @@
         </div>
       </div>
       <form class="new-page-form" id="newPageForm">
-        <div class="new-page-form-group">
-          <label class="new-page-question" for="newPageTitle">What is the page title?</label>
-          <input
-            class="new-page-input"
-            type="text"
-            id="newPageTitle"
-            name="title"
-            placeholder="Enter a title..."
-            autocomplete="off"
-            required
-          >
-        </div>
-        <div class="new-page-form-group">
-          <label class="new-page-question" for="newPageFolder">Choose a folder</label>
-          <select class="new-page-select" id="newPageFolder" name="folder">
-            <option value="unassigned">Unassigned</option>
-            <option value="marketing">Marketing</option>
-            <option value="product">Product</option>
-            <option value="engineering">Engineering</option>
-            <option value="support">Support</option>
-          </select>
-        </div>
-        <div class="new-page-form-group">
-          <span class="new-page-question">What is the page type?</span>
-          <div class="new-page-type-grid" role="radiogroup" aria-label="Page type">
-            <button type="button" class="new-page-type-option accent-blue" data-page-type="landing" role="radio" aria-checked="false">
-              Landing
-            </button>
-            <button type="button" class="new-page-type-option accent-purple" data-page-type="content" role="radio" aria-checked="false">
-              Content
-            </button>
-            <button type="button" class="new-page-type-option accent-pink" data-page-type="portfolio" role="radio" aria-checked="false">
-              Portfolio
-            </button>
-            <button type="button" class="new-page-type-option accent-green" data-page-type="contact" role="radio" aria-checked="false">
-              Contact
-            </button>
-            <button type="button" class="new-page-type-option accent-indigo" data-page-type="style-guide" role="radio" aria-checked="false">
-              Style Guide
-            </button>
-            <button type="button" class="new-page-type-option accent-cyan" data-page-type="application" role="radio" aria-checked="false">
-              Application
-            </button>
-            <button type="button" class="new-page-type-option accent-rose" data-page-type="blog" role="radio" aria-checked="false">
-              Blog
-            </button>
-            <button type="button" class="new-page-type-option accent-orange" data-page-type="event" role="radio" aria-checked="false">
-              Event
-            </button>
+        <section class="new-page-step" data-step="details">
+          <div class="new-page-form-group">
+            <label class="new-page-question" for="newPageTitle">What is the page title?</label>
+            <input
+              class="new-page-input"
+              type="text"
+              id="newPageTitle"
+              name="title"
+              placeholder="Enter a title..."
+              autocomplete="off"
+              required
+            >
           </div>
-          <input type="hidden" id="newPageTypeInput" name="type" value="">
-        </div>
+          <div class="new-page-form-group">
+            <label class="new-page-question" for="newPageFolder">Choose a folder</label>
+            <select class="new-page-select" id="newPageFolder" name="folder">
+              <option value="unassigned">Unassigned</option>
+              <option value="marketing">Marketing</option>
+              <option value="product">Product</option>
+              <option value="engineering">Engineering</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+          <div class="new-page-form-group">
+            <span class="new-page-question">What is the page type?</span>
+            <div class="new-page-type-grid" role="radiogroup" aria-label="Page type">
+              <button type="button" class="new-page-type-option accent-blue" data-page-type="landing" role="radio" aria-checked="false">
+                Landing
+              </button>
+              <button type="button" class="new-page-type-option accent-purple" data-page-type="content" role="radio" aria-checked="false">
+                Content
+              </button>
+              <button type="button" class="new-page-type-option accent-pink" data-page-type="portfolio" role="radio" aria-checked="false">
+                Portfolio
+              </button>
+              <button type="button" class="new-page-type-option accent-green" data-page-type="contact" role="radio" aria-checked="false">
+                Contact
+              </button>
+              <button type="button" class="new-page-type-option accent-indigo" data-page-type="style-guide" role="radio" aria-checked="false">
+                Style Guide
+              </button>
+              <button type="button" class="new-page-type-option accent-cyan" data-page-type="application" role="radio" aria-checked="false">
+                Application
+              </button>
+              <button type="button" class="new-page-type-option accent-rose" data-page-type="blog" role="radio" aria-checked="false">
+                Blog
+              </button>
+              <button type="button" class="new-page-type-option accent-orange" data-page-type="event" role="radio" aria-checked="false">
+                Event
+              </button>
+            </div>
+            <input type="hidden" id="newPageTypeInput" name="type" value="">
+          </div>
+        </section>
+        <section class="new-page-step" data-step="metadata" hidden aria-hidden="true">
+          <div class="new-page-form-group">
+            <label class="new-page-question" for="newPageSlug">Slug</label>
+            <input
+              class="new-page-input"
+              type="text"
+              id="newPageSlug"
+              name="slug"
+              placeholder="e.g. about-us"
+              pattern="^[a-z0-9-]+$"
+              inputmode="text"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+            >
+          </div>
+          <div class="new-page-form-group">
+            <label class="new-page-question" for="newPageMetaTitle">Meta title</label>
+            <input
+              class="new-page-input"
+              type="text"
+              id="newPageMetaTitle"
+              name="metaTitle"
+              placeholder="Enter a meta title"
+              required
+            >
+          </div>
+          <div class="new-page-form-group">
+            <label class="new-page-question" for="newPageMetaDescription">Meta description</label>
+            <textarea
+              class="new-page-input"
+              id="newPageMetaDescription"
+              name="metaDescription"
+              placeholder="Describe the page in 160 characters or fewer"
+              maxlength="160"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="new-page-form-group">
+            <label class="new-page-question" for="newPageSocialImage">Social image (optional)</label>
+            <input
+              class="new-page-input"
+              type="file"
+              id="newPageSocialImage"
+              name="socialImage"
+              accept="image/*"
+            >
+          </div>
+        </section>
         <div class="dialog-actions">
-          <button type="submit" class="primary">Next</button>
+          <button type="button" data-new-page-nav="prev" hidden>Back</button>
+          <button type="button" class="primary" data-new-page-nav="next">Next</button>
+          <button type="submit" class="primary" data-new-page-nav="submit" hidden>Create page</button>
         </div>
       </form>
     </div>
@@ -3519,6 +3580,16 @@
       const newPageTypeButtons = newPageDialog
         ? Array.from(newPageDialog.querySelectorAll('[data-page-type]'))
         : [];
+      const newPageSteps = newPageForm
+        ? Array.from(newPageForm.querySelectorAll('[data-step]'))
+        : [];
+      const newPagePrevButton = newPageForm?.querySelector('[data-new-page-nav="prev"]') || null;
+      const newPageNextButton = newPageForm?.querySelector('[data-new-page-nav="next"]') || null;
+      const newPageSubmitButton = newPageForm?.querySelector('[data-new-page-nav="submit"]') || null;
+      const newPageSlugInput = document.getElementById('newPageSlug');
+      const newPageMetaTitleInput = document.getElementById('newPageMetaTitle');
+      const newPageMetaDescriptionInput = document.getElementById('newPageMetaDescription');
+      let newPageCurrentStepIndex = 0;
 
       const masterCheckbox = document.getElementById('masterCheckbox');
       const bulkBar = document.getElementById('bulkActionsBar');
@@ -4375,6 +4446,13 @@
 
       function resetNewPageDialog() {
         if (newPageForm) {
+          newPageSteps.forEach((section) => {
+            getNewPageStepControls(section).forEach((control) => {
+              control.removeAttribute('disabled');
+            });
+            section.removeAttribute('hidden');
+            section.removeAttribute('aria-hidden');
+          });
           newPageForm.reset();
         }
         if (newPageTypeInput) {
@@ -4384,6 +4462,13 @@
           button.classList.remove('selected');
           button.setAttribute('aria-checked', 'false');
         });
+        newPageSlugInput?.setCustomValidity('');
+        newPageMetaTitleInput?.setCustomValidity('');
+        newPageMetaDescriptionInput?.setCustomValidity('');
+        newPageCurrentStepIndex = 0;
+        if (newPageSteps.length > 0) {
+          syncNewPageStepState();
+        }
       }
 
       function openNewPageDialog() {
@@ -4682,6 +4767,156 @@
         }
       });
 
+      function getNewPageStepControls(section) {
+        if (!section) {
+          return [];
+        }
+        return Array.from(section.querySelectorAll('input, select, textarea'));
+      }
+
+      function syncNewPageStepState() {
+        if (newPageSteps.length === 0) {
+          return;
+        }
+        newPageSteps.forEach((section, index) => {
+          const isActive = index === newPageCurrentStepIndex;
+          section.toggleAttribute('hidden', !isActive);
+          section.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+          getNewPageStepControls(section).forEach((control) => {
+            if (control instanceof HTMLInputElement && control.type === 'hidden') {
+              return;
+            }
+            if (isActive) {
+              control.removeAttribute('disabled');
+            } else {
+              control.setAttribute('disabled', 'true');
+            }
+          });
+        });
+        if (newPagePrevButton) {
+          newPagePrevButton.toggleAttribute('hidden', newPageCurrentStepIndex === 0);
+        }
+        if (newPageNextButton) {
+          newPageNextButton.toggleAttribute(
+            'hidden',
+            newPageCurrentStepIndex >= newPageSteps.length - 1
+          );
+        }
+        if (newPageSubmitButton) {
+          newPageSubmitButton.toggleAttribute(
+            'hidden',
+            newPageCurrentStepIndex < newPageSteps.length - 1
+          );
+        }
+      }
+
+      function focusNewPageStep(section) {
+        if (!section) {
+          return;
+        }
+        const focusTarget = section.querySelector(
+          'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled])'
+        );
+        if (focusTarget instanceof HTMLElement) {
+          focusTarget.focus();
+        }
+      }
+
+      function setNewPageStep(index) {
+        if (newPageSteps.length === 0) {
+          return;
+        }
+        const clampedIndex = Math.max(0, Math.min(index, newPageSteps.length - 1));
+        newPageCurrentStepIndex = clampedIndex;
+        syncNewPageStepState();
+        window.requestAnimationFrame(() => {
+          focusNewPageStep(newPageSteps[newPageCurrentStepIndex]);
+        });
+      }
+
+      function validateNewPageStep(stepIndex = newPageCurrentStepIndex) {
+        const section = newPageSteps[stepIndex];
+        if (!section) {
+          return true;
+        }
+        if (section.dataset.step === 'metadata') {
+          if (newPageSlugInput) {
+            const slugValue = newPageSlugInput.value.trim();
+            if (!slugValue) {
+              newPageSlugInput.setCustomValidity('Please enter a slug.');
+            } else if (!/^[a-z0-9-]+$/.test(slugValue)) {
+              newPageSlugInput.setCustomValidity(
+                'Slug can only contain lowercase letters, numbers, and hyphens.'
+              );
+            } else {
+              newPageSlugInput.value = slugValue;
+              newPageSlugInput.setCustomValidity('');
+            }
+          }
+          if (newPageMetaTitleInput) {
+            const metaTitleValue = newPageMetaTitleInput.value.trim();
+            if (!metaTitleValue) {
+              newPageMetaTitleInput.setCustomValidity('Please enter a meta title.');
+            } else {
+              newPageMetaTitleInput.value = metaTitleValue;
+              newPageMetaTitleInput.setCustomValidity('');
+            }
+          }
+          if (newPageMetaDescriptionInput) {
+            const descriptionValue = newPageMetaDescriptionInput.value.trim();
+            if (!descriptionValue) {
+              newPageMetaDescriptionInput.setCustomValidity('Please enter a meta description.');
+            } else if (descriptionValue.length > 160) {
+              newPageMetaDescriptionInput.setCustomValidity(
+                'Meta description must be 160 characters or fewer.'
+              );
+            } else {
+              newPageMetaDescriptionInput.value = descriptionValue;
+              newPageMetaDescriptionInput.setCustomValidity('');
+            }
+          }
+        }
+        let isValid = true;
+        getNewPageStepControls(section)
+          .filter((control) => !control.disabled)
+          .forEach((control) => {
+            if (!control.checkValidity()) {
+              if (isValid) {
+                control.reportValidity();
+              }
+              isValid = false;
+            }
+          });
+        return isValid;
+      }
+
+      if (newPageSteps.length > 0) {
+        syncNewPageStepState();
+      }
+
+      newPageNextButton?.addEventListener('click', () => {
+        if (!validateNewPageStep()) {
+          return;
+        }
+        setNewPageStep(newPageCurrentStepIndex + 1);
+      });
+
+      newPagePrevButton?.addEventListener('click', () => {
+        setNewPageStep(newPageCurrentStepIndex - 1);
+      });
+
+      newPageSlugInput?.addEventListener('input', () => {
+        newPageSlugInput.setCustomValidity('');
+      });
+
+      newPageMetaTitleInput?.addEventListener('input', () => {
+        newPageMetaTitleInput.setCustomValidity('');
+      });
+
+      newPageMetaDescriptionInput?.addEventListener('input', () => {
+        newPageMetaDescriptionInput.setCustomValidity('');
+      });
+
       function selectNewPageType(button, { focus = false } = {}) {
         if (!button || newPageTypeButtons.length === 0) {
           return;
@@ -4744,15 +4979,47 @@
 
       newPageForm?.addEventListener('submit', (event) => {
         event.preventDefault();
+        if (!validateNewPageStep()) {
+          return;
+        }
+        const restoredControls = [];
+        newPageSteps.forEach((section) => {
+          getNewPageStepControls(section).forEach((control) => {
+            if (
+              control.disabled &&
+              !(control instanceof HTMLInputElement && control.type === 'hidden')
+            ) {
+              restoredControls.push(control);
+              control.removeAttribute('disabled');
+            }
+          });
+        });
         if (!newPageForm.checkValidity()) {
           newPageForm.reportValidity();
+          restoredControls.forEach((control) => {
+            control.setAttribute('disabled', 'true');
+          });
           return;
         }
         const formData = new FormData(newPageForm);
-        const title = formData.get('title');
-        const folder = formData.get('folder');
-        const type = formData.get('type');
-        console.log('Create new page', { title, folder, type });
+        restoredControls.forEach((control) => {
+          control.setAttribute('disabled', 'true');
+        });
+        const socialImage = formData.get('socialImage');
+        const normalizedSocialImage =
+          socialImage instanceof File && socialImage.name ? socialImage : null;
+        const payload = {
+          title: (formData.get('title') || '').toString().trim(),
+          folder: (formData.get('folder') || '').toString().trim(),
+          type: (formData.get('type') || '').toString().trim(),
+          metadata: {
+            slug: (formData.get('slug') || '').toString().trim(),
+            metaTitle: (formData.get('metaTitle') || '').toString().trim(),
+            metaDescription: (formData.get('metaDescription') || '').toString().trim(),
+            socialImage: normalizedSocialImage,
+          },
+        };
+        console.log('Create new page', payload);
         closeNewPageDialog();
       });
 
