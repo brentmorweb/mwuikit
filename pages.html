@@ -6452,10 +6452,8 @@
         }
         const authorButton = event.target.closest('[data-author-filter]');
         if (authorButton) {
-          const author = authorButton.dataset.authorFilter;
-          if (author) {
+          if (state.authors.size > 0) {
             state.authors.clear();
-            state.authors.add(author);
             syncFilterControls();
             updateRows();
           }
