@@ -4267,7 +4267,20 @@
         .sort((a, b) => a.localeCompare(b));
 
       const rowData = pageRows.map((row) => {
-        const { pageId = '', status = 'all', type = '', author = '' } = row.dataset;
+        const {
+          pageId = '',
+          status = 'all',
+          type = '',
+          author = '',
+          title = '',
+        } = row.dataset;
+        const slugElement = row.querySelector('.title-text .subtitle');
+        const slug = slugElement ? slugElement.textContent.trim() : '';
+        const searchSource = [title, slug, status, type, author, row.textContent || '']
+          .join(' ')
+          .toLowerCase()
+          .replace(/\s+/g, ' ')
+          .trim();
         const reportIssues = new Set(
           (row.dataset.reportIssues || '')
             .split(/\s+/)
@@ -4280,10 +4293,12 @@
           status,
           type,
           author,
+          title,
+          slug,
           created: row.dataset.created || '',
           modified: row.dataset.modified || '',
           reportIssues,
-          searchText: row.textContent.toLowerCase(),
+          searchText: searchSource,
         };
       });
 
