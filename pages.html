@@ -4666,7 +4666,9 @@
           if (key) {
             counts[key] += 1;
           }
-          counts.all += 1;
+          if (item.status !== 'trash') {
+            counts.all += 1;
+          }
         });
 
         countBadges.forEach((badge) => {
@@ -5029,7 +5031,10 @@
         rowData.forEach((item) => {
           const matchesBase = matchesBaseFilters(item);
           baseMatches.set(item, matchesBase);
-          const matchesStatus = state.status === 'all' || item.status === state.status;
+          const matchesStatus =
+            state.status === 'all'
+              ? item.status !== 'trash'
+              : item.status === state.status;
           const shouldShow = matchesBase && matchesStatus;
           item.element.classList.toggle('is-filter-hidden', !shouldShow);
           if (!shouldShow && selection.has(item.pageId)) {
