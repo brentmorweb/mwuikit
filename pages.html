@@ -1932,83 +1932,6 @@
       box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
     }
 
-    .new-page-collaborator-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    @media (min-width: 520px) {
-      .new-page-collaborator-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .new-page-collaborator-option {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.32);
-      background: #fff;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-      cursor: pointer;
-    }
-
-    .new-page-collaborator-option:hover,
-    .new-page-collaborator-option:focus-within {
-      border-color: rgba(37, 99, 235, 0.5);
-      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .new-page-collaborator-option input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--pages-accent);
-    }
-
-    .new-page-collaborator-option .author-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 14px;
-      color: #fff;
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
-    }
-
-    .new-page-collaborator-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .new-page-collaborator-info .name {
-      font-weight: 600;
-      color: var(--pages-text);
-    }
-
-    .new-page-collaborator-info .email {
-      font-size: 12px;
-      color: var(--pages-muted);
-    }
-
-    .new-page-permissions {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .new-page-permissions .checkbox-option {
-      font-size: 14px;
-    }
-
     .new-page-hint {
       margin: 0;
       font-size: 12px;
@@ -3769,7 +3692,7 @@
             </span>
             <span class="new-page-tab-text">
               <span class="new-page-tab-title">Publishing</span>
-              <span class="new-page-tab-description">Status, collaborators, access</span>
+              <span class="new-page-tab-description">Status and scheduling</span>
             </span>
           </button>
         </div>
@@ -3933,29 +3856,6 @@
               >
             </div>
             <p class="new-page-hint">Pick a publish date and time for scheduled pages.</p>
-          </div>
-          <div class="new-page-form-group">
-            <span class="new-page-question">Collaborators</span>
-            <div class="new-page-collaborator-grid" data-collaborator-options></div>
-            <p class="new-page-hint" data-collaborator-helper>Select at least one collaborator.</p>
-          </div>
-          <div class="new-page-form-group">
-            <span class="new-page-question">Permissions</span>
-            <div class="new-page-permissions">
-              <label class="checkbox-option">
-                <input type="checkbox" id="newPageMirrorPermissions" name="pagePermissions" value="mirror" checked>
-                Mirror folder permissions
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="pagePermissions" value="team-edit" checked>
-                Team can edit
-              </label>
-              <label class="checkbox-option">
-                <input type="checkbox" name="pagePermissions" value="guest-view">
-                Guests can view
-              </label>
-            </div>
-            <p class="new-page-hint">Adjust access or keep it aligned with the selected folder.</p>
           </div>
         </section>
         <div class="dialog-actions">
@@ -4195,13 +4095,8 @@
         newPageDialog?.querySelector('[data-schedule-wrapper]') || null;
       const newPageScheduleDateInput = document.getElementById('newPageScheduleDate');
       const newPageScheduleTimeInput = document.getElementById('newPageScheduleTime');
-      const newPageCollaboratorContainer =
-        newPageDialog?.querySelector('[data-collaborator-options]') || null;
-      const newPageCollaboratorHelper =
-        newPageDialog?.querySelector('[data-collaborator-helper]') || null;
       let newPageCurrentStepIndex = 0;
       const newPageStatusRadios = [];
-      const newPageCollaboratorCheckboxes = [];
 
       const masterCheckbox = document.getElementById('masterCheckbox');
       const bulkBar = document.getElementById('bulkActionsBar');
@@ -5034,78 +4929,6 @@
         });
       }
 
-      function hasSelectedCollaborators() {
-        return newPageCollaboratorCheckboxes.some((checkbox) => checkbox.checked);
-      }
-
-      function setCollaboratorValidity() {
-        if (newPageCollaboratorCheckboxes.length === 0) {
-          return;
-        }
-        const hasSelection = hasSelectedCollaborators();
-        const message = hasSelection
-          ? 'Collaborators will be notified when the page is created.'
-          : 'Select at least one collaborator.';
-        newPageCollaboratorCheckboxes[0].setCustomValidity(
-          hasSelection ? '' : 'Select at least one collaborator.'
-        );
-        if (newPageCollaboratorHelper) {
-          newPageCollaboratorHelper.textContent = message;
-        }
-      }
-
-      function renderNewPageCollaboratorOptions() {
-        if (!newPageCollaboratorContainer) {
-          return;
-        }
-        newPageCollaboratorContainer.innerHTML = '';
-        newPageCollaboratorCheckboxes.length = 0;
-        const authors = Object.keys(AUTHOR_DETAILS)
-          .filter(Boolean)
-          .sort();
-        authors.forEach((name) => {
-          const { color = DEFAULT_AUTHOR_COLOR, email = '' } = AUTHOR_DETAILS[name] || {};
-          const optionLabel = document.createElement('label');
-          optionLabel.className = 'new-page-collaborator-option';
-
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.name = 'collaborators';
-          checkbox.value = name;
-          checkbox.defaultChecked = false;
-          optionLabel.appendChild(checkbox);
-
-          const avatar = document.createElement('span');
-          avatar.className = 'author-avatar';
-          avatar.dataset.color = color;
-          avatar.textContent = getAuthorInitials(name) || name;
-          optionLabel.appendChild(avatar);
-
-          const info = document.createElement('span');
-          info.className = 'new-page-collaborator-info';
-          const nameSpan = document.createElement('span');
-          nameSpan.className = 'name';
-          nameSpan.textContent = name;
-          info.appendChild(nameSpan);
-          if (email) {
-            const emailSpan = document.createElement('span');
-            emailSpan.className = 'email';
-            emailSpan.textContent = email;
-            info.appendChild(emailSpan);
-          }
-          optionLabel.appendChild(info);
-
-          checkbox.addEventListener('change', () => {
-            setCollaboratorValidity();
-            syncCreateButtonState();
-          });
-
-          newPageCollaboratorContainer.appendChild(optionLabel);
-          newPageCollaboratorCheckboxes.push(checkbox);
-        });
-        setCollaboratorValidity();
-      }
-
       function syncCreateButtonState() {
         if (!newPageSubmitButton) {
           return;
@@ -5115,9 +4938,8 @@
         const scheduleReady =
           !requiresSchedule ||
           Boolean(newPageScheduleDateInput?.value) && Boolean(newPageScheduleTimeInput?.value);
-        const collaboratorsReady = hasSelectedCollaborators();
         const statusReady = Boolean(statusValue);
-        const shouldDisable = !(statusReady && scheduleReady && collaboratorsReady);
+        const shouldDisable = !(statusReady && scheduleReady);
         newPageSubmitButton.disabled = shouldDisable;
       }
 
@@ -5160,7 +4982,6 @@
       renderTypeFilters();
       renderReportFilters();
       renderNewPageStatusOptions();
-      renderNewPageCollaboratorOptions();
       syncScheduleState();
       syncCreateButtonState();
       syncFilterControls();
@@ -5237,7 +5058,6 @@
         newPageStatusRadios.forEach((radio) => {
           radio.checked = radio.defaultChecked;
         });
-        setCollaboratorValidity();
         syncScheduleState();
         syncCreateButtonState();
         if (newPageStatusRadios.length > 0) {
@@ -5732,7 +5552,6 @@
             newPageScheduleDateInput?.setCustomValidity('');
             newPageScheduleTimeInput?.setCustomValidity('');
           }
-          setCollaboratorValidity();
         }
         let isValid = true;
         getNewPageStepControls(section)
@@ -5908,22 +5727,12 @@
           statusValue === 'scheduled' && scheduleDate && scheduleTime
             ? `${scheduleDate}T${scheduleTime}`
             : null;
-        const collaborators = formData
-          .getAll('collaborators')
-          .map((value) => value.toString().trim())
-          .filter(Boolean);
-        const permissions = formData
-          .getAll('pagePermissions')
-          .map((value) => value.toString().trim())
-          .filter(Boolean);
         const payload = {
           title: (formData.get('title') || '').toString().trim(),
           folder: (formData.get('folder') || '').toString().trim(),
           type: (formData.get('type') || '').toString().trim(),
           status: statusValue,
           scheduleAt,
-          collaborators,
-          permissions,
           metadata: {
             slug: (formData.get('slug') || '').toString().trim(),
             metaTitle: (formData.get('metaTitle') || '').toString().trim(),
