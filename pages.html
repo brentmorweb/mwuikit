@@ -1509,6 +1509,18 @@
       font-size: 20px;
     }
 
+    .dialog-heading {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dialog-heading p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--pages-muted);
+    }
+
     .dialog-close {
       background: transparent;
       border: none;
@@ -1546,6 +1558,149 @@
     .dialog-option:hover {
       border-color: var(--pages-accent);
       box-shadow: 0 14px 30px rgba(37, 99, 235, 0.16);
+    }
+
+    .page-settings-dialog {
+      width: min(640px, 100%);
+      gap: 24px;
+    }
+
+    .page-settings-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+    }
+
+    .page-settings-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .page-settings-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .page-settings-id {
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .page-settings-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+      color: var(--pages-accent);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: capitalize;
+    }
+
+    .page-settings-status[data-status='published'] {
+      background: var(--pages-badge-published);
+      color: #047857;
+    }
+
+    .page-settings-status[data-status='draft'] {
+      background: var(--pages-badge-draft);
+      color: #b45309;
+    }
+
+    .page-settings-status[data-status='unpublished'] {
+      background: var(--pages-badge-unpublished);
+      color: #4338ca;
+    }
+
+    .page-settings-status[data-status='scheduled'] {
+      background: var(--pages-badge-scheduled);
+      color: #b91c1c;
+    }
+
+    .page-settings-status[data-status='trash'] {
+      background: var(--pages-badge-trash);
+      color: #1f2937;
+    }
+
+    .page-settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .settings-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .settings-field input,
+    .settings-field select {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--pages-border);
+      font-size: 14px;
+      color: var(--pages-text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .settings-field input:focus,
+    .settings-field select:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.5);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .page-settings-toggles {
+      border: 1px solid var(--pages-border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .page-settings-toggles legend {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pages-muted);
+      padding: 0 6px;
+    }
+
+    .toggle-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--pages-text);
+    }
+
+    .toggle-option input {
+      margin-top: 4px;
+    }
+
+    .toggle-option strong {
+      display: block;
+      font-size: 14px;
+      color: var(--pages-text);
+    }
+
+    .toggle-option small {
+      display: block;
+      color: var(--pages-muted);
+      font-size: 12px;
+      line-height: 1.4;
     }
 
     .folder-dialog {
@@ -2452,7 +2607,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2547,7 +2709,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2642,7 +2811,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2761,7 +2937,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2856,7 +3039,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -2951,7 +3141,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -3046,7 +3243,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -3141,7 +3345,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -3260,7 +3471,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -3355,7 +3573,14 @@
             <td class="actions">
               <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button type="button" aria-label="Page settings" data-tooltip="Page settings"><i class="fa-solid fa-gear"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings-trigger
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
               <div class="action-menu" data-action-menu>
                 <button
                   type="button"
@@ -4014,6 +4239,92 @@
     </div>
   </div>
 
+  <div
+    class="dialog-backdrop"
+    id="pageSettingsDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="pageSettingsDialogTitle"
+    aria-describedby="pageSettingsDialogDescription"
+  >
+    <div class="dialog page-settings-dialog">
+      <div class="dialog-header">
+        <div class="dialog-heading">
+          <h2 id="pageSettingsDialogTitle">Page settings</h2>
+          <p id="pageSettingsDialogDescription">Update meta details, publishing rules, and ownership.</p>
+        </div>
+        <button class="dialog-close" type="button" aria-label="Close page settings" data-page-settings-action="close">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="page-settings-summary">
+        <div class="page-settings-primary">
+          <span class="page-settings-name" data-page-settings-name>Untitled page</span>
+          <span class="page-settings-id" data-page-settings-id></span>
+        </div>
+        <span class="page-settings-status" data-page-settings-status>Draft</span>
+      </div>
+      <form id="pageSettingsForm">
+        <div class="page-settings-grid">
+          <label class="settings-field" for="pageSettingsTitle">
+            <span>Title</span>
+            <input type="text" id="pageSettingsTitle" name="title" required>
+          </label>
+          <label class="settings-field" for="pageSettingsSlug">
+            <span>Slug</span>
+            <input type="text" id="pageSettingsSlug" name="slug" required>
+          </label>
+          <label class="settings-field" for="pageSettingsStatus">
+            <span>Status</span>
+            <select id="pageSettingsStatus" name="status" data-page-settings-status-select required></select>
+          </label>
+          <label class="settings-field" for="pageSettingsType">
+            <span>Type</span>
+            <select id="pageSettingsType" name="type" data-page-settings-type-select required></select>
+          </label>
+          <label class="settings-field" for="pageSettingsAuthor">
+            <span>Owner</span>
+            <select id="pageSettingsAuthor" name="author" data-page-settings-author-select required></select>
+          </label>
+          <label class="settings-field" for="pageSettingsFolder">
+            <span>Folder</span>
+            <input type="text" id="pageSettingsFolder" name="folder">
+          </label>
+          <label class="settings-field" for="pageSettingsCreated">
+            <span>Created</span>
+            <input type="date" id="pageSettingsCreated" name="created">
+          </label>
+          <label class="settings-field" for="pageSettingsModified">
+            <span>Last updated</span>
+            <input type="date" id="pageSettingsModified" name="modified">
+          </label>
+        </div>
+        <fieldset class="page-settings-toggles">
+          <legend>Visibility</legend>
+          <label class="toggle-option">
+            <input type="checkbox" name="indexed" checked>
+            <span>
+              <strong>Allow search indexing</strong>
+              <small>Keep the page discoverable across the site.</small>
+            </span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" name="notifications" checked>
+            <span>
+              <strong>Notify collaborators on publish</strong>
+              <small>Send an email to assigned collaborators when status changes.</small>
+            </span>
+          </label>
+        </fieldset>
+        <div class="dialog-actions">
+          <button type="button" data-page-settings-action="cancel">Cancel</button>
+          <button type="submit" class="primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
     <script>
     (function () {
       const folderStateStorageKey = 'mw-pages-folder-state';
@@ -4047,6 +4358,11 @@
       ];
 
       const NEW_PAGE_STATUS_OPTIONS = STATUS_OPTIONS.filter(({ value }) => value !== 'trash');
+
+      const STATUS_LABEL_LOOKUP = STATUS_OPTIONS.reduce((acc, option) => {
+        acc[option.value] = option.label;
+        return acc;
+      }, {});
 
       const STATUS_DESCRIPTIONS = {
         published: 'Visible immediately after creation',
@@ -4217,6 +4533,23 @@
       const folderColorRadios = folderSettingsForm ? folderSettingsForm.querySelectorAll('input[name="folderColor"]') : [];
       const folderDialogCancel = folderSettingsDialog?.querySelector('[data-folder-dialog-action="cancel"]');
 
+      const pageSettingsDialog = document.getElementById('pageSettingsDialog');
+      const pageSettingsForm = document.getElementById('pageSettingsForm');
+      const pageSettingsName = pageSettingsDialog?.querySelector('[data-page-settings-name]') || null;
+      const pageSettingsId = pageSettingsDialog?.querySelector('[data-page-settings-id]') || null;
+      const pageSettingsStatus = pageSettingsDialog?.querySelector('[data-page-settings-status]') || null;
+      const pageSettingsTitleInput = document.getElementById('pageSettingsTitle');
+      const pageSettingsSlugInput = document.getElementById('pageSettingsSlug');
+      const pageSettingsStatusSelect = pageSettingsDialog?.querySelector('[data-page-settings-status-select]') || null;
+      const pageSettingsTypeSelect = pageSettingsDialog?.querySelector('[data-page-settings-type-select]') || null;
+      const pageSettingsAuthorSelect = pageSettingsDialog?.querySelector('[data-page-settings-author-select]') || null;
+      const pageSettingsFolderInput = document.getElementById('pageSettingsFolder');
+      const pageSettingsCreatedInput = document.getElementById('pageSettingsCreated');
+      const pageSettingsModifiedInput = document.getElementById('pageSettingsModified');
+      const pageSettingsCloseButton = pageSettingsDialog?.querySelector('[data-page-settings-action="close"]') || null;
+      const pageSettingsCancelButton = pageSettingsDialog?.querySelector('[data-page-settings-action="cancel"]') || null;
+      const pageSettingsTriggers = Array.from(document.querySelectorAll('[data-page-settings-trigger]'));
+
       const pageRows = Array.from(document.querySelectorAll('.page-row'));
       const folderRows = Array.from(document.querySelectorAll('.group-row'));
       const folderToggleButtons = Array.from(document.querySelectorAll('[data-folder-toggle]'));
@@ -4289,14 +4622,19 @@
       })();
 
       let activeFolderId = null;
+      let activePageSettingsId = null;
+      let lastPageSettingsTrigger = null;
 
       function syncBodyScrollState() {
         const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
         const createDialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
         const folderDialogOpen = folderSettingsDialog?.getAttribute('aria-hidden') === 'false';
         const newPageDialogOpen = newPageDialog?.getAttribute('aria-hidden') === 'false';
+        const pageSettingsDialogOpen = pageSettingsDialog?.getAttribute('aria-hidden') === 'false';
         document.body.style.overflow =
-          drawerOpen || createDialogOpen || folderDialogOpen || newPageDialogOpen ? 'hidden' : '';
+          drawerOpen || createDialogOpen || folderDialogOpen || newPageDialogOpen || pageSettingsDialogOpen
+            ? 'hidden'
+            : '';
       }
 
       function closeActionMenu(menu, { focusTrigger = false } = {}) {
@@ -5106,6 +5444,156 @@
         setCollaboratorValidity();
       }
 
+      function ensureSelectOption(select, value, label) {
+        if (!select || !value) {
+          return;
+        }
+        const exists = Array.from(select.options).some((option) => option.value === value);
+        if (!exists) {
+          const option = document.createElement('option');
+          option.value = value;
+          option.textContent = label || value;
+          select.appendChild(option);
+        }
+      }
+
+      function initialisePageSettingsOptions() {
+        if (pageSettingsStatusSelect && pageSettingsStatusSelect.options.length === 0) {
+          STATUS_OPTIONS.forEach(({ value, label }) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            pageSettingsStatusSelect.appendChild(option);
+          });
+        }
+
+        if (pageSettingsTypeSelect && pageSettingsTypeSelect.options.length === 0) {
+          const typeValues = new Set(Object.keys(TYPE_STYLES));
+          pageRows.forEach((row) => {
+            if (row.dataset.type) {
+              typeValues.add(row.dataset.type);
+            }
+          });
+          Array.from(typeValues)
+            .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b))
+            .forEach((type) => {
+              const option = document.createElement('option');
+              option.value = type;
+              option.textContent = type;
+              pageSettingsTypeSelect.appendChild(option);
+            });
+        }
+
+        if (pageSettingsAuthorSelect && pageSettingsAuthorSelect.options.length === 0) {
+          const authorValues = new Set(Object.keys(AUTHOR_DETAILS));
+          pageRows.forEach((row) => {
+            if (row.dataset.author) {
+              authorValues.add(row.dataset.author);
+            }
+          });
+          Array.from(authorValues)
+            .filter(Boolean)
+            .sort((a, b) => a.localeCompare(b))
+            .forEach((author) => {
+              const option = document.createElement('option');
+              option.value = author;
+              option.textContent = author;
+              pageSettingsAuthorSelect.appendChild(option);
+            });
+        }
+      }
+
+      function formatStatusLabel(status) {
+        if (!status) {
+          return 'Draft';
+        }
+        return STATUS_LABEL_LOOKUP[status] || status;
+      }
+
+      function setPageSettingsStatus(status) {
+        if (!pageSettingsStatus) {
+          return;
+        }
+        const value = status || 'draft';
+        pageSettingsStatus.textContent = formatStatusLabel(value);
+        pageSettingsStatus.dataset.status = value;
+      }
+
+      function openPageSettingsDialog(row, trigger = null) {
+        if (!pageSettingsDialog || !row) {
+          return;
+        }
+        initialisePageSettingsOptions();
+        pageSettingsForm?.reset();
+        lastPageSettingsTrigger = trigger;
+        activePageSettingsId = row.dataset.pageId || null;
+        const title = row.dataset.title || row.querySelector('.title-button')?.textContent?.trim() || 'Untitled page';
+        const slug = row.querySelector('.subtitle')?.textContent?.trim() || '';
+        const statusValue = row.dataset.status || 'draft';
+        const typeValue = row.dataset.type || '';
+        const authorValue = row.dataset.author || '';
+        const folderValue = row.dataset.folder || '';
+        const createdValue = row.dataset.created || '';
+        const modifiedValue = row.dataset.modified || '';
+
+        if (pageSettingsName) {
+          pageSettingsName.textContent = title || 'Untitled page';
+        }
+        if (pageSettingsId) {
+          pageSettingsId.textContent = activePageSettingsId ? `#${activePageSettingsId}` : '';
+        }
+        if (pageSettingsTitleInput) {
+          pageSettingsTitleInput.value = title;
+        }
+        if (pageSettingsSlugInput) {
+          pageSettingsSlugInput.value = slug;
+        }
+        if (pageSettingsStatusSelect) {
+          ensureSelectOption(pageSettingsStatusSelect, statusValue, formatStatusLabel(statusValue));
+          pageSettingsStatusSelect.value = statusValue;
+        }
+        if (pageSettingsTypeSelect) {
+          ensureSelectOption(pageSettingsTypeSelect, typeValue, typeValue);
+          pageSettingsTypeSelect.value = typeValue;
+        }
+        if (pageSettingsAuthorSelect) {
+          ensureSelectOption(pageSettingsAuthorSelect, authorValue, authorValue);
+          pageSettingsAuthorSelect.value = authorValue;
+        }
+        if (pageSettingsFolderInput) {
+          pageSettingsFolderInput.value = folderValue;
+        }
+        if (pageSettingsCreatedInput) {
+          pageSettingsCreatedInput.value = createdValue;
+        }
+        if (pageSettingsModifiedInput) {
+          pageSettingsModifiedInput.value = modifiedValue;
+        }
+
+        setPageSettingsStatus(statusValue);
+
+        pageSettingsDialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        window.requestAnimationFrame(() => {
+          pageSettingsTitleInput?.focus({ preventScroll: true });
+          pageSettingsTitleInput?.select?.();
+        });
+      }
+
+      function closePageSettingsDialog({ focusTrigger = true } = {}) {
+        if (!pageSettingsDialog) {
+          return;
+        }
+        pageSettingsDialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        if (focusTrigger && lastPageSettingsTrigger instanceof HTMLElement) {
+          lastPageSettingsTrigger.focus({ preventScroll: true });
+        }
+        lastPageSettingsTrigger = null;
+        activePageSettingsId = null;
+      }
+
       function syncCreateButtonState() {
         if (!newPageSubmitButton) {
           return;
@@ -5161,6 +5649,7 @@
       renderReportFilters();
       renderNewPageStatusOptions();
       renderNewPageCollaboratorOptions();
+      initialisePageSettingsOptions();
       syncScheduleState();
       syncCreateButtonState();
       syncFilterControls();
@@ -5402,6 +5891,11 @@
           if (dialog?.getAttribute('aria-hidden') === 'false') {
             event.preventDefault();
             closeDialog();
+            return;
+          }
+          if (pageSettingsDialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closePageSettingsDialog();
             return;
           }
           if (folderSettingsDialog?.getAttribute('aria-hidden') === 'false') {
@@ -5977,6 +6471,147 @@
         closeFolderDialog();
       });
 
+      pageSettingsTriggers.forEach((trigger) => {
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          const row = trigger.closest('.page-row');
+          if (row) {
+            openPageSettingsDialog(row, trigger);
+          }
+        });
+      });
+
+      pageSettingsCloseButton?.addEventListener('click', () => {
+        closePageSettingsDialog();
+      });
+
+      pageSettingsCancelButton?.addEventListener('click', () => {
+        closePageSettingsDialog();
+      });
+
+      pageSettingsDialog?.addEventListener('click', (event) => {
+        if (event.target === pageSettingsDialog) {
+          closePageSettingsDialog();
+        }
+      });
+
+      pageSettingsStatusSelect?.addEventListener('change', (event) => {
+        const value = event.target.value;
+        setPageSettingsStatus(value);
+      });
+
+      pageSettingsTitleInput?.addEventListener('input', () => {
+        if (pageSettingsName) {
+          const value = pageSettingsTitleInput.value.trim();
+          pageSettingsName.textContent = value || 'Untitled page';
+        }
+      });
+
+      pageSettingsForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!pageSettingsForm) {
+          closePageSettingsDialog({ focusTrigger: false });
+          return;
+        }
+        const pageId = activePageSettingsId;
+        const formData = new FormData(pageSettingsForm);
+        const payload = {
+          title: (formData.get('title') || '').toString().trim(),
+          slug: (formData.get('slug') || '').toString().trim(),
+          status: (formData.get('status') || '').toString().trim(),
+          type: (formData.get('type') || '').toString().trim(),
+          author: (formData.get('author') || '').toString().trim(),
+          folder: (formData.get('folder') || '').toString().trim(),
+          created: (formData.get('created') || '').toString(),
+          modified: (formData.get('modified') || '').toString(),
+          indexed: formData.getAll('indexed').length > 0,
+          notifications: formData.getAll('notifications').length > 0,
+        };
+        if (pageId) {
+          const row = pageRowById.get(pageId);
+          if (row) {
+            const resolvedStatus = payload.status || row.dataset.status || 'draft';
+            const resolvedType = payload.type || row.dataset.type || '';
+            const resolvedAuthor = payload.author || row.dataset.author || '';
+            payload.status = resolvedStatus;
+            payload.type = resolvedType;
+            payload.author = resolvedAuthor;
+            if (payload.title) {
+              const titleButton = row.querySelector('.title-button');
+              if (titleButton) {
+                titleButton.textContent = payload.title;
+              }
+              row.dataset.title = payload.title;
+            }
+            if (payload.slug) {
+              const subtitle = row.querySelector('.subtitle');
+              if (subtitle) {
+                subtitle.textContent = payload.slug;
+              }
+              row.dataset.slug = payload.slug;
+            }
+            if (payload.status) {
+              row.dataset.status = payload.status;
+              const statusBadge = row.querySelector('.status-pill .badge');
+              if (statusBadge) {
+                statusBadge.className = `badge ${payload.status}`;
+                statusBadge.textContent = formatStatusLabel(payload.status);
+              }
+            }
+            if (payload.type) {
+              row.dataset.type = payload.type;
+              const typeChip = row.querySelector('.chip');
+              if (typeChip) {
+                typeChip.textContent = payload.type;
+              }
+            }
+            if (payload.author) {
+              row.dataset.author = payload.author;
+              const avatarSpan = row.querySelector('.author-filter .avatar span');
+              if (avatarSpan) {
+                avatarSpan.textContent = getAuthorInitials(payload.author) || payload.author;
+              }
+            }
+            if (payload.folder) {
+              row.dataset.folder = payload.folder;
+            }
+            if (payload.created) {
+              row.dataset.created = payload.created;
+              const createdCell = row.querySelector('[data-created-label]');
+              if (createdCell) {
+                const createdDate = new Date(payload.created);
+                createdCell.textContent = Number.isNaN(createdDate.getTime())
+                  ? payload.created
+                  : dateFormatter.format(createdDate);
+              }
+            }
+            if (payload.modified) {
+              row.dataset.modified = payload.modified;
+              const modifiedCell = row.querySelector('[data-modified-label]');
+              if (modifiedCell) {
+                const modifiedDate = new Date(payload.modified);
+                modifiedCell.textContent = Number.isNaN(modifiedDate.getTime())
+                  ? payload.modified
+                  : dateFormatter.format(modifiedDate);
+              }
+            }
+            const rowDatum = rowData.find((item) => item.pageId === pageId);
+            if (rowDatum) {
+              rowDatum.status = payload.status || rowDatum.status;
+              rowDatum.type = payload.type || rowDatum.type;
+              rowDatum.author = payload.author || rowDatum.author;
+              rowDatum.created = payload.created || rowDatum.created;
+              rowDatum.modified = payload.modified || rowDatum.modified;
+              rowDatum.searchText = row.textContent.toLowerCase();
+            }
+          }
+          applyRowVisualStyles();
+          updateRows();
+        }
+        console.log('Save page settings', pageId, payload);
+        closePageSettingsDialog({ focusTrigger: false });
+      });
+
       pageRows.forEach((row) => {
         const checkbox = row.querySelector('[data-row-checkbox]');
         if (!checkbox) {
@@ -6136,6 +6771,17 @@
       updateFolderViewToggleButtonState();
 
       document.addEventListener('click', (event) => {
+        const settingsTrigger = event.target.closest('[data-page-settings-trigger]');
+        if (settingsTrigger) {
+          event.preventDefault();
+          closeAllActionMenus();
+          const row = settingsTrigger.closest('.page-row');
+          if (row) {
+            openPageSettingsDialog(row, settingsTrigger);
+          }
+          return;
+        }
+
         const menuElement = event.target.closest('[data-action-menu]');
         if (!menuElement) {
           closeAllActionMenus();
@@ -6144,6 +6790,17 @@
         if (actionMenuItem) {
           const action = actionMenuItem.dataset.menuAction;
           const row = actionMenuItem.closest('.page-row');
+          if (action === 'settings') {
+            if (menuElement) {
+              closeActionMenu(menuElement);
+            }
+            if (row) {
+              const focusTarget =
+                menuElement?.querySelector('[data-action-menu-trigger]') || actionMenuItem;
+              openPageSettingsDialog(row, focusTarget);
+            }
+            return;
+          }
           if (action) {
             console.log(`Page ${action}`, row?.dataset.pageId);
           }
