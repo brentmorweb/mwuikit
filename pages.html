@@ -1724,6 +1724,27 @@
       box-shadow: 0 14px 32px rgba(37, 99, 235, 0.22);
     }
 
+    .copy-page-dialog {
+      width: min(420px, 100%);
+    }
+
+    .copy-page-dialog form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .copy-page-message {
+      margin: 0;
+      font-size: 14px;
+      color: var(--pages-muted);
+      line-height: 1.5;
+    }
+
+    .copy-page-message strong {
+      color: var(--pages-text);
+    }
+
     .dialog-option .icon-circle {
       background: #f8fafc;
       color: var(--pages-text);
@@ -2414,7 +2435,7 @@
             <td data-created-label>Jan 05, 2025</td>
             <td data-modified-label>Jul 20, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -2516,7 +2537,7 @@
             <td data-created-label>Jan 07, 2025</td>
             <td data-modified-label>Jul 18, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -2618,7 +2639,7 @@
             <td data-created-label>Jan 11, 2025</td>
             <td data-modified-label>Jul 15, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -2744,7 +2765,7 @@
             <td data-created-label>Jan 12, 2025</td>
             <td data-modified-label>Jul 15, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -2846,7 +2867,7 @@
             <td data-created-label>Jan 13, 2025</td>
             <td data-modified-label>Jul 10, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -2948,7 +2969,7 @@
             <td data-created-label>Jan 19, 2025</td>
             <td data-modified-label>Jul 09, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -3050,7 +3071,7 @@
             <td data-created-label>Jan 22, 2025</td>
             <td data-modified-label>Jul 08, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -3152,7 +3173,7 @@
             <td data-created-label>Jan 25, 2025</td>
             <td data-modified-label>Jul 05, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -3278,7 +3299,7 @@
             <td data-created-label>Jan 27, 2025</td>
             <td data-modified-label>Jul 03, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -3380,7 +3401,7 @@
             <td data-created-label>Jan 28, 2025</td>
             <td data-modified-label>Jul 02, 2025</td>
             <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page"><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
               <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
               <button
                 type="button"
@@ -3963,6 +3984,38 @@
     </div>
   </div>
 
+  <div
+    class="dialog-backdrop"
+    id="copyPageDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="copyPageDialogTitle"
+    aria-describedby="copyPageDialogDescription"
+  >
+    <div class="dialog copy-page-dialog">
+      <div class="dialog-header">
+        <h2 id="copyPageDialogTitle">Duplicate page</h2>
+        <button class="dialog-close" type="button" aria-label="Close duplicate page dialog">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="copyPageForm">
+        <p class="copy-page-message" id="copyPageDialogDescription">
+          You're creating a copy of <strong id="copyPageSourceName">this page</strong>. Choose a name for the new page.
+        </p>
+        <div class="form-field">
+          <label for="copyPageNameInput">New page name</label>
+          <input type="text" id="copyPageNameInput" name="copyPageName" required autocomplete="off" placeholder="e.g. Homepage copy">
+        </div>
+        <div class="dialog-actions">
+          <button type="button" data-copy-dialog-action="cancel">Cancel</button>
+          <button type="submit" class="primary">Duplicate page</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="dialog-backdrop" id="folderSettingsDialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="folderDialogTitle">
     <div class="dialog folder-dialog">
       <div class="dialog-header">
@@ -4262,6 +4315,12 @@
         newPageDialog?.querySelector('[data-schedule-wrapper]') || null;
       const newPageScheduleDateInput = document.getElementById('newPageScheduleDate');
       const newPageScheduleTimeInput = document.getElementById('newPageScheduleTime');
+      const copyPageDialog = document.getElementById('copyPageDialog');
+      const copyPageDialogClose = copyPageDialog?.querySelector('.dialog-close');
+      const copyPageForm = document.getElementById('copyPageForm');
+      const copyPageNameInput = document.getElementById('copyPageNameInput');
+      const copyPageSourceName = document.getElementById('copyPageSourceName');
+      const copyPageCancelButton = copyPageDialog?.querySelector('[data-copy-dialog-action="cancel"]');
       let newPageCurrentStepIndex = 0;
       const newPageStatusRadios = [];
 
@@ -4302,6 +4361,7 @@
       const folderCheckboxes = Array.from(document.querySelectorAll('[data-folder-checkbox]'));
       const folderViewToggleButton = document.querySelector('[data-folder-toggle-all]');
       const actionMenus = Array.from(document.querySelectorAll('[data-action-menu]'));
+      const copyPageButtons = Array.from(document.querySelectorAll('[data-copy-page]'));
 
       const pageRowById = new Map(pageRows.map((row) => [row.dataset.pageId, row]));
       const folderRowById = new Map(folderRows.map((row) => [row.dataset.folder, row]));
@@ -4388,6 +4448,17 @@
       }
 
       applyRowVisualStyles();
+
+      copyPageButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          const row = button.closest('.page-row');
+          const pageId = row?.dataset.pageId;
+          if (pageId) {
+            openCopyPageDialog(pageId, button);
+          }
+        });
+      });
 
       function populatePageSettingsControls() {
         if (pageSettingsFolderSelect) {
@@ -4611,6 +4682,8 @@
       let activeFolderId = null;
       let activePageId = null;
       let lastPageSettingsTrigger = null;
+      let activeCopyPageId = null;
+      let lastCopyPageTrigger = null;
 
       function syncBodyScrollState() {
         const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
@@ -4618,12 +4691,14 @@
         const folderDialogOpen = folderSettingsDialog?.getAttribute('aria-hidden') === 'false';
         const newPageDialogOpen = newPageDialog?.getAttribute('aria-hidden') === 'false';
         const pageSettingsOpen = pageSettingsDialog?.getAttribute('aria-hidden') === 'false';
+        const copyPageDialogOpen = copyPageDialog?.getAttribute('aria-hidden') === 'false';
         document.body.style.overflow =
           drawerOpen ||
           createDialogOpen ||
           folderDialogOpen ||
           newPageDialogOpen ||
-          pageSettingsOpen
+          pageSettingsOpen ||
+          copyPageDialogOpen
             ? 'hidden'
             : '';
       }
@@ -5524,6 +5599,63 @@
         }
       }
 
+      function openCopyPageDialog(pageId, trigger) {
+        if (!copyPageDialog) {
+          return;
+        }
+        const row = pageRowById.get(pageId);
+        if (!row) {
+          return;
+        }
+        activeCopyPageId = pageId;
+        lastCopyPageTrigger = trigger instanceof HTMLElement ? trigger : null;
+        const title =
+          row.dataset.title ||
+          row.querySelector('.title-button')?.textContent?.trim() ||
+          row.querySelector('.title-text')?.textContent?.trim() ||
+          'this page';
+        if (copyPageSourceName) {
+          copyPageSourceName.textContent = title;
+        }
+        if (copyPageNameInput) {
+          const suggestedName = title ? `${title} copy` : '';
+          copyPageNameInput.value = suggestedName.trim();
+          if (copyPageNameInput.value) {
+            copyPageNameInput.setSelectionRange(0, copyPageNameInput.value.length);
+          }
+        }
+        copyPageDialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        window.requestAnimationFrame(() => {
+          if (copyPageNameInput) {
+            copyPageNameInput.focus({ preventScroll: true });
+            copyPageNameInput.select();
+          }
+        });
+      }
+
+      function closeCopyPageDialog({ focusTrigger = true } = {}) {
+        if (!copyPageDialog) {
+          return;
+        }
+        copyPageDialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        copyPageForm?.reset();
+        if (copyPageSourceName) {
+          copyPageSourceName.textContent = 'this page';
+        }
+        if (copyPageNameInput) {
+          copyPageNameInput.value = '';
+          copyPageNameInput.setCustomValidity('');
+        }
+        const trigger = lastCopyPageTrigger;
+        activeCopyPageId = null;
+        lastCopyPageTrigger = null;
+        if (focusTrigger && trigger instanceof HTMLElement) {
+          trigger.focus({ preventScroll: true });
+        }
+      }
+
       function openFolderDialog(folderId) {
         if (!folderSettingsDialog) {
           return;
@@ -5639,6 +5771,11 @@
           if (newPageDialog?.getAttribute('aria-hidden') === 'false') {
             event.preventDefault();
             closeNewPageDialog();
+            return;
+          }
+          if (copyPageDialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closeCopyPageDialog();
             return;
           }
           if (dialog?.getAttribute('aria-hidden') === 'false') {
@@ -5799,6 +5936,35 @@
         if (event.target === newPageDialog) {
           closeNewPageDialog();
         }
+      });
+
+      copyPageDialogClose?.addEventListener('click', () => {
+        closeCopyPageDialog();
+      });
+
+      copyPageCancelButton?.addEventListener('click', () => {
+        closeCopyPageDialog();
+      });
+
+      copyPageDialog?.addEventListener('click', (event) => {
+        if (event.target === copyPageDialog) {
+          closeCopyPageDialog();
+        }
+      });
+
+      copyPageForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!copyPageForm.reportValidity()) {
+          return;
+        }
+        if (!activeCopyPageId) {
+          closeCopyPageDialog();
+          return;
+        }
+        const formData = new FormData(copyPageForm);
+        const newTitle = (formData.get('copyPageName') || '').toString().trim();
+        console.log('Duplicate page', { sourcePageId: activeCopyPageId, title: newTitle });
+        closeCopyPageDialog();
       });
 
       function getNewPageStepControls(section) {
@@ -6432,6 +6598,9 @@
           if (action === 'settings' && pageId) {
             const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
             openPageSettingsDialog(pageId, triggerButton || actionMenuItem);
+          } else if (action === 'duplicate' && pageId) {
+            const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
+            openCopyPageDialog(pageId, triggerButton || actionMenuItem);
           } else if (action) {
             console.log(`Page ${action}`, pageId);
           }
