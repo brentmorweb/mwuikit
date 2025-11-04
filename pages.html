@@ -1558,6 +1558,16 @@
       gap: 18px;
     }
 
+    .page-settings-dialog {
+      max-width: 520px;
+    }
+
+    .page-settings-dialog form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
     .form-field {
       display: flex;
       flex-direction: column;
@@ -1570,6 +1580,45 @@
       color: var(--pages-muted);
     }
 
+    .dialog-subtitle {
+      margin: 0;
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .dialog-subtitle:empty {
+      display: none;
+    }
+
+    .page-settings-columns {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .page-settings-meta {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .page-settings-meta div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .page-settings-meta dt {
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .page-settings-meta dd {
+      margin: 2px 0 0;
+    }
+
     .form-field input[type='text'] {
       padding: 10px 14px;
       border-radius: 10px;
@@ -1578,10 +1627,26 @@
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .form-field input[type='text']:focus {
+    .form-field input[type='text']:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
       outline: none;
       border-color: rgba(37, 99, 235, 0.5);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .form-field select,
+    .form-field textarea {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--pages-border);
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-field textarea {
+      min-height: 96px;
+      resize: vertical;
     }
 
     .color-swatches {
@@ -3914,7 +3979,81 @@
     </div>
   </div>
 
-    <script>
+  <div
+    class="dialog-backdrop"
+    id="pageSettingsDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="pageSettingsDialogTitle"
+  >
+    <div class="dialog page-settings-dialog">
+      <div class="dialog-header">
+        <div>
+          <h2 id="pageSettingsDialogTitle">Page settings</h2>
+          <p class="dialog-subtitle" id="pageSettingsDialogSubtitle"></p>
+        </div>
+        <button class="dialog-close" type="button" aria-label="Close page settings">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="pageSettingsForm">
+        <input type="hidden" id="pageSettingsIdInput" name="pageId">
+        <div class="form-field">
+          <label for="pageSettingsTitleInput">Title</label>
+          <input type="text" id="pageSettingsTitleInput" name="title" required>
+        </div>
+        <div class="page-settings-columns">
+          <div class="form-field">
+            <label for="pageSettingsSlugInput">Slug</label>
+            <input type="text" id="pageSettingsSlugInput" name="slug" required>
+          </div>
+          <div class="form-field">
+            <label for="pageSettingsFolderSelect">Folder</label>
+            <select id="pageSettingsFolderSelect" name="folder"></select>
+          </div>
+        </div>
+        <div class="page-settings-columns">
+          <div class="form-field">
+            <label for="pageSettingsStatusSelect">Status</label>
+            <select id="pageSettingsStatusSelect" name="status"></select>
+          </div>
+          <div class="form-field">
+            <label for="pageSettingsAuthorSelect">Owner</label>
+            <select id="pageSettingsAuthorSelect" name="author"></select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="pageSettingsDescriptionInput">Description</label>
+          <textarea
+            id="pageSettingsDescriptionInput"
+            name="description"
+            placeholder="Add a short summary for collaborators"
+          ></textarea>
+        </div>
+        <dl class="page-settings-meta">
+          <div>
+            <dt>Page URL</dt>
+            <dd id="pageSettingsUrlValue">—</dd>
+          </div>
+          <div>
+            <dt>Created</dt>
+            <dd id="pageSettingsCreatedValue">—</dd>
+          </div>
+          <div>
+            <dt>Last updated</dt>
+            <dd id="pageSettingsUpdatedValue">—</dd>
+          </div>
+        </dl>
+        <div class="dialog-actions">
+          <button type="button" data-page-settings-action="cancel">Cancel</button>
+          <button type="submit" class="primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
     (function () {
       const folderStateStorageKey = 'mw-pages-folder-state';
       const state = {
@@ -4112,6 +4251,23 @@
       const folderColorRadios = folderSettingsForm ? folderSettingsForm.querySelectorAll('input[name="folderColor"]') : [];
       const folderDialogCancel = folderSettingsDialog?.querySelector('[data-folder-dialog-action="cancel"]');
 
+      const pageSettingsDialog = document.getElementById('pageSettingsDialog');
+      const pageSettingsDialogTitle = document.getElementById('pageSettingsDialogTitle');
+      const pageSettingsDialogSubtitle = document.getElementById('pageSettingsDialogSubtitle');
+      const pageSettingsDialogClose = pageSettingsDialog?.querySelector('.dialog-close');
+      const pageSettingsCancel = pageSettingsDialog?.querySelector('[data-page-settings-action="cancel"]');
+      const pageSettingsForm = document.getElementById('pageSettingsForm');
+      const pageSettingsIdInput = document.getElementById('pageSettingsIdInput');
+      const pageSettingsTitleInput = document.getElementById('pageSettingsTitleInput');
+      const pageSettingsSlugInput = document.getElementById('pageSettingsSlugInput');
+      const pageSettingsFolderSelect = document.getElementById('pageSettingsFolderSelect');
+      const pageSettingsStatusSelect = document.getElementById('pageSettingsStatusSelect');
+      const pageSettingsAuthorSelect = document.getElementById('pageSettingsAuthorSelect');
+      const pageSettingsDescriptionInput = document.getElementById('pageSettingsDescriptionInput');
+      const pageSettingsUrlValue = document.getElementById('pageSettingsUrlValue');
+      const pageSettingsCreatedValue = document.getElementById('pageSettingsCreatedValue');
+      const pageSettingsUpdatedValue = document.getElementById('pageSettingsUpdatedValue');
+
       const pageRows = Array.from(document.querySelectorAll('.page-row'));
       const folderRows = Array.from(document.querySelectorAll('.group-row'));
       const folderToggleButtons = Array.from(document.querySelectorAll('[data-folder-toggle]'));
@@ -4130,6 +4286,27 @@
         }
         folderMembers.get(folderId).push(row);
       });
+
+      const folderOptions = [{ value: '_root', label: 'No folder' }];
+      const seenFolders = new Set(['_root']);
+      folderRows.forEach((row) => {
+        const folderId = row.dataset.folder || '';
+        if (!folderId || seenFolders.has(folderId)) {
+          return;
+        }
+        const label = row.dataset.folderName || folderId;
+        folderOptions.push({ value: folderId, label });
+        seenFolders.add(folderId);
+      });
+
+      const authorOptions = Array.from(
+        new Set([
+          ...pageRows.map((row) => row.dataset.author || '').filter(Boolean),
+          ...Object.keys(AUTHOR_DETAILS),
+        ])
+      )
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
 
       const rowData = pageRows.map((row) => {
         const { pageId = '', status = 'all', type = '', author = '' } = row.dataset;
@@ -4169,6 +4346,211 @@
 
       applyRowVisualStyles();
 
+      function populatePageSettingsControls() {
+        if (pageSettingsFolderSelect) {
+          const previousValue = pageSettingsFolderSelect.value;
+          pageSettingsFolderSelect.innerHTML = '';
+          folderOptions.forEach(({ value, label }) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            pageSettingsFolderSelect.append(option);
+          });
+          if (
+            previousValue &&
+            pageSettingsFolderSelect.querySelector(`option[value="${previousValue}"]`)
+          ) {
+            pageSettingsFolderSelect.value = previousValue;
+          } else {
+            pageSettingsFolderSelect.value = '_root';
+          }
+        }
+
+        if (pageSettingsStatusSelect) {
+          const previousValue = pageSettingsStatusSelect.value;
+          pageSettingsStatusSelect.innerHTML = '';
+          STATUS_OPTIONS.forEach(({ value, label }) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            pageSettingsStatusSelect.append(option);
+          });
+          const fallbackStatus =
+            STATUS_OPTIONS.find(({ value }) => value === 'draft')?.value || STATUS_OPTIONS[0]?.value || '';
+          if (
+            previousValue &&
+            pageSettingsStatusSelect.querySelector(`option[value="${previousValue}"]`)
+          ) {
+            pageSettingsStatusSelect.value = previousValue;
+          } else {
+            pageSettingsStatusSelect.value = fallbackStatus;
+          }
+        }
+
+        if (pageSettingsAuthorSelect) {
+          const previousValue = pageSettingsAuthorSelect.value;
+          pageSettingsAuthorSelect.innerHTML = '';
+          const unassignedOption = document.createElement('option');
+          unassignedOption.value = '';
+          unassignedOption.textContent = 'Unassigned';
+          pageSettingsAuthorSelect.append(unassignedOption);
+          authorOptions.forEach((author) => {
+            const option = document.createElement('option');
+            option.value = author;
+            option.textContent = author;
+            pageSettingsAuthorSelect.append(option);
+          });
+          if (
+            previousValue &&
+            pageSettingsAuthorSelect.querySelector(`option[value="${previousValue}"]`)
+          ) {
+            pageSettingsAuthorSelect.value = previousValue;
+          } else {
+            pageSettingsAuthorSelect.value = '';
+          }
+        }
+      }
+
+      function resetPageSettingsDialog() {
+        pageSettingsForm?.reset();
+        if (pageSettingsDialogSubtitle) {
+          pageSettingsDialogSubtitle.textContent = '';
+        }
+        if (pageSettingsUrlValue) {
+          pageSettingsUrlValue.textContent = '—';
+        }
+        if (pageSettingsCreatedValue) {
+          pageSettingsCreatedValue.textContent = '—';
+        }
+        if (pageSettingsUpdatedValue) {
+          pageSettingsUpdatedValue.textContent = '—';
+        }
+        if (pageSettingsIdInput) {
+          pageSettingsIdInput.value = '';
+        }
+      }
+
+      function formatPageDate(dateString) {
+        if (!dateString) {
+          return '—';
+        }
+        const parsed = new Date(dateString);
+        if (Number.isNaN(parsed.getTime())) {
+          return dateString;
+        }
+        return new Intl.DateTimeFormat('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }).format(parsed);
+      }
+
+      function openPageSettingsDialog(pageId, trigger) {
+        if (!pageSettingsDialog || !pageId) {
+          return;
+        }
+        const row = pageRowById.get(pageId);
+        if (!row) {
+          return;
+        }
+        resetPageSettingsDialog();
+        populatePageSettingsControls();
+        activePageId = pageId;
+        lastPageSettingsTrigger = trigger || null;
+
+        const fallbackTitle =
+          row.dataset.title ||
+          row.querySelector('.title-button')?.textContent?.trim() ||
+          'Untitled page';
+        const slug = row.dataset.pageId || '';
+        const folder = row.dataset.folder || '_root';
+        const status = row.dataset.status || 'draft';
+        const author = row.dataset.author || '';
+        const description = row.dataset.description || '';
+        const folderRow = folderRowById.get(folder);
+        const folderLabel =
+          folder === '_root' ? 'No folder' : folderRow?.dataset.folderName || folder;
+
+        if (pageSettingsDialogTitle) {
+          pageSettingsDialogTitle.textContent = 'Page settings';
+        }
+        if (pageSettingsDialogSubtitle) {
+          pageSettingsDialogSubtitle.textContent = fallbackTitle;
+        }
+        if (pageSettingsIdInput) {
+          pageSettingsIdInput.value = pageId;
+        }
+        if (pageSettingsTitleInput) {
+          pageSettingsTitleInput.value = fallbackTitle;
+        }
+        if (pageSettingsSlugInput) {
+          pageSettingsSlugInput.value = slug;
+        }
+        if (pageSettingsFolderSelect) {
+          if (!pageSettingsFolderSelect.querySelector(`option[value="${folder}"]`)) {
+            const option = document.createElement('option');
+            option.value = folder;
+            option.textContent = folderLabel || folder || 'No folder';
+            pageSettingsFolderSelect.append(option);
+          }
+          pageSettingsFolderSelect.value = folder || '_root';
+        }
+        if (pageSettingsStatusSelect) {
+          if (!pageSettingsStatusSelect.querySelector(`option[value="${status}"]`)) {
+            const option = document.createElement('option');
+            option.value = status;
+            option.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+            pageSettingsStatusSelect.append(option);
+          }
+          pageSettingsStatusSelect.value = status;
+        }
+        if (pageSettingsAuthorSelect) {
+          if (author && !pageSettingsAuthorSelect.querySelector(`option[value="${author}"]`)) {
+            const option = document.createElement('option');
+            option.value = author;
+            option.textContent = author;
+            pageSettingsAuthorSelect.append(option);
+          }
+          pageSettingsAuthorSelect.value = author || '';
+        }
+        if (pageSettingsDescriptionInput) {
+          pageSettingsDescriptionInput.value = description;
+        }
+        if (pageSettingsUrlValue) {
+          const folderSegment = folder && folder !== '_root' ? `${folder}/` : '';
+          pageSettingsUrlValue.textContent = slug ? `/${folderSegment}${slug}` : '—';
+        }
+        if (pageSettingsCreatedValue) {
+          pageSettingsCreatedValue.textContent = formatPageDate(row.dataset.created);
+        }
+        if (pageSettingsUpdatedValue) {
+          pageSettingsUpdatedValue.textContent = formatPageDate(row.dataset.modified);
+        }
+
+        pageSettingsDialog.setAttribute('aria-hidden', 'false');
+        syncBodyScrollState();
+        window.requestAnimationFrame(() => {
+          pageSettingsTitleInput?.focus({ preventScroll: true });
+        });
+      }
+
+      function closePageSettingsDialog({ focusTrigger = true } = {}) {
+        if (!pageSettingsDialog) {
+          return;
+        }
+        pageSettingsDialog.setAttribute('aria-hidden', 'true');
+        syncBodyScrollState();
+        if (focusTrigger && lastPageSettingsTrigger instanceof HTMLElement) {
+          lastPageSettingsTrigger.focus({ preventScroll: true });
+        }
+        activePageId = null;
+        lastPageSettingsTrigger = null;
+        resetPageSettingsDialog();
+      }
+
+      populatePageSettingsControls();
+      resetPageSettingsDialog();
+
       const folderState = (() => {
         try {
           const stored = localStorage.getItem(folderStateStorageKey);
@@ -4184,14 +4566,23 @@
       })();
 
       let activeFolderId = null;
+      let activePageId = null;
+      let lastPageSettingsTrigger = null;
 
       function syncBodyScrollState() {
         const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
         const createDialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
         const folderDialogOpen = folderSettingsDialog?.getAttribute('aria-hidden') === 'false';
         const newPageDialogOpen = newPageDialog?.getAttribute('aria-hidden') === 'false';
+        const pageSettingsOpen = pageSettingsDialog?.getAttribute('aria-hidden') === 'false';
         document.body.style.overflow =
-          drawerOpen || createDialogOpen || folderDialogOpen || newPageDialogOpen ? 'hidden' : '';
+          drawerOpen ||
+          createDialogOpen ||
+          folderDialogOpen ||
+          newPageDialogOpen ||
+          pageSettingsOpen
+            ? 'hidden'
+            : '';
       }
 
       function closeActionMenu(menu, { focusTrigger = false } = {}) {
@@ -5228,6 +5619,10 @@
             event.preventDefault();
             closeFolderDialog();
           }
+          if (pageSettingsDialog?.getAttribute('aria-hidden') === 'false') {
+            event.preventDefault();
+            closePageSettingsDialog();
+          }
           closeAllActionMenus();
         }
       });
@@ -5774,6 +6169,11 @@
           folderCheckbox?.setAttribute('aria-label', `Select folder ${newName}`);
           const actionsGroup = folderRow.querySelector('.folder-actions');
           actionsGroup?.setAttribute('aria-label', `${newName} folder actions`);
+          const folderOption = folderOptions.find((option) => option.value === activeFolderId);
+          if (folderOption) {
+            folderOption.label = newName;
+            populatePageSettingsControls();
+          }
         }
         const selectedColor = Array.from(folderColorRadios).find((radio) => radio.checked)?.value;
         if (selectedColor) {
@@ -5784,6 +6184,40 @@
           folderRow.dataset.folderColor = selectedColor;
         }
         closeFolderDialog();
+      });
+
+      pageSettingsDialogClose?.addEventListener('click', () => {
+        closePageSettingsDialog();
+      });
+
+      pageSettingsCancel?.addEventListener('click', () => {
+        closePageSettingsDialog();
+      });
+
+      pageSettingsDialog?.addEventListener('click', (event) => {
+        if (event.target === pageSettingsDialog) {
+          closePageSettingsDialog();
+        }
+      });
+
+      pageSettingsForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!activePageId) {
+          closePageSettingsDialog();
+          return;
+        }
+        const formData = new FormData(pageSettingsForm);
+        const payload = {
+          pageId: activePageId,
+          title: (formData.get('title') || '').toString().trim(),
+          slug: (formData.get('slug') || '').toString().trim(),
+          folder: (formData.get('folder') || '').toString().trim(),
+          status: (formData.get('status') || '').toString().trim(),
+          author: (formData.get('author') || '').toString().trim(),
+          description: (formData.get('description') || '').toString().trim(),
+        };
+        console.log('Update page settings', payload);
+        closePageSettingsDialog();
       });
 
       pageRows.forEach((row) => {
@@ -5953,8 +6387,12 @@
         if (actionMenuItem) {
           const action = actionMenuItem.dataset.menuAction;
           const row = actionMenuItem.closest('.page-row');
-          if (action) {
-            console.log(`Page ${action}`, row?.dataset.pageId);
+          const pageId = row?.dataset.pageId;
+          if (action === 'settings' && pageId) {
+            const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
+            openPageSettingsDialog(pageId, triggerButton || actionMenuItem);
+          } else if (action) {
+            console.log(`Page ${action}`, pageId);
           }
           if (menuElement) {
             closeActionMenu(menuElement);
