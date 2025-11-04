@@ -776,10 +776,10 @@
       box-shadow: 0 24px 48px rgba(15, 23, 42, 0.28);
       padding: 28px;
       max-height: calc(100vh - 64px);
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 24px;
+      overflow: hidden;
     }
 
     .drawer-header {
@@ -844,53 +844,29 @@
       border: 1px solid var(--pages-border);
       border-radius: 14px;
       background: #f8fafc;
-      overflow: hidden;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .drawer-section + .drawer-section {
       margin-top: 4px;
     }
 
-    .section-toggle {
-      width: 100%;
-      background: transparent;
-      border: none;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .drawer-section-title {
+      margin: 0;
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
       color: var(--pages-muted);
-      cursor: pointer;
-    }
-
-    .section-toggle .chevron {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(148, 163, 184, 0.24);
-      color: var(--pages-muted);
-      transition: transform 0.2s ease;
-    }
-
-    .drawer-section[aria-expanded="false"] .chevron {
-      transform: rotate(-90deg);
     }
 
     .section-content {
-      padding: 0 18px 18px;
+      padding: 0;
       display: grid;
       gap: 14px;
-    }
-
-    .section-content[hidden] {
-      display: none;
     }
 
     .date-grid {
@@ -3581,11 +3557,8 @@
       </div>
       <div class="drawer-meta" id="activeFilterCount">No filters applied</div>
       <div class="drawer-sections" role="presentation">
-        <div class="drawer-section" data-section="date" aria-expanded="true">
-          <button class="section-toggle" type="button" data-section-toggle="date" aria-controls="dateFilterSection">
-            Date
-            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-          </button>
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Date</h3>
           <div class="section-content" id="dateFilterSection">
             <div class="date-grid">
               <label for="filterStartDate">Start Date
@@ -3598,38 +3571,26 @@
             <div class="date-hint">Filters by last modified date. Leave one field blank for an open range.</div>
           </div>
         </div>
-        <div class="drawer-section" data-section="author" aria-expanded="true">
-          <button class="section-toggle" type="button" data-section-toggle="author" aria-controls="authorFilterSection">
-            Author
-            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-          </button>
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Author</h3>
           <div class="section-content" id="authorFilterSection">
             <div class="author-filter-grid" id="authorFilterList" role="group" aria-label="Filter by author"></div>
           </div>
         </div>
-        <div class="drawer-section" data-section="status" aria-expanded="true">
-          <button class="section-toggle" type="button" data-section-toggle="status" aria-controls="statusFilterSection">
-            Status
-            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-          </button>
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Status</h3>
           <div class="section-content" id="statusFilterSection">
             <div class="filter-pill-group" id="statusFilterPills" role="group" aria-label="Filter by status"></div>
           </div>
         </div>
-        <div class="drawer-section" data-section="type" aria-expanded="true">
-          <button class="section-toggle" type="button" data-section-toggle="type" aria-controls="typeFilterSection">
-            Type
-            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-          </button>
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Type</h3>
           <div class="section-content" id="typeFilterSection">
             <div class="type-chip-group" id="typeFilterList" role="group" aria-label="Filter by type"></div>
           </div>
         </div>
-        <div class="drawer-section" data-section="report" aria-expanded="true">
-          <button class="section-toggle" type="button" data-section-toggle="report" aria-controls="reportFilterSection">
-            Report Card
-            <span class="chevron" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-          </button>
+        <div class="drawer-section">
+          <h3 class="drawer-section-title">Report Card</h3>
           <div class="section-content" id="reportFilterSection">
             <div class="report-checkboxes" id="reportFilterList"></div>
           </div>
@@ -4199,9 +4160,6 @@
       const startDateInput = document.getElementById('filterStartDate');
       const endDateInput = document.getElementById('filterEndDate');
       const activeFilterCount = document.getElementById('activeFilterCount');
-      const sectionToggleButtons = filtersDrawer
-        ? Array.from(filtersDrawer.querySelectorAll('[data-section-toggle]'))
-        : [];
       const searchOverlay = document.querySelector('.search-overlay');
       const newButton = document.getElementById('newButton');
       const dialog = document.getElementById('newDialog');
@@ -5376,23 +5334,6 @@
       syncScheduleState();
       syncCreateButtonState();
       syncFilterControls();
-
-      sectionToggleButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const section = button.closest('.drawer-section');
-          if (!section) {
-            return;
-          }
-          const contentId = button.getAttribute('aria-controls');
-          const content = contentId ? document.getElementById(contentId) : section.querySelector('.section-content');
-          const expanded = section.getAttribute('aria-expanded') !== 'false';
-          const next = !expanded;
-          section.setAttribute('aria-expanded', next ? 'true' : 'false');
-          if (content) {
-            content.hidden = !next;
-          }
-        });
-      });
 
       function openDrawer() {
         if (!filtersDrawer) {
