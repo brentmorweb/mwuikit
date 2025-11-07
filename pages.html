@@ -4611,6 +4611,167 @@
 
   <div
     class="dialog-backdrop"
+    id="moveFolderDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="moveFolderDialogTitle"
+    aria-describedby="moveFolderDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="moveFolderDialogTitle">Move folder</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close move folder dialog"
+          data-folder-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" id="moveFolderForm">
+        <p class="action-dialog-description" id="moveFolderDialogDescription">
+          Choose where to move <strong data-folder-dialog-folder-name>this folder</strong>. Pages inside will move with it.
+        </p>
+        <div class="form-field">
+          <label for="moveFolderDestination">Destination</label>
+          <select id="moveFolderDestination" name="destination" required></select>
+        </div>
+        <p class="action-dialog-hint">You can move folders back to the top level by choosing “No folder”.</p>
+        <div class="dialog-actions">
+          <button type="button" data-folder-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-folder-dialog-primary>Move folder</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="deleteFolderDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="deleteFolderDialogTitle"
+    aria-describedby="deleteFolderDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="deleteFolderDialogTitle">Delete folder</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close delete folder dialog"
+          data-folder-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" id="deleteFolderForm">
+        <p class="action-dialog-description action-dialog-warning" id="deleteFolderDialogDescription">
+          Permanently remove <strong data-folder-dialog-folder-name>this folder</strong> and every page inside. This action cannot be undone.
+        </p>
+        <div class="form-field">
+          <label for="deleteFolderConfirmInput">Type the folder name to confirm</label>
+          <input
+            type="text"
+            id="deleteFolderConfirmInput"
+            name="confirmation"
+            required
+            autocomplete="off"
+            data-folder-confirmation-input
+          >
+        </div>
+        <p class="action-dialog-hint">To confirm, enter the exact folder name above.</p>
+        <div class="dialog-actions">
+          <button type="button" data-folder-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-folder-dialog-primary>Delete folder</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="restoreAllDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="restoreAllDialogTitle"
+    aria-describedby="restoreAllDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="restoreAllDialogTitle">Restore all pages</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close restore dialog"
+          data-folder-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" id="restoreAllForm">
+        <p class="action-dialog-description" id="restoreAllDialogDescription">
+          Restore every page currently in <strong data-folder-dialog-folder-name>this folder</strong>. Restored pages return to their original locations as drafts.
+        </p>
+        <div class="dialog-actions">
+          <button type="button" data-folder-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-folder-dialog-primary>Restore pages</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="emptyTrashDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="emptyTrashDialogTitle"
+    aria-describedby="emptyTrashDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="emptyTrashDialogTitle">Empty trash</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close empty trash dialog"
+          data-folder-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" id="emptyTrashForm">
+        <p class="action-dialog-description action-dialog-warning" id="emptyTrashDialogDescription">
+          Permanently delete every page in <strong data-folder-dialog-folder-name>this folder</strong>. This cannot be undone and pages cannot be recovered.
+        </p>
+        <div class="form-field">
+          <label for="emptyTrashConfirmInput">Type <strong>EMPTY</strong> to confirm</label>
+          <input
+            type="text"
+            id="emptyTrashConfirmInput"
+            name="confirmEmpty"
+            required
+            autocomplete="off"
+            data-folder-confirmation-input
+          >
+        </div>
+        <p class="action-dialog-hint">We’ll only empty the trash once you enter the confirmation text.</p>
+        <div class="dialog-actions">
+          <button type="button" data-folder-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-folder-dialog-primary>Empty trash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
     id="pageSettingsDialog"
     role="dialog"
     aria-modal="true"
@@ -5289,6 +5450,26 @@
         : [];
       const folderDialogCancel = folderSettingsDialog?.querySelector('[data-folder-dialog-action="cancel"]');
 
+      const moveFolderDialog = document.getElementById('moveFolderDialog');
+      const moveFolderDialogPanel = moveFolderDialog?.querySelector('.dialog');
+      const moveFolderForm = document.getElementById('moveFolderForm');
+      const moveFolderDestinationSelect = document.getElementById('moveFolderDestination');
+      const moveFolderSubmitButton = moveFolderForm?.querySelector('[data-folder-dialog-primary]');
+
+      const deleteFolderDialog = document.getElementById('deleteFolderDialog');
+      const deleteFolderDialogPanel = deleteFolderDialog?.querySelector('.dialog');
+      const deleteFolderForm = document.getElementById('deleteFolderForm');
+      const deleteFolderConfirmInput = document.getElementById('deleteFolderConfirmInput');
+
+      const restoreAllDialog = document.getElementById('restoreAllDialog');
+      const restoreAllDialogPanel = restoreAllDialog?.querySelector('.dialog');
+      const restoreAllForm = document.getElementById('restoreAllForm');
+
+      const emptyTrashDialog = document.getElementById('emptyTrashDialog');
+      const emptyTrashDialogPanel = emptyTrashDialog?.querySelector('.dialog');
+      const emptyTrashForm = document.getElementById('emptyTrashForm');
+      const emptyTrashConfirmInput = document.getElementById('emptyTrashConfirmInput');
+
       const pageSettingsDialog = document.getElementById('pageSettingsDialog');
       const pageSettingsDialogTitle = document.getElementById('pageSettingsDialogTitle');
       const pageSettingsDialogSubtitle = document.getElementById('pageSettingsDialogSubtitle');
@@ -5437,6 +5618,7 @@
       });
 
       const actionDialogs = {};
+      const folderActionDialogs = {};
 
       const publishDialogController = createActionDialog({
         name: 'publish',
@@ -5681,6 +5863,169 @@
       if (deleteDialogController) {
         actionDialogControllers.push(deleteDialogController);
         actionDialogs['delete-permanently'] = deleteDialogController;
+      }
+
+      const moveFolderDialogController = createFolderActionDialog({
+        name: 'move-folder',
+        backdrop: moveFolderDialog,
+        dialog: moveFolderDialogPanel,
+        form: moveFolderForm,
+        initialFocusSelector: '#moveFolderDestination',
+        onOpen: ({ folderId }) => {
+          if (!(moveFolderDestinationSelect instanceof HTMLSelectElement)) {
+            return;
+          }
+          moveFolderDestinationSelect.innerHTML = '';
+          moveFolderDestinationSelect.disabled = false;
+          moveFolderDestinationSelect.required = true;
+          folderOptions.forEach(({ value, label }) => {
+            if (!value || value === folderId) {
+              return;
+            }
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            moveFolderDestinationSelect.append(option);
+          });
+          if (moveFolderDestinationSelect.options.length > 0) {
+            moveFolderDestinationSelect.value = moveFolderDestinationSelect.options[0].value;
+            moveFolderDestinationSelect.setCustomValidity('');
+          } else {
+            const placeholderOption = document.createElement('option');
+            placeholderOption.value = '';
+            placeholderOption.textContent = 'No available destinations';
+            placeholderOption.disabled = true;
+            placeholderOption.selected = true;
+            moveFolderDestinationSelect.append(placeholderOption);
+            moveFolderDestinationSelect.disabled = true;
+          }
+          if (moveFolderSubmitButton instanceof HTMLButtonElement) {
+            moveFolderSubmitButton.disabled = moveFolderDestinationSelect.disabled;
+          }
+        },
+        onClose: () => {
+          if (moveFolderDestinationSelect instanceof HTMLSelectElement) {
+            moveFolderDestinationSelect.innerHTML = '';
+            moveFolderDestinationSelect.disabled = false;
+            moveFolderDestinationSelect.setCustomValidity('');
+          }
+          if (moveFolderSubmitButton instanceof HTMLButtonElement) {
+            moveFolderSubmitButton.disabled = false;
+          }
+        },
+        onSubmit: ({ folderId, form }) => {
+          if (!(form instanceof HTMLFormElement)) {
+            return true;
+          }
+          const formData = new FormData(form);
+          const destination = (formData.get('destination') || '').toString();
+          if (!destination) {
+            if (moveFolderDestinationSelect instanceof HTMLSelectElement) {
+              moveFolderDestinationSelect.setCustomValidity('Select a destination.');
+              moveFolderDestinationSelect.reportValidity();
+            }
+            return false;
+          }
+          console.log('Move folder', { folderId, destination });
+          return true;
+        },
+      });
+
+      if (moveFolderDialogController) {
+        actionDialogControllers.push(moveFolderDialogController);
+        folderActionDialogs.move = moveFolderDialogController;
+      }
+
+      const deleteFolderDialogController = createFolderActionDialog({
+        name: 'delete-folder',
+        backdrop: deleteFolderDialog,
+        dialog: deleteFolderDialogPanel,
+        form: deleteFolderForm,
+        initialFocusSelector: '#deleteFolderConfirmInput',
+        onOpen: ({ folderName }) => {
+          if (deleteFolderConfirmInput instanceof HTMLInputElement) {
+            deleteFolderConfirmInput.value = '';
+            deleteFolderConfirmInput.placeholder = folderName;
+            deleteFolderConfirmInput.setCustomValidity('');
+          }
+        },
+        onClose: () => {
+          if (deleteFolderConfirmInput instanceof HTMLInputElement) {
+            deleteFolderConfirmInput.value = '';
+            deleteFolderConfirmInput.setCustomValidity('');
+            deleteFolderConfirmInput.removeAttribute('placeholder');
+          }
+        },
+        onSubmit: ({ folderId, folderName }) => {
+          const typedValue = (deleteFolderConfirmInput?.value || '').trim();
+          if (!typedValue || typedValue !== folderName) {
+            if (deleteFolderConfirmInput instanceof HTMLInputElement) {
+              deleteFolderConfirmInput.setCustomValidity('Enter the folder name exactly to confirm.');
+              deleteFolderConfirmInput.reportValidity();
+            }
+            return false;
+          }
+          console.log('Delete folder permanently', { folderId });
+          return true;
+        },
+      });
+
+      if (deleteFolderDialogController) {
+        actionDialogControllers.push(deleteFolderDialogController);
+        folderActionDialogs.delete = deleteFolderDialogController;
+      }
+
+      const restoreAllDialogController = createFolderActionDialog({
+        name: 'restore-all',
+        backdrop: restoreAllDialog,
+        dialog: restoreAllDialogPanel,
+        form: restoreAllForm,
+        onSubmit: ({ folderId }) => {
+          console.log('Restore all pages for folder', { folderId });
+          return true;
+        },
+      });
+
+      if (restoreAllDialogController) {
+        actionDialogControllers.push(restoreAllDialogController);
+        folderActionDialogs['restore-all'] = restoreAllDialogController;
+      }
+
+      const emptyTrashDialogController = createFolderActionDialog({
+        name: 'empty-trash',
+        backdrop: emptyTrashDialog,
+        dialog: emptyTrashDialogPanel,
+        form: emptyTrashForm,
+        initialFocusSelector: '#emptyTrashConfirmInput',
+        onOpen: () => {
+          if (emptyTrashConfirmInput instanceof HTMLInputElement) {
+            emptyTrashConfirmInput.value = '';
+            emptyTrashConfirmInput.setCustomValidity('');
+          }
+        },
+        onClose: () => {
+          if (emptyTrashConfirmInput instanceof HTMLInputElement) {
+            emptyTrashConfirmInput.value = '';
+            emptyTrashConfirmInput.setCustomValidity('');
+          }
+        },
+        onSubmit: ({ folderId }) => {
+          const typedValue = (emptyTrashConfirmInput?.value || '').trim();
+          if (!typedValue || typedValue.toUpperCase() !== 'EMPTY') {
+            if (emptyTrashConfirmInput instanceof HTMLInputElement) {
+              emptyTrashConfirmInput.setCustomValidity('Type EMPTY to confirm.');
+              emptyTrashConfirmInput.reportValidity();
+            }
+            return false;
+          }
+          console.log('Empty trash', { folderId });
+          return true;
+        },
+      });
+
+      if (emptyTrashDialogController) {
+        actionDialogControllers.push(emptyTrashDialogController);
+        folderActionDialogs.empty = emptyTrashDialogController;
       }
 
       const authorOptions = Array.from(
@@ -6137,6 +6482,28 @@
         return row.dataset.pageId || 'this page';
       }
 
+      function getFolderNameFromRow(row) {
+        if (!(row instanceof HTMLElement)) {
+          return 'this folder';
+        }
+        const explicitName = row.dataset.folderName;
+        if (explicitName) {
+          return explicitName;
+        }
+        const textName = row.querySelector('.folder-name')?.textContent?.trim();
+        if (textName) {
+          return textName;
+        }
+        const identifier = row.dataset.folder;
+        if (identifier === '_root') {
+          return 'Root';
+        }
+        if (identifier === 'trash') {
+          return 'Trash';
+        }
+        return identifier || 'this folder';
+      }
+
       function formatDateInputValue(date) {
         if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
           return '';
@@ -6269,6 +6636,154 @@
           close,
           isOpen,
           getPageId: () => activePageIdForDialog,
+        };
+      }
+
+      function createFolderActionDialog({
+        name,
+        backdrop,
+        dialog,
+        form = null,
+        initialFocusSelector = '[data-folder-dialog-primary]',
+        onOpen = null,
+        onClose = null,
+        onSubmit = null,
+      }) {
+        if (!(backdrop instanceof HTMLElement) || !(dialog instanceof HTMLElement)) {
+          return null;
+        }
+
+        const trap = createFocusTrap(dialog);
+        const nameTargets = Array.from(dialog.querySelectorAll('[data-folder-dialog-folder-name]'));
+        const closeButtons = Array.from(backdrop.querySelectorAll('[data-folder-dialog-close]'));
+        const cancelButtons = Array.from(backdrop.querySelectorAll('[data-folder-dialog-cancel]'));
+
+        let activeFolderIdForDialog = null;
+        let activeFolderNameForDialog = 'this folder';
+        let lastTriggerForDialog = null;
+
+        const isOpen = () => backdrop.getAttribute('aria-hidden') === 'false';
+
+        const setFolderName = (value) => {
+          nameTargets.forEach((target) => {
+            target.textContent = value;
+          });
+        };
+
+        const open = (folderId, { trigger = null } = {}) => {
+          if (!folderId) {
+            return;
+          }
+          const row = folderRowById.get(folderId) || null;
+          activeFolderIdForDialog = folderId;
+          activeFolderNameForDialog = getFolderNameFromRow(row);
+          lastTriggerForDialog = trigger instanceof HTMLElement ? trigger : null;
+          if (form instanceof HTMLFormElement) {
+            form.reset();
+          }
+          setFolderName(activeFolderNameForDialog);
+          if (typeof onOpen === 'function') {
+            onOpen({
+              folderId,
+              folderName: activeFolderNameForDialog,
+              row,
+              dialog,
+              backdrop,
+              form,
+            });
+          }
+          backdrop.setAttribute('aria-hidden', 'false');
+          syncBodyScrollState();
+          window.requestAnimationFrame(() => {
+            const initialFocus = initialFocusSelector
+              ? dialog.querySelector(initialFocusSelector)
+              : null;
+            trap.activate({
+              focusElement: initialFocus instanceof HTMLElement ? initialFocus : null,
+            });
+          });
+        };
+
+        const close = ({ focusTrigger = true } = {}) => {
+          if (!isOpen()) {
+            return;
+          }
+          trap.deactivate();
+          backdrop.setAttribute('aria-hidden', 'true');
+          syncBodyScrollState();
+          if (form instanceof HTMLFormElement) {
+            form.reset();
+          }
+          if (typeof onClose === 'function') {
+            onClose({
+              folderId: activeFolderIdForDialog,
+              folderName: activeFolderNameForDialog,
+              dialog,
+              backdrop,
+            });
+          }
+          const triggerElement = lastTriggerForDialog;
+          activeFolderIdForDialog = null;
+          activeFolderNameForDialog = 'this folder';
+          lastTriggerForDialog = null;
+          if (focusTrigger && triggerElement instanceof HTMLElement) {
+            triggerElement.focus({ preventScroll: true });
+          }
+        };
+
+        closeButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            close();
+          });
+        });
+
+        cancelButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            close();
+          });
+        });
+
+        backdrop.addEventListener('click', (event) => {
+          if (event.target === backdrop) {
+            close();
+          }
+        });
+
+        if (form instanceof HTMLFormElement) {
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (!activeFolderIdForDialog) {
+              close();
+              return;
+            }
+            if (!form.reportValidity()) {
+              return;
+            }
+            let shouldClose = true;
+            if (typeof onSubmit === 'function') {
+              const row = folderRowById.get(activeFolderIdForDialog) || null;
+              const result = onSubmit({
+                folderId: activeFolderIdForDialog,
+                folderName: activeFolderNameForDialog,
+                row,
+                form,
+              });
+              if (result === false) {
+                shouldClose = false;
+              }
+            }
+            if (shouldClose) {
+              close();
+            }
+          });
+        }
+
+        return {
+          name,
+          open,
+          close,
+          isOpen,
+          getFolderId: () => activeFolderIdForDialog,
         };
       }
 
@@ -8024,6 +8539,18 @@
         closeFolderDialog();
       });
 
+      moveFolderDestinationSelect?.addEventListener('change', () => {
+        moveFolderDestinationSelect.setCustomValidity('');
+      });
+
+      deleteFolderConfirmInput?.addEventListener('input', () => {
+        deleteFolderConfirmInput.setCustomValidity('');
+      });
+
+      emptyTrashConfirmInput?.addEventListener('input', () => {
+        emptyTrashConfirmInput.setCustomValidity('');
+      });
+
       pageSettingsTabButtons.forEach((button) => {
         button.addEventListener('click', () => {
           setActivePageSettingsTab(button.dataset.pageSettingsTab);
@@ -8322,7 +8849,14 @@
               menuElement?.querySelector('[data-action-menu-trigger]') || folderActionButton;
             openFolderDialog(folderId, { trigger: triggerButton });
           } else if (action && folderId) {
-            console.log(`Folder ${action}`, folderId);
+            const controller = folderActionDialogs[action];
+            if (controller) {
+              const triggerButton =
+                menuElement?.querySelector('[data-action-menu-trigger]') || folderActionButton;
+              controller.open(folderId, { trigger: triggerButton });
+            } else {
+              console.log(`Folder ${action}`, folderId);
+            }
           }
         }
       });
