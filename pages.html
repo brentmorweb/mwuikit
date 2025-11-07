@@ -4807,8 +4807,12 @@
       const folderSettingsDialog = document.getElementById('folderSettingsDialog');
       const folderDialogClose = folderSettingsDialog?.querySelector('.dialog-close');
       const folderSettingsForm = document.getElementById('folderSettingsForm');
+      const folderDialogTitle = document.getElementById('folderDialogTitle');
+      const folderDialogSubmitButton = folderSettingsForm?.querySelector('button[type="submit"]');
       const folderNameInput = document.getElementById('folderNameInput');
-      const folderColorRadios = folderSettingsForm ? folderSettingsForm.querySelectorAll('input[name="folderColor"]') : [];
+      const folderColorRadios = folderSettingsForm
+        ? folderSettingsForm.querySelectorAll('input[name="folderColor"]')
+        : [];
       const folderDialogCancel = folderSettingsDialog?.querySelector('[data-folder-dialog-action="cancel"]');
 
       const pageSettingsDialog = document.getElementById('pageSettingsDialog');
@@ -5213,6 +5217,9 @@
       })();
 
       let activeFolderId = null;
+      let folderDialogMode = 'edit';
+      let lastFolderDialogTrigger = null;
+      const DEFAULT_FOLDER_COLOR = 'blue';
       let activePageId = null;
       let lastPageSettingsTrigger = null;
       let activeCopyPageId = null;
@@ -6189,40 +6196,101 @@
         }
       }
 
-      function openFolderDialog(folderId) {
+      function resetFolderDialog() {
+        if (folderSettingsForm) {
+          folderSettingsForm.reset();
+        }
+        if (folderNameInput) {
+          folderNameInput.value = '';
+          folderNameInput.setCustomValidity('');
+        }
+        folderColorRadios.forEach((radio) => {
+          radio.checked = false;
+        });
+        if (folderDialogTitle) {
+          folderDialogTitle.textContent = 'Folder settings';
+        }
+        if (folderDialogSubmitButton) {
+          folderDialogSubmitButton.textContent = 'Save changes';
+        }
+        folderSettingsDialog?.setAttribute('data-mode', 'edit');
+      }
+
+      function openFolderDialog(folderId = null, { trigger = null } = {}) {
         if (!folderSettingsDialog) {
           return;
         }
-        const folderRow = folderRowById.get(folderId);
-        if (!folderRow) {
-          return;
+        resetFolderDialog();
+        lastFolderDialogTrigger = trigger instanceof HTMLElement ? trigger : null;
+        const folderRow = folderId ? folderRowById.get(folderId) : null;
+        const isEditMode = Boolean(folderRow);
+        folderDialogMode = isEditMode ? 'edit' : 'create';
+        folderSettingsDialog.setAttribute('data-mode', folderDialogMode);
+        if (folderDialogMode === 'edit' && folderRow) {
+          activeFolderId = folderId;
+          const currentName =
+            folderRow.dataset.folderName ||
+            folderRow.querySelector('.folder-name')?.textContent?.trim() ||
+            '';
+          if (folderNameInput) {
+            folderNameInput.value = currentName;
+          }
+          const currentColor = folderRow.dataset.folderColor || DEFAULT_FOLDER_COLOR;
+          folderColorRadios.forEach((radio) => {
+            radio.checked = radio.value === currentColor;
+          });
+          if (folderDialogTitle) {
+            folderDialogTitle.textContent = 'Folder settings';
+          }
+          if (folderDialogSubmitButton) {
+            folderDialogSubmitButton.textContent = 'Save changes';
+          }
+        } else {
+          activeFolderId = null;
+          if (folderDialogTitle) {
+            folderDialogTitle.textContent = 'Create folder';
+          }
+          if (folderDialogSubmitButton) {
+            folderDialogSubmitButton.textContent = 'Create folder';
+          }
+          const hasPreselectedColor = Array.from(folderColorRadios).some(
+            (radio) => radio.checked
+          );
+          if (!hasPreselectedColor) {
+            const defaultRadio = Array.from(folderColorRadios).find(
+              (radio) => radio.value === DEFAULT_FOLDER_COLOR
+            );
+            if (defaultRadio) {
+              defaultRadio.checked = true;
+            } else if (folderColorRadios[0]) {
+              folderColorRadios[0].checked = true;
+            }
+          }
         }
-        activeFolderId = folderId;
-        const currentName =
-          folderRow.dataset.folderName ||
-          folderRow.querySelector('.folder-name')?.textContent?.trim() ||
-          '';
-        if (folderNameInput) {
-          folderNameInput.value = currentName;
-        }
-        const currentColor = folderRow.dataset.folderColor || 'blue';
-        folderColorRadios.forEach((radio) => {
-          radio.checked = radio.value === currentColor;
-        });
         folderSettingsDialog.setAttribute('aria-hidden', 'false');
         syncBodyScrollState();
         window.requestAnimationFrame(() => {
-          folderNameInput?.focus();
+          if (folderNameInput) {
+            folderNameInput.focus({ preventScroll: true });
+            folderNameInput.select();
+          }
         });
       }
 
-      function closeFolderDialog() {
+      function closeFolderDialog({ focusTrigger = true } = {}) {
         if (!folderSettingsDialog) {
           return;
         }
         folderSettingsDialog.setAttribute('aria-hidden', 'true');
         syncBodyScrollState();
         activeFolderId = null;
+        folderDialogMode = 'edit';
+        const trigger = lastFolderDialogTrigger;
+        lastFolderDialogTrigger = null;
+        resetFolderDialog();
+        if (focusTrigger && trigger instanceof HTMLElement) {
+          trigger.focus({ preventScroll: true });
+        }
       }
 
       function clearSelection() {
@@ -6451,6 +6519,13 @@
             closeDialog({ focusTrigger: false });
             window.requestAnimationFrame(() => {
               openNewPageDialog();
+            });
+            return;
+          }
+          if (action === 'folder') {
+            closeDialog({ focusTrigger: false });
+            window.requestAnimationFrame(() => {
+              openFolderDialog(null, { trigger: newButton });
             });
             return;
           }
@@ -6869,17 +6944,53 @@
         closeNewPageDialog();
       });
 
-      folderDialogClose?.addEventListener('click', closeFolderDialog);
-      folderDialogCancel?.addEventListener('click', closeFolderDialog);
+      folderDialogClose?.addEventListener('click', () => {
+        closeFolderDialog();
+      });
+      folderDialogCancel?.addEventListener('click', () => {
+        closeFolderDialog();
+      });
       folderSettingsDialog?.addEventListener('click', (event) => {
         if (event.target === folderSettingsDialog) {
           closeFolderDialog();
         }
       });
 
+      folderNameInput?.addEventListener('input', () => {
+        folderNameInput.setCustomValidity('');
+      });
+
       folderSettingsForm?.addEventListener('submit', (event) => {
         event.preventDefault();
-        if (!activeFolderId) {
+        if (!folderSettingsForm?.reportValidity()) {
+          return;
+        }
+        const trimmedName = folderNameInput?.value.trim() || '';
+        if (!trimmedName) {
+          if (folderNameInput) {
+            folderNameInput.value = '';
+            folderNameInput.setCustomValidity('Please enter a folder name.');
+            folderNameInput.reportValidity();
+          }
+          return;
+        }
+        if (folderNameInput) {
+          folderNameInput.value = trimmedName;
+          folderNameInput.setCustomValidity('');
+        }
+        const selectedColor =
+          Array.from(folderColorRadios).find((radio) => radio.checked)?.value || DEFAULT_FOLDER_COLOR;
+        const selectedPermissions = folderSettingsForm
+          ? Array.from(
+              folderSettingsForm.querySelectorAll('input[name="folderPermissions"]:checked')
+            ).map((input) => input.value)
+          : [];
+        if (folderDialogMode === 'create' || !activeFolderId) {
+          console.log('Create folder', {
+            name: trimmedName,
+            color: selectedColor,
+            permissions: selectedPermissions,
+          });
           closeFolderDialog();
           return;
         }
@@ -6888,24 +6999,20 @@
           closeFolderDialog();
           return;
         }
-        const newName = folderNameInput?.value.trim();
-        if (newName) {
-          const nameElement = folderRow.querySelector('.folder-name');
-          if (nameElement) {
-            nameElement.textContent = newName;
-          }
-          folderRow.dataset.folderName = newName;
-          const folderCheckbox = folderRow.querySelector('[data-folder-checkbox]');
-          folderCheckbox?.setAttribute('aria-label', `Select folder ${newName}`);
-          const actionsGroup = folderRow.querySelector('.folder-actions');
-          actionsGroup?.setAttribute('aria-label', `${newName} folder actions`);
-          const folderOption = folderOptions.find((option) => option.value === activeFolderId);
-          if (folderOption) {
-            folderOption.label = newName;
-            populatePageSettingsControls();
-          }
+        const nameElement = folderRow.querySelector('.folder-name');
+        if (nameElement) {
+          nameElement.textContent = trimmedName;
         }
-        const selectedColor = Array.from(folderColorRadios).find((radio) => radio.checked)?.value;
+        folderRow.dataset.folderName = trimmedName;
+        const folderCheckbox = folderRow.querySelector('[data-folder-checkbox]');
+        folderCheckbox?.setAttribute('aria-label', `Select folder ${trimmedName}`);
+        const actionsGroup = folderRow.querySelector('.folder-actions');
+        actionsGroup?.setAttribute('aria-label', `${trimmedName} folder actions`);
+        const folderOption = folderOptions.find((option) => option.value === activeFolderId);
+        if (folderOption) {
+          folderOption.label = trimmedName;
+          populatePageSettingsControls();
+        }
         if (selectedColor) {
           const icon = folderRow.querySelector('.folder-icon');
           if (icon) {
@@ -6913,6 +7020,12 @@
           }
           folderRow.dataset.folderColor = selectedColor;
         }
+        console.log('Update folder', {
+          folderId: activeFolderId,
+          name: trimmedName,
+          color: selectedColor,
+          permissions: selectedPermissions,
+        });
         closeFolderDialog();
       });
 
@@ -7117,7 +7230,7 @@
         button.addEventListener('dblclick', (event) => {
           event.preventDefault();
           event.stopPropagation();
-          openFolderDialog(folderId);
+          openFolderDialog(folderId, { trigger: button });
         });
       });
 
@@ -7200,7 +7313,9 @@
           const folderRow = folderActionButton.closest('.group-row');
           const folderId = folderRow?.dataset.folder;
           if (action === 'rename' && folderId) {
-            openFolderDialog(folderId);
+            const triggerButton =
+              menuElement?.querySelector('[data-action-menu-trigger]') || folderActionButton;
+            openFolderDialog(folderId, { trigger: triggerButton });
           } else if (action && folderId) {
             console.log(`Folder ${action}`, folderId);
           }
