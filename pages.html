@@ -1544,6 +1544,56 @@
       gap: 18px;
     }
 
+    .page-settings-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 12px;
+      background: rgba(148, 163, 184, 0.16);
+    }
+
+    .page-settings-tab {
+      position: relative;
+      border: none;
+      background: transparent;
+      color: var(--pages-muted);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .page-settings-tab:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+    }
+
+    .page-settings-tab.is-active,
+    .page-settings-tab[aria-selected='true'] {
+      background: #fff;
+      color: var(--pages-text);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+    }
+
+    .page-settings-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .page-settings-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .page-settings-panel[hidden] {
+      display: none;
+    }
+
     .form-field {
       display: flex;
       flex-direction: column;
@@ -4083,52 +4133,130 @@
       </div>
       <form id="pageSettingsForm">
         <input type="hidden" id="pageSettingsIdInput" name="pageId">
-        <div class="form-field">
-          <label for="pageSettingsTitleInput">Title</label>
-          <input type="text" id="pageSettingsTitleInput" name="title" required>
+        <div
+          class="page-settings-tabs"
+          role="tablist"
+          aria-label="Page settings sections"
+        >
+          <button
+            type="button"
+            class="page-settings-tab is-active"
+            id="pageSettingsTab-details"
+            role="tab"
+            aria-selected="true"
+            aria-controls="pageSettingsPanel-details"
+            data-page-settings-tab="details"
+            tabindex="0"
+          >
+            Details
+          </button>
+          <button
+            type="button"
+            class="page-settings-tab"
+            id="pageSettingsTab-publishing"
+            role="tab"
+            aria-selected="false"
+            aria-controls="pageSettingsPanel-publishing"
+            data-page-settings-tab="publishing"
+            tabindex="-1"
+          >
+            Publishing
+          </button>
+          <button
+            type="button"
+            class="page-settings-tab"
+            id="pageSettingsTab-metadata"
+            role="tab"
+            aria-selected="false"
+            aria-controls="pageSettingsPanel-metadata"
+            data-page-settings-tab="metadata"
+            tabindex="-1"
+          >
+            Metadata
+          </button>
         </div>
-        <div class="page-settings-columns">
-          <div class="form-field">
-            <label for="pageSettingsSlugInput">Slug</label>
-            <input type="text" id="pageSettingsSlugInput" name="slug" required>
-          </div>
-          <div class="form-field">
-            <label for="pageSettingsFolderSelect">Folder</label>
-            <select id="pageSettingsFolderSelect" name="folder"></select>
-          </div>
+        <div class="page-settings-panels">
+          <section
+            class="page-settings-panel"
+            id="pageSettingsPanel-details"
+            role="tabpanel"
+            aria-labelledby="pageSettingsTab-details"
+            data-page-settings-panel="details"
+          >
+            <div class="form-field">
+              <label for="pageSettingsTitleInput">Title</label>
+              <input type="text" id="pageSettingsTitleInput" name="title" required>
+            </div>
+            <div class="page-settings-columns">
+              <div class="form-field">
+                <label for="pageSettingsSlugInput">Slug</label>
+                <input type="text" id="pageSettingsSlugInput" name="slug" required>
+              </div>
+              <div class="form-field">
+                <label for="pageSettingsFolderSelect">Folder</label>
+                <select id="pageSettingsFolderSelect" name="folder"></select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="pageSettingsDescriptionInput">Description</label>
+              <textarea
+                id="pageSettingsDescriptionInput"
+                name="description"
+                placeholder="Add a short summary for collaborators"
+              ></textarea>
+            </div>
+          </section>
+          <section
+            class="page-settings-panel"
+            id="pageSettingsPanel-publishing"
+            role="tabpanel"
+            aria-labelledby="pageSettingsTab-publishing"
+            data-page-settings-panel="publishing"
+            hidden
+            aria-hidden="true"
+          >
+            <div class="page-settings-columns">
+              <div class="form-field">
+                <label for="pageSettingsStatusSelect">Status</label>
+                <select id="pageSettingsStatusSelect" name="status"></select>
+              </div>
+              <div class="form-field">
+                <label for="pageSettingsAuthorSelect">Owner</label>
+                <select id="pageSettingsAuthorSelect" name="author"></select>
+              </div>
+            </div>
+            <p class="dialog-subtitle">
+              Choose how the page should be available and who is responsible for it.
+            </p>
+          </section>
+          <section
+            class="page-settings-panel"
+            id="pageSettingsPanel-metadata"
+            role="tabpanel"
+            aria-labelledby="pageSettingsTab-metadata"
+            data-page-settings-panel="metadata"
+            hidden
+            aria-hidden="true"
+          >
+            <dl class="page-settings-meta">
+              <div>
+                <dt>Page URL</dt>
+                <dd id="pageSettingsUrlValue">—</dd>
+              </div>
+              <div>
+                <dt>Created</dt>
+                <dd id="pageSettingsCreatedValue">—</dd>
+              </div>
+              <div>
+                <dt>Last updated</dt>
+                <dd id="pageSettingsUpdatedValue">—</dd>
+              </div>
+            </dl>
+            <p class="dialog-subtitle">
+              Metadata updates automatically based on your edits and publishing history.
+            </p>
+          </section>
         </div>
-        <div class="page-settings-columns">
-          <div class="form-field">
-            <label for="pageSettingsStatusSelect">Status</label>
-            <select id="pageSettingsStatusSelect" name="status"></select>
-          </div>
-          <div class="form-field">
-            <label for="pageSettingsAuthorSelect">Owner</label>
-            <select id="pageSettingsAuthorSelect" name="author"></select>
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="pageSettingsDescriptionInput">Description</label>
-          <textarea
-            id="pageSettingsDescriptionInput"
-            name="description"
-            placeholder="Add a short summary for collaborators"
-          ></textarea>
-        </div>
-        <dl class="page-settings-meta">
-          <div>
-            <dt>Page URL</dt>
-            <dd id="pageSettingsUrlValue">—</dd>
-          </div>
-          <div>
-            <dt>Created</dt>
-            <dd id="pageSettingsCreatedValue">—</dd>
-          </div>
-          <div>
-            <dt>Last updated</dt>
-            <dd id="pageSettingsUpdatedValue">—</dd>
-          </div>
-        </dl>
         <div class="dialog-actions">
           <button type="button" data-page-settings-action="cancel">Cancel</button>
           <button type="submit" class="primary">Save changes</button>
@@ -4354,6 +4482,65 @@
       const pageSettingsUrlValue = document.getElementById('pageSettingsUrlValue');
       const pageSettingsCreatedValue = document.getElementById('pageSettingsCreatedValue');
       const pageSettingsUpdatedValue = document.getElementById('pageSettingsUpdatedValue');
+      const pageSettingsTabButtons = pageSettingsDialog
+        ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-settings-tab]'))
+        : [];
+      const pageSettingsPanels = pageSettingsDialog
+        ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-settings-panel]'))
+        : [];
+      const defaultPageSettingsTab =
+        pageSettingsTabButtons[0]?.dataset.pageSettingsTab || null;
+      let activePageSettingsTab = defaultPageSettingsTab;
+
+      function setActivePageSettingsTab(tabValue, { focusTab = false } = {}) {
+        if (!pageSettingsTabButtons.length || !pageSettingsPanels.length) {
+          return;
+        }
+
+        const targetValue =
+          pageSettingsTabButtons.find(
+            (button) => button.dataset.pageSettingsTab === tabValue
+          )?.dataset.pageSettingsTab || defaultPageSettingsTab;
+
+        if (!targetValue) {
+          return;
+        }
+
+        activePageSettingsTab = targetValue;
+
+        pageSettingsTabButtons.forEach((button) => {
+          const isActive = button.dataset.pageSettingsTab === targetValue;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          button.tabIndex = isActive ? 0 : -1;
+          if (isActive && focusTab) {
+            button.focus({ preventScroll: true });
+          }
+        });
+
+        pageSettingsPanels.forEach((panel) => {
+          const isActive = panel.dataset.pageSettingsPanel === targetValue;
+          panel.hidden = !isActive;
+          panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+      }
+
+      function focusAdjacentPageSettingsTab(direction) {
+        if (!pageSettingsTabButtons.length) {
+          return;
+        }
+        const currentIndex = pageSettingsTabButtons.findIndex(
+          (button) => button.dataset.pageSettingsTab === activePageSettingsTab
+        );
+        const startIndex = currentIndex >= 0 ? currentIndex : 0;
+        const nextIndex =
+          (startIndex + direction + pageSettingsTabButtons.length) %
+          pageSettingsTabButtons.length;
+        const nextTab = pageSettingsTabButtons[nextIndex]?.dataset.pageSettingsTab;
+        if (nextTab) {
+          setActivePageSettingsTab(nextTab, { focusTab: true });
+        }
+      }
 
       const pageRows = Array.from(document.querySelectorAll('.page-row'));
       const folderRows = Array.from(document.querySelectorAll('.group-row'));
@@ -4542,6 +4729,7 @@
         if (pageSettingsIdInput) {
           pageSettingsIdInput.value = '';
         }
+        setActivePageSettingsTab(defaultPageSettingsTab);
       }
 
       function formatPageDate(dateString) {
@@ -6381,6 +6569,35 @@
           folderRow.dataset.folderColor = selectedColor;
         }
         closeFolderDialog();
+      });
+
+      pageSettingsTabButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setActivePageSettingsTab(button.dataset.pageSettingsTab);
+        });
+        button.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            focusAdjacentPageSettingsTab(1);
+          } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            focusAdjacentPageSettingsTab(-1);
+          } else if (event.key === 'Home') {
+            event.preventDefault();
+            const firstTab = pageSettingsTabButtons[0]?.dataset.pageSettingsTab;
+            if (firstTab) {
+              setActivePageSettingsTab(firstTab, { focusTab: true });
+            }
+          } else if (event.key === 'End') {
+            event.preventDefault();
+            const lastTab =
+              pageSettingsTabButtons[pageSettingsTabButtons.length - 1]?.dataset
+                .pageSettingsTab;
+            if (lastTab) {
+              setActivePageSettingsTab(lastTab, { focusTab: true });
+            }
+          }
+        });
       });
 
       pageSettingsDialogClose?.addEventListener('click', () => {
