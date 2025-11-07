@@ -1784,6 +1784,157 @@
       gap: 18px;
     }
 
+    .action-dialog {
+      width: min(500px, 100%);
+    }
+
+    .action-dialog-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .action-dialog-description {
+      margin: 0;
+      font-size: 14px;
+      color: var(--pages-muted);
+      line-height: 1.6;
+    }
+
+    .action-dialog-description strong {
+      color: var(--pages-text);
+    }
+
+    .action-dialog-meta {
+      margin: -10px 0 0;
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .action-dialog-field,
+    .action-dialog-fieldset {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    .action-dialog-field label,
+    .action-dialog-fieldset > legend {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pages-text);
+      margin: 0;
+    }
+
+    .action-dialog-fieldset > legend {
+      padding: 0;
+    }
+
+    .action-dialog-field input,
+    .action-dialog-field select,
+    .action-dialog-field textarea {
+      font: inherit;
+      padding: 10px 12px;
+      border: 1px solid var(--pages-border);
+      border-radius: 12px;
+      background: #fff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .action-dialog-field textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .action-dialog-field input:focus,
+    .action-dialog-field select:focus,
+    .action-dialog-field textarea:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .action-dialog-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--pages-muted);
+    }
+
+    .action-dialog-checkbox input {
+      margin-top: 2px;
+    }
+
+    .action-dialog-checkbox label {
+      cursor: pointer;
+    }
+
+    .action-dialog-radio-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .action-dialog-radio {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 16px;
+      border: 1px solid var(--pages-border);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease,
+        transform 0.15s ease;
+    }
+
+    .action-dialog-radio:hover {
+      transform: translateY(-1px);
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .action-dialog-radio:focus-within {
+      border-color: rgba(37, 99, 235, 0.55);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .action-dialog-radio input {
+      flex-shrink: 0;
+    }
+
+    .action-dialog-radio-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .action-dialog-radio-text strong {
+      font-size: 14px;
+      color: var(--pages-text);
+    }
+
+    .action-dialog-hint {
+      margin: -8px 0 0;
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .action-dialog-warning {
+      color: #b91c1c;
+    }
+
+    .action-dialog-optional {
+      font-weight: 400;
+      color: var(--pages-muted);
+      font-size: 12px;
+    }
+
     .copy-page-message {
       margin: 0;
       font-size: 14px;
@@ -4610,6 +4761,329 @@
     </div>
   </div>
 
+  <div
+    class="dialog-backdrop"
+    id="publishConfirmDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="publishConfirmTitle"
+    aria-describedby="publishConfirmDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="publishConfirmTitle">Publish page</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close publish confirmation"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-publish-dialog-form>
+        <p class="action-dialog-description" id="publishConfirmDescription">
+          Ready to publish <strong data-dialog-page-name>this page</strong>? Choose a visibility level
+          and we’ll take it live immediately.
+        </p>
+        <p class="action-dialog-meta">Current status: <span data-publish-current-status>—</span></p>
+        <div class="action-dialog-field">
+          <label for="publishVisibility">Visibility</label>
+          <select id="publishVisibility" name="publishVisibility">
+            <option value="public">Public</option>
+            <option value="internal">Internal only</option>
+            <option value="private">Private link</option>
+          </select>
+        </div>
+        <div class="action-dialog-checkbox">
+          <input type="checkbox" id="publishNotifySubscribers" name="publishNotifySubscribers">
+          <label for="publishNotifySubscribers">Notify subscribers about this update</label>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Publish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="unpublishConfirmDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="unpublishConfirmTitle"
+    aria-describedby="unpublishConfirmDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="unpublishConfirmTitle">Unpublish page</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close unpublish confirmation"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-unpublish-dialog-form>
+        <p class="action-dialog-description" id="unpublishConfirmDescription">
+          We’ll take <strong data-dialog-page-name>this page</strong> offline and move it back into
+          draft.
+        </p>
+        <div class="action-dialog-field">
+          <label for="unpublishReason">Reason</label>
+          <select id="unpublishReason" name="unpublishReason">
+            <option value="content-update">Updating content</option>
+            <option value="compliance-review">Compliance review</option>
+            <option value="quality-issue">Quality issue</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="action-dialog-field">
+          <label for="unpublishNote">
+            Internal note <span class="action-dialog-optional">(optional)</span>
+          </label>
+          <textarea
+            id="unpublishNote"
+            name="unpublishNote"
+            placeholder="Share context with teammates"
+          ></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Unpublish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="scheduleDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="scheduleDialogTitle"
+    aria-describedby="scheduleDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="scheduleDialogTitle">Schedule publish</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close schedule dialog"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-schedule-dialog-form>
+        <p class="action-dialog-description" id="scheduleDialogDescription">
+          Decide when <strong data-dialog-page-name>this page</strong> should go live.
+        </p>
+        <div class="action-dialog-field">
+          <label for="scheduleDateInput">Publish date</label>
+          <input type="date" id="scheduleDateInput" name="scheduleDate" required>
+        </div>
+        <div class="action-dialog-field">
+          <label for="scheduleTimeInput">Publish time</label>
+          <input type="time" id="scheduleTimeInput" name="scheduleTime" required>
+        </div>
+        <div class="action-dialog-field">
+          <label for="scheduleTimezoneSelect">Time zone</label>
+          <select id="scheduleTimezoneSelect" name="scheduleTimezone">
+            <option value="UTC">UTC</option>
+            <option value="America/New_York">Eastern (US &amp; Canada)</option>
+            <option value="America/Chicago">Central (US &amp; Canada)</option>
+            <option value="America/Denver">Mountain (US &amp; Canada)</option>
+            <option value="America/Los_Angeles">Pacific (US &amp; Canada)</option>
+            <option value="Europe/London">London</option>
+            <option value="Europe/Berlin">Berlin</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+            <option value="Australia/Sydney">Sydney</option>
+          </select>
+        </div>
+        <div class="action-dialog-checkbox">
+          <input type="checkbox" id="scheduleNotifyTeam" name="scheduleNotifyTeam" checked>
+          <label for="scheduleNotifyTeam">Remind the page owner 30 minutes before publish</label>
+        </div>
+        <p class="action-dialog-hint">
+          The page status will automatically switch to Published at the scheduled time.
+        </p>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Schedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="movePageDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="movePageDialogTitle"
+    aria-describedby="movePageDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="movePageDialogTitle">Move to folder</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close move dialog"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-move-dialog-form>
+        <p class="action-dialog-description" id="movePageDialogDescription">
+          Select where <strong data-dialog-page-name>this page</strong> should live.
+        </p>
+        <fieldset class="action-dialog-fieldset">
+          <legend>Destination folder</legend>
+          <div class="action-dialog-radio-group" data-move-dialog-options></div>
+        </fieldset>
+        <p class="action-dialog-hint">
+          Folders help keep analytics, permissions, and workflows organized.
+        </p>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Move page</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="trashConfirmDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="trashConfirmTitle"
+    aria-describedby="trashConfirmDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="trashConfirmTitle">Move to trash</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close trash confirmation"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-trash-dialog-form>
+        <p class="action-dialog-description" id="trashConfirmDescription">
+          Send <strong data-dialog-page-name>this page</strong> to the trash. You’ll be able to restore
+          it within 30 days.
+        </p>
+        <div class="action-dialog-field">
+          <label for="trashReason">
+            Leave a note <span class="action-dialog-optional">(optional)</span>
+          </label>
+          <textarea
+            id="trashReason"
+            name="trashReason"
+            placeholder="Share context for teammates"
+          ></textarea>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Move to trash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="restoreConfirmDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="restoreConfirmTitle"
+    aria-describedby="restoreConfirmDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="restoreConfirmTitle">Restore page</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close restore confirmation"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-restore-dialog-form>
+        <p class="action-dialog-description" id="restoreConfirmDescription">
+          Restore <strong data-dialog-page-name>this page</strong> from the trash. We’ll return it to its
+          original folder.
+        </p>
+        <div class="action-dialog-checkbox">
+          <input type="checkbox" id="restorePublishToggle" name="restorePublish">
+          <label for="restorePublishToggle">Publish immediately after restoring</label>
+        </div>
+        <p class="action-dialog-hint">Leave unchecked to keep the page in draft.</p>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Restore page</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div
+    class="dialog-backdrop"
+    id="deleteConfirmDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="deleteConfirmTitle"
+    aria-describedby="deleteConfirmDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="deleteConfirmTitle">Delete permanently</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close delete confirmation"
+          data-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form class="action-dialog-form" data-delete-dialog-form>
+        <p class="action-dialog-description action-dialog-warning" id="deleteConfirmDescription">
+          Permanently remove <strong data-dialog-page-name>this page</strong> and all analytics. This
+          action cannot be undone.
+        </p>
+        <div class="action-dialog-checkbox">
+          <input type="checkbox" id="deleteAcknowledge" name="deleteAcknowledge" required>
+          <label for="deleteAcknowledge">Yes, I understand this will delete the page forever.</label>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" data-dialog-cancel>Cancel</button>
+          <button type="submit" class="primary" data-dialog-primary>Delete permanently</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     (function () {
       const folderStateStorageKey = 'mw-pages-folder-state';
@@ -4831,6 +5305,45 @@
       const pageSettingsUrlValue = document.getElementById('pageSettingsUrlValue');
       const pageSettingsCreatedValue = document.getElementById('pageSettingsCreatedValue');
       const pageSettingsUpdatedValue = document.getElementById('pageSettingsUpdatedValue');
+
+      const publishDialog = document.getElementById('publishConfirmDialog');
+      const publishDialogPanel = publishDialog?.querySelector('.dialog');
+      const publishDialogForm = publishDialog?.querySelector('[data-publish-dialog-form]');
+      const publishStatusLabel = publishDialog?.querySelector('[data-publish-current-status]');
+
+      const unpublishDialog = document.getElementById('unpublishConfirmDialog');
+      const unpublishDialogPanel = unpublishDialog?.querySelector('.dialog');
+      const unpublishDialogForm = unpublishDialog?.querySelector('[data-unpublish-dialog-form]');
+      const unpublishReasonSelect = unpublishDialog?.querySelector('#unpublishReason');
+      const unpublishNoteInput = unpublishDialog?.querySelector('#unpublishNote');
+
+      const scheduleDialog = document.getElementById('scheduleDialog');
+      const scheduleDialogPanel = scheduleDialog?.querySelector('.dialog');
+      const scheduleDialogForm = scheduleDialog?.querySelector('[data-schedule-dialog-form]');
+      const scheduleDateInput = scheduleDialog?.querySelector('#scheduleDateInput');
+      const scheduleTimeInput = scheduleDialog?.querySelector('#scheduleTimeInput');
+      const scheduleTimezoneSelect = scheduleDialog?.querySelector('#scheduleTimezoneSelect');
+      const scheduleNotifyCheckbox = scheduleDialog?.querySelector('#scheduleNotifyTeam');
+
+      const moveDialog = document.getElementById('movePageDialog');
+      const moveDialogPanel = moveDialog?.querySelector('.dialog');
+      const moveDialogForm = moveDialog?.querySelector('[data-move-dialog-form]');
+      const moveDialogOptions = moveDialog?.querySelector('[data-move-dialog-options]');
+
+      const trashDialog = document.getElementById('trashConfirmDialog');
+      const trashDialogPanel = trashDialog?.querySelector('.dialog');
+      const trashDialogForm = trashDialog?.querySelector('[data-trash-dialog-form]');
+      const trashNoteInput = trashDialog?.querySelector('#trashReason');
+
+      const restoreDialog = document.getElementById('restoreConfirmDialog');
+      const restoreDialogPanel = restoreDialog?.querySelector('.dialog');
+      const restoreDialogForm = restoreDialog?.querySelector('[data-restore-dialog-form]');
+      const restorePublishCheckbox = restoreDialog?.querySelector('#restorePublishToggle');
+
+      const deleteDialog = document.getElementById('deleteConfirmDialog');
+      const deleteDialogPanel = deleteDialog?.querySelector('.dialog');
+      const deleteDialogForm = deleteDialog?.querySelector('[data-delete-dialog-form]');
+      const deleteAcknowledgeCheckbox = deleteDialog?.querySelector('#deleteAcknowledge');
       const pageSettingsTabButtons = pageSettingsDialog
         ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-settings-tab]'))
         : [];
@@ -4922,6 +5435,253 @@
         folderOptions.push({ value: folderId, label });
         seenFolders.add(folderId);
       });
+
+      const actionDialogs = {};
+
+      const publishDialogController = createActionDialog({
+        name: 'publish',
+        backdrop: publishDialog,
+        dialog: publishDialogPanel,
+        form: publishDialogForm,
+        initialFocusSelector: '#publishVisibility',
+        onOpen: ({ row }) => {
+          if (publishStatusLabel) {
+            const statusValue = row?.dataset.status || '';
+            const statusLabel = statusValue ? getStatusLabel(statusValue) : '—';
+            publishStatusLabel.textContent = statusLabel || '—';
+          }
+        },
+        onClose: () => {
+          if (publishStatusLabel) {
+            publishStatusLabel.textContent = '—';
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const visibility = (formData.get('publishVisibility') || 'public').toString();
+          const notify = formData.has('publishNotifySubscribers');
+          console.log('Publish page', {
+            pageId,
+            visibility,
+            notifySubscribers: notify,
+          });
+        },
+      });
+
+      if (publishDialogController) {
+        actionDialogControllers.push(publishDialogController);
+        actionDialogs.publish = publishDialogController;
+      }
+
+      const unpublishDialogController = createActionDialog({
+        name: 'unpublish',
+        backdrop: unpublishDialog,
+        dialog: unpublishDialogPanel,
+        form: unpublishDialogForm,
+        initialFocusSelector: '#unpublishReason',
+        onOpen: () => {
+          if (unpublishReasonSelect instanceof HTMLSelectElement && unpublishReasonSelect.options.length > 0) {
+            unpublishReasonSelect.value = unpublishReasonSelect.options[0].value;
+          }
+          if (unpublishNoteInput instanceof HTMLTextAreaElement) {
+            unpublishNoteInput.value = '';
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const reason = (formData.get('unpublishReason') || '').toString();
+          const note = (formData.get('unpublishNote') || '').toString().trim();
+          console.log('Unpublish page', {
+            pageId,
+            reason,
+            note: note || null,
+          });
+        },
+      });
+
+      if (unpublishDialogController) {
+        actionDialogControllers.push(unpublishDialogController);
+        actionDialogs.unpublish = unpublishDialogController;
+      }
+
+      const scheduleDialogController = createActionDialog({
+        name: 'schedule',
+        backdrop: scheduleDialog,
+        dialog: scheduleDialogPanel,
+        form: scheduleDialogForm,
+        initialFocusSelector: '#scheduleDateInput',
+        onOpen: () => {
+          const now = new Date();
+          if (scheduleDateInput instanceof HTMLInputElement) {
+            const today = formatDateInputValue(now);
+            scheduleDateInput.min = today;
+            scheduleDateInput.value = today;
+          }
+          if (scheduleTimeInput instanceof HTMLInputElement) {
+            scheduleTimeInput.value = formatTimeInputValue(now);
+          }
+          if (scheduleTimezoneSelect instanceof HTMLSelectElement) {
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+            if (scheduleTimezoneSelect.querySelector(`option[value="${timezone}"]`)) {
+              scheduleTimezoneSelect.value = timezone;
+            } else {
+              scheduleTimezoneSelect.value = 'UTC';
+            }
+          }
+          if (scheduleNotifyCheckbox instanceof HTMLInputElement) {
+            scheduleNotifyCheckbox.checked = true;
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const date = (formData.get('scheduleDate') || '').toString();
+          const time = (formData.get('scheduleTime') || '').toString();
+          const timezone = (formData.get('scheduleTimezone') || '').toString();
+          const notify = formData.has('scheduleNotifyTeam');
+          console.log('Schedule page', {
+            pageId,
+            schedule: { date, time, timezone },
+            notifyOwner: notify,
+          });
+        },
+      });
+
+      if (scheduleDialogController) {
+        actionDialogControllers.push(scheduleDialogController);
+        actionDialogs.schedule = scheduleDialogController;
+      }
+
+      const moveDialogController = createActionDialog({
+        name: 'move',
+        backdrop: moveDialog,
+        dialog: moveDialogPanel,
+        form: moveDialogForm,
+        initialFocusSelector: 'input[name="moveFolder"]',
+        onOpen: ({ row }) => {
+          if (!(moveDialogOptions instanceof HTMLElement)) {
+            return;
+          }
+          moveDialogOptions.innerHTML = '';
+          const currentFolder = row?.dataset.folder || '_root';
+          folderOptions.forEach(({ value, label }) => {
+            const optionLabel = label || (value === '_root' ? 'No folder' : value);
+            const wrapper = document.createElement('label');
+            wrapper.className = 'action-dialog-radio';
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'moveFolder';
+            radio.value = value;
+            radio.required = true;
+            radio.checked = value === currentFolder;
+            const text = document.createElement('div');
+            text.className = 'action-dialog-radio-text';
+            const title = document.createElement('strong');
+            title.textContent = optionLabel;
+            const subtitle = document.createElement('span');
+            subtitle.textContent =
+              value === currentFolder ? 'Currently assigned' : 'Move page to this folder';
+            text.append(title, subtitle);
+            wrapper.append(radio, text);
+            moveDialogOptions.append(wrapper);
+          });
+        },
+        onClose: () => {
+          if (moveDialogOptions instanceof HTMLElement) {
+            moveDialogOptions.innerHTML = '';
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const folderId = (formData.get('moveFolder') || '_root').toString();
+          console.log('Move page to folder', {
+            pageId,
+            folderId,
+          });
+        },
+      });
+
+      if (moveDialogController) {
+        actionDialogControllers.push(moveDialogController);
+        actionDialogs.move = moveDialogController;
+      }
+
+      const trashDialogController = createActionDialog({
+        name: 'trash',
+        backdrop: trashDialog,
+        dialog: trashDialogPanel,
+        form: trashDialogForm,
+        initialFocusSelector: '#trashReason',
+        onOpen: () => {
+          if (trashNoteInput instanceof HTMLTextAreaElement) {
+            trashNoteInput.value = '';
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const note = (formData.get('trashReason') || '').toString().trim();
+          console.log('Move page to trash', {
+            pageId,
+            note: note || null,
+          });
+        },
+      });
+
+      if (trashDialogController) {
+        actionDialogControllers.push(trashDialogController);
+        actionDialogs.trash = trashDialogController;
+      }
+
+      const restoreDialogController = createActionDialog({
+        name: 'restore',
+        backdrop: restoreDialog,
+        dialog: restoreDialogPanel,
+        form: restoreDialogForm,
+        initialFocusSelector: '#restorePublishToggle',
+        onOpen: () => {
+          if (restorePublishCheckbox instanceof HTMLInputElement) {
+            restorePublishCheckbox.checked = false;
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const publish = formData.has('restorePublish');
+          console.log('Restore page', {
+            pageId,
+            publishImmediately: publish,
+          });
+        },
+      });
+
+      if (restoreDialogController) {
+        actionDialogControllers.push(restoreDialogController);
+        actionDialogs.restore = restoreDialogController;
+      }
+
+      const deleteDialogController = createActionDialog({
+        name: 'delete-permanently',
+        backdrop: deleteDialog,
+        dialog: deleteDialogPanel,
+        form: deleteDialogForm,
+        initialFocusSelector: '#deleteAcknowledge',
+        onOpen: () => {
+          if (deleteAcknowledgeCheckbox instanceof HTMLInputElement) {
+            deleteAcknowledgeCheckbox.checked = false;
+          }
+        },
+        onSubmit: ({ pageId, form }) => {
+          const formData = new FormData(form);
+          const confirmed = formData.has('deleteAcknowledge');
+          console.log('Delete page permanently', {
+            pageId,
+            confirmed,
+          });
+        },
+      });
+
+      if (deleteDialogController) {
+        actionDialogControllers.push(deleteDialogController);
+        actionDialogs['delete-permanently'] = deleteDialogController;
+      }
 
       const authorOptions = Array.from(
         new Set([
@@ -5224,6 +5984,7 @@
       let lastPageSettingsTrigger = null;
       let activeCopyPageId = null;
       let lastCopyPageTrigger = null;
+      const actionDialogControllers = [];
 
       function syncBodyScrollState() {
         const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
@@ -5232,13 +5993,17 @@
         const newPageDialogOpen = newPageDialog?.getAttribute('aria-hidden') === 'false';
         const pageSettingsOpen = pageSettingsDialog?.getAttribute('aria-hidden') === 'false';
         const copyPageDialogOpen = copyPageDialog?.getAttribute('aria-hidden') === 'false';
+        const actionDialogsOpen = actionDialogControllers.some(
+          (controller) => typeof controller?.isOpen === 'function' && controller.isOpen()
+        );
         document.body.style.overflow =
           drawerOpen ||
           createDialogOpen ||
           folderDialogOpen ||
           newPageDialogOpen ||
           pageSettingsOpen ||
-          copyPageDialogOpen
+          copyPageDialogOpen ||
+          actionDialogsOpen
             ? 'hidden'
             : '';
       }
@@ -5282,6 +6047,229 @@
           }
           closeActionMenu(menu);
         });
+      }
+
+      function createFocusTrap(container) {
+        if (!(container instanceof HTMLElement)) {
+          return {
+            activate() {},
+            deactivate() {},
+          };
+        }
+
+        const getFocusableElements = () =>
+          Array.from(
+            container.querySelectorAll(
+              'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )
+          ).filter((element) => {
+            if (!(element instanceof HTMLElement)) {
+              return false;
+            }
+            if (element.hasAttribute('disabled')) {
+              return false;
+            }
+            if (element.getAttribute('aria-hidden') === 'true') {
+              return false;
+            }
+            const { offsetParent } = element;
+            return offsetParent !== null || element === document.activeElement;
+          });
+
+        const handleKeydown = (event) => {
+          if (event.key !== 'Tab') {
+            return;
+          }
+
+          const focusable = getFocusableElements();
+          if (focusable.length === 0) {
+            event.preventDefault();
+            container.focus({ preventScroll: true });
+            return;
+          }
+
+          const currentIndex = focusable.indexOf(document.activeElement);
+          if (event.shiftKey) {
+            if (currentIndex <= 0) {
+              event.preventDefault();
+              focusable[focusable.length - 1].focus({ preventScroll: true });
+            }
+          } else if (currentIndex === focusable.length - 1) {
+            event.preventDefault();
+            focusable[0].focus({ preventScroll: true });
+          }
+        };
+
+        return {
+          activate({ focusElement = null } = {}) {
+            container.addEventListener('keydown', handleKeydown);
+            const focusable = getFocusableElements();
+            const target =
+              focusElement instanceof HTMLElement
+                ? focusElement
+                : focusable[0] || container;
+            if (target instanceof HTMLElement) {
+              target.focus({ preventScroll: true });
+            }
+          },
+          deactivate() {
+            container.removeEventListener('keydown', handleKeydown);
+          },
+        };
+      }
+
+      function getPageNameFromRow(row) {
+        if (!(row instanceof HTMLElement)) {
+          return 'this page';
+        }
+        const explicitTitle = row.dataset.title;
+        if (explicitTitle) {
+          return explicitTitle;
+        }
+        const buttonTitle = row.querySelector('.title-button')?.textContent?.trim();
+        if (buttonTitle) {
+          return buttonTitle;
+        }
+        const textTitle = row.querySelector('.title-text')?.textContent?.trim();
+        if (textTitle) {
+          return textTitle;
+        }
+        return row.dataset.pageId || 'this page';
+      }
+
+      function formatDateInputValue(date) {
+        if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+          return '';
+        }
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      function formatTimeInputValue(date) {
+        if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+          return '';
+        }
+        return date.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' });
+      }
+
+      function createActionDialog({
+        name,
+        backdrop,
+        dialog,
+        form = null,
+        initialFocusSelector = '[data-dialog-primary]',
+        onOpen = null,
+        onClose = null,
+        onSubmit = null,
+      }) {
+        if (!(backdrop instanceof HTMLElement) || !(dialog instanceof HTMLElement)) {
+          return null;
+        }
+
+        const trap = createFocusTrap(dialog);
+        const pageNameTargets = Array.from(
+          dialog.querySelectorAll('[data-dialog-page-name]')
+        );
+        const closeButtons = Array.from(backdrop.querySelectorAll('[data-dialog-close]'));
+        const cancelButtons = Array.from(backdrop.querySelectorAll('[data-dialog-cancel]'));
+
+        let activePageIdForDialog = null;
+        let lastTriggerForDialog = null;
+
+        const isOpen = () => backdrop.getAttribute('aria-hidden') === 'false';
+
+        const setPageName = (name) => {
+          pageNameTargets.forEach((target) => {
+            target.textContent = name;
+          });
+        };
+
+        const open = (pageId, { trigger = null } = {}) => {
+          if (!pageId) {
+            return;
+          }
+          const row = pageRowById.get(pageId) || null;
+          activePageIdForDialog = pageId;
+          lastTriggerForDialog = trigger instanceof HTMLElement ? trigger : null;
+          setPageName(getPageNameFromRow(row));
+          if (typeof onOpen === 'function') {
+            onOpen({ pageId, row, dialog, backdrop });
+          }
+          backdrop.setAttribute('aria-hidden', 'false');
+          syncBodyScrollState();
+          window.requestAnimationFrame(() => {
+            const initialFocus = initialFocusSelector
+              ? dialog.querySelector(initialFocusSelector)
+              : null;
+            trap.activate({
+              focusElement: initialFocus instanceof HTMLElement ? initialFocus : null,
+            });
+          });
+        };
+
+        const close = ({ focusTrigger = true } = {}) => {
+          if (!isOpen()) {
+            return;
+          }
+          trap.deactivate();
+          backdrop.setAttribute('aria-hidden', 'true');
+          syncBodyScrollState();
+          if (form instanceof HTMLFormElement) {
+            form.reset();
+          }
+          if (typeof onClose === 'function') {
+            onClose({ pageId: activePageIdForDialog });
+          }
+          const triggerElement = lastTriggerForDialog;
+          activePageIdForDialog = null;
+          lastTriggerForDialog = null;
+          if (focusTrigger && triggerElement instanceof HTMLElement) {
+            triggerElement.focus({ preventScroll: true });
+          }
+        };
+
+        closeButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            close();
+          });
+        });
+
+        cancelButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            close();
+          });
+        });
+
+        backdrop.addEventListener('click', (event) => {
+          if (event.target === backdrop) {
+            close();
+          }
+        });
+
+        if (form instanceof HTMLFormElement) {
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (!activePageIdForDialog) {
+              close();
+              return;
+            }
+            if (typeof onSubmit === 'function') {
+              const row = pageRowById.get(activePageIdForDialog) || null;
+              onSubmit({ pageId: activePageIdForDialog, row, form });
+            }
+            close();
+          });
+        }
+
+        return {
+          name,
+          open,
+          close,
+          isOpen,
+          getPageId: () => activePageIdForDialog,
+        };
       }
 
       function matchesBaseFilters(item) {
@@ -6364,6 +7352,13 @@
           return;
         }
         if (event.key === 'Escape') {
+          for (const controller of actionDialogControllers) {
+            if (controller?.isOpen && controller.isOpen()) {
+              event.preventDefault();
+              controller.close();
+              return;
+            }
+          }
           if (filtersDrawer?.getAttribute('aria-hidden') === 'false') {
             event.preventDefault();
             closeDrawer();
@@ -7276,6 +8271,16 @@
           } else if (action === 'duplicate' && pageId) {
             const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
             openCopyPageDialog(pageId, triggerButton || actionMenuItem);
+          } else if (action && pageId) {
+            const controller = actionDialogs[action];
+            if (controller) {
+              if (menuElement) {
+                closeActionMenu(menuElement);
+              }
+              controller.open(pageId, { trigger: actionMenuItem });
+              return;
+            }
+            console.log(`Page ${action}`, pageId);
           } else if (action) {
             console.log(`Page ${action}`, pageId);
           }
