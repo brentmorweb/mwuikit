@@ -5617,6 +5617,7 @@
         seenFolders.add(folderId);
       });
 
+      const actionDialogControllers = [];
       const actionDialogs = {};
       const folderActionDialogs = {};
 
@@ -6329,8 +6330,6 @@
       let lastPageSettingsTrigger = null;
       let activeCopyPageId = null;
       let lastCopyPageTrigger = null;
-      const actionDialogControllers = [];
-
       function syncBodyScrollState() {
         const drawerOpen = filtersDrawer?.getAttribute('aria-hidden') === 'false';
         const createDialogOpen = dialog?.getAttribute('aria-hidden') === 'false';
