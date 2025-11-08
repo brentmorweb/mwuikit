@@ -1553,25 +1553,35 @@
     }
 
     .page-settings-tabs {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 4px;
-      padding: 4px;
-      border-radius: 12px;
-      background: rgba(148, 163, 184, 0.16);
+      gap: 6px;
+      border-bottom: 1px solid var(--pages-border);
+      padding-bottom: 2px;
     }
 
     .page-settings-tab {
       position: relative;
       border: none;
-      background: transparent;
+      background: none;
       color: var(--pages-muted);
       font-weight: 600;
       font-size: 13px;
-      padding: 8px 14px;
-      border-radius: 10px;
+      padding: 10px 16px;
+      border-radius: 10px 10px 0 0;
       cursor: pointer;
-      transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      transition: color 0.2s ease;
+    }
+
+    .page-settings-tab::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -1px;
+      height: 2px;
+      background: transparent;
+      transition: background 0.2s ease;
     }
 
     .page-settings-tab:focus-visible {
@@ -1581,9 +1591,12 @@
 
     .page-settings-tab.is-active,
     .page-settings-tab[aria-selected='true'] {
-      background: #fff;
       color: var(--pages-text);
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+    }
+
+    .page-settings-tab.is-active::after,
+    .page-settings-tab[aria-selected='true']::after {
+      background: var(--pages-accent);
     }
 
     .page-settings-panels {
@@ -2012,33 +2025,43 @@
     }
 
     .new-page-tabs {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      padding: 6px;
-      border-radius: 18px;
-      background: rgba(148, 163, 184, 0.18);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--pages-border);
+      padding-bottom: 2px;
     }
 
     .new-page-tab {
-      display: flex;
+      position: relative;
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-      border: 1px solid transparent;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.65);
-      padding: 12px 16px;
-      text-align: left;
-      font-family: inherit;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border: none;
+      background: none;
+      font: inherit;
+      font-weight: 600;
       color: var(--pages-muted);
       cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
-        color 0.2s ease, transform 0.2s ease;
+      border-radius: 10px 10px 0 0;
+      transition: color 0.2s ease;
+    }
+
+    .new-page-tab::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: -1px;
+      height: 2px;
+      background: transparent;
+      transition: background 0.2s ease;
     }
 
     .new-page-tab:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+      color: var(--pages-text);
     }
 
     .new-page-tab:focus-visible {
@@ -2046,66 +2069,22 @@
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.24);
     }
 
-    .new-page-tab.is-active {
-      background: #fff;
-      border-color: rgba(37, 99, 235, 0.45);
+    .new-page-tab.is-active,
+    .new-page-tab[aria-selected='true'] {
       color: var(--pages-text);
-      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.14);
     }
 
-    .new-page-tab.is-complete {
-      color: var(--pages-text);
-      border-color: rgba(59, 130, 246, 0.2);
-      background: rgba(37, 99, 235, 0.08);
-    }
-
-    .new-page-tab-badge {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 14px;
-      background: rgba(148, 163, 184, 0.32);
-      color: var(--pages-muted);
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .new-page-tab-check {
-      display: none;
-      font-size: 14px;
-    }
-
-    .new-page-tab.is-active .new-page-tab-badge {
+    .new-page-tab.is-active::after,
+    .new-page-tab[aria-selected='true']::after {
       background: var(--pages-accent);
-      color: #fff;
-      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
     }
 
-    .new-page-tab.is-complete .new-page-tab-badge {
-      background: rgba(37, 99, 235, 0.16);
-      color: var(--pages-accent);
-    }
-
-    .new-page-tab.is-complete .new-page-tab-index {
+    .new-page-tab-badge,
+    .new-page-tab-check,
+    .new-page-tab-text,
+    .new-page-tab-title,
+    .new-page-tab-description {
       display: none;
-    }
-
-    .new-page-tab.is-complete .new-page-tab-check {
-      display: inline-flex;
-    }
-
-    .new-page-tab-text {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .new-page-tab-title {
-      font-weight: 600;
-      color: inherit;
     }
 
     .new-page-tab-description {
@@ -2204,6 +2183,252 @@
     }
 
     .new-page-hint {
+      margin: 0;
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .wizard-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .wizard-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .wizard-field label {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .wizard-inline-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wizard-checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .wizard-checkbox input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--pages-accent);
+    }
+
+    .wizard-template-picker {
+      border: 1px solid var(--pages-border);
+      border-radius: 14px;
+      padding: 18px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .wizard-template-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .wizard-template-change {
+      border: none;
+      background: none;
+      color: var(--pages-accent);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wizard-template-carousel {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .wizard-template-track {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .wizard-template-card {
+      border: 1px solid var(--pages-border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--pages-muted);
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.8));
+    }
+
+    .wizard-template-card.is-active {
+      border-color: var(--pages-accent);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--pages-text);
+    }
+
+    .wizard-template-preview {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 10px;
+      aspect-ratio: 4 / 3;
+      padding: 12px;
+      background: #fff;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 8px;
+    }
+
+    .wizard-template-preview .preview-title {
+      height: 16px;
+      background: rgba(37, 99, 235, 0.16);
+      border-radius: 6px;
+    }
+
+    .wizard-template-preview .preview-body {
+      display: grid;
+      gap: 6px;
+    }
+
+    .wizard-template-preview .preview-line {
+      height: 6px;
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 4px;
+    }
+
+    .wizard-template-nav {
+      border: none;
+      background: none;
+      color: var(--pages-muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .wizard-template-nav:hover {
+      background: rgba(148, 163, 184, 0.18);
+      color: var(--pages-text);
+    }
+
+    .wizard-checkbox-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wizard-checkbox-grid .wizard-checkbox {
+      font-weight: 500;
+      color: var(--pages-muted);
+    }
+
+    .wizard-field input[type='text'],
+    .wizard-field input[type='url'],
+    .wizard-field textarea,
+    .wizard-field select {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--pages-border);
+      font-size: 14px;
+      background: #fff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .wizard-field textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .wizard-field input:focus,
+    .wizard-field textarea:focus,
+    .wizard-field select:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .wizard-file-drop {
+      border: 1px dashed rgba(148, 163, 184, 0.65);
+      border-radius: 14px;
+      background: rgba(148, 163, 184, 0.08);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+      color: var(--pages-muted);
+    }
+
+    .wizard-file-drop i {
+      font-size: 28px;
+      color: var(--pages-muted);
+    }
+
+    .wizard-file-drop strong {
+      color: var(--pages-text);
+    }
+
+    .wizard-file-drop input[type='file'] {
+      display: none;
+    }
+
+    .wizard-file-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .wizard-file-actions button,
+    .wizard-file-actions label {
+      border: none;
+      background: var(--pages-accent);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .wizard-file-actions button.danger {
+      background: #ef4444;
+    }
+
+    .wizard-helper-text {
+      margin: 0;
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .wizard-select-note {
       margin: 0;
       font-size: 12px;
       color: var(--pages-muted);
@@ -4540,223 +4765,285 @@
             type="button"
             class="new-page-tab is-active"
             role="tab"
-            id="newPageTab-details"
+            id="newPageTab-general"
             data-step-tab
             data-step-index="0"
             aria-selected="true"
-            aria-controls="newPageStep-details"
+            aria-controls="newPageStep-general"
             tabindex="0"
           >
-            <span class="new-page-tab-badge" aria-hidden="true">
-              <span class="new-page-tab-index">1</span>
-              <span class="new-page-tab-check"><i class="fa-solid fa-check"></i></span>
-            </span>
-            <span class="new-page-tab-text">
-              <span class="new-page-tab-title">Details</span>
-              <span class="new-page-tab-description">Title, folder, and type</span>
-            </span>
+            General
           </button>
           <button
             type="button"
             class="new-page-tab"
             role="tab"
-            id="newPageTab-metadata"
+            id="newPageTab-seo"
             data-step-tab
             data-step-index="1"
             aria-selected="false"
-            aria-controls="newPageStep-metadata"
+            aria-controls="newPageStep-seo"
             tabindex="-1"
           >
-            <span class="new-page-tab-badge" aria-hidden="true">
-              <span class="new-page-tab-index">2</span>
-              <span class="new-page-tab-check"><i class="fa-solid fa-check"></i></span>
-            </span>
-            <span class="new-page-tab-text">
-              <span class="new-page-tab-title">Metadata</span>
-              <span class="new-page-tab-description">Slug and SEO basics</span>
-            </span>
+            SEO
           </button>
           <button
             type="button"
             class="new-page-tab"
             role="tab"
-            id="newPageTab-publishing"
+            id="newPageTab-socials"
             data-step-tab
             data-step-index="2"
             aria-selected="false"
-            aria-controls="newPageStep-publishing"
+            aria-controls="newPageStep-socials"
             tabindex="-1"
           >
-            <span class="new-page-tab-badge" aria-hidden="true">
-              <span class="new-page-tab-index">3</span>
-              <span class="new-page-tab-check"><i class="fa-solid fa-check"></i></span>
-            </span>
-            <span class="new-page-tab-text">
-              <span class="new-page-tab-title">Publishing</span>
-              <span class="new-page-tab-description">Status and scheduling</span>
-            </span>
+            Socials
+          </button>
+          <button
+            type="button"
+            class="new-page-tab"
+            role="tab"
+            id="newPageTab-access"
+            data-step-tab
+            data-step-index="3"
+            aria-selected="false"
+            aria-controls="newPageStep-access"
+            tabindex="-1"
+          >
+            Access
           </button>
         </div>
         <section
           class="new-page-step"
-          data-step="details"
-          id="newPageStep-details"
+          data-step="general"
+          id="newPageStep-general"
           role="tabpanel"
-          aria-labelledby="newPageTab-details"
+          aria-labelledby="newPageTab-general"
           tabindex="0"
         >
-          <div class="new-page-form-group">
-            <label class="new-page-question" for="newPageTitle">What is the page title?</label>
-            <input
-              class="new-page-input"
-              type="text"
-              id="newPageTitle"
-              name="title"
-              placeholder="Enter a title..."
-              autocomplete="off"
-              required
-            >
-          </div>
-          <div class="new-page-form-group">
-            <label class="new-page-question" for="newPageFolder">Choose a folder</label>
-            <select class="new-page-select" id="newPageFolder" name="folder">
-              <option value="unassigned">Unassigned</option>
-              <option value="marketing">Marketing</option>
-              <option value="product">Product</option>
-              <option value="engineering">Engineering</option>
-              <option value="support">Support</option>
-            </select>
-          </div>
-          <div class="new-page-form-group">
-            <span class="new-page-question">What is the page type?</span>
-            <div class="new-page-type-grid" role="radiogroup" aria-label="Page type">
-              <button type="button" class="new-page-type-option accent-blue" data-page-type="landing" role="radio" aria-checked="false">
-                Landing
-              </button>
-              <button type="button" class="new-page-type-option accent-purple" data-page-type="content" role="radio" aria-checked="false">
-                Content
-              </button>
-              <button type="button" class="new-page-type-option accent-pink" data-page-type="portfolio" role="radio" aria-checked="false">
-                Portfolio
-              </button>
-              <button type="button" class="new-page-type-option accent-green" data-page-type="contact" role="radio" aria-checked="false">
-                Contact
-              </button>
-              <button type="button" class="new-page-type-option accent-indigo" data-page-type="style-guide" role="radio" aria-checked="false">
-                Style Guide
-              </button>
-              <button type="button" class="new-page-type-option accent-cyan" data-page-type="application" role="radio" aria-checked="false">
-                Application
-              </button>
-              <button type="button" class="new-page-type-option accent-rose" data-page-type="blog" role="radio" aria-checked="false">
-                Blog
-              </button>
-              <button type="button" class="new-page-type-option accent-orange" data-page-type="event" role="radio" aria-checked="false">
-                Event
-              </button>
+          <div class="wizard-section">
+            <div class="wizard-field">
+              <label for="newPageTitle">Page Title</label>
+              <input
+                class="new-page-input"
+                type="text"
+                id="newPageTitle"
+                name="title"
+                placeholder="About Us"
+                autocomplete="off"
+                required
+              >
             </div>
-            <input type="hidden" id="newPageTypeInput" name="type" value="">
+            <div class="wizard-inline-controls">
+              <label class="wizard-checkbox" for="newPageSetHome">
+                <input type="checkbox" id="newPageSetHome" name="setHome">
+                <span>Set as Home Page</span>
+              </label>
+            </div>
+            <div class="wizard-template-picker">
+              <div class="wizard-template-header">
+                <span>Template</span>
+                <button type="button" class="wizard-template-change">
+                  Change <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="wizard-template-carousel">
+                <button type="button" class="wizard-template-nav" aria-label="Previous template">
+                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <div class="wizard-template-track">
+                  <div class="wizard-template-card is-active">
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Page</strong>
+                  </div>
+                  <div class="wizard-template-card">
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Landing</strong>
+                  </div>
+                  <div class="wizard-template-card">
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Blog</strong>
+                  </div>
+                </div>
+                <button type="button" class="wizard-template-nav" aria-label="Next template">
+                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </section>
         <section
           class="new-page-step"
-          data-step="metadata"
-          id="newPageStep-metadata"
+          data-step="seo"
+          id="newPageStep-seo"
           role="tabpanel"
-          aria-labelledby="newPageTab-metadata"
+          aria-labelledby="newPageTab-seo"
           hidden
           aria-hidden="true"
           tabindex="-1"
         >
-          <div class="new-page-form-group">
-            <label class="new-page-question" for="newPageSlug">Slug</label>
-            <input
-              class="new-page-input"
-              type="text"
-              id="newPageSlug"
-              name="slug"
-              placeholder="e.g. about-us"
-              pattern="^[a-z0-9-]+$"
-              inputmode="text"
-              autocomplete="off"
-              autocapitalize="none"
-              spellcheck="false"
-              required
-            >
-          </div>
-          <div class="new-page-form-group">
-            <label class="new-page-question" for="newPageMetaTitle">Meta title</label>
-            <input
-              class="new-page-input"
-              type="text"
-              id="newPageMetaTitle"
-              name="metaTitle"
-              placeholder="Enter a meta title"
-              required
-            >
-          </div>
-          <div class="new-page-form-group">
-            <label class="new-page-question" for="newPageMetaDescription">Meta description</label>
-            <textarea
-              class="new-page-input"
-              id="newPageMetaDescription"
-              name="metaDescription"
-              placeholder="Describe the page in 160 characters or fewer"
-              maxlength="160"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-          <div class="new-page-form-group">
-            <label class="new-page-question" for="newPageSocialImage">Social image (optional)</label>
-            <input
-              class="new-page-input"
-              type="file"
-              id="newPageSocialImage"
-              name="socialImage"
-              accept="image/*"
-            >
+          <div class="wizard-section">
+            <div class="wizard-field">
+              <label for="newPageSlug">Page Url</label>
+              <input
+                class="new-page-input"
+                type="text"
+                id="newPageSlug"
+                name="slug"
+                placeholder="About-Us"
+                pattern="[a-z0-9]+(?:-[a-z0-9]+)*"
+                inputmode="text"
+                autocomplete="off"
+                autocapitalize="none"
+                spellcheck="false"
+                required
+              >
+            </div>
+            <div class="wizard-checkbox-grid">
+              <label class="wizard-checkbox" for="newPageComplexUrl">
+                <input type="checkbox" id="newPageComplexUrl" name="complexUrl">
+                <span>Use Complex Url</span>
+              </label>
+              <label class="wizard-checkbox" for="newPageHideSearch">
+                <input type="checkbox" id="newPageHideSearch" name="hideSearch">
+                <span>Hide from Search Engines</span>
+              </label>
+              <label class="wizard-checkbox" for="newPageHideSiteSearch">
+                <input type="checkbox" id="newPageHideSiteSearch" name="hideSiteSearch">
+                <span>Hide from Site Search</span>
+              </label>
+            </div>
+            <div class="wizard-field">
+              <label for="newPageCanonical">Canonical Url</label>
+              <input
+                type="url"
+                id="newPageCanonical"
+                name="canonicalUrl"
+                placeholder="https://mydomain.com/title"
+              >
+            </div>
+            <div class="wizard-field">
+              <label for="newPageMetaTitle">Meta Title</label>
+              <input
+                class="new-page-input"
+                type="text"
+                id="newPageMetaTitle"
+                name="metaTitle"
+                placeholder="About Us — My Company"
+                required
+              >
+            </div>
+            <div class="wizard-field">
+              <label for="newPageMetaDescription">Meta Description</label>
+              <textarea
+                class="new-page-input"
+                id="newPageMetaDescription"
+                name="metaDescription"
+                placeholder="Describe the page in 160 characters or fewer"
+                maxlength="160"
+                rows="3"
+                required
+              ></textarea>
+            </div>
           </div>
         </section>
         <section
           class="new-page-step"
-          data-step="publishing"
-          id="newPageStep-publishing"
+          data-step="socials"
+          id="newPageStep-socials"
           role="tabpanel"
-          aria-labelledby="newPageTab-publishing"
+          aria-labelledby="newPageTab-socials"
           hidden
           aria-hidden="true"
           tabindex="-1"
         >
-          <div class="new-page-form-group">
-            <span class="new-page-question">Set publish status</span>
-            <div
-              class="new-page-status-options"
-              role="radiogroup"
-              aria-label="Initial status"
-              data-status-options
-            ></div>
-            <p class="new-page-hint">Choose how the page should be available after creation.</p>
-          </div>
-          <div class="new-page-form-group" data-schedule-wrapper hidden aria-hidden="true">
-            <span class="new-page-question">Schedule details</span>
-            <div class="new-page-schedule-fields">
+          <div class="wizard-section">
+            <div class="wizard-field">
+              <label for="newPageOgTitle">Open Graph Title</label>
               <input
-                type="date"
-                id="newPageScheduleDate"
-                name="scheduleDate"
-                autocomplete="off"
-                disabled
-              >
-              <input
-                type="time"
-                id="newPageScheduleTime"
-                name="scheduleTime"
-                autocomplete="off"
-                disabled
+                type="text"
+                id="newPageOgTitle"
+                name="ogTitle"
+                placeholder="About Us"
               >
             </div>
-            <p class="new-page-hint">Pick a publish date and time for scheduled pages.</p>
+            <div class="wizard-field">
+              <label for="newPageOgDescription">Open Graph Description</label>
+              <textarea
+                id="newPageOgDescription"
+                name="ogDescription"
+                rows="3"
+                placeholder="Share a short description for social cards"
+              ></textarea>
+            </div>
+            <div class="wizard-field">
+              <label for="newPageSocialImage">Open Graph Image</label>
+              <div class="wizard-file-drop">
+                <i class="fa-regular fa-image" aria-hidden="true"></i>
+                <strong>Upload a cover image</strong>
+                <p class="wizard-helper-text">Recommended dimensions: 1200x630.</p>
+                <div class="wizard-file-actions">
+                  <label for="newPageSocialImage">Select File...</label>
+                  <button type="button" class="danger">Remove</button>
+                </div>
+                <input type="file" id="newPageSocialImage" name="socialImage" accept="image/*">
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          class="new-page-step"
+          data-step="access"
+          id="newPageStep-access"
+          role="tabpanel"
+          aria-labelledby="newPageTab-access"
+          hidden
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          <div class="wizard-section">
+            <div class="wizard-field">
+              <label for="newPagePrivacy">Privacy Setting</label>
+              <select id="newPagePrivacy" name="privacySetting">
+                <option value="any">Any user</option>
+                <option value="members">Only members</option>
+                <option value="admins">Only administrators</option>
+              </select>
+              <p class="wizard-select-note">
+                This setting allows you to restrict public access to this page on your site.
+              </p>
+            </div>
+            <div class="wizard-inline-controls">
+              <label class="wizard-checkbox" for="newPageRequireLogin">
+                <input type="checkbox" id="newPageRequireLogin" name="requireLogin">
+                <span>Require Login</span>
+              </label>
+              <p class="wizard-helper-text">
+                If selected, this page will require users to login explicitly, ignoring cookies.
+              </p>
+            </div>
           </div>
         </section>
         <div class="dialog-actions">
@@ -5036,120 +5323,241 @@
           <button
             type="button"
             class="page-settings-tab is-active"
-            id="pageSettingsTab-details"
+            id="pageSettingsTab-general"
             role="tab"
             aria-selected="true"
-            aria-controls="pageSettingsPanel-details"
-            data-page-settings-tab="details"
+            aria-controls="pageSettingsPanel-general"
+            data-page-settings-tab="general"
             tabindex="0"
           >
-            Details
+            General
           </button>
           <button
             type="button"
             class="page-settings-tab"
-            id="pageSettingsTab-publishing"
+            id="pageSettingsTab-seo"
             role="tab"
             aria-selected="false"
-            aria-controls="pageSettingsPanel-publishing"
-            data-page-settings-tab="publishing"
+            aria-controls="pageSettingsPanel-seo"
+            data-page-settings-tab="seo"
             tabindex="-1"
           >
-            Publishing
+            SEO
           </button>
           <button
             type="button"
             class="page-settings-tab"
-            id="pageSettingsTab-metadata"
+            id="pageSettingsTab-socials"
             role="tab"
             aria-selected="false"
-            aria-controls="pageSettingsPanel-metadata"
-            data-page-settings-tab="metadata"
+            aria-controls="pageSettingsPanel-socials"
+            data-page-settings-tab="socials"
             tabindex="-1"
           >
-            Metadata
+            Socials
+          </button>
+          <button
+            type="button"
+            class="page-settings-tab"
+            id="pageSettingsTab-access"
+            role="tab"
+            aria-selected="false"
+            aria-controls="pageSettingsPanel-access"
+            data-page-settings-tab="access"
+            tabindex="-1"
+          >
+            Access
           </button>
         </div>
         <div class="page-settings-panels">
           <section
             class="page-settings-panel"
-            id="pageSettingsPanel-details"
+            id="pageSettingsPanel-general"
             role="tabpanel"
-            aria-labelledby="pageSettingsTab-details"
-            data-page-settings-panel="details"
+            aria-labelledby="pageSettingsTab-general"
+            data-page-settings-panel="general"
           >
-            <div class="form-field">
-              <label for="pageSettingsTitleInput">Title</label>
-              <input type="text" id="pageSettingsTitleInput" name="title" required>
+            <div class="wizard-section">
+              <div class="wizard-field">
+                <label for="pageSettingsTitleInput">Page Title</label>
+                <input type="text" id="pageSettingsTitleInput" name="title" required>
+              </div>
+              <div class="wizard-inline-controls">
+                <label class="wizard-checkbox" for="pageSettingsHomeToggle">
+                  <input type="checkbox" id="pageSettingsHomeToggle" name="setHome">
+                  <span>Set as Home Page</span>
+                </label>
+              </div>
+              <div class="wizard-template-picker">
+                <div class="wizard-template-header">
+                  <span>Template</span>
+                  <button type="button" class="wizard-template-change">
+                    Change <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="wizard-template-carousel">
+                  <button type="button" class="wizard-template-nav" aria-label="Previous template">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                  </button>
+                  <div class="wizard-template-track">
+                    <div class="wizard-template-card is-active">
+                      <div class="wizard-template-preview" aria-hidden="true">
+                        <span class="preview-title"></span>
+                        <div class="preview-body">
+                          <span class="preview-line"></span>
+                          <span class="preview-line"></span>
+                          <span class="preview-line"></span>
+                        </div>
+                      </div>
+                      <strong>Page</strong>
+                    </div>
+                    <div class="wizard-template-card">
+                      <div class="wizard-template-preview" aria-hidden="true">
+                        <span class="preview-title"></span>
+                        <div class="preview-body">
+                          <span class="preview-line"></span>
+                          <span class="preview-line"></span>
+                          <span class="preview-line"></span>
+                        </div>
+                      </div>
+                      <strong>Landing</strong>
+                    </div>
+                    <div class="wizard-template-card">
+                      <div class="wizard-template-preview" aria-hidden="true">
+                        <span class="preview-title"></span>
+                        <div class="preview-body">
+                          <span class="preview-line"></span>
+                          <span class="preview-line"></span>
+                          <span class="preview-line"></span>
+                        </div>
+                      </div>
+                      <strong>Blog</strong>
+                    </div>
+                  </div>
+                  <button type="button" class="wizard-template-nav" aria-label="Next template">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="page-settings-columns">
-              <div class="form-field">
-                <label for="pageSettingsSlugInput">Slug</label>
+          </section>
+          <section
+            class="page-settings-panel"
+            id="pageSettingsPanel-seo"
+            role="tabpanel"
+            aria-labelledby="pageSettingsTab-seo"
+            data-page-settings-panel="seo"
+            hidden
+            aria-hidden="true"
+          >
+            <div class="wizard-section">
+              <div class="wizard-field">
+                <label for="pageSettingsSlugInput">Page Url</label>
                 <input type="text" id="pageSettingsSlugInput" name="slug" required>
               </div>
-              <div class="form-field">
-                <label for="pageSettingsFolderSelect">Folder</label>
-                <select id="pageSettingsFolderSelect" name="folder"></select>
+              <div class="wizard-checkbox-grid">
+                <label class="wizard-checkbox" for="pageSettingsComplexUrl">
+                  <input type="checkbox" id="pageSettingsComplexUrl" name="complexUrl">
+                  <span>Use Complex Url</span>
+                </label>
+                <label class="wizard-checkbox" for="pageSettingsHideSearch">
+                  <input type="checkbox" id="pageSettingsHideSearch" name="hideSearch">
+                  <span>Hide from Search Engines</span>
+                </label>
+                <label class="wizard-checkbox" for="pageSettingsHideSiteSearch">
+                  <input type="checkbox" id="pageSettingsHideSiteSearch" name="hideSiteSearch">
+                  <span>Hide from Site Search</span>
+                </label>
               </div>
-            </div>
-            <div class="form-field">
-              <label for="pageSettingsDescriptionInput">Description</label>
-              <textarea
-                id="pageSettingsDescriptionInput"
-                name="description"
-                placeholder="Add a short summary for collaborators"
-              ></textarea>
+              <div class="wizard-field">
+                <label for="pageSettingsCanonical">Canonical Url</label>
+                <input type="url" id="pageSettingsCanonical" name="canonicalUrl" placeholder="https://mydomain.com/title">
+              </div>
+              <div class="wizard-field">
+                <label for="pageSettingsMetaTitle">Meta Title</label>
+                <input type="text" id="pageSettingsMetaTitle" name="metaTitle" placeholder="About Us — My Company">
+              </div>
+              <div class="wizard-field">
+                <label for="pageSettingsMetaDescription">Meta Description</label>
+                <textarea
+                  id="pageSettingsMetaDescription"
+                  name="metaDescription"
+                  rows="3"
+                  placeholder="Describe the page in 160 characters or fewer"
+                  maxlength="160"
+                ></textarea>
+              </div>
             </div>
           </section>
           <section
             class="page-settings-panel"
-            id="pageSettingsPanel-publishing"
+            id="pageSettingsPanel-socials"
             role="tabpanel"
-            aria-labelledby="pageSettingsTab-publishing"
-            data-page-settings-panel="publishing"
+            aria-labelledby="pageSettingsTab-socials"
+            data-page-settings-panel="socials"
             hidden
             aria-hidden="true"
           >
-            <div class="page-settings-columns">
-              <div class="form-field">
-                <label for="pageSettingsStatusSelect">Status</label>
-                <select id="pageSettingsStatusSelect" name="status"></select>
+            <div class="wizard-section">
+              <div class="wizard-field">
+                <label for="pageSettingsOgTitle">Open Graph Title</label>
+                <input type="text" id="pageSettingsOgTitle" name="ogTitle" placeholder="About Us">
               </div>
-              <div class="form-field">
-                <label for="pageSettingsAuthorSelect">Owner</label>
-                <select id="pageSettingsAuthorSelect" name="author"></select>
+              <div class="wizard-field">
+                <label for="pageSettingsOgDescription">Open Graph Description</label>
+                <textarea
+                  id="pageSettingsOgDescription"
+                  name="ogDescription"
+                  rows="3"
+                  placeholder="Share a short description for social cards"
+                ></textarea>
+              </div>
+              <div class="wizard-field">
+                <label for="pageSettingsOgImage">Open Graph Image</label>
+                <div class="wizard-file-drop">
+                  <i class="fa-regular fa-image" aria-hidden="true"></i>
+                  <strong>Upload a cover image</strong>
+                  <p class="wizard-helper-text">Recommended dimensions: 1200x630.</p>
+                  <div class="wizard-file-actions">
+                    <label for="pageSettingsOgImage">Select File...</label>
+                    <button type="button" class="danger">Remove</button>
+                  </div>
+                  <input type="file" id="pageSettingsOgImage" name="ogImage" accept="image/*">
+                </div>
               </div>
             </div>
-            <p class="dialog-subtitle">
-              Choose how the page should be available and who is responsible for it.
-            </p>
           </section>
           <section
             class="page-settings-panel"
-            id="pageSettingsPanel-metadata"
+            id="pageSettingsPanel-access"
             role="tabpanel"
-            aria-labelledby="pageSettingsTab-metadata"
-            data-page-settings-panel="metadata"
+            aria-labelledby="pageSettingsTab-access"
+            data-page-settings-panel="access"
             hidden
             aria-hidden="true"
           >
-            <dl class="page-settings-meta">
-              <div>
-                <dt>Page URL</dt>
-                <dd id="pageSettingsUrlValue">—</dd>
+            <div class="wizard-section">
+              <div class="wizard-field">
+                <label for="pageSettingsPrivacy">Privacy Setting</label>
+                <select id="pageSettingsPrivacy" name="privacySetting">
+                  <option value="any">Any user</option>
+                  <option value="members">Only members</option>
+                  <option value="admins">Only administrators</option>
+                </select>
+                <p class="wizard-select-note">
+                  This setting allows you to restrict public access to this page on your site.
+                </p>
               </div>
-              <div>
-                <dt>Created</dt>
-                <dd id="pageSettingsCreatedValue">—</dd>
+              <div class="wizard-inline-controls">
+                <label class="wizard-checkbox" for="pageSettingsRequireLogin">
+                  <input type="checkbox" id="pageSettingsRequireLogin" name="requireLogin">
+                  <span>Require Login</span>
+                </label>
+                <p class="wizard-helper-text">
+                  If selected, this page will require users to login explicitly, ignoring cookies.
+                </p>
               </div>
-              <div>
-                <dt>Last updated</dt>
-                <dd id="pageSettingsUpdatedValue">—</dd>
-              </div>
-            </dl>
-            <p class="dialog-subtitle">
-              Metadata updates automatically based on your edits and publishing history.
-            </p>
+            </div>
           </section>
         </div>
         <div class="dialog-actions">
@@ -5515,8 +5923,6 @@
         { value: 'trash', label: 'Trash' },
       ];
 
-      const NEW_PAGE_STATUS_OPTIONS = STATUS_OPTIONS.filter(({ value }) => value !== 'trash');
-
       const STATUS_DESCRIPTIONS = {
         published: 'Visible immediately after creation',
         unpublished: 'Keep offline but ready to go live later',
@@ -5638,11 +6044,6 @@
       const newPageDialogCloseButton = newPageDialog?.querySelector('.dialog-close');
       const newPageForm = document.getElementById('newPageForm');
       const newPageTitleInput = document.getElementById('newPageTitle');
-      const newPageTypeInput = document.getElementById('newPageTypeInput');
-      const newPageTypeGrid = newPageDialog?.querySelector('.new-page-type-grid') || null;
-      const newPageTypeButtons = newPageDialog
-        ? Array.from(newPageDialog.querySelectorAll('[data-page-type]'))
-        : [];
       const newPageSteps = newPageForm
         ? Array.from(newPageForm.querySelectorAll('[data-step]'))
         : [];
@@ -5655,12 +6056,6 @@
       const newPageSlugInput = document.getElementById('newPageSlug');
       const newPageMetaTitleInput = document.getElementById('newPageMetaTitle');
       const newPageMetaDescriptionInput = document.getElementById('newPageMetaDescription');
-      const newPageStatusContainer =
-        newPageDialog?.querySelector('[data-status-options]') || null;
-      const newPageScheduleWrapper =
-        newPageDialog?.querySelector('[data-schedule-wrapper]') || null;
-      const newPageScheduleDateInput = document.getElementById('newPageScheduleDate');
-      const newPageScheduleTimeInput = document.getElementById('newPageScheduleTime');
       const copyPageDialog = document.getElementById('copyPageDialog');
       const copyPageDialogClose = copyPageDialog?.querySelector('.dialog-close');
       const copyPageForm = document.getElementById('copyPageForm');
@@ -5668,8 +6063,6 @@
       const copyPageSourceName = document.getElementById('copyPageSourceName');
       const copyPageCancelButton = copyPageDialog?.querySelector('[data-copy-dialog-action="cancel"]');
       let newPageCurrentStepIndex = 0;
-      const newPageStatusRadios = [];
-
       const masterCheckbox = document.getElementById('masterCheckbox');
       const bulkBar = document.getElementById('bulkActionsBar');
       const selectionCount = document.getElementById('selectionCount');
@@ -5717,13 +6110,18 @@
       const pageSettingsIdInput = document.getElementById('pageSettingsIdInput');
       const pageSettingsTitleInput = document.getElementById('pageSettingsTitleInput');
       const pageSettingsSlugInput = document.getElementById('pageSettingsSlugInput');
-      const pageSettingsFolderSelect = document.getElementById('pageSettingsFolderSelect');
-      const pageSettingsStatusSelect = document.getElementById('pageSettingsStatusSelect');
-      const pageSettingsAuthorSelect = document.getElementById('pageSettingsAuthorSelect');
-      const pageSettingsDescriptionInput = document.getElementById('pageSettingsDescriptionInput');
-      const pageSettingsUrlValue = document.getElementById('pageSettingsUrlValue');
-      const pageSettingsCreatedValue = document.getElementById('pageSettingsCreatedValue');
-      const pageSettingsUpdatedValue = document.getElementById('pageSettingsUpdatedValue');
+      const pageSettingsHomeToggle = document.getElementById('pageSettingsHomeToggle');
+      const pageSettingsPrivacySelect = document.getElementById('pageSettingsPrivacy');
+      const pageSettingsRequireLoginCheckbox = document.getElementById('pageSettingsRequireLogin');
+      const pageSettingsComplexUrlCheckbox = document.getElementById('pageSettingsComplexUrl');
+      const pageSettingsHideSearchCheckbox = document.getElementById('pageSettingsHideSearch');
+      const pageSettingsHideSiteSearchCheckbox = document.getElementById('pageSettingsHideSiteSearch');
+      const pageSettingsCanonicalInput = document.getElementById('pageSettingsCanonical');
+      const pageSettingsMetaTitleInput = document.getElementById('pageSettingsMetaTitle');
+      const pageSettingsMetaDescriptionInput = document.getElementById('pageSettingsMetaDescription');
+      const pageSettingsOgTitleInput = document.getElementById('pageSettingsOgTitle');
+      const pageSettingsOgDescriptionInput = document.getElementById('pageSettingsOgDescription');
+      const pageSettingsOgImageInput = document.getElementById('pageSettingsOgImage');
 
       const publishDialog = document.getElementById('publishConfirmDialog');
       const publishDialogPanel = publishDialog?.querySelector('.dialog');
@@ -6341,67 +6739,33 @@
       });
 
       function populatePageSettingsControls() {
-        if (pageSettingsFolderSelect) {
-          const previousValue = pageSettingsFolderSelect.value;
-          pageSettingsFolderSelect.innerHTML = '';
-          folderOptions.forEach(({ value, label }) => {
-            const option = document.createElement('option');
-            option.value = value;
-            option.textContent = label;
-            pageSettingsFolderSelect.append(option);
-          });
-          if (
-            previousValue &&
-            pageSettingsFolderSelect.querySelector(`option[value="${previousValue}"]`)
-          ) {
-            pageSettingsFolderSelect.value = previousValue;
-          } else {
-            pageSettingsFolderSelect.value = '_root';
-          }
+        if (pageSettingsPrivacySelect) {
+          pageSettingsPrivacySelect.value = 'any';
         }
-
-        if (pageSettingsStatusSelect) {
-          const previousValue = pageSettingsStatusSelect.value;
-          pageSettingsStatusSelect.innerHTML = '';
-          STATUS_OPTIONS.forEach(({ value, label }) => {
-            const option = document.createElement('option');
-            option.value = value;
-            option.textContent = label;
-            pageSettingsStatusSelect.append(option);
-          });
-          const fallbackStatus =
-            STATUS_OPTIONS.find(({ value }) => value === 'draft')?.value || STATUS_OPTIONS[0]?.value || '';
-          if (
-            previousValue &&
-            pageSettingsStatusSelect.querySelector(`option[value="${previousValue}"]`)
-          ) {
-            pageSettingsStatusSelect.value = previousValue;
-          } else {
-            pageSettingsStatusSelect.value = fallbackStatus;
+        [
+          pageSettingsHomeToggle,
+          pageSettingsComplexUrlCheckbox,
+          pageSettingsHideSearchCheckbox,
+          pageSettingsHideSiteSearchCheckbox,
+          pageSettingsRequireLoginCheckbox,
+        ].forEach((checkbox) => {
+          if (checkbox instanceof HTMLInputElement) {
+            checkbox.checked = false;
           }
-        }
-
-        if (pageSettingsAuthorSelect) {
-          const previousValue = pageSettingsAuthorSelect.value;
-          pageSettingsAuthorSelect.innerHTML = '';
-          const unassignedOption = document.createElement('option');
-          unassignedOption.value = '';
-          unassignedOption.textContent = 'Unassigned';
-          pageSettingsAuthorSelect.append(unassignedOption);
-          authorOptions.forEach((author) => {
-            const option = document.createElement('option');
-            option.value = author;
-            option.textContent = author;
-            pageSettingsAuthorSelect.append(option);
-          });
-          if (
-            previousValue &&
-            pageSettingsAuthorSelect.querySelector(`option[value="${previousValue}"]`)
-          ) {
-            pageSettingsAuthorSelect.value = previousValue;
-          } else {
-            pageSettingsAuthorSelect.value = '';
+        });
+        [
+          pageSettingsCanonicalInput,
+          pageSettingsMetaTitleInput,
+          pageSettingsMetaDescriptionInput,
+          pageSettingsOgTitleInput,
+          pageSettingsOgDescriptionInput,
+        ].forEach((input) => {
+          if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+            input.value = '';
           }
+        });
+        if (pageSettingsOgImageInput instanceof HTMLInputElement) {
+          pageSettingsOgImageInput.value = '';
         }
       }
 
@@ -6410,37 +6774,14 @@
         if (pageSettingsDialogSubtitle) {
           pageSettingsDialogSubtitle.textContent = '';
         }
-        if (pageSettingsUrlValue) {
-          pageSettingsUrlValue.textContent = '—';
-        }
-        if (pageSettingsCreatedValue) {
-          pageSettingsCreatedValue.textContent = '—';
-        }
-        if (pageSettingsUpdatedValue) {
-          pageSettingsUpdatedValue.textContent = '—';
-        }
         if (pageSettingsIdInput) {
           pageSettingsIdInput.value = '';
         }
+        populatePageSettingsControls();
         setActivePageSettingsTab(defaultPageSettingsTab);
       }
 
-      function formatPageDate(dateString) {
-        if (!dateString) {
-          return '—';
-        }
-        const parsed = new Date(dateString);
-        if (Number.isNaN(parsed.getTime())) {
-          return dateString;
-        }
-        return new Intl.DateTimeFormat('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-        }).format(parsed);
-      }
-
-      function openPageSettingsDialog(pageId, trigger) {
+     function openPageSettingsDialog(pageId, trigger) {
         if (!pageSettingsDialog || !pageId) {
           return;
         }
@@ -6458,13 +6799,17 @@
           row.querySelector('.title-button')?.textContent?.trim() ||
           'Untitled page';
         const slug = row.dataset.pageId || '';
-        const folder = row.dataset.folder || '_root';
-        const status = row.dataset.status || 'draft';
-        const author = row.dataset.author || '';
-        const description = row.dataset.description || '';
-        const folderRow = folderRowById.get(folder);
-        const folderLabel =
-          folder === '_root' ? 'No folder' : folderRow?.dataset.folderName || folder;
+        const metaTitle = row.dataset.metaTitle || fallbackTitle;
+        const metaDescription = row.dataset.metaDescription || '';
+        const ogTitle = row.dataset.ogTitle || fallbackTitle;
+        const ogDescription = row.dataset.ogDescription || '';
+        const privacy = row.dataset.privacy || 'any';
+        const requiresLogin = row.dataset.requireLogin === 'true';
+        const complexUrl = row.dataset.complexUrl === 'true';
+        const hideSearch = row.dataset.hideSearch === 'true';
+        const hideSiteSearch = row.dataset.hideSiteSearch === 'true';
+        const canonicalUrl = row.dataset.canonicalUrl || '';
+        const isHomePage = row.dataset.home === 'true';
 
         if (pageSettingsDialogTitle) {
           pageSettingsDialogTitle.textContent = 'Page settings';
@@ -6481,45 +6826,44 @@
         if (pageSettingsSlugInput) {
           pageSettingsSlugInput.value = slug;
         }
-        if (pageSettingsFolderSelect) {
-          if (!pageSettingsFolderSelect.querySelector(`option[value="${folder}"]`)) {
+        if (pageSettingsHomeToggle) {
+          pageSettingsHomeToggle.checked = isHomePage;
+        }
+        if (pageSettingsPrivacySelect) {
+          if (!pageSettingsPrivacySelect.querySelector(`option[value="${privacy}"]`)) {
             const option = document.createElement('option');
-            option.value = folder;
-            option.textContent = folderLabel || folder || 'No folder';
-            pageSettingsFolderSelect.append(option);
+            option.value = privacy;
+            option.textContent = privacy;
+            pageSettingsPrivacySelect.append(option);
           }
-          pageSettingsFolderSelect.value = folder || '_root';
+          pageSettingsPrivacySelect.value = privacy;
         }
-        if (pageSettingsStatusSelect) {
-          if (!pageSettingsStatusSelect.querySelector(`option[value="${status}"]`)) {
-            const option = document.createElement('option');
-            option.value = status;
-            option.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-            pageSettingsStatusSelect.append(option);
-          }
-          pageSettingsStatusSelect.value = status;
+        if (pageSettingsRequireLoginCheckbox) {
+          pageSettingsRequireLoginCheckbox.checked = requiresLogin;
         }
-        if (pageSettingsAuthorSelect) {
-          if (author && !pageSettingsAuthorSelect.querySelector(`option[value="${author}"]`)) {
-            const option = document.createElement('option');
-            option.value = author;
-            option.textContent = author;
-            pageSettingsAuthorSelect.append(option);
-          }
-          pageSettingsAuthorSelect.value = author || '';
+        if (pageSettingsComplexUrlCheckbox) {
+          pageSettingsComplexUrlCheckbox.checked = complexUrl;
         }
-        if (pageSettingsDescriptionInput) {
-          pageSettingsDescriptionInput.value = description;
+        if (pageSettingsHideSearchCheckbox) {
+          pageSettingsHideSearchCheckbox.checked = hideSearch;
         }
-        if (pageSettingsUrlValue) {
-          const folderSegment = folder && folder !== '_root' ? `${folder}/` : '';
-          pageSettingsUrlValue.textContent = slug ? `/${folderSegment}${slug}` : '—';
+        if (pageSettingsHideSiteSearchCheckbox) {
+          pageSettingsHideSiteSearchCheckbox.checked = hideSiteSearch;
         }
-        if (pageSettingsCreatedValue) {
-          pageSettingsCreatedValue.textContent = formatPageDate(row.dataset.created);
+        if (pageSettingsCanonicalInput) {
+          pageSettingsCanonicalInput.value = canonicalUrl;
         }
-        if (pageSettingsUpdatedValue) {
-          pageSettingsUpdatedValue.textContent = formatPageDate(row.dataset.modified);
+        if (pageSettingsMetaTitleInput) {
+          pageSettingsMetaTitleInput.value = metaTitle;
+        }
+        if (pageSettingsMetaDescriptionInput) {
+          pageSettingsMetaDescriptionInput.value = metaDescription;
+        }
+        if (pageSettingsOgTitleInput) {
+          pageSettingsOgTitleInput.value = ogTitle;
+        }
+        if (pageSettingsOgDescriptionInput) {
+          pageSettingsOgDescriptionInput.value = ogDescription;
         }
 
         pageSettingsDialog.setAttribute('aria-hidden', 'false');
@@ -7686,94 +8030,11 @@
         });
       }
 
-      function getSelectedStatusValue() {
-        const selectedRadio = newPageStatusRadios.find((radio) => radio.checked);
-        return selectedRadio ? selectedRadio.value : '';
-      }
-
-      function syncScheduleState() {
-        const selectedStatus = getSelectedStatusValue();
-        const requiresSchedule = selectedStatus === 'scheduled';
-        if (newPageScheduleWrapper) {
-          newPageScheduleWrapper.toggleAttribute('hidden', !requiresSchedule);
-          newPageScheduleWrapper.setAttribute('aria-hidden', requiresSchedule ? 'false' : 'true');
-        }
-        const scheduleInputs = [newPageScheduleDateInput, newPageScheduleTimeInput];
-        scheduleInputs.forEach((input) => {
-          if (!input) {
-            return;
-          }
-          if (requiresSchedule) {
-            input.removeAttribute('disabled');
-            input.setAttribute('required', 'true');
-          } else {
-            input.value = '';
-            input.setCustomValidity('');
-            input.removeAttribute('required');
-            input.setAttribute('disabled', 'true');
-          }
-        });
-      }
-
-      function handleStatusChange() {
-        if (newPageStatusRadios.length > 0) {
-          newPageStatusRadios[0].setCustomValidity('');
-        }
-        syncScheduleState();
-        syncCreateButtonState();
-      }
-
-      function renderNewPageStatusOptions() {
-        if (!newPageStatusContainer) {
-          return;
-        }
-        newPageStatusContainer.innerHTML = '';
-        newPageStatusRadios.length = 0;
-        NEW_PAGE_STATUS_OPTIONS.forEach(({ value, label }) => {
-          const optionLabel = document.createElement('label');
-          optionLabel.className = 'new-page-status-option';
-
-          const radio = document.createElement('input');
-          radio.type = 'radio';
-          radio.name = 'status';
-          radio.value = value;
-          radio.required = true;
-          radio.checked = value === 'draft';
-          radio.defaultChecked = radio.checked;
-          optionLabel.appendChild(radio);
-
-          const textWrapper = document.createElement('span');
-          textWrapper.className = 'new-page-status-label';
-          const title = document.createElement('span');
-          title.textContent = label;
-          textWrapper.appendChild(title);
-          const descriptionText = STATUS_DESCRIPTIONS[value];
-          if (descriptionText) {
-            const description = document.createElement('small');
-            description.textContent = descriptionText;
-            textWrapper.appendChild(description);
-          }
-          optionLabel.appendChild(textWrapper);
-
-          radio.addEventListener('change', handleStatusChange);
-
-          newPageStatusContainer.appendChild(optionLabel);
-          newPageStatusRadios.push(radio);
-        });
-      }
-
       function syncCreateButtonState() {
         if (!newPageSubmitButton) {
           return;
         }
-        const statusValue = getSelectedStatusValue();
-        const requiresSchedule = statusValue === 'scheduled';
-        const scheduleReady =
-          !requiresSchedule ||
-          Boolean(newPageScheduleDateInput?.value) && Boolean(newPageScheduleTimeInput?.value);
-        const statusReady = Boolean(statusValue);
-        const shouldDisable = !(statusReady && scheduleReady);
-        newPageSubmitButton.disabled = shouldDisable;
+        newPageSubmitButton.disabled = false;
       }
 
       function syncFilterControls() {
@@ -7814,8 +8075,6 @@
       renderStatusFilters();
       renderTypeFilters();
       renderReportFilters();
-      renderNewPageStatusOptions();
-      syncScheduleState();
       syncCreateButtonState();
       syncFilterControls();
 
@@ -7871,21 +8130,7 @@
           });
           newPageForm.reset();
         }
-        newPageStatusRadios.forEach((radio) => {
-          radio.checked = radio.defaultChecked;
-        });
-        syncScheduleState();
         syncCreateButtonState();
-        if (newPageStatusRadios.length > 0) {
-          newPageStatusRadios[0].setCustomValidity('');
-        }
-        if (newPageTypeInput) {
-          newPageTypeInput.value = '';
-        }
-        newPageTypeButtons.forEach((button) => {
-          button.classList.remove('selected');
-          button.setAttribute('aria-checked', 'false');
-        });
         newPageSlugInput?.setCustomValidity('');
         newPageMetaTitleInput?.setCustomValidity('');
         newPageMetaDescriptionInput?.setCustomValidity('');
@@ -8473,7 +8718,7 @@
         if (!section) {
           return true;
         }
-        if (section.dataset.step === 'metadata') {
+        if (section.dataset.step === 'seo') {
           if (newPageSlugInput) {
             const slugValue = newPageSlugInput.value.trim();
             if (!slugValue) {
@@ -8508,35 +8753,6 @@
               newPageMetaDescriptionInput.value = descriptionValue;
               newPageMetaDescriptionInput.setCustomValidity('');
             }
-          }
-        }
-        if (section.dataset.step === 'publishing') {
-          const statusValue = getSelectedStatusValue();
-          if (newPageStatusRadios.length > 0) {
-            newPageStatusRadios[0].setCustomValidity(
-              statusValue ? '' : 'Please choose an initial status.'
-            );
-          }
-          if (statusValue === 'scheduled') {
-            if (newPageScheduleDateInput) {
-              const dateValue = newPageScheduleDateInput.value;
-              if (!dateValue) {
-                newPageScheduleDateInput.setCustomValidity('Select a publish date.');
-              } else {
-                newPageScheduleDateInput.setCustomValidity('');
-              }
-            }
-            if (newPageScheduleTimeInput) {
-              const timeValue = newPageScheduleTimeInput.value;
-              if (!timeValue) {
-                newPageScheduleTimeInput.setCustomValidity('Select a publish time.');
-              } else {
-                newPageScheduleTimeInput.setCustomValidity('');
-              }
-            }
-          } else {
-            newPageScheduleDateInput?.setCustomValidity('');
-            newPageScheduleTimeInput?.setCustomValidity('');
           }
         }
         let isValid = true;
@@ -8604,76 +8820,6 @@
       newPageMetaDescriptionInput?.addEventListener('input', () => {
         newPageMetaDescriptionInput.setCustomValidity('');
       });
-
-      newPageScheduleDateInput?.addEventListener('input', () => {
-        newPageScheduleDateInput.setCustomValidity('');
-        syncCreateButtonState();
-      });
-
-      newPageScheduleTimeInput?.addEventListener('input', () => {
-        newPageScheduleTimeInput.setCustomValidity('');
-        syncCreateButtonState();
-      });
-
-      function selectNewPageType(button, { focus = false } = {}) {
-        if (!button || newPageTypeButtons.length === 0) {
-          return;
-        }
-        const value = button.dataset.pageType || '';
-        newPageTypeButtons.forEach((typeButton) => {
-          const isCurrent = typeButton === button;
-          typeButton.classList.toggle('selected', isCurrent);
-          typeButton.setAttribute('aria-checked', isCurrent ? 'true' : 'false');
-        });
-        if (newPageTypeInput) {
-          newPageTypeInput.value = value;
-        }
-        if (focus) {
-          button.focus();
-        }
-      }
-
-      newPageTypeButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          selectNewPageType(button);
-        });
-        button.addEventListener('keydown', (event) => {
-          if (event.key === ' ' || event.key === 'Enter') {
-            event.preventDefault();
-            selectNewPageType(button);
-          }
-        });
-      });
-
-      if (newPageTypeGrid && newPageTypeButtons.length > 0) {
-        newPageTypeGrid.addEventListener('keydown', (event) => {
-          const keys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
-          if (!keys.includes(event.key)) {
-            return;
-          }
-          event.preventDefault();
-          const activeElement = document.activeElement;
-          const currentIndex = newPageTypeButtons.findIndex((button) => button.classList.contains('selected'));
-          let focusIndex = newPageTypeButtons.indexOf(activeElement);
-          if (focusIndex === -1) {
-            focusIndex = currentIndex >= 0 ? currentIndex : 0;
-          }
-          let targetIndex = focusIndex;
-          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-            targetIndex = (focusIndex + 1) % newPageTypeButtons.length;
-          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-            targetIndex = (focusIndex - 1 + newPageTypeButtons.length) % newPageTypeButtons.length;
-          } else if (event.key === 'Home') {
-            targetIndex = 0;
-          } else if (event.key === 'End') {
-            targetIndex = newPageTypeButtons.length - 1;
-          }
-          const targetButton = newPageTypeButtons[targetIndex];
-          if (targetButton) {
-            selectNewPageType(targetButton, { focus: true });
-          }
-        });
-      }
 
       newPageForm?.addEventListener('submit', (event) => {
         event.preventDefault();
