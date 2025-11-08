@@ -1316,6 +1316,22 @@
       padding-left: 48px;
     }
 
+    body.pages-flat-view .group-row {
+      display: none !important;
+    }
+
+    body.pages-flat-view .page-row[data-folder] td:first-child {
+      padding-left: 24px;
+    }
+
+    body.pages-flat-view .page-row[data-folder] td.checkbox-cell {
+      padding-left: 20px;
+    }
+
+    body.pages-flat-view .page-row.is-collapsed {
+      display: table-row !important;
+    }
+
     .folder-actions {
       display: inline-flex;
       align-items: center;
@@ -2685,6 +2701,10 @@
         padding-left: 32px;
       }
 
+      body.pages-flat-view .page-row[data-folder] td:first-child {
+        padding-left: 24px;
+      }
+
       .dialog {
         width: 100%;
       }
@@ -2725,9 +2745,18 @@
           <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="scheduled">Scheduled <span class="tab-badge" data-status-count="scheduled">0</span></button>
           <button class="tab-button" type="button" role="tab" aria-selected="false" data-status-tab="trash">Trash <span class="tab-badge" data-status-count="trash">0</span></button>
         </nav>
-        <div class="quick-actions" aria-label="History and view controls">
-          <button class="icon-button" type="button" title="Undo" aria-label="Undo" data-tooltip="Undo"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
-          <button class="icon-button" type="button" title="Redo" aria-label="Redo" data-tooltip="Redo"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>
+        <div class="quick-actions" aria-label="View controls">
+          <button
+            class="icon-button"
+            type="button"
+            title="Show pages without folders"
+            aria-label="Show pages without folders"
+            data-flat-view-toggle
+            data-tooltip="Show pages without folders"
+            aria-pressed="false"
+          >
+            <i class="fa-solid fa-list" data-flat-view-icon aria-hidden="true"></i>
+          </button>
           <button
             class="icon-button"
             type="button"
@@ -5911,6 +5940,7 @@
   <script>
     (function () {
       const folderStateStorageKey = 'mw-pages-folder-state';
+      const flatViewStorageKey = 'mw-pages-flat-view';
       const state = {
         status: 'all',
         search: '',
@@ -6243,6 +6273,8 @@
       const folderToggleButtons = Array.from(document.querySelectorAll('[data-folder-toggle]'));
       const folderCheckboxes = Array.from(document.querySelectorAll('[data-folder-checkbox]'));
       const folderViewToggleButton = document.querySelector('[data-folder-toggle-all]');
+      const flatViewToggleButton = document.querySelector('[data-flat-view-toggle]');
+      const flatViewToggleIcon = flatViewToggleButton?.querySelector('[data-flat-view-icon]') || null;
       const actionMenus = Array.from(document.querySelectorAll('[data-action-menu]'));
       const copyPageButtons = Array.from(document.querySelectorAll('[data-copy-page]'));
 
@@ -6918,6 +6950,16 @@
         } catch (error) {
           console.warn('Unable to parse folder state', error);
           return {};
+        }
+      })();
+
+      let isFlatView = (() => {
+        try {
+          const stored = localStorage.getItem(flatViewStorageKey);
+          return stored === 'true';
+        } catch (error) {
+          console.warn('Unable to parse flat view preference', error);
+          return false;
         }
       })();
 
@@ -7808,8 +7850,34 @@
         });
       }
 
+      function updateFlatViewToggleButton() {
+        if (!flatViewToggleButton) {
+          return;
+        }
+
+        const label = isFlatView ? 'Show pages in folders' : 'Show pages without folders';
+        flatViewToggleButton.setAttribute('aria-label', label);
+        flatViewToggleButton.setAttribute('title', label);
+        flatViewToggleButton.setAttribute('aria-pressed', isFlatView ? 'true' : 'false');
+        flatViewToggleButton.setAttribute('data-tooltip', label);
+        if (flatViewToggleIcon) {
+          flatViewToggleIcon.classList.remove('fa-list', 'fa-folder-tree');
+          flatViewToggleIcon.classList.add(isFlatView ? 'fa-folder-tree' : 'fa-list');
+        }
+      }
+
       function updateFolderViewToggleButtonState() {
         if (!folderViewToggleButton) {
+          return;
+        }
+
+        if (isFlatView) {
+          const label = 'Folder controls hidden in flat view';
+          folderViewToggleButton.setAttribute('aria-label', label);
+          folderViewToggleButton.setAttribute('title', label);
+          folderViewToggleButton.setAttribute('aria-pressed', 'false');
+          folderViewToggleButton.setAttribute('data-tooltip', label);
+          folderViewToggleButton.disabled = true;
           return;
         }
 
@@ -7818,6 +7886,7 @@
           folderViewToggleButton.setAttribute('aria-label', 'Expand all folders');
           folderViewToggleButton.setAttribute('title', 'Expand all folders');
           folderViewToggleButton.setAttribute('aria-pressed', 'false');
+          folderViewToggleButton.setAttribute('data-tooltip', 'Expand all folders');
           folderViewToggleButton.disabled = true;
           return;
         }
@@ -7831,6 +7900,7 @@
         folderViewToggleButton.setAttribute('aria-label', label);
         folderViewToggleButton.setAttribute('title', label);
         folderViewToggleButton.setAttribute('aria-pressed', allExpanded ? 'true' : 'false');
+        folderViewToggleButton.setAttribute('data-tooltip', label);
       }
 
       function setFolderExpanded(folderId, expanded, persist = true) {
@@ -7863,6 +7933,49 @@
         updateFolderViewToggleButtonState();
         updateMasterCheckbox();
         updateBulkBar();
+      }
+
+      function refreshFolderExpansionFromState() {
+        if (isFlatView) {
+          return;
+        }
+        folderToggleButtons.forEach((button) => {
+          const folderId = button.dataset.folderToggle;
+          if (!folderId) {
+            return;
+          }
+          const stored = folderState[folderId];
+          const expanded = stored !== undefined ? Boolean(stored) : true;
+          setFolderExpanded(folderId, expanded, false);
+        });
+      }
+
+      function applyFlatViewState({ persist = true } = {}) {
+        document.body.classList.toggle('pages-flat-view', isFlatView);
+
+        if (isFlatView) {
+          pageRows.forEach((row) => {
+            row.classList.remove('is-collapsed');
+            row.removeAttribute('aria-hidden');
+          });
+        } else {
+          refreshFolderExpansionFromState();
+        }
+
+        updateFlatViewToggleButton();
+        updateFolderViewToggleButtonState();
+        updateGroupRowsVisibility();
+        updateMasterCheckbox();
+        updateFolderCheckboxes();
+        updateBulkBar();
+
+        if (persist) {
+          try {
+            localStorage.setItem(flatViewStorageKey, isFlatView ? 'true' : 'false');
+          } catch (error) {
+            console.warn('Unable to persist flat view preference', error);
+          }
+        }
       }
 
       function updateRows() {
@@ -9180,23 +9293,35 @@
 
       folderToggleButtons.forEach((button) => {
         const folderId = button.dataset.folderToggle;
-        const expanded =
-          folderState[folderId] !== undefined ? Boolean(folderState[folderId]) : true;
-        setFolderExpanded(folderId, expanded, false);
         button.addEventListener('click', (event) => {
           event.preventDefault();
+          if (isFlatView) {
+            return;
+          }
           const isExpanded = button.getAttribute('aria-expanded') === 'true';
           setFolderExpanded(folderId, !isExpanded);
         });
         button.addEventListener('dblclick', (event) => {
           event.preventDefault();
+          if (isFlatView) {
+            return;
+          }
           event.stopPropagation();
           openFolderDialog(folderId, { trigger: button });
         });
       });
 
+      flatViewToggleButton?.addEventListener('click', (event) => {
+        event.preventDefault();
+        isFlatView = !isFlatView;
+        applyFlatViewState();
+      });
+
       folderViewToggleButton?.addEventListener('click', (event) => {
         event.preventDefault();
+        if (isFlatView) {
+          return;
+        }
         const availableToggles = folderToggleButtons.filter((button) => button.dataset.folderToggle);
         const shouldExpand = availableToggles.some(
           (toggleButton) => toggleButton.getAttribute('aria-expanded') !== 'true'
@@ -9208,6 +9333,8 @@
           }
         });
       });
+
+      applyFlatViewState({ persist: false });
 
       updateFolderViewToggleButtonState();
 
