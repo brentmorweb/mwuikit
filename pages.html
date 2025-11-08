@@ -588,62 +588,79 @@
 
     .checkbox input {
       appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 2px;
-      border: 1.5px solid var(--pages-border);
-      background: #fff;
+      margin: 0;
+      width: 20px;
+      height: 20px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       cursor: pointer;
-      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      background: transparent;
+      border: none;
+      color: var(--pages-border);
+      transition: color 0.2s ease;
     }
 
-    .checkbox input:hover {
-      border-color: rgba(37, 99, 235, 0.6);
+    .checkbox input::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.28);
+      opacity: 0;
+      transition: box-shadow 0.2s ease, opacity 0.2s ease;
+      pointer-events: none;
     }
 
     .checkbox input:focus-visible {
       outline: none;
+    }
+
+    .checkbox input:focus-visible::before {
+      opacity: 1;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.28);
     }
 
     .checkbox input::after {
-      content: '';
-      width: 9px;
-      height: 9px;
+      content: "\f0c8";
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1;
       display: block;
-      background: transparent;
-      clip-path: polygon(0 0, 100% 50%, 0 100%, 20% 50%);
-      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
-      transform: scale(0.8);
-      opacity: 0;
+      color: currentColor;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .checkbox input:not(:checked):not(:indeterminate):hover::after {
+      color: rgba(37, 99, 235, 0.6);
+    }
+
+    .checkbox input:checked:hover::after,
+    .checkbox input:indeterminate:hover::after {
+      color: #1d4ed8;
     }
 
     .checkbox input:checked {
-      background: #000;
-      border-color: #000;
+      color: var(--pages-accent);
     }
 
     .checkbox input:checked::after {
-      background: #fff;
-      opacity: 1;
-      transform: scale(1);
+      content: "\f14a";
+      font-weight: 900;
+      color: currentColor;
     }
 
     .checkbox input:indeterminate {
-      background: rgba(37, 99, 235, 0.12);
-      border-color: rgba(37, 99, 235, 0.5);
+      color: var(--pages-accent);
     }
 
     .checkbox input:indeterminate::after {
-      width: 8px;
-      height: 0;
-      border: none;
-      border-radius: 999px;
-      background: var(--pages-accent);
-      transform: scale(1);
+      content: "\f146";
+      font-weight: 900;
+      transform: none;
     }
 
     .sort-button {
