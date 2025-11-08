@@ -1316,6 +1316,10 @@
       padding-left: 48px;
     }
 
+    .page-row[data-folder] td:nth-child(2) .title-cell {
+      margin-left: 16px;
+    }
+
     body.pages-flat-view .group-row {
       display: none !important;
     }
@@ -2382,6 +2386,94 @@
       color: var(--pages-muted);
     }
 
+    .page-settings-choice-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .page-settings-choice-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .page-settings-choice-header span {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--pages-text);
+    }
+
+    .page-settings-choice-header p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .page-settings-choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .page-settings-choice {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--choice-bg, rgba(148, 163, 184, 0.18));
+      color: var(--choice-color, #334155);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .page-settings-choice[data-selected='false'] {
+      filter: grayscale(0.35);
+      opacity: 0.72;
+    }
+
+    .page-settings-choice[data-selected='true'] {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+      filter: none;
+    }
+
+    .page-settings-choice:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.24);
+    }
+
+    .page-settings-choice[data-accent='blue'] {
+      --choice-bg: rgba(37, 99, 235, 0.16);
+      --choice-color: #1d4ed8;
+    }
+
+    .page-settings-choice[data-accent='violet'] {
+      --choice-bg: rgba(139, 92, 246, 0.18);
+      --choice-color: #5b21b6;
+    }
+
+    .page-settings-choice[data-accent='amber'] {
+      --choice-bg: rgba(217, 119, 6, 0.2);
+      --choice-color: #b45309;
+    }
+
+    .page-settings-choice[data-accent='emerald'] {
+      --choice-bg: rgba(16, 185, 129, 0.2);
+      --choice-color: #047857;
+    }
+
+    .page-settings-choice[data-accent='pink'] {
+      --choice-bg: rgba(219, 39, 119, 0.2);
+      --choice-color: #be185d;
+    }
+
+    .page-settings-choice[data-accent='slate'] {
+      --choice-bg: rgba(148, 163, 184, 0.2);
+      --choice-color: #334155;
+    }
+
     .wizard-field input[type='text'],
     .wizard-field input[type='url'],
     .wizard-field textarea,
@@ -2703,6 +2795,10 @@
 
       body.pages-flat-view .page-row[data-folder] td:first-child {
         padding-left: 24px;
+      }
+
+      .page-row[data-folder] td:nth-child(2) .title-cell {
+        margin-left: 12px;
       }
 
       .dialog {
@@ -5167,11 +5263,6 @@
             </label>
           </div>
         </div>
-        <div class="form-field">
-          <label>Permissions</label>
-          <label class="checkbox-option"><input type="checkbox" name="folderPermissions" value="edit" checked>Team can edit</label>
-          <label class="checkbox-option"><input type="checkbox" name="folderPermissions" value="view">Guests can view</label>
-        </div>
         <div class="dialog-actions">
           <button type="button" data-folder-dialog-action="cancel">Cancel</button>
           <button type="submit" class="primary">Save changes</button>
@@ -5361,6 +5452,8 @@
       </div>
       <form id="pageSettingsForm">
         <input type="hidden" id="pageSettingsIdInput" name="pageId">
+        <input type="hidden" id="pageSettingsTypeInput" name="type">
+        <input type="hidden" id="pageSettingsTemplateInput" name="template">
         <div
           class="page-settings-tabs"
           role="tablist"
@@ -5434,54 +5527,219 @@
                   <span>Set as Home Page</span>
                 </label>
               </div>
-              <div class="wizard-template-picker">
-                <div class="wizard-template-header">
-                  <span>Template</span>
-                  <button type="button" class="wizard-template-change">
-                    Change <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              <div class="page-settings-choice-group">
+                <div class="page-settings-choice-header">
+                  <span>Page type</span>
+                  <p>Used to organize and filter your pages.</p>
+                </div>
+                <div
+                  class="page-settings-choices"
+                  id="pageSettingsTypeOptions"
+                  role="group"
+                  aria-label="Select page type"
+                >
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Landing"
+                    data-accent="blue"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Landing
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Content"
+                    data-accent="slate"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Content
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Docs"
+                    data-accent="slate"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Docs
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Media"
+                    data-accent="pink"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Media
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Portfolio"
+                    data-accent="pink"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Portfolio
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Campaign"
+                    data-accent="amber"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Campaign
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Report"
+                    data-accent="violet"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Report
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Resource"
+                    data-accent="emerald"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Resource
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-type-option="Style Guide"
+                    data-accent="violet"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Style Guide
                   </button>
                 </div>
-                <div class="wizard-template-carousel">
-                  <button type="button" class="wizard-template-nav" aria-label="Previous template">
-                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+              </div>
+              <div class="page-settings-choice-group">
+                <div class="page-settings-choice-header">
+                  <span>Page template</span>
+                  <p>Choose the layout that best fits this page.</p>
+                </div>
+                <div
+                  class="page-settings-choices"
+                  id="pageSettingsTemplateOptions"
+                  role="group"
+                  aria-label="Select page template"
+                >
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Standard page"
+                    data-accent="slate"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Standard page
                   </button>
-                  <div class="wizard-template-track">
-                    <div class="wizard-template-card is-active">
-                      <div class="wizard-template-preview" aria-hidden="true">
-                        <span class="preview-title"></span>
-                        <div class="preview-body">
-                          <span class="preview-line"></span>
-                          <span class="preview-line"></span>
-                          <span class="preview-line"></span>
-                        </div>
-                      </div>
-                      <strong>Page</strong>
-                    </div>
-                    <div class="wizard-template-card">
-                      <div class="wizard-template-preview" aria-hidden="true">
-                        <span class="preview-title"></span>
-                        <div class="preview-body">
-                          <span class="preview-line"></span>
-                          <span class="preview-line"></span>
-                          <span class="preview-line"></span>
-                        </div>
-                      </div>
-                      <strong>Landing</strong>
-                    </div>
-                    <div class="wizard-template-card">
-                      <div class="wizard-template-preview" aria-hidden="true">
-                        <span class="preview-title"></span>
-                        <div class="preview-body">
-                          <span class="preview-line"></span>
-                          <span class="preview-line"></span>
-                          <span class="preview-line"></span>
-                        </div>
-                      </div>
-                      <strong>Blog</strong>
-                    </div>
-                  </div>
-                  <button type="button" class="wizard-template-nav" aria-label="Next template">
-                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Hero landing"
+                    data-accent="blue"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Hero landing
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Editorial longform"
+                    data-accent="violet"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Editorial longform
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Knowledge base"
+                    data-accent="emerald"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Knowledge base
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Gallery"
+                    data-accent="pink"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Gallery
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Portfolio showcase"
+                    data-accent="pink"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Portfolio showcase
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Campaign spotlight"
+                    data-accent="amber"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Campaign spotlight
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Resource hub"
+                    data-accent="emerald"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Resource hub
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Insight report"
+                    data-accent="violet"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Insight report
+                  </button>
+                  <button
+                    type="button"
+                    class="page-settings-choice"
+                    data-page-template-option="Brand style guide"
+                    data-accent="violet"
+                    data-selected="false"
+                    aria-pressed="false"
+                  >
+                    Brand style guide
                   </button>
                 </div>
               </div>
@@ -5990,6 +6248,21 @@
         Content: 'slate',
         Docs: 'slate',
         Media: 'pink',
+        Campaign: 'amber',
+        Report: 'violet',
+        Resource: 'emerald',
+      };
+
+      const TEMPLATE_DEFAULTS_BY_TYPE = {
+        Landing: 'Hero landing',
+        Content: 'Editorial longform',
+        Docs: 'Knowledge base',
+        Media: 'Gallery',
+        Portfolio: 'Portfolio showcase',
+        Campaign: 'Campaign spotlight',
+        Report: 'Insight report',
+        Resource: 'Resource hub',
+        'Style Guide': 'Brand style guide',
       };
 
       const REPORT_CARD_OPTIONS = [
@@ -6169,6 +6442,8 @@
       const pageSettingsOgTitleInput = document.getElementById('pageSettingsOgTitle');
       const pageSettingsOgDescriptionInput = document.getElementById('pageSettingsOgDescription');
       const pageSettingsOgImageInput = document.getElementById('pageSettingsOgImage');
+      const pageSettingsTypeInput = document.getElementById('pageSettingsTypeInput');
+      const pageSettingsTemplateInput = document.getElementById('pageSettingsTemplateInput');
 
       const publishDialog = document.getElementById('publishConfirmDialog');
       const publishDialogPanel = publishDialog?.querySelector('.dialog');
@@ -6217,6 +6492,16 @@
       const defaultPageSettingsTab =
         pageSettingsTabButtons[0]?.dataset.pageSettingsTab || null;
       let activePageSettingsTab = defaultPageSettingsTab;
+      const pageSettingsTypeButtons = pageSettingsDialog
+        ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-type-option]'))
+        : [];
+      const pageSettingsTemplateButtons = pageSettingsDialog
+        ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-template-option]'))
+        : [];
+      const defaultPageTypeValue =
+        pageSettingsTypeButtons[0]?.dataset.pageTypeOption || '';
+      const defaultPageTemplateValue =
+        pageSettingsTemplateButtons[0]?.dataset.pageTemplateOption || '';
 
       function setActivePageSettingsTab(tabValue, { focusTab = false } = {}) {
         if (!pageSettingsTabButtons.length || !pageSettingsPanels.length) {
@@ -6268,6 +6553,60 @@
         }
       }
 
+      function setPageSettingsType(value) {
+        const buttons = pageSettingsTypeButtons;
+        if (!buttons.length) {
+          if (pageSettingsTypeInput) {
+            pageSettingsTypeInput.value = value || '';
+          }
+          return;
+        }
+        const availableValues = buttons
+          .map((button) => button.dataset.pageTypeOption || '')
+          .filter(Boolean);
+        const target =
+          (value && availableValues.includes(value) && value) ||
+          defaultPageTypeValue ||
+          availableValues[0] ||
+          '';
+        if (pageSettingsTypeInput) {
+          pageSettingsTypeInput.value = target;
+        }
+        buttons.forEach((button) => {
+          const buttonValue = button.dataset.pageTypeOption || '';
+          const isSelected = Boolean(target) && buttonValue === target;
+          button.dataset.selected = isSelected ? 'true' : 'false';
+          button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        });
+      }
+
+      function setPageSettingsTemplate(value) {
+        const buttons = pageSettingsTemplateButtons;
+        if (!buttons.length) {
+          if (pageSettingsTemplateInput) {
+            pageSettingsTemplateInput.value = value || '';
+          }
+          return;
+        }
+        const availableValues = buttons
+          .map((button) => button.dataset.pageTemplateOption || '')
+          .filter(Boolean);
+        const target =
+          (value && availableValues.includes(value) && value) ||
+          defaultPageTemplateValue ||
+          availableValues[0] ||
+          '';
+        if (pageSettingsTemplateInput) {
+          pageSettingsTemplateInput.value = target;
+        }
+        buttons.forEach((button) => {
+          const buttonValue = button.dataset.pageTemplateOption || '';
+          const isSelected = Boolean(target) && buttonValue === target;
+          button.dataset.selected = isSelected ? 'true' : 'false';
+          button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        });
+      }
+
       const pageRows = Array.from(document.querySelectorAll('.page-row'));
       const folderRows = Array.from(document.querySelectorAll('.group-row'));
       const folderToggleButtons = Array.from(document.querySelectorAll('[data-folder-toggle]'));
@@ -6286,6 +6625,14 @@
         const folderId = row.dataset.folder || '_root';
         if (!folderMembers.has(folderId)) {
           folderMembers.set(folderId, []);
+        }
+        if (!row.dataset.template) {
+          const fallbackTemplate =
+            TEMPLATE_DEFAULTS_BY_TYPE[row.dataset.type || ''] ||
+            defaultPageTemplateValue;
+          if (fallbackTemplate) {
+            row.dataset.template = fallbackTemplate;
+          }
         }
         folderMembers.get(folderId).push(row);
       });
@@ -6730,10 +7077,11 @@
           type = '',
           author = '',
           title = '',
+          template = '',
         } = row.dataset;
         const slugElement = row.querySelector('.title-text .subtitle');
         const slug = slugElement ? slugElement.textContent.trim() : '';
-        const searchSource = [title, slug, status, type, author, row.textContent || '']
+        const searchSource = [title, slug, status, type, author, template, row.textContent || '']
           .join(' ')
           .toLowerCase()
           .replace(/\s+/g, ' ')
@@ -6752,6 +7100,7 @@
           author,
           title,
           slug,
+          template,
           created: row.dataset.created || '',
           modified: row.dataset.modified || '',
           reportIssues,
@@ -6816,6 +7165,8 @@
         if (pageSettingsOgImageInput instanceof HTMLInputElement) {
           pageSettingsOgImageInput.value = '';
         }
+        setPageSettingsType(defaultPageTypeValue);
+        setPageSettingsTemplate(defaultPageTemplateValue);
       }
 
       function resetPageSettingsDialog() {
@@ -6914,6 +7265,17 @@
         if (pageSettingsOgDescriptionInput) {
           pageSettingsOgDescriptionInput.value = ogDescription;
         }
+
+        const typeValue = row.dataset.type || defaultPageTypeValue;
+        setPageSettingsType(typeValue);
+
+        const suggestedTemplate =
+          TEMPLATE_DEFAULTS_BY_TYPE[typeValue] || defaultPageTemplateValue;
+        const templateValue = row.dataset.template || suggestedTemplate;
+        if (!row.dataset.template && templateValue) {
+          row.dataset.template = templateValue;
+        }
+        setPageSettingsTemplate(templateValue);
 
         pageSettingsDialog.setAttribute('aria-hidden', 'false');
         syncBodyScrollState();
@@ -9042,16 +9404,10 @@
         }
         const selectedColor =
           Array.from(folderColorRadios).find((radio) => radio.checked)?.value || DEFAULT_FOLDER_COLOR;
-        const selectedPermissions = folderSettingsForm
-          ? Array.from(
-              folderSettingsForm.querySelectorAll('input[name="folderPermissions"]:checked')
-            ).map((input) => input.value)
-          : [];
         if (folderDialogMode === 'create' || !activeFolderId) {
           console.log('Create folder', {
             name: trimmedName,
             color: selectedColor,
-            permissions: selectedPermissions,
           });
           closeFolderDialog();
           return;
@@ -9086,7 +9442,6 @@
           folderId: activeFolderId,
           name: trimmedName,
           color: selectedColor,
-          permissions: selectedPermissions,
         });
         closeFolderDialog();
       });
@@ -9132,6 +9487,24 @@
         });
       });
 
+      pageSettingsTypeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextType = button.dataset.pageTypeOption || '';
+          setPageSettingsType(nextType);
+          const recommendedTemplate =
+            TEMPLATE_DEFAULTS_BY_TYPE[nextType] || defaultPageTemplateValue;
+          if (recommendedTemplate) {
+            setPageSettingsTemplate(recommendedTemplate);
+          }
+        });
+      });
+
+      pageSettingsTemplateButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setPageSettingsTemplate(button.dataset.pageTemplateOption || '');
+        });
+      });
+
       pageSettingsDialogClose?.addEventListener('click', () => {
         closePageSettingsDialog();
       });
@@ -9153,15 +9526,76 @@
           return;
         }
         const formData = new FormData(pageSettingsForm);
+        const titleValue = (formData.get('title') || '').toString().trim();
+        const slugValue = (formData.get('slug') || '').toString().trim();
+        const typeValue = (formData.get('type') || '').toString().trim();
+        const templateValue = (formData.get('template') || '').toString().trim();
+        const normalizedType = typeValue || defaultPageTypeValue;
+        const resolvedTemplate =
+          templateValue || TEMPLATE_DEFAULTS_BY_TYPE[normalizedType] || defaultPageTemplateValue;
         const payload = {
           pageId: activePageId,
-          title: (formData.get('title') || '').toString().trim(),
-          slug: (formData.get('slug') || '').toString().trim(),
+          title: titleValue,
+          slug: slugValue,
           folder: (formData.get('folder') || '').toString().trim(),
           status: (formData.get('status') || '').toString().trim(),
           author: (formData.get('author') || '').toString().trim(),
           description: (formData.get('description') || '').toString().trim(),
+          type: normalizedType,
+          template: resolvedTemplate,
         };
+        const row = pageRowById.get(activePageId);
+        if (row) {
+          if (titleValue) {
+            row.dataset.title = titleValue;
+            const titleButton = row.querySelector('.title-button');
+            if (titleButton) {
+              titleButton.textContent = titleValue;
+            }
+          }
+          if (slugValue) {
+            const subtitle = row.querySelector('.title-text .subtitle');
+            if (subtitle) {
+              subtitle.textContent = slugValue;
+            }
+          }
+          if (normalizedType) {
+            row.dataset.type = normalizedType;
+          }
+          if (resolvedTemplate) {
+            row.dataset.template = resolvedTemplate;
+          }
+          const typeChip = row.querySelector('.chip');
+          if (typeChip) {
+            typeChip.textContent = normalizedType || '—';
+            typeChip.dataset.color = TYPE_STYLES[normalizedType] || 'slate';
+          }
+        }
+        const rowEntry = rowData.find((item) => item.pageId === activePageId);
+        if (rowEntry) {
+          rowEntry.title = titleValue || rowEntry.title;
+          rowEntry.slug = slugValue || rowEntry.slug;
+          rowEntry.type = normalizedType || rowEntry.type;
+          rowEntry.template = resolvedTemplate || rowEntry.template;
+          const sourceBits = [
+            rowEntry.title,
+            rowEntry.slug,
+            rowEntry.status,
+            rowEntry.type,
+            rowEntry.author,
+            rowEntry.template,
+            row?.textContent || '',
+          ];
+          rowEntry.searchText = sourceBits
+            .join(' ')
+            .toLowerCase()
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+        applyRowVisualStyles();
+        renderTypeFilters();
+        syncFilterControls();
+        updateRows();
         console.log('Update page settings', payload);
         closePageSettingsDialog();
       });
