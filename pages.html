@@ -448,6 +448,14 @@
       background: #f7f9ff;
     }
 
+    .pages-table tbody tr.is-homepage {
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.02));
+    }
+
+    .pages-table tbody tr.is-homepage:hover {
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.12), rgba(37, 99, 235, 0.04));
+    }
+
     .pages-table tbody td {
       padding: 10px 24px;
       font-size: 14px;
@@ -2569,606 +2577,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            class="page-row"
-            data-page-id="company-overview"
-            data-status="published"
-            data-type="Landing"
-            data-author="Maya Patel"
-            data-title="Company Overview"
-            data-created="2024-12-12"
-            data-modified="2025-07-18"
-            data-report-value="860"
-            data-report-trend="5"
-            data-report-direction="up"
-            data-report-issues="seo-low"
-          >
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-row-checkbox aria-label="Select Company Overview">
-              </label>
-            </td>
-            <td>
-              <div class="title-cell">
-                <div class="title-text">
-                  <button type="button" class="title-button" data-open-page="company-overview">Company Overview</button>
-                  <span class="subtitle">company-overview</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
-            </td>
-            <td><span class="chip">Landing</span></td>
-            <td>
-              <button
-                type="button"
-                class="author-filter"
-                data-author-filter="Maya Patel"
-                title="Filter by Maya Patel"
-                aria-label="Filter by Maya Patel"
-              >
-                <div class="avatar">
-                  <span aria-hidden="true">MP</span>
-                </div>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="reports-button" data-report-drawer="company-overview">
-                <div class="reports-metric" data-trend="positive">
-                  <strong>860 views</strong>
-                  <span class="metric-trend positive">+5% vs last week</span>
-                </div>
-              </button>
-            </td>
-            <td data-created-label>Dec 12, 2024</td>
-            <td data-modified-label>Jul 18, 2025</td>
-            <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button
-                type="button"
-                aria-label="Page settings"
-                data-tooltip="Page settings"
-                data-page-settings
-              >
-                <i class="fa-solid fa-gear"></i>
-              </button>
-              <div class="action-menu" data-action-menu>
-                <button
-                  type="button"
-                  class="action-menu-trigger"
-                  aria-label="More actions"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-action-menu-trigger
-                  data-tooltip="More actions"
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
-                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
-                    <span>Publish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
-                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    <span>Unpublish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
-                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                    <span>Schedule</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
-                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                    <span>Move to Folder</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
-                    <span>Duplicate</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
-                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                    <span>Settings</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="action-menu-item is-destructive"
-                    role="menuitem"
-                    data-menu-action="trash"
-                  >
-                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                    <span>Trash</span>
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
-            data-page-id="annual-impact-report"
-            data-status="published"
-            data-type="Report"
-            data-author="Luis Gomez"
-            data-title="Annual Impact Report"
-            data-created="2025-01-22"
-            data-modified="2025-07-19"
-            data-report-value="1450"
-            data-report-trend="7"
-            data-report-direction="up"
-            data-report-issues="seo-low slow-speed"
-          >
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-row-checkbox aria-label="Select Annual Impact Report">
-              </label>
-            </td>
-            <td>
-              <div class="title-cell">
-                <div class="title-text">
-                  <button type="button" class="title-button" data-open-page="annual-impact-report">Annual Impact Report</button>
-                  <span class="subtitle">annual-impact-report</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
-            </td>
-            <td><span class="chip">Report</span></td>
-            <td>
-              <button
-                type="button"
-                class="author-filter"
-                data-author-filter="Luis Gomez"
-                title="Filter by Luis Gomez"
-                aria-label="Filter by Luis Gomez"
-              >
-                <div class="avatar">
-                  <span aria-hidden="true">LG</span>
-                </div>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="reports-button" data-report-drawer="annual-impact-report">
-                <div class="reports-metric" data-trend="positive">
-                  <strong>1.5K views</strong>
-                  <span class="metric-trend positive">+7% vs last week</span>
-                </div>
-              </button>
-            </td>
-            <td data-created-label>Jan 22, 2025</td>
-            <td data-modified-label>Jul 19, 2025</td>
-            <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button
-                type="button"
-                aria-label="Page settings"
-                data-tooltip="Page settings"
-                data-page-settings
-              >
-                <i class="fa-solid fa-gear"></i>
-              </button>
-              <div class="action-menu" data-action-menu>
-                <button
-                  type="button"
-                  class="action-menu-trigger"
-                  aria-label="More actions"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-action-menu-trigger
-                  data-tooltip="More actions"
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
-                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
-                    <span>Publish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
-                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    <span>Unpublish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
-                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                    <span>Schedule</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
-                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                    <span>Move to Folder</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
-                    <span>Duplicate</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
-                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                    <span>Settings</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="action-menu-item is-destructive"
-                    role="menuitem"
-                    data-menu-action="trash"
-                  >
-                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                    <span>Trash</span>
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
-            data-page-id="product-launch-hub"
-            data-status="published"
-            data-type="Campaign"
-            data-author="Noah Kim"
-            data-title="Product Launch Hub"
-            data-created="2025-02-10"
-            data-modified="2025-07-21"
-            data-report-value="1780"
-            data-report-trend="12"
-            data-report-direction="up"
-            data-report-issues="slow-speed accessibility"
-          >
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-row-checkbox aria-label="Select Product Launch Hub">
-              </label>
-            </td>
-            <td>
-              <div class="title-cell">
-                <div class="title-text">
-                  <button type="button" class="title-button" data-open-page="product-launch-hub">Product Launch Hub</button>
-                  <span class="subtitle">product-launch-hub</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
-            </td>
-            <td><span class="chip">Campaign</span></td>
-            <td>
-              <button
-                type="button"
-                class="author-filter"
-                data-author-filter="Noah Kim"
-                title="Filter by Noah Kim"
-                aria-label="Filter by Noah Kim"
-              >
-                <div class="avatar">
-                  <span aria-hidden="true">NK</span>
-                </div>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="reports-button" data-report-drawer="product-launch-hub">
-                <div class="reports-metric" data-trend="positive">
-                  <strong>1.8K views</strong>
-                  <span class="metric-trend positive">+12% vs last week</span>
-                </div>
-              </button>
-            </td>
-            <td data-created-label>Feb 10, 2025</td>
-            <td data-modified-label>Jul 21, 2025</td>
-            <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button
-                type="button"
-                aria-label="Page settings"
-                data-tooltip="Page settings"
-                data-page-settings
-              >
-                <i class="fa-solid fa-gear"></i>
-              </button>
-              <div class="action-menu" data-action-menu>
-                <button
-                  type="button"
-                  class="action-menu-trigger"
-                  aria-label="More actions"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-action-menu-trigger
-                  data-tooltip="More actions"
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
-                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
-                    <span>Publish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
-                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    <span>Unpublish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
-                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                    <span>Schedule</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
-                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                    <span>Move to Folder</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
-                    <span>Duplicate</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
-                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                    <span>Settings</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="action-menu-item is-destructive"
-                    role="menuitem"
-                    data-menu-action="trash"
-                  >
-                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                    <span>Trash</span>
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
-            data-page-id="press-kit"
-            data-status="draft"
-            data-type="Resource"
-            data-author="Luis Gomez"
-            data-title="Press Kit"
-            data-created="2025-02-03"
-            data-modified="2025-07-12"
-            data-report-value="120"
-            data-report-trend="0"
-            data-report-direction="neutral"
-            data-report-issues="missing-alt-text seo-low"
-          >
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-row-checkbox aria-label="Select Press Kit">
-              </label>
-            </td>
-            <td>
-              <div class="title-cell">
-                <div class="title-text">
-                  <button type="button" class="title-button" data-open-page="press-kit">Press Kit</button>
-                  <span class="subtitle">press-kit</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <button type="button" class="status-pill" data-status-action="draft"><span class="badge draft">Draft</span></button>
-            </td>
-            <td><span class="chip">Resource</span></td>
-            <td>
-              <button
-                type="button"
-                class="author-filter"
-                data-author-filter="Luis Gomez"
-                title="Filter by Luis Gomez"
-                aria-label="Filter by Luis Gomez"
-              >
-                <div class="avatar">
-                  <span aria-hidden="true">LG</span>
-                </div>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="reports-button" data-report-drawer="press-kit">
-                <div class="reports-metric" data-trend="neutral">
-                  <strong>120 downloads</strong>
-                  <span class="metric-trend neutral">No change vs last week</span>
-                </div>
-              </button>
-            </td>
-            <td data-created-label>Feb 03, 2025</td>
-            <td data-modified-label>Jul 12, 2025</td>
-            <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button
-                type="button"
-                aria-label="Page settings"
-                data-tooltip="Page settings"
-                data-page-settings
-              >
-                <i class="fa-solid fa-gear"></i>
-              </button>
-              <div class="action-menu" data-action-menu>
-                <button
-                  type="button"
-                  class="action-menu-trigger"
-                  aria-label="More actions"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-action-menu-trigger
-                  data-tooltip="More actions"
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
-                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
-                    <span>Publish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
-                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    <span>Unpublish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
-                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                    <span>Schedule</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
-                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                    <span>Move to Folder</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
-                    <span>Duplicate</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
-                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                    <span>Settings</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="action-menu-item is-destructive"
-                    role="menuitem"
-                    data-menu-action="trash"
-                  >
-                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                    <span>Trash</span>
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr
-            class="page-row"
-            data-page-id="investor-update"
-            data-status="scheduled"
-            data-type="Report"
-            data-author="John Lee"
-            data-title="Investor Update Q3"
-            data-created="2025-03-14"
-            data-modified="2025-07-22"
-            data-report-value="640"
-            data-report-trend="12"
-            data-report-direction="up"
-            data-report-issues="accessibility"
-          >
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-row-checkbox aria-label="Select Investor Update Q3">
-              </label>
-            </td>
-            <td>
-              <div class="title-cell">
-                <div class="title-text">
-                  <button type="button" class="title-button" data-open-page="investor-update">Investor Update Q3</button>
-                  <span class="subtitle">investor-update</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <button type="button" class="status-pill" data-status-action="scheduled"><span class="badge scheduled">Scheduled</span></button>
-            </td>
-            <td><span class="chip">Report</span></td>
-            <td>
-              <button
-                type="button"
-                class="author-filter"
-                data-author-filter="John Lee"
-                title="Filter by John Lee"
-                aria-label="Filter by John Lee"
-              >
-                <div class="avatar">
-                  <span aria-hidden="true">JL</span>
-                </div>
-              </button>
-            </td>
-            <td>
-              <button type="button" class="reports-button" data-report-drawer="investor-update">
-                <div class="reports-metric" data-trend="positive">
-                  <strong>640 reads</strong>
-                  <span class="metric-trend positive">+12% vs last week</span>
-                </div>
-              </button>
-            </td>
-            <td data-created-label>Mar 14, 2025</td>
-            <td data-modified-label>Jul 22, 2025</td>
-            <td class="actions">
-              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
-              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
-              <button
-                type="button"
-                aria-label="Page settings"
-                data-tooltip="Page settings"
-                data-page-settings
-              >
-                <i class="fa-solid fa-gear"></i>
-              </button>
-              <div class="action-menu" data-action-menu>
-                <button
-                  type="button"
-                  class="action-menu-trigger"
-                  aria-label="More actions"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-action-menu-trigger
-                  data-tooltip="More actions"
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </button>
-                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
-                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
-                    <span>Publish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
-                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                    <span>Unpublish</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
-                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                    <span>Schedule</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
-                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                    <span>Move to Folder</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
-                    <span>Duplicate</span>
-                  </button>
-                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
-                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
-                    <span>Settings</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="action-menu-item is-destructive"
-                    role="menuitem"
-                    data-menu-action="trash"
-                  >
-                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
-                    <span>Trash</span>
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr class="group-row" data-folder="website" data-folder-total="3" data-folder-name="Website" data-folder-color="blue">
-            <td class="checkbox-cell">
-              <label class="checkbox">
-                <input type="checkbox" data-folder-checkbox data-folder-id="website" aria-label="Select folder Website">
-              </label>
-            </td>
-            <td colspan="8">
-              <div class="folder-header">
-                <button type="button" class="folder-toggle" data-folder-toggle="website" aria-expanded="true">
-                  <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
-                  <span class="folder-icon" data-color="blue" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
-                  <div class="folder-details">
-                    <span class="folder-name">Website</span>
-                    <span class="group-meta"><span class="folder-count" data-folder-count>3 pages</span></span>
-                  </div>
-                </button>
-                <div class="folder-actions" role="group" aria-label="Website folder actions">
-                  <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
-                  <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr class="page-row" data-folder="website" data-page-id="homepage-2025" data-status="published" data-type="Landing" data-author="John Lee" data-title="Homepage 2025" data-created="2025-01-05" data-modified="2025-07-20" data-report-value="2400" data-report-trend="18" data-report-direction="up" data-report-issues="slow-speed">
+          <tr class="page-row is-homepage" data-page-id="homepage-2025" data-pinned="true" data-status="published" data-type="Landing" data-author="John Lee" data-title="Homepage 2025" data-created="2025-01-05" data-modified="2025-07-20" data-report-value="2400" data-report-trend="18" data-report-direction="up" data-report-issues="slow-speed">
             <td class="checkbox-cell">
               <label class="checkbox">
                 <input type="checkbox" data-row-checkbox aria-label="Select Homepage 2025">
@@ -3267,6 +2676,30 @@
                     <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
                     <span>Trash</span>
                   </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="group-row" data-folder="website" data-folder-total="2" data-folder-name="Website" data-folder-color="blue">
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-folder-checkbox data-folder-id="website" aria-label="Select folder Website">
+              </label>
+            </td>
+            <td colspan="8">
+              <div class="folder-header">
+                <button type="button" class="folder-toggle" data-folder-toggle="website" aria-expanded="true">
+                  <span class="folder-caret" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></span>
+                  <span class="folder-icon" data-color="blue" aria-hidden="true"><i class="fa-solid fa-folder-open" data-folder-icon></i></span>
+                  <div class="folder-details">
+                    <span class="folder-name">Website</span>
+                    <span class="group-meta"><span class="folder-count" data-folder-count>2 pages</span></span>
+                  </div>
+                </button>
+                <div class="folder-actions" role="group" aria-label="Website folder actions">
+                  <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -4401,6 +3834,581 @@
                   <button type="button" class="action-menu-item is-destructive" role="menuitem" data-menu-action="delete-permanently">
                     <i class="fa-solid fa-trash" aria-hidden="true"></i>
                     <span>Delete permanently</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="company-overview"
+            data-status="published"
+            data-type="Landing"
+            data-author="Maya Patel"
+            data-title="Company Overview"
+            data-created="2024-12-12"
+            data-modified="2025-07-18"
+            data-report-value="860"
+            data-report-trend="5"
+            data-report-direction="up"
+            data-report-issues="seo-low"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Company Overview">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="company-overview">Company Overview</button>
+                  <span class="subtitle">company-overview</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
+            <td><span class="chip">Landing</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Maya Patel"
+                title="Filter by Maya Patel"
+                aria-label="Filter by Maya Patel"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">MP</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="company-overview">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>860 views</strong>
+                  <span class="metric-trend positive">+5% vs last week</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Dec 12, 2024</td>
+            <td data-modified-label>Jul 18, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                  data-tooltip="More actions"
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="trash"
+                  >
+                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                    <span>Trash</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="annual-impact-report"
+            data-status="published"
+            data-type="Report"
+            data-author="Luis Gomez"
+            data-title="Annual Impact Report"
+            data-created="2025-01-22"
+            data-modified="2025-07-19"
+            data-report-value="1450"
+            data-report-trend="7"
+            data-report-direction="up"
+            data-report-issues="seo-low slow-speed"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Annual Impact Report">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="annual-impact-report">Annual Impact Report</button>
+                  <span class="subtitle">annual-impact-report</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
+            <td><span class="chip">Report</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Luis Gomez"
+                title="Filter by Luis Gomez"
+                aria-label="Filter by Luis Gomez"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">LG</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="annual-impact-report">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>1.5K views</strong>
+                  <span class="metric-trend positive">+7% vs last week</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Jan 22, 2025</td>
+            <td data-modified-label>Jul 19, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                  data-tooltip="More actions"
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="trash"
+                  >
+                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                    <span>Trash</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="product-launch-hub"
+            data-status="published"
+            data-type="Campaign"
+            data-author="Noah Kim"
+            data-title="Product Launch Hub"
+            data-created="2025-02-10"
+            data-modified="2025-07-21"
+            data-report-value="1780"
+            data-report-trend="12"
+            data-report-direction="up"
+            data-report-issues="slow-speed accessibility"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Product Launch Hub">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="product-launch-hub">Product Launch Hub</button>
+                  <span class="subtitle">product-launch-hub</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="published"><span class="badge published">Published</span></button>
+            </td>
+            <td><span class="chip">Campaign</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Noah Kim"
+                title="Filter by Noah Kim"
+                aria-label="Filter by Noah Kim"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">NK</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="product-launch-hub">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>1.8K views</strong>
+                  <span class="metric-trend positive">+12% vs last week</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Feb 10, 2025</td>
+            <td data-modified-label>Jul 21, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                  data-tooltip="More actions"
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="trash"
+                  >
+                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                    <span>Trash</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="press-kit"
+            data-status="draft"
+            data-type="Resource"
+            data-author="Luis Gomez"
+            data-title="Press Kit"
+            data-created="2025-02-03"
+            data-modified="2025-07-12"
+            data-report-value="120"
+            data-report-trend="0"
+            data-report-direction="neutral"
+            data-report-issues="missing-alt-text seo-low"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Press Kit">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="press-kit">Press Kit</button>
+                  <span class="subtitle">press-kit</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="draft"><span class="badge draft">Draft</span></button>
+            </td>
+            <td><span class="chip">Resource</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Luis Gomez"
+                title="Filter by Luis Gomez"
+                aria-label="Filter by Luis Gomez"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">LG</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="press-kit">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>120 downloads</strong>
+                  <span class="metric-trend neutral">No change vs last week</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Feb 03, 2025</td>
+            <td data-modified-label>Jul 12, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                  data-tooltip="More actions"
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="trash"
+                  >
+                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                    <span>Trash</span>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="investor-update"
+            data-status="scheduled"
+            data-type="Report"
+            data-author="John Lee"
+            data-title="Investor Update Q3"
+            data-created="2025-03-14"
+            data-modified="2025-07-22"
+            data-report-value="640"
+            data-report-trend="12"
+            data-report-direction="up"
+            data-report-issues="accessibility"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Investor Update Q3">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="investor-update">Investor Update Q3</button>
+                  <span class="subtitle">investor-update</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="scheduled"><span class="badge scheduled">Scheduled</span></button>
+            </td>
+            <td><span class="chip">Report</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="John Lee"
+                title="Filter by John Lee"
+                aria-label="Filter by John Lee"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">JL</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="investor-update">
+                <div class="reports-metric" data-trend="positive">
+                  <strong>640 reads</strong>
+                  <span class="metric-trend positive">+12% vs last week</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Mar 14, 2025</td>
+            <td data-modified-label>Jul 22, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Copy page" data-tooltip="Copy page" data-copy-page><i class="fa-regular fa-copy"></i></button>
+              <button type="button" aria-label="Copy link" data-tooltip="Copy link"><i class="fa-solid fa-link"></i></button>
+              <button
+                type="button"
+                aria-label="Page settings"
+                data-tooltip="Page settings"
+                data-page-settings
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
+              <div class="action-menu" data-action-menu>
+                <button
+                  type="button"
+                  class="action-menu-trigger"
+                  aria-label="More actions"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-action-menu-trigger
+                  data-tooltip="More actions"
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+                <div class="action-menu-dropdown" role="menu" data-action-menu-dropdown hidden>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="publish">
+                    <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>
+                    <span>Publish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="unpublish">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                    <span>Unpublish</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="schedule">
+                    <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                    <span>Schedule</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="move">
+                    <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                    <span>Move to Folder</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="duplicate">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                    <span>Duplicate</span>
+                  </button>
+                  <button type="button" class="action-menu-item" role="menuitem" data-menu-action="settings">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>Settings</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="action-menu-item is-destructive"
+                    role="menuitem"
+                    data-menu-action="trash"
+                  >
+                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                    <span>Trash</span>
                   </button>
                 </div>
               </div>
@@ -7363,6 +7371,7 @@
         if (!state.sortKey) {
           return;
         }
+
         folderRows.forEach((folderRow) => {
           const folderId = folderRow.dataset.folder || '_root';
           const members = folderMembers.get(folderId) || [];
@@ -7379,6 +7388,44 @@
           });
           folderMembers.set(folderId, sorted);
         });
+
+        const rootMembers = folderMembers.get('_root') || [];
+        if (rootMembers.length === 0) {
+          return;
+        }
+
+        const pinnedRows = rootMembers.filter((row) => row.dataset.pinned === 'true');
+        const unpinnedRows = rootMembers.filter((row) => row.dataset.pinned !== 'true');
+        const sortedUnpinned = unpinnedRows
+          .slice()
+          .sort((a, b) => compareRows(a, b, state.sortKey, state.sortDirection));
+        const tbody = rootMembers[0]?.parentElement || folderRows[0]?.parentElement || null;
+        if (!tbody) {
+          folderMembers.set('_root', [...pinnedRows, ...sortedUnpinned]);
+          return;
+        }
+
+        const firstFolderRow = folderRows[0] || null;
+        const pinnedMarker =
+          firstFolderRow || sortedUnpinned[0] || unpinnedRows[0] || tbody.firstChild;
+        pinnedRows.forEach((row) => {
+          tbody.insertBefore(row, pinnedMarker);
+        });
+
+        const afterLastFolderMarker = (() => {
+          if (folderRows.length === 0) {
+            return null;
+          }
+          const lastFolderRow = folderRows[folderRows.length - 1];
+          const nextGroupRow = getNextGroupRow(lastFolderRow);
+          return nextGroupRow || null;
+        })();
+
+        sortedUnpinned.forEach((row) => {
+          tbody.insertBefore(row, afterLastFolderMarker);
+        });
+
+        folderMembers.set('_root', [...pinnedRows, ...sortedUnpinned]);
       }
 
       function updateSortIndicators() {
