@@ -2291,95 +2291,83 @@
       gap: 6px;
     }
 
-    .wizard-template-carousel {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .wizard-template-track {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(140px, 1fr));
-      gap: 12px;
-    }
-
-    .wizard-template-card {
-      border: 1px solid var(--pages-border);
-      border-radius: 12px;
-      padding: 12px;
+    .wizard-template-options {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      font-size: 12px;
-      color: var(--pages-muted);
-      background: linear-gradient(180deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.8));
-      cursor: pointer;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-      appearance: none;
-      outline: none;
-    }
-
-    .wizard-template-card.is-active {
-      border-color: var(--pages-accent);
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
-      background: rgba(37, 99, 235, 0.08);
-      color: var(--pages-text);
-      transform: translateY(-1px);
-    }
-
-    .wizard-template-card:focus-visible {
-      outline: 2px solid rgba(37, 99, 235, 0.35);
-      outline-offset: 2px;
-    }
-
-    .wizard-template-preview {
-      width: 100%;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      border-radius: 10px;
-      aspect-ratio: 4 / 3;
-      padding: 12px;
-      background: #fff;
-      display: grid;
-      grid-template-rows: auto 1fr;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
-    .wizard-template-preview .preview-title {
-      height: 16px;
-      background: rgba(37, 99, 235, 0.16);
-      border-radius: 6px;
-    }
-
-    .wizard-template-preview .preview-body {
-      display: grid;
-      gap: 6px;
-    }
-
-    .wizard-template-preview .preview-line {
-      height: 6px;
-      background: rgba(148, 163, 184, 0.4);
-      border-radius: 4px;
-    }
-
-    .wizard-template-nav {
+    .wizard-template-option {
       border: none;
-      background: none;
-      color: var(--pages-muted);
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 13px;
       cursor: pointer;
-      transition: color 0.2s ease, background 0.2s ease;
+      background: var(--template-choice-bg, rgba(148, 163, 184, 0.18));
+      color: var(--template-choice-color, #334155);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     }
 
-    .wizard-template-nav:hover {
-      background: rgba(148, 163, 184, 0.18);
-      color: var(--pages-text);
+    .wizard-template-option[data-selected='false'] {
+      filter: grayscale(0.35);
+      opacity: 0.72;
+    }
+
+    .wizard-template-option[data-selected='true'] {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+      filter: none;
+    }
+
+    .wizard-template-option:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.24);
+    }
+
+    .wizard-template-option[data-accent='blue'] {
+      --template-choice-bg: rgba(37, 99, 235, 0.16);
+      --template-choice-color: #1d4ed8;
+    }
+
+    .wizard-template-option[data-accent='violet'] {
+      --template-choice-bg: rgba(139, 92, 246, 0.18);
+      --template-choice-color: #5b21b6;
+    }
+
+    .wizard-template-option[data-accent='indigo'] {
+      --template-choice-bg: rgba(79, 70, 229, 0.18);
+      --template-choice-color: #4338ca;
+    }
+
+    .wizard-template-option[data-accent='rose'] {
+      --template-choice-bg: rgba(244, 63, 94, 0.18);
+      --template-choice-color: #e11d48;
+    }
+
+    .wizard-template-option[data-accent='amber'] {
+      --template-choice-bg: rgba(217, 119, 6, 0.2);
+      --template-choice-color: #b45309;
+    }
+
+    .wizard-template-option[data-accent='emerald'] {
+      --template-choice-bg: rgba(16, 185, 129, 0.2);
+      --template-choice-color: #047857;
+    }
+
+    .wizard-template-option[data-accent='pink'] {
+      --template-choice-bg: rgba(219, 39, 119, 0.2);
+      --template-choice-color: #be185d;
+    }
+
+    .wizard-template-option[data-accent='orange'] {
+      --template-choice-bg: rgba(249, 115, 22, 0.2);
+      --template-choice-color: #c2410c;
+    }
+
+    .wizard-template-option[data-accent='slate'] {
+      --template-choice-bg: rgba(148, 163, 184, 0.2);
+      --template-choice-color: #334155;
     }
 
     .wizard-checkbox-grid {
@@ -5081,186 +5069,110 @@
                   Change <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                 </button>
               </div>
-              <div class="wizard-template-carousel">
+              <div
+                class="wizard-template-options"
+                id="newPageTemplateOptions"
+                role="group"
+                aria-label="Select page template"
+              >
                 <button
                   type="button"
-                  class="wizard-template-nav"
-                  aria-label="Previous template"
-                  data-new-page-template-nav="prev"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Hero landing"
+                  data-template-type="Landing"
+                  data-accent="blue"
+                  data-selected="true"
+                  aria-pressed="true"
                 >
-                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                  Hero landing
                 </button>
-                <div class="wizard-template-track" id="newPageTemplateOptions" role="group" aria-label="Select page template">
-                  <button
-                    type="button"
-                    class="wizard-template-card is-active"
-                    data-new-page-template-option="Hero landing"
-                    data-template-type="Landing"
-                    aria-pressed="true"
-                    tabindex="0"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Hero landing</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Editorial longform"
-                    data-template-type="Content"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Editorial longform</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Knowledge base"
-                    data-template-type="Docs"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Knowledge base</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Gallery"
-                    data-template-type="Media"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Gallery</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Portfolio showcase"
-                    data-template-type="Portfolio"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Portfolio showcase</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Campaign spotlight"
-                    data-template-type="Campaign"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Campaign spotlight</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Insight report"
-                    data-template-type="Report"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Insight report</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Resource hub"
-                    data-template-type="Resource"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Resource hub</strong>
-                  </button>
-                  <button
-                    type="button"
-                    class="wizard-template-card"
-                    data-new-page-template-option="Brand style guide"
-                    data-template-type="Style Guide"
-                    aria-pressed="false"
-                    tabindex="-1"
-                  >
-                    <div class="wizard-template-preview" aria-hidden="true">
-                      <span class="preview-title"></span>
-                      <div class="preview-body">
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                        <span class="preview-line"></span>
-                      </div>
-                    </div>
-                    <strong>Brand style guide</strong>
-                  </button>
-                </div>
                 <button
                   type="button"
-                  class="wizard-template-nav"
-                  aria-label="Next template"
-                  data-new-page-template-nav="next"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Editorial longform"
+                  data-template-type="Content"
+                  data-accent="violet"
+                  data-selected="false"
+                  aria-pressed="false"
                 >
-                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                  Editorial longform
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Knowledge base"
+                  data-template-type="Docs"
+                  data-accent="slate"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Knowledge base
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Gallery"
+                  data-template-type="Media"
+                  data-accent="pink"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Gallery
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Portfolio showcase"
+                  data-template-type="Portfolio"
+                  data-accent="rose"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Portfolio showcase
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Campaign spotlight"
+                  data-template-type="Campaign"
+                  data-accent="amber"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Campaign spotlight
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Insight report"
+                  data-template-type="Report"
+                  data-accent="indigo"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Insight report
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Resource hub"
+                  data-template-type="Resource"
+                  data-accent="emerald"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Resource hub
+                </button>
+                <button
+                  type="button"
+                  class="wizard-template-option"
+                  data-new-page-template-option="Brand style guide"
+                  data-template-type="Style Guide"
+                  data-accent="orange"
+                  data-selected="false"
+                  aria-pressed="false"
+                >
+                  Brand style guide
                 </button>
               </div>
             </div>
@@ -6615,9 +6527,6 @@
       const newPageTemplateButtons = newPageForm
         ? Array.from(newPageForm.querySelectorAll('[data-new-page-template-option]'))
         : [];
-      const newPageTemplateNavButtons = newPageForm
-        ? Array.from(newPageForm.querySelectorAll('[data-new-page-template-nav]'))
-        : [];
       const newPageTypeInput = document.getElementById('newPageTypeInput');
       const newPageTemplateInput = document.getElementById('newPageTemplateInput');
       let defaultNewPageTypeValue = '';
@@ -6768,9 +6677,10 @@
           : '') ||
         newPageTemplateButtons[0]?.dataset.newPageTemplateOption ||
         '';
-      activeNewPageTemplateIndex = newPageTemplateButtons.findIndex((button) =>
-        button.classList.contains('is-active')
-      );
+      activeNewPageTemplateIndex = newPageTemplateButtons.findIndex((button) => {
+        const ariaPressed = button.getAttribute('aria-pressed');
+        return button.dataset.selected === 'true' || ariaPressed === 'true';
+      });
 
       function setActivePageSettingsTab(tabValue, { focusTab = false } = {}) {
         if (!pageSettingsTabButtons.length || !pageSettingsPanels.length) {
@@ -8936,7 +8846,7 @@
         newPageTemplateButtons.forEach((button, index) => {
           const buttonValue = button.dataset.newPageTemplateOption || '';
           const isActive = Boolean(fallbackTemplate) && buttonValue === fallbackTemplate;
-          button.classList.toggle('is-active', isActive);
+          button.dataset.selected = isActive ? 'true' : 'false';
           button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
           button.tabIndex = isActive ? 0 : -1;
           if (isActive) {
@@ -9752,26 +9662,6 @@
               syncType: true,
             });
             targetButton.focus({ preventScroll: true });
-          }
-        });
-      });
-
-      newPageTemplateNavButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          if (!newPageTemplateButtons.length) {
-            return;
-          }
-          const direction = button.dataset.newPageTemplateNav === 'next' ? 1 : -1;
-          const currentIndex =
-            activeNewPageTemplateIndex >= 0 ? activeNewPageTemplateIndex : 0;
-          const nextIndex =
-            (currentIndex + direction + newPageTemplateButtons.length) %
-            newPageTemplateButtons.length;
-          const nextButton = newPageTemplateButtons[nextIndex];
-          if (nextButton) {
-            setNewPageTemplate(nextButton.dataset.newPageTemplateOption || '', { syncType: true });
-            nextButton.focus({ preventScroll: true });
-            nextButton.scrollIntoView({ block: 'nearest', inline: 'center' });
           }
         });
       });
