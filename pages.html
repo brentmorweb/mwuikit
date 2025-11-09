@@ -2318,6 +2318,10 @@
       font-size: 12px;
       color: var(--pages-muted);
       background: linear-gradient(180deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.8));
+      cursor: pointer;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+      appearance: none;
+      outline: none;
     }
 
     .wizard-template-card.is-active {
@@ -2325,6 +2329,12 @@
       box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
       background: rgba(37, 99, 235, 0.08);
       color: var(--pages-text);
+      transform: translateY(-1px);
+    }
+
+    .wizard-template-card:focus-visible {
+      outline: 2px solid rgba(37, 99, 235, 0.35);
+      outline-offset: 2px;
     }
 
     .wizard-template-preview {
@@ -2621,6 +2631,8 @@
       text-align: center;
       background: rgba(241, 245, 249, 0.72);
       color: var(--pages-text);
+      appearance: none;
+      outline: none;
     }
 
     .new-page-type-option:hover,
@@ -4983,6 +4995,88 @@
                 <span>Set as Home Page</span>
               </label>
             </div>
+            <div class="wizard-field">
+              <label class="wizard-field-label" id="newPageTypeLabel" for="newPageTypeInput">Page type</label>
+              <div
+                class="new-page-type-grid"
+                id="newPageTypeOptions"
+                role="group"
+                aria-labelledby="newPageTypeLabel"
+              >
+                <button
+                  type="button"
+                  class="new-page-type-option accent-blue selected"
+                  data-new-page-type-option="Landing"
+                  aria-pressed="true"
+                >
+                  Landing
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-purple"
+                  data-new-page-type-option="Content"
+                  aria-pressed="false"
+                >
+                  Content
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-indigo"
+                  data-new-page-type-option="Docs"
+                  aria-pressed="false"
+                >
+                  Docs
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-pink"
+                  data-new-page-type-option="Media"
+                  aria-pressed="false"
+                >
+                  Media
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-rose"
+                  data-new-page-type-option="Portfolio"
+                  aria-pressed="false"
+                >
+                  Portfolio
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-amber"
+                  data-new-page-type-option="Campaign"
+                  aria-pressed="false"
+                >
+                  Campaign
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-indigo"
+                  data-new-page-type-option="Report"
+                  aria-pressed="false"
+                >
+                  Report
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-green"
+                  data-new-page-type-option="Resource"
+                  aria-pressed="false"
+                >
+                  Resource
+                </button>
+                <button
+                  type="button"
+                  class="new-page-type-option accent-orange"
+                  data-new-page-type-option="Style Guide"
+                  aria-pressed="false"
+                >
+                  Style Guide
+                </button>
+              </div>
+            </div>
             <div class="wizard-template-picker">
               <div class="wizard-template-header">
                 <span>Template</span>
@@ -4991,11 +5085,23 @@
                 </button>
               </div>
               <div class="wizard-template-carousel">
-                <button type="button" class="wizard-template-nav" aria-label="Previous template">
+                <button
+                  type="button"
+                  class="wizard-template-nav"
+                  aria-label="Previous template"
+                  data-new-page-template-nav="prev"
+                >
                   <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                 </button>
-                <div class="wizard-template-track">
-                  <div class="wizard-template-card is-active">
+                <div class="wizard-template-track" id="newPageTemplateOptions" role="group" aria-label="Select page template">
+                  <button
+                    type="button"
+                    class="wizard-template-card is-active"
+                    data-new-page-template-option="Hero landing"
+                    data-template-type="Landing"
+                    aria-pressed="true"
+                    tabindex="0"
+                  >
                     <div class="wizard-template-preview" aria-hidden="true">
                       <span class="preview-title"></span>
                       <div class="preview-body">
@@ -5004,9 +5110,16 @@
                         <span class="preview-line"></span>
                       </div>
                     </div>
-                    <strong>Page</strong>
-                  </div>
-                  <div class="wizard-template-card">
+                    <strong>Hero landing</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Editorial longform"
+                    data-template-type="Content"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
                     <div class="wizard-template-preview" aria-hidden="true">
                       <span class="preview-title"></span>
                       <div class="preview-body">
@@ -5015,9 +5128,16 @@
                         <span class="preview-line"></span>
                       </div>
                     </div>
-                    <strong>Landing</strong>
-                  </div>
-                  <div class="wizard-template-card">
+                    <strong>Editorial longform</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Knowledge base"
+                    data-template-type="Docs"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
                     <div class="wizard-template-preview" aria-hidden="true">
                       <span class="preview-title"></span>
                       <div class="preview-body">
@@ -5026,14 +5146,129 @@
                         <span class="preview-line"></span>
                       </div>
                     </div>
-                    <strong>Blog</strong>
-                  </div>
+                    <strong>Knowledge base</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Gallery"
+                    data-template-type="Media"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Gallery</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Portfolio showcase"
+                    data-template-type="Portfolio"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Portfolio showcase</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Campaign spotlight"
+                    data-template-type="Campaign"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Campaign spotlight</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Insight report"
+                    data-template-type="Report"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Insight report</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Resource hub"
+                    data-template-type="Resource"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Resource hub</strong>
+                  </button>
+                  <button
+                    type="button"
+                    class="wizard-template-card"
+                    data-new-page-template-option="Brand style guide"
+                    data-template-type="Style Guide"
+                    aria-pressed="false"
+                    tabindex="-1"
+                  >
+                    <div class="wizard-template-preview" aria-hidden="true">
+                      <span class="preview-title"></span>
+                      <div class="preview-body">
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                        <span class="preview-line"></span>
+                      </div>
+                    </div>
+                    <strong>Brand style guide</strong>
+                  </button>
                 </div>
-                <button type="button" class="wizard-template-nav" aria-label="Next template">
+                <button
+                  type="button"
+                  class="wizard-template-nav"
+                  aria-label="Next template"
+                  data-new-page-template-nav="next"
+                >
                   <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
+            <input type="hidden" id="newPageTypeInput" name="type" value="Landing">
+            <input type="hidden" id="newPageTemplateInput" name="template" value="Hero landing">
           </div>
         </section>
         <section
@@ -6376,6 +6611,20 @@
       const newPageSlugInput = document.getElementById('newPageSlug');
       const newPageMetaTitleInput = document.getElementById('newPageMetaTitle');
       const newPageMetaDescriptionInput = document.getElementById('newPageMetaDescription');
+      const newPageTypeButtons = newPageForm
+        ? Array.from(newPageForm.querySelectorAll('[data-new-page-type-option]'))
+        : [];
+      const newPageTemplateButtons = newPageForm
+        ? Array.from(newPageForm.querySelectorAll('[data-new-page-template-option]'))
+        : [];
+      const newPageTemplateNavButtons = newPageForm
+        ? Array.from(newPageForm.querySelectorAll('[data-new-page-template-nav]'))
+        : [];
+      const newPageTypeInput = document.getElementById('newPageTypeInput');
+      const newPageTemplateInput = document.getElementById('newPageTemplateInput');
+      let defaultNewPageTypeValue = '';
+      let defaultNewPageTemplateValue = '';
+      let activeNewPageTemplateIndex = -1;
       const copyPageDialog = document.getElementById('copyPageDialog');
       const copyPageDialogClose = copyPageDialog?.querySelector('.dialog-close');
       const copyPageForm = document.getElementById('copyPageForm');
@@ -6502,6 +6751,28 @@
         pageSettingsTypeButtons[0]?.dataset.pageTypeOption || '';
       const defaultPageTemplateValue =
         pageSettingsTemplateButtons[0]?.dataset.pageTemplateOption || '';
+
+      defaultNewPageTypeValue =
+        newPageTypeInput?.value ||
+        newPageTypeButtons[0]?.dataset.newPageTypeOption ||
+        defaultPageTypeValue ||
+        '';
+      defaultNewPageTemplateValue =
+        newPageTemplateInput?.value ||
+        (newPageTemplateButtons.find(
+          (button) => button.dataset.templateType === defaultNewPageTypeValue
+        )?.dataset.newPageTemplateOption || '') ||
+        (defaultPageTemplateValue &&
+        newPageTemplateButtons.some(
+          (button) => button.dataset.newPageTemplateOption === defaultPageTemplateValue
+        )
+          ? defaultPageTemplateValue
+          : '') ||
+        newPageTemplateButtons[0]?.dataset.newPageTemplateOption ||
+        '';
+      activeNewPageTemplateIndex = newPageTemplateButtons.findIndex((button) =>
+        button.classList.contains('is-active')
+      );
 
       function setActivePageSettingsTab(tabValue, { focusTab = false } = {}) {
         if (!pageSettingsTabButtons.length || !pageSettingsPanels.length) {
@@ -8611,6 +8882,119 @@
         }
       }
 
+      function setNewPageTemplate(value, { syncType = true } = {}) {
+        if (!newPageTemplateButtons.length) {
+          if (newPageTemplateInput) {
+            newPageTemplateInput.value = value || '';
+          }
+          if (syncType && value) {
+            const associatedButton = newPageTemplateButtons.find(
+              (button) => button.dataset.newPageTemplateOption === value
+            );
+            const associatedType = associatedButton?.dataset.templateType || '';
+            if (associatedType) {
+              setNewPageType(associatedType, { syncTemplate: false });
+            }
+          }
+          return;
+        }
+
+        const availableTemplates = newPageTemplateButtons
+          .map((button) => button.dataset.newPageTemplateOption || '')
+          .filter(Boolean);
+        const recommendedTemplate =
+          (newPageTypeInput?.value && TEMPLATE_DEFAULTS_BY_TYPE[newPageTypeInput.value]) ||
+          '';
+        const fallbackTemplate =
+          (value && availableTemplates.includes(value) && value) ||
+          (recommendedTemplate && availableTemplates.includes(recommendedTemplate)
+            ? recommendedTemplate
+            : '') ||
+          (defaultNewPageTemplateValue &&
+          availableTemplates.includes(defaultNewPageTemplateValue)
+            ? defaultNewPageTemplateValue
+            : '') ||
+          availableTemplates[0] ||
+          '';
+
+        if (newPageTemplateInput) {
+          newPageTemplateInput.value = fallbackTemplate;
+        }
+
+        let nextActiveIndex = -1;
+        newPageTemplateButtons.forEach((button, index) => {
+          const buttonValue = button.dataset.newPageTemplateOption || '';
+          const isActive = Boolean(fallbackTemplate) && buttonValue === fallbackTemplate;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          button.tabIndex = isActive ? 0 : -1;
+          if (isActive) {
+            nextActiveIndex = index;
+          }
+        });
+
+        activeNewPageTemplateIndex =
+          nextActiveIndex >= 0 ? nextActiveIndex : Math.max(0, activeNewPageTemplateIndex);
+
+        if (syncType) {
+          const templateButton = newPageTemplateButtons[activeNewPageTemplateIndex] || null;
+          const templateType = templateButton?.dataset.templateType || '';
+          if (templateType) {
+            setNewPageType(templateType, { syncTemplate: false });
+          }
+        }
+      }
+
+      function setNewPageType(value, { syncTemplate = true } = {}) {
+        if (!newPageTypeButtons.length) {
+          if (newPageTypeInput) {
+            newPageTypeInput.value = value || '';
+          }
+          if (syncTemplate) {
+            const recommended = TEMPLATE_DEFAULTS_BY_TYPE[value] || defaultNewPageTemplateValue || '';
+            if (recommended) {
+              setNewPageTemplate(recommended, { syncType: false });
+            }
+          }
+          return;
+        }
+
+        const availableTypes = newPageTypeButtons
+          .map((button) => button.dataset.newPageTypeOption || '')
+          .filter(Boolean);
+        const fallbackType =
+          (value && availableTypes.includes(value) && value) ||
+          (defaultNewPageTypeValue && availableTypes.includes(defaultNewPageTypeValue)
+            ? defaultNewPageTypeValue
+            : '') ||
+          availableTypes[0] ||
+          '';
+
+        if (newPageTypeInput) {
+          newPageTypeInput.value = fallbackType;
+        }
+
+        newPageTypeButtons.forEach((button) => {
+          const buttonValue = button.dataset.newPageTypeOption || '';
+          const isSelected = Boolean(fallbackType) && buttonValue === fallbackType;
+          button.classList.toggle('selected', isSelected);
+          button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        });
+
+        if (syncTemplate) {
+          const templateButton = newPageTemplateButtons.find(
+            (button) => button.dataset.templateType === fallbackType
+          );
+          const templateValue =
+            templateButton?.dataset.newPageTemplateOption ||
+            TEMPLATE_DEFAULTS_BY_TYPE[fallbackType] ||
+            '';
+          if (templateValue) {
+            setNewPageTemplate(templateValue, { syncType: false });
+          }
+        }
+      }
+
       function resetNewPageDialog() {
         if (newPageForm) {
           newPageSteps.forEach((section) => {
@@ -8622,6 +9006,9 @@
           });
           newPageForm.reset();
         }
+        const initialTypeValue =
+          newPageTypeInput?.value || defaultNewPageTypeValue || '';
+        setNewPageType(initialTypeValue, { syncTemplate: true });
         syncCreateButtonState();
         newPageSlugInput?.setCustomValidity('');
         newPageMetaTitleInput?.setCustomValidity('');
@@ -9300,6 +9687,95 @@
       newPagePrevButton?.addEventListener('click', () => {
         setNewPageStep(newPageCurrentStepIndex - 1);
       });
+
+      newPageTypeButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          setNewPageType(button.dataset.newPageTypeOption || '', { syncTemplate: true });
+        });
+        button.addEventListener('keydown', (event) => {
+          const keys = ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp', 'Home', 'End'];
+          if (!keys.includes(event.key)) {
+            return;
+          }
+          event.preventDefault();
+          let targetIndex = index;
+          const total = newPageTypeButtons.length;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            targetIndex = (index + 1) % total;
+          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            targetIndex = (index - 1 + total) % total;
+          } else if (event.key === 'Home') {
+            targetIndex = 0;
+          } else if (event.key === 'End') {
+            targetIndex = total - 1;
+          }
+          const targetButton = newPageTypeButtons[targetIndex];
+          if (targetButton) {
+            setNewPageType(targetButton.dataset.newPageTypeOption || '', { syncTemplate: true });
+            targetButton.focus({ preventScroll: true });
+          }
+        });
+      });
+
+      newPageTemplateButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          setNewPageTemplate(button.dataset.newPageTemplateOption || '', { syncType: true });
+        });
+        button.addEventListener('keydown', (event) => {
+          const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+          if (!keys.includes(event.key)) {
+            return;
+          }
+          event.preventDefault();
+          let targetIndex = index;
+          if (event.key === 'ArrowRight') {
+            targetIndex = (index + 1) % newPageTemplateButtons.length;
+          } else if (event.key === 'ArrowLeft') {
+            targetIndex =
+              (index - 1 + newPageTemplateButtons.length) % newPageTemplateButtons.length;
+          } else if (event.key === 'Home') {
+            targetIndex = 0;
+          } else if (event.key === 'End') {
+            targetIndex = newPageTemplateButtons.length - 1;
+          }
+          const targetButton = newPageTemplateButtons[targetIndex];
+          if (targetButton) {
+            setNewPageTemplate(targetButton.dataset.newPageTemplateOption || '', {
+              syncType: true,
+            });
+            targetButton.focus({ preventScroll: true });
+          }
+        });
+      });
+
+      newPageTemplateNavButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          if (!newPageTemplateButtons.length) {
+            return;
+          }
+          const direction = button.dataset.newPageTemplateNav === 'next' ? 1 : -1;
+          const currentIndex =
+            activeNewPageTemplateIndex >= 0 ? activeNewPageTemplateIndex : 0;
+          const nextIndex =
+            (currentIndex + direction + newPageTemplateButtons.length) %
+            newPageTemplateButtons.length;
+          const nextButton = newPageTemplateButtons[nextIndex];
+          if (nextButton) {
+            setNewPageTemplate(nextButton.dataset.newPageTemplateOption || '', { syncType: true });
+            nextButton.focus({ preventScroll: true });
+            nextButton.scrollIntoView({ block: 'nearest', inline: 'center' });
+          }
+        });
+      });
+
+      if (newPageTypeButtons.length || newPageTypeInput) {
+        const initialType = newPageTypeInput?.value || defaultNewPageTypeValue || '';
+        setNewPageType(initialType, { syncTemplate: true });
+      } else if (newPageTemplateButtons.length) {
+        const initialTemplate =
+          newPageTemplateInput?.value || defaultNewPageTemplateValue || '';
+        setNewPageTemplate(initialTemplate, { syncType: true });
+      }
 
       newPageSlugInput?.addEventListener('input', () => {
         newPageSlugInput.setCustomValidity('');
