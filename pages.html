@@ -2858,7 +2858,7 @@
             data-folder-toggle-all
             data-tooltip="Toggle view"
           >
-            <i class="fa-solid fa-table-cells" aria-hidden="true"></i>
+            <i class="fa-solid fa-folder" data-folder-view-icon aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -6609,6 +6609,8 @@
       const folderToggleButtons = Array.from(document.querySelectorAll('[data-folder-toggle]'));
       const folderCheckboxes = Array.from(document.querySelectorAll('[data-folder-checkbox]'));
       const folderViewToggleButton = document.querySelector('[data-folder-toggle-all]');
+      const folderViewToggleIcon =
+        folderViewToggleButton?.querySelector('[data-folder-view-icon]') || null;
       const flatViewToggleButton = document.querySelector('[data-flat-view-toggle]');
       const flatViewToggleIcon = flatViewToggleButton?.querySelector('[data-flat-view-icon]') || null;
       const actionMenus = Array.from(document.querySelectorAll('[data-action-menu]'));
@@ -8230,6 +8232,14 @@
           return;
         }
 
+        const setFolderToggleIcon = (isExpanded) => {
+          if (!folderViewToggleIcon) {
+            return;
+          }
+          folderViewToggleIcon.classList.remove('fa-folder', 'fa-folder-open');
+          folderViewToggleIcon.classList.add(isExpanded ? 'fa-folder-open' : 'fa-folder');
+        };
+
         if (isFlatView) {
           const label = 'Folder controls hidden in flat view';
           folderViewToggleButton.setAttribute('aria-label', label);
@@ -8237,6 +8247,7 @@
           folderViewToggleButton.setAttribute('aria-pressed', 'false');
           folderViewToggleButton.setAttribute('data-tooltip', label);
           folderViewToggleButton.disabled = true;
+          setFolderToggleIcon(false);
           return;
         }
 
@@ -8247,6 +8258,7 @@
           folderViewToggleButton.setAttribute('aria-pressed', 'false');
           folderViewToggleButton.setAttribute('data-tooltip', 'Expand all folders');
           folderViewToggleButton.disabled = true;
+          setFolderToggleIcon(false);
           return;
         }
 
@@ -8260,6 +8272,7 @@
         folderViewToggleButton.setAttribute('title', label);
         folderViewToggleButton.setAttribute('aria-pressed', allExpanded ? 'true' : 'false');
         folderViewToggleButton.setAttribute('data-tooltip', label);
+        setFolderToggleIcon(allExpanded);
       }
 
       function setFolderExpanded(folderId, expanded, persist = true) {
