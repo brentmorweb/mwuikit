@@ -5421,7 +5421,7 @@
           </div>
         </section>
         <div class="dialog-actions">
-          <button type="button" data-new-page-nav="prev" hidden>Back</button>
+          <button type="button" data-new-page-action="cancel">Cancel</button>
           <button type="button" class="primary" data-new-page-nav="next">Next</button>
           <button type="submit" class="primary" data-new-page-nav="submit" hidden>Create page</button>
         </div>
@@ -6602,9 +6602,10 @@
       const newPageStepTabs = newPageForm
         ? Array.from(newPageForm.querySelectorAll('[data-step-tab]'))
         : [];
-      const newPagePrevButton = newPageForm?.querySelector('[data-new-page-nav="prev"]') || null;
       const newPageNextButton = newPageForm?.querySelector('[data-new-page-nav="next"]') || null;
       const newPageSubmitButton = newPageForm?.querySelector('[data-new-page-nav="submit"]') || null;
+      const newPageCancelButton =
+        newPageForm?.querySelector('[data-new-page-action="cancel"]') || null;
       const newPageSlugInput = document.getElementById('newPageSlug');
       const newPageMetaTitleInput = document.getElementById('newPageMetaTitle');
       const newPageMetaDescriptionInput = document.getElementById('newPageMetaDescription');
@@ -9532,9 +9533,6 @@
             tab.setAttribute('tabindex', isActive ? '0' : '-1');
           });
         }
-        if (newPagePrevButton) {
-          newPagePrevButton.toggleAttribute('hidden', newPageCurrentStepIndex === 0);
-        }
         if (newPageNextButton) {
           newPageNextButton.toggleAttribute(
             'hidden',
@@ -9694,8 +9692,8 @@
         setNewPageStep(newPageCurrentStepIndex + 1);
       });
 
-      newPagePrevButton?.addEventListener('click', () => {
-        setNewPageStep(newPageCurrentStepIndex - 1);
+      newPageCancelButton?.addEventListener('click', () => {
+        closeNewPageDialog();
       });
 
       newPageTypeButtons.forEach((button, index) => {
