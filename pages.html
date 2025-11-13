@@ -2294,6 +2294,105 @@
       accent-color: var(--pages-accent);
     }
 
+    .wizard-radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .wizard-radio {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--pages-border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .wizard-radio:hover {
+      border-color: rgba(37, 99, 235, 0.3);
+      background: rgba(37, 99, 235, 0.02);
+    }
+
+    .wizard-radio input[type="radio"] {
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--pages-accent);
+      cursor: pointer;
+    }
+
+    .wizard-radio input[type="radio"]:checked + .wizard-radio-content {
+      color: var(--pages-text);
+    }
+
+    .wizard-radio:has(input[type="radio"]:checked) {
+      border-color: var(--pages-accent);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .wizard-radio-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .wizard-radio-content strong {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--pages-text);
+    }
+
+    .wizard-radio-content small {
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .wizard-schedule-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 16px;
+      border: 1px solid var(--pages-border);
+      border-radius: 12px;
+      background: rgba(37, 99, 235, 0.02);
+    }
+
+    .wizard-schedule-fields .wizard-field {
+      margin: 0;
+    }
+
+    .wizard-schedule-fields input[type="date"],
+    .wizard-schedule-fields input[type="time"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--pages-border);
+      font-size: 14px;
+      background: #fff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .wizard-schedule-fields input:focus {
+      outline: none;
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .wizard-schedule-fields label {
+      display: block;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--pages-text);
+      margin-bottom: 6px;
+    }
+
+
     .wizard-template-picker {
       border: 1px solid var(--pages-border);
       border-radius: 14px;
@@ -2907,8 +3006,7 @@
           <button type="button" data-bulk-action="publish"><i class="fa-solid fa-globe" aria-hidden="true"></i>Publish</button>
           <button type="button" data-bulk-action="unpublish"><i class="fa-solid fa-toggle-off" aria-hidden="true"></i>Unpublish</button>
           <button type="button" data-bulk-action="move"><i class="fa-solid fa-folder-arrow-down" aria-hidden="true"></i>Move to Folder</button>
-          <button type="button" data-bulk-action="archive"><i class="fa-solid fa-box-archive" aria-hidden="true"></i>Archive</button>
-          <button type="button" data-bulk-action="delete"><i class="fa-solid fa-trash-can" aria-hidden="true"></i>Delete</button>
+          <button type="button" data-bulk-action="delete"><i class="fa-solid fa-trash-can" aria-hidden="true"></i>Trash</button>
           <button type="button" class="bulk-clear" id="clearSelectionButton"><i class="fa-solid fa-xmark" aria-hidden="true"></i>Clear Selection</button>
         </div>
       </div>
@@ -3116,7 +3214,7 @@
                 <div class="folder-actions" role="group" aria-label="About Us folder actions">
                   <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -3610,7 +3708,7 @@
                 <div class="folder-actions" role="group" aria-label="Programs folder actions">
                   <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -3988,7 +4086,7 @@
                 <div class="folder-actions" role="group" aria-label="Get Involved folder actions">
                   <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -4366,7 +4464,7 @@
                 <div class="folder-actions" role="group" aria-label="Stories folder actions">
                   <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -4860,7 +4958,7 @@
                 <div class="folder-actions" role="group" aria-label="Resources folder actions">
                   <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -5469,7 +5567,7 @@
                 <div class="folder-actions" role="group" aria-label="Utility folder actions">
                   <button type="button" data-folder-action="rename" aria-label="Rename folder" data-tooltip="Rename folder"><i class="fa-solid fa-pen-to-square"></i></button>
                   <button type="button" data-folder-action="move" aria-label="Move folder" data-tooltip="Move folder"><i class="fa-solid fa-arrow-right-arrow-left"></i></button>
-                  <button type="button" data-folder-action="delete" aria-label="Delete folder" data-tooltip="Delete folder"><i class="fa-solid fa-trash-can"></i></button>
+                  <button type="button" data-folder-action="delete" aria-label="Trash folder" data-tooltip="Trash folder"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
               </div>
             </td>
@@ -5706,6 +5804,238 @@
               </div>
             </td>
           </tr>
+          <tr
+            class="page-row"
+            data-page-id="old-promotions"
+            data-status="trash"
+            data-type="Marketing"
+            data-author="Jordan Blake"
+            data-title="Old Promotions"
+            data-created="2024-03-15"
+            data-modified="2025-08-20"
+            data-report-value="850"
+            data-report-trend="-15"
+            data-report-direction="down"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Old Promotions">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="old-promotions">Old Promotions</button>
+                  <span class="subtitle">marketing/old-promotions</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="trash"><span class="badge trash">Trash</span></button>
+            </td>
+            <td><span class="chip">Marketing</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Jordan Blake"
+                title="Jordan Blake"
+                aria-label="Filter by Jordan Blake"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">JB</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="old-promotions">
+                <div class="reports-metric" data-trend="down">
+                  <strong>850 views</strong>
+                  <span class="metric-trend down">-15% engagement</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Mar 15, 2024</td>
+            <td data-modified-label>Aug 20, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+              <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="legacy-product-catalog"
+            data-status="trash"
+            data-type="Catalog"
+            data-author="Amelia Reed"
+            data-title="Legacy Product Catalog"
+            data-created="2023-11-08"
+            data-modified="2025-08-18"
+            data-report-value="1240"
+            data-report-trend="-22"
+            data-report-direction="down"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Legacy Product Catalog">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="legacy-product-catalog">Legacy Product Catalog</button>
+                  <span class="subtitle">products/legacy-catalog</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="trash"><span class="badge trash">Trash</span></button>
+            </td>
+            <td><span class="chip">Catalog</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Amelia Reed"
+                title="Amelia Reed"
+                aria-label="Filter by Amelia Reed"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">AR</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="legacy-product-catalog">
+                <div class="reports-metric" data-trend="down">
+                  <strong>1.2k views</strong>
+                  <span class="metric-trend down">-22% traffic</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Nov 08, 2023</td>
+            <td data-modified-label>Aug 18, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+              <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="discontinued-services"
+            data-status="trash"
+            data-type="Content"
+            data-author="Daniel Ortiz"
+            data-title="Discontinued Services"
+            data-created="2024-06-12"
+            data-modified="2025-08-15"
+            data-report-value="320"
+            data-report-trend="-45"
+            data-report-direction="down"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Discontinued Services">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="discontinued-services">Discontinued Services</button>
+                  <span class="subtitle">services/discontinued</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="trash"><span class="badge trash">Trash</span></button>
+            </td>
+            <td><span class="chip">Content</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Daniel Ortiz"
+                title="Daniel Ortiz"
+                aria-label="Filter by Daniel Ortiz"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">DO</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="discontinued-services">
+                <div class="reports-metric" data-trend="down">
+                  <strong>320 views</strong>
+                  <span class="metric-trend down">-45% engagement</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Jun 12, 2024</td>
+            <td data-modified-label>Aug 15, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+              <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
+          <tr
+            class="page-row"
+            data-page-id="test-page-draft"
+            data-status="trash"
+            data-type="Testing"
+            data-author="Jordan Blake"
+            data-title="Test Page Draft"
+            data-created="2025-07-01"
+            data-modified="2025-08-10"
+            data-report-value="45"
+            data-report-trend="0"
+            data-report-direction="neutral"
+          >
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" data-row-checkbox aria-label="Select Test Page Draft">
+              </label>
+            </td>
+            <td>
+              <div class="title-cell">
+                <div class="title-text">
+                  <button type="button" class="title-button" data-open-page="test-page-draft">Test Page Draft</button>
+                  <span class="subtitle">testing/test-draft</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="status-pill" data-status-action="trash"><span class="badge trash">Trash</span></button>
+            </td>
+            <td><span class="chip">Testing</span></td>
+            <td>
+              <button
+                type="button"
+                class="author-filter"
+                data-author-filter="Jordan Blake"
+                title="Jordan Blake"
+                aria-label="Filter by Jordan Blake"
+              >
+                <div class="avatar">
+                  <span aria-hidden="true">JB</span>
+                </div>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="reports-button" data-report-drawer="test-page-draft">
+                <div class="reports-metric" data-trend="neutral">
+                  <strong>45 views</strong>
+                  <span class="metric-trend neutral">No change</span>
+                </div>
+              </button>
+            </td>
+            <td data-created-label>Jul 01, 2025</td>
+            <td data-modified-label>Aug 10, 2025</td>
+            <td class="actions">
+              <button type="button" aria-label="Restore page" data-tooltip="Restore page" data-menu-action="restore"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+              <button type="button" aria-label="Delete permanently" data-tooltip="Delete permanently" data-menu-action="delete"><i class="fa-solid fa-trash-can"></i></button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -5879,6 +6209,19 @@
             tabindex="-1"
           >
             Access
+          </button>
+          <button
+            type="button"
+            class="new-page-tab"
+            role="tab"
+            id="newPageTab-publishing"
+            data-step-tab
+            data-step-index="4"
+            aria-selected="false"
+            aria-controls="newPageStep-publishing"
+            tabindex="-1"
+          >
+            Publishing
           </button>
         </div>
         <section
@@ -6260,6 +6603,62 @@
             </div>
           </div>
         </section>
+        <section
+          class="new-page-step"
+          data-step="publishing"
+          id="newPageStep-publishing"
+          role="tabpanel"
+          aria-labelledby="newPageTab-publishing"
+          hidden
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          <div class="wizard-section">
+            <div class="wizard-field">
+              <label class="wizard-field-label">Publishing Options</label>
+              <div class="wizard-radio-group">
+                <label class="wizard-radio">
+                  <input type="radio" name="publishOption" value="publish-now" checked>
+                  <span class="wizard-radio-content">
+                    <strong>Publish Now</strong>
+                    <small>Make this page live immediately</small>
+                  </span>
+                </label>
+                <label class="wizard-radio">
+                  <input type="radio" name="publishOption" value="schedule-publish">
+                  <span class="wizard-radio-content">
+                    <strong>Schedule Publish</strong>
+                    <small>Set a future publish date and time</small>
+                  </span>
+                </label>
+                <label class="wizard-radio">
+                  <input type="radio" name="publishOption" value="schedule-unpublish">
+                  <span class="wizard-radio-content">
+                    <strong>Schedule Unpublish</strong>
+                    <small>Automatically unpublish at a specific date and time</small>
+                  </span>
+                </label>
+                <label class="wizard-radio">
+                  <input type="radio" name="publishOption" value="save-draft">
+                  <span class="wizard-radio-content">
+                    <strong>Save as Draft</strong>
+                    <small>Keep this page unpublished</small>
+                  </span>
+                </label>
+              </div>
+              <div class="wizard-schedule-fields" id="newPageScheduleFields" hidden>
+                <div class="wizard-field">
+                  <label for="newPageScheduleDate">Date</label>
+                  <input type="date" id="newPageScheduleDate" name="scheduleDate" class="new-page-input">
+                </div>
+                <div class="wizard-field">
+                  <label for="newPageScheduleTime">Time</label>
+                  <input type="time" id="newPageScheduleTime" name="scheduleTime" class="new-page-input">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <div class="dialog-actions">
           <button type="button" data-new-page-action="cancel">Cancel</button>
           <button type="button" class="primary" data-new-page-nav="next">Next</button>
@@ -6392,11 +6791,11 @@
   >
     <div class="dialog action-dialog" tabindex="-1">
       <div class="dialog-header">
-        <h2 id="deleteFolderDialogTitle">Delete folder</h2>
+        <h2 id="deleteFolderDialogTitle">Trash folder</h2>
         <button
           class="dialog-close"
           type="button"
-          aria-label="Close delete folder dialog"
+          aria-label="Close trash folder dialog"
           data-folder-dialog-close
         >
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
@@ -6404,7 +6803,7 @@
       </div>
       <form class="action-dialog-form" id="deleteFolderForm">
         <p class="action-dialog-description action-dialog-warning" id="deleteFolderDialogDescription">
-          Permanently remove <strong data-folder-dialog-folder-name>this folder</strong> and every page inside. This action cannot be undone.
+          Move <strong data-folder-dialog-folder-name>this folder</strong> and every page inside to trash. You can restore them later.
         </p>
         <div class="form-field">
           <label for="deleteFolderConfirmInput">Type the folder name to confirm</label>
@@ -6420,7 +6819,7 @@
         <p class="action-dialog-hint">To confirm, enter the exact folder name above.</p>
         <div class="dialog-actions">
           <button type="button" data-folder-dialog-cancel>Cancel</button>
-          <button type="submit" class="primary" data-folder-dialog-primary>Delete folder</button>
+          <button type="submit" class="primary" data-folder-dialog-primary>Move to Trash</button>
         </div>
       </form>
     </div>
@@ -6578,6 +6977,18 @@
             tabindex="-1"
           >
             Access
+          </button>
+          <button
+            type="button"
+            class="page-settings-tab"
+            id="pageSettingsTab-publishing"
+            role="tab"
+            aria-selected="false"
+            aria-controls="pageSettingsPanel-publishing"
+            data-page-settings-tab="publishing"
+            tabindex="-1"
+          >
+            Publishing
           </button>
         </div>
         <div class="page-settings-panels">
@@ -6935,6 +7346,64 @@
               </div>
             </div>
           </section>
+          <section
+            class="page-settings-panel"
+            id="pageSettingsPanel-publishing"
+            role="tabpanel"
+            aria-labelledby="pageSettingsTab-publishing"
+            data-page-settings-panel="publishing"
+            hidden
+            aria-hidden="true"
+          >
+            <div class="wizard-section">
+              <div class="page-settings-choice-group">
+                <div class="page-settings-choice-header">
+                  <span>Publishing Options</span>
+                  <p>Control when this page goes live or unpublishes.</p>
+                </div>
+                <div class="wizard-radio-group">
+                  <label class="wizard-radio">
+                    <input type="radio" name="pagePublishOption" value="publish-now" checked>
+                    <span class="wizard-radio-content">
+                      <strong>Publish Now</strong>
+                      <small>Make this page live immediately</small>
+                    </span>
+                  </label>
+                  <label class="wizard-radio">
+                    <input type="radio" name="pagePublishOption" value="schedule-publish">
+                    <span class="wizard-radio-content">
+                      <strong>Schedule Publish</strong>
+                      <small>Set a future publish date and time</small>
+                    </span>
+                  </label>
+                  <label class="wizard-radio">
+                    <input type="radio" name="pagePublishOption" value="schedule-unpublish">
+                    <span class="wizard-radio-content">
+                      <strong>Schedule Unpublish</strong>
+                      <small>Automatically unpublish at a specific date and time</small>
+                    </span>
+                  </label>
+                  <label class="wizard-radio">
+                    <input type="radio" name="pagePublishOption" value="save-draft">
+                    <span class="wizard-radio-content">
+                      <strong>Save as Draft</strong>
+                      <small>Keep this page unpublished</small>
+                    </span>
+                  </label>
+                </div>
+                <div class="wizard-schedule-fields" id="pageSettingsScheduleFields" hidden>
+                  <div class="wizard-field">
+                    <label for="pageSettingsScheduleDate">Date</label>
+                    <input type="date" id="pageSettingsScheduleDate" name="scheduleDate">
+                  </div>
+                  <div class="wizard-field">
+                    <label for="pageSettingsScheduleTime">Time</label>
+                    <input type="time" id="pageSettingsScheduleTime" name="scheduleTime">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
         <div class="dialog-actions">
           <button type="button" data-page-settings-action="cancel">Cancel</button>
@@ -7255,10 +7724,18 @@
           Permanently remove <strong data-dialog-page-name>this page</strong> and all analytics. This
           action cannot be undone.
         </p>
-        <div class="action-dialog-checkbox">
-          <input type="checkbox" id="deleteAcknowledge" name="deleteAcknowledge" required>
-          <label for="deleteAcknowledge">Yes, I understand this will delete the page forever.</label>
+        <div class="form-field">
+          <label for="deletePageConfirmInput">Type the page name to confirm</label>
+          <input
+            type="text"
+            id="deletePageConfirmInput"
+            name="confirmation"
+            required
+            autocomplete="off"
+            data-delete-confirmation-input
+          >
         </div>
+        <p class="action-dialog-hint">To confirm, enter the exact page name above.</p>
         <div class="dialog-actions">
           <button type="button" data-dialog-cancel>Cancel</button>
           <button type="submit" class="primary" data-dialog-primary>Delete permanently</button>
@@ -7457,6 +7934,14 @@
         : [];
       const newPageTypeInput = document.getElementById('newPageTypeInput');
       const newPageTemplateInput = document.getElementById('newPageTemplateInput');
+      const newPagePublishOptions = newPageForm
+        ? Array.from(newPageForm.querySelectorAll('input[name="publishOption"]'))
+        : [];
+      const newPageScheduleFields = document.getElementById('newPageScheduleFields');
+      const pageSettingsPublishOptions = Array.from(
+        document.querySelectorAll('input[name="pagePublishOption"]')
+      );
+      const pageSettingsScheduleFields = document.getElementById('pageSettingsScheduleFields');
       let defaultNewPageTypeValue = '';
       let defaultNewPageTemplateValue = '';
       let activeNewPageTemplateIndex = -1;
@@ -7566,7 +8051,7 @@
       const deleteDialog = document.getElementById('deleteConfirmDialog');
       const deleteDialogPanel = deleteDialog?.querySelector('.dialog');
       const deleteDialogForm = deleteDialog?.querySelector('[data-delete-dialog-form]');
-      const deleteAcknowledgeCheckbox = deleteDialog?.querySelector('#deleteAcknowledge');
+      const deletePageConfirmInput = document.getElementById('deletePageConfirmInput');
       const pageSettingsTabButtons = pageSettingsDialog
         ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-settings-tab]'))
         : [];
@@ -7986,25 +8471,43 @@
         backdrop: deleteDialog,
         dialog: deleteDialogPanel,
         form: deleteDialogForm,
-        initialFocusSelector: '#deleteAcknowledge',
-        onOpen: () => {
-          if (deleteAcknowledgeCheckbox instanceof HTMLInputElement) {
-            deleteAcknowledgeCheckbox.checked = false;
+        initialFocusSelector: '#deletePageConfirmInput',
+        onOpen: ({ pageId, row }) => {
+          const pageName = getPageNameFromRow(row);
+          if (deletePageConfirmInput instanceof HTMLInputElement) {
+            deletePageConfirmInput.value = '';
+            deletePageConfirmInput.placeholder = pageName;
+            deletePageConfirmInput.setCustomValidity('');
           }
         },
-        onSubmit: ({ pageId, form }) => {
-          const formData = new FormData(form);
-          const confirmed = formData.has('deleteAcknowledge');
+        onClose: () => {
+          if (deletePageConfirmInput instanceof HTMLInputElement) {
+            deletePageConfirmInput.value = '';
+            deletePageConfirmInput.setCustomValidity('');
+            deletePageConfirmInput.removeAttribute('placeholder');
+          }
+        },
+        onSubmit: ({ pageId, row, form }) => {
+          const pageName = getPageNameFromRow(row);
+          const typedValue = (deletePageConfirmInput?.value || '').trim();
+          if (!typedValue || typedValue !== pageName) {
+            if (deletePageConfirmInput instanceof HTMLInputElement) {
+              deletePageConfirmInput.setCustomValidity('Enter the page name exactly to confirm.');
+              deletePageConfirmInput.reportValidity();
+            }
+            return false;
+          }
           console.log('Delete page permanently', {
             pageId,
-            confirmed,
+            confirmed: true,
           });
+          return true;
         },
       });
 
       if (deleteDialogController) {
         actionDialogControllers.push(deleteDialogController);
-        actionDialogs['delete-permanently'] = deleteDialogController;
+        actionDialogs['delete'] = deleteDialogController;
       }
 
       const moveFolderDialogController = createFolderActionDialog({
@@ -10909,6 +11412,7 @@
         }
         checkbox.addEventListener('change', () => {
           setPageSelection(row, checkbox.checked);
+
           updateMasterCheckbox();
           updateFolderCheckboxes();
           updateBulkBar();
@@ -11161,6 +11665,26 @@
             }
           }
         }
+      });
+
+      // Handle publish option changes for new page dialog
+      newPagePublishOptions.forEach((radio) => {
+        radio.addEventListener('change', () => {
+          if (newPageScheduleFields) {
+            const showSchedule = radio.value === 'schedule-publish' || radio.value === 'schedule-unpublish';
+            newPageScheduleFields.hidden = !showSchedule;
+          }
+        });
+      });
+
+      // Handle publish option changes for page settings dialog
+      pageSettingsPublishOptions.forEach((radio) => {
+        radio.addEventListener('change', () => {
+          if (pageSettingsScheduleFields) {
+            const showSchedule = radio.value === 'schedule-publish' || radio.value === 'schedule-unpublish';
+            pageSettingsScheduleFields.hidden = !showSchedule;
+          }
+        });
       });
 
       const initialise = () => {
