@@ -813,6 +813,7 @@
       opacity: 0;
       transform: translateY(-12px);
       transition: opacity 0.2s ease, transform 0.2s ease;
+      position: relative;
     }
 
     .page-analytics-row.is-open .page-analytics-drawer {
@@ -820,18 +821,12 @@
       transform: translateY(0);
     }
 
-    .page-analytics-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
     .page-analytics-heading {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      margin-bottom: 20px;
+      padding-right: 60px;
     }
 
     .page-analytics-title {
@@ -903,6 +898,12 @@
       align-items: center;
       justify-content: center;
       transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .page-analytics-drawer > .analytics-close {
+      position: absolute;
+      top: 28px;
+      right: 32px;
     }
 
     .analytics-close:hover,
@@ -8721,16 +8722,14 @@
         const cards = ANALYTICS_CARD_ORDER.map((key) => renderAnalyticsCard(key, data[key])).join('');
         return `
           <div class="page-analytics-drawer" data-analytics-drawer>
-            <div class="page-analytics-header">
-              <div class="page-analytics-heading">
-                <h3 class="page-analytics-title">${escapeHtml(headline)}</h3>
-                ${summary ? `<p class="page-analytics-subtitle">${escapeHtml(summary)}</p>` : ''}
-                ${metaChips ? `<div class="page-analytics-meta">${metaChips}</div>` : ''}
-              </div>
-              <button type="button" class="analytics-close" data-analytics-close aria-label="Close analytics panel">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-              </button>
+            <div class="page-analytics-heading">
+              <h3 class="page-analytics-title">${escapeHtml(headline)}</h3>
+              ${summary ? `<p class="page-analytics-subtitle">${escapeHtml(summary)}</p>` : ''}
+              ${metaChips ? `<div class="page-analytics-meta">${metaChips}</div>` : ''}
             </div>
+            <button type="button" class="analytics-close" data-analytics-close aria-label="Close analytics panel">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
             <div class="analytics-grid">
               ${cards}
             </div>
