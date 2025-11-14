@@ -788,6 +788,325 @@
       background: rgba(37, 99, 235, 0.12);
     }
 
+    .page-row.has-analytics-open {
+      background: rgba(37, 99, 235, 0.06);
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.1);
+    }
+
+    .page-row.has-analytics-open:hover {
+      background: rgba(37, 99, 235, 0.1);
+    }
+
+    .page-analytics-row {
+      background: transparent;
+    }
+
+    .page-analytics-row > td {
+      padding: 0;
+      border: none;
+    }
+
+    .page-analytics-drawer {
+      background: var(--pages-bg);
+      border-top: 1px solid var(--pages-border);
+      padding: 28px 32px 32px;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .page-analytics-row.is-open .page-analytics-drawer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page-analytics-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .page-analytics-heading {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .page-analytics-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .page-analytics-subtitle {
+      margin: 0;
+      color: var(--pages-muted);
+      font-size: 14px;
+    }
+
+    .page-analytics-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .analytics-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 4px 10px;
+      letter-spacing: 0.02em;
+      background: var(--pages-chip-bg);
+      color: var(--pages-chip-color);
+    }
+
+    .analytics-chip.is-good {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .analytics-chip.is-caution {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .analytics-chip.is-issue {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .analytics-chip.is-neutral {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .analytics-chip.is-status {
+      padding: 4px 12px;
+    }
+
+    .analytics-close {
+      border: none;
+      background: rgba(15, 23, 42, 0.06);
+      color: var(--pages-muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .analytics-close:hover,
+    .analytics-close:focus-visible {
+      background: rgba(15, 23, 42, 0.12);
+      color: var(--pages-text);
+      outline: none;
+    }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .analytics-card {
+      background: var(--pages-card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--pages-border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .analytics-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .analytics-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .analytics-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .analytics-card-subtitle {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .analytics-card-action {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--pages-accent);
+      border: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .analytics-card-action:hover,
+    .analytics-card-action:focus-visible {
+      background: rgba(37, 99, 235, 0.18);
+      color: #1d4ed8;
+      outline: none;
+    }
+
+    .analytics-metric-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .analytics-metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .analytics-metric-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .analytics-metric-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--pages-muted);
+    }
+
+    .analytics-metric-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--pages-text);
+    }
+
+    .analytics-metric-helper {
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .analytics-card--traffic {
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(37, 99, 235, 0.02));
+      border-color: rgba(37, 99, 235, 0.18);
+    }
+
+    .analytics-traffic-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .analytics-traffic-value {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .analytics-traffic-label {
+      font-size: 13px;
+      color: var(--pages-muted);
+    }
+
+    .analytics-traffic-trend {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .analytics-traffic-trend.is-up {
+      color: #0f766e;
+    }
+
+    .analytics-traffic-trend.is-down {
+      color: #b91c1c;
+    }
+
+    .analytics-traffic-context {
+      font-size: 12px;
+      color: var(--pages-muted);
+    }
+
+    .analytics-traffic-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .analytics-traffic-details .analytics-detail {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .analytics-detail-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(37, 99, 235, 0.8);
+      font-weight: 600;
+    }
+
+    .analytics-detail-value {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .analytics-detail-chip {
+      align-self: flex-start;
+    }
+
+    @media (max-width: 1440px) {
+      .analytics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 960px) {
+      .analytics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-analytics-drawer {
+        padding: 24px;
+      }
+    }
+
     .page-row.is-filter-hidden,
     .page-row.is-collapsed {
       display: none !important;
@@ -7710,6 +8029,275 @@
         { value: 'low-engagement', label: 'Low engagement rate' },
       ];
 
+      const PAGE_ANALYTICS_DATA = {
+        home: {
+          headline: 'Homepage 2025',
+          summary: 'Performance snapshot for your primary landing experience.',
+          info: {
+            subtitle: 'Owned by Jordan Blake',
+            metrics: [
+              { label: 'Page Rank', value: '#1', status: 'good', statusLabel: 'Leading' },
+              { label: 'Word Count', value: '847 words', status: 'good', statusLabel: 'Balanced' },
+              { label: 'Images', value: '12 assets', status: 'caution', statusLabel: 'Alt text audit' },
+              { label: 'Links', value: '18 total', status: 'issue', statusLabel: '2 broken' },
+              { label: 'Last Edited', value: 'Jul 22, 2025', status: 'caution', statusLabel: '30 days ago' },
+            ],
+          },
+          seo: {
+            subtitle: 'Score 92 / 100',
+            actionLabel: 'View SEO audit',
+            metrics: [
+              { label: 'Meta Title', value: 'Optimized', status: 'good', statusLabel: 'Green' },
+              { label: 'Meta Description', value: 'Too long', status: 'caution', statusLabel: '-12 chars' },
+              { label: 'Open Graph', value: 'Complete', status: 'good', statusLabel: 'Share ready' },
+              { label: 'Schema', value: 'Article & Breadcrumb', status: 'good', statusLabel: 'Valid' },
+              { label: 'Page Speed', value: '91 (mobile)', status: 'good', statusLabel: '+4 vs last week' },
+            ],
+          },
+          accessibility: {
+            subtitle: 'WCAG score 98 / 100',
+            metrics: [
+              { label: 'Heading Hierarchy', value: '1 issue', status: 'issue', statusLabel: 'Missing H2' },
+              { label: 'Image Alt Text', value: '2 warnings', status: 'caution', statusLabel: 'Decorative?' },
+              { label: 'Keyboard Navigation', value: 'Pass', status: 'good', statusLabel: 'Focusable' },
+              { label: 'Color Contrast', value: 'AA compliant', status: 'good', statusLabel: 'Pass' },
+              { label: 'ARIA Labels', value: 'Optimized', status: 'good', statusLabel: 'Complete' },
+            ],
+          },
+          traffic: {
+            subtitle: 'Total views (rolling 12 months)',
+            actionLabel: 'Open traffic report',
+            primary: {
+              value: '12.8k',
+              label: 'Views YTD',
+              delta: '+12.4% vs last month',
+              direction: 'up',
+              context: 'Avg. session duration 3m 24s',
+            },
+            metrics: [
+              { label: 'Unique visitors', value: '8.7k', status: 'good', statusLabel: 'Growing' },
+              { label: 'Bounce rate', value: '38%', status: 'caution', statusLabel: 'Watch' },
+              { label: 'Top channel', value: 'Organic (54%)', status: 'good', statusLabel: 'Trending' },
+              { label: 'Top device', value: 'Mobile (62%)', status: 'good', statusLabel: 'Stable' },
+            ],
+          },
+        },
+        'our-team': {
+          headline: 'Our Team overview',
+          summary: 'Spotlight on staff bios and leadership content.',
+          info: {
+            subtitle: 'Owned by Amelia Reed',
+            metrics: [
+              { label: 'Team Bios', value: '14 published', status: 'good', statusLabel: 'Complete' },
+              { label: 'Word Count', value: '2,450 words', status: 'caution', statusLabel: 'Long read' },
+              { label: 'Profile Photos', value: '12 / 14', status: 'caution', statusLabel: '2 missing' },
+              { label: 'Internal Links', value: '9', status: 'good', statusLabel: 'Healthy' },
+              { label: 'Last Edited', value: 'Jun 30, 2025', status: 'caution', statusLabel: '45 days ago' },
+            ],
+          },
+          seo: {
+            subtitle: 'Score 87 / 100',
+            metrics: [
+              { label: 'Meta Title', value: 'Optimized', status: 'good', statusLabel: 'Target keyword' },
+              { label: 'Meta Description', value: 'Needs action', status: 'issue', statusLabel: 'Missing CTA' },
+              { label: 'Open Graph', value: 'Preview image', status: 'good', statusLabel: 'Updated' },
+              { label: 'Schema', value: 'Organization', status: 'good', statusLabel: 'Valid' },
+              { label: 'Page Speed', value: '84 (desktop)', status: 'caution', statusLabel: 'Image weight' },
+            ],
+          },
+          accessibility: {
+            subtitle: 'WCAG score 92 / 100',
+            metrics: [
+              { label: 'Heading Hierarchy', value: 'Pass', status: 'good', statusLabel: 'Clear' },
+              { label: 'Image Alt Text', value: '2 missing', status: 'issue', statusLabel: 'Add alt text' },
+              { label: 'Keyboard Navigation', value: 'Pass', status: 'good', statusLabel: 'Tab order' },
+              { label: 'Color Contrast', value: 'AA', status: 'good', statusLabel: 'Verified' },
+              { label: 'ARIA Labels', value: 'Team slider', status: 'caution', statusLabel: 'Add region label' },
+            ],
+          },
+          traffic: {
+            subtitle: 'Weekly engagement trend',
+            primary: {
+              value: '4.2k',
+              label: 'Views 30d',
+              delta: '+6.1% vs prior',
+              direction: 'up',
+              context: 'Avg. time on page 2m 18s',
+            },
+            metrics: [
+              { label: 'Unique visitors', value: '2.9k', status: 'good', statusLabel: 'Up 4%' },
+              { label: 'CTA clicks', value: '384', status: 'good', statusLabel: 'New record' },
+              { label: 'Bounce rate', value: '42%', status: 'caution', statusLabel: 'Improve hero' },
+              { label: 'Top referrer', value: 'LinkedIn', status: 'good', statusLabel: '34%' },
+            ],
+          },
+        },
+        'annual-reports': {
+          headline: 'Annual Reports hub',
+          summary: 'Download center for investor-ready documents.',
+          info: {
+            subtitle: 'Owned by Casey Morgan',
+            metrics: [
+              { label: 'Documents', value: '8 uploads', status: 'good', statusLabel: 'Current' },
+              { label: 'Word Count', value: '1,180 words', status: 'good', statusLabel: 'Skimmable' },
+              { label: 'Downloads', value: '742 YTD', status: 'good', statusLabel: '+18%' },
+              { label: 'Links', value: '6 outbound', status: 'caution', statusLabel: 'Verify quarterly' },
+              { label: 'Last Edited', value: 'May 12, 2025', status: 'issue', statusLabel: '90+ days' },
+            ],
+          },
+          seo: {
+            subtitle: 'Score 79 / 100',
+            metrics: [
+              { label: 'Meta Title', value: 'Too short', status: 'caution', statusLabel: 'Add detail' },
+              { label: 'Meta Description', value: 'Optimized', status: 'good', statusLabel: '120 chars' },
+              { label: 'Open Graph', value: 'No image', status: 'issue', statusLabel: 'Add OG art' },
+              { label: 'Schema', value: 'Report & FAQ', status: 'good', statusLabel: 'Valid' },
+              { label: 'Page Speed', value: '88 (mobile)', status: 'good', statusLabel: 'CDN cached' },
+            ],
+          },
+          accessibility: {
+            subtitle: 'WCAG score 95 / 100',
+            metrics: [
+              { label: 'Heading Hierarchy', value: 'Pass', status: 'good', statusLabel: 'Structured' },
+              { label: 'Download buttons', value: 'Focusable', status: 'good', statusLabel: 'Keyboard' },
+              { label: 'PDF tags', value: '6 / 8 tagged', status: 'caution', statusLabel: 'Fix 2 files' },
+              { label: 'Contrast', value: 'AAA', status: 'good', statusLabel: 'Excellent' },
+              { label: 'Alt Text', value: 'Hero illustration', status: 'caution', statusLabel: 'Decorative?' },
+            ],
+          },
+          traffic: {
+            subtitle: 'Conversion insights',
+            primary: {
+              value: '2.1k',
+              label: 'Downloads 90d',
+              delta: '+3.4% vs prior',
+              direction: 'up',
+              context: 'Completion rate 78%',
+            },
+            metrics: [
+              { label: 'Unique visitors', value: '3.6k', status: 'good', statusLabel: 'Solid' },
+              { label: 'Top device', value: 'Desktop (58%)', status: 'neutral', statusLabel: 'Stable' },
+              { label: 'Email signups', value: '216', status: 'caution', statusLabel: 'Goal 250' },
+              { label: 'Bounce rate', value: '34%', status: 'good', statusLabel: 'Healthy' },
+            ],
+          },
+        },
+        blog: {
+          headline: 'Blog index',
+          summary: 'Content marketing performance overview.',
+          info: {
+            subtitle: 'Owned by Nico Harper',
+            metrics: [
+              { label: 'Articles', value: '128 published', status: 'good', statusLabel: '+4 this month' },
+              { label: 'Word Count', value: 'Average 1,100', status: 'good', statusLabel: 'Optimal' },
+              { label: 'Featured Images', value: '125 / 128', status: 'caution', statusLabel: '3 missing' },
+              { label: 'Internal Links', value: '24', status: 'good', statusLabel: 'Strong web' },
+              { label: 'Last Edited', value: 'Jul 15, 2025', status: 'good', statusLabel: 'Recent' },
+            ],
+          },
+          seo: {
+            subtitle: 'Score 90 / 100',
+            metrics: [
+              { label: 'Meta Title', value: 'Optimized', status: 'good', statusLabel: 'Dynamic' },
+              { label: 'Meta Description', value: 'Auto generated', status: 'caution', statusLabel: 'Review' },
+              { label: 'Schema', value: 'BlogPosting', status: 'good', statusLabel: 'Valid' },
+              { label: 'Canonical', value: 'Set', status: 'good', statusLabel: 'Avoid duplicates' },
+              { label: 'Page Speed', value: '95 (mobile)', status: 'good', statusLabel: 'Fast' },
+            ],
+          },
+          accessibility: {
+            subtitle: 'WCAG score 97 / 100',
+            metrics: [
+              { label: 'Heading Hierarchy', value: 'Pass', status: 'good', statusLabel: 'H1 only once' },
+              { label: 'Image Alt Text', value: '4 missing', status: 'caution', statusLabel: 'New posts' },
+              { label: 'Keyboard Navigation', value: 'Pass', status: 'good', statusLabel: 'Skip link' },
+              { label: 'Color Contrast', value: 'AA', status: 'good', statusLabel: 'Verified' },
+              { label: 'ARIA Labels', value: 'Tags filter', status: 'good', statusLabel: 'Described' },
+            ],
+          },
+          traffic: {
+            subtitle: 'Engagement funnel',
+            primary: {
+              value: '6.4k',
+              label: 'Views 30d',
+              delta: '+9.8% vs prior',
+              direction: 'up',
+              context: 'Newsletter CTR 4.6%',
+            },
+            metrics: [
+              { label: 'Unique visitors', value: '4.1k', status: 'good', statusLabel: 'Record high' },
+              { label: 'Average scroll depth', value: '68%', status: 'good', statusLabel: 'Goal 65%' },
+              { label: 'Bounce rate', value: '47%', status: 'caution', statusLabel: 'Improve intro' },
+              { label: 'Top post', value: '2025 Impact Story', status: 'good', statusLabel: '1.1k views' },
+            ],
+          },
+        },
+        contact: {
+          headline: 'Contact page health',
+          summary: 'Ensure support pathways stay available.',
+          info: {
+            subtitle: 'Owned by Devin Lee',
+            metrics: [
+              { label: 'Form submissions', value: '328 / month', status: 'good', statusLabel: '+5%' },
+              { label: 'Response SLA', value: '2h 14m', status: 'good', statusLabel: 'On target' },
+              { label: 'Support links', value: '6 live', status: 'good', statusLabel: 'Monitored' },
+              { label: 'Fallback phone', value: 'Tested weekly', status: 'good', statusLabel: 'Up' },
+              { label: 'Last Edited', value: 'Jun 11, 2025', status: 'caution', statusLabel: '60 days ago' },
+            ],
+          },
+          seo: {
+            subtitle: 'Score 85 / 100',
+            metrics: [
+              { label: 'Meta Title', value: 'Optimized', status: 'good', statusLabel: 'Includes CTA' },
+              { label: 'Meta Description', value: 'Too short', status: 'caution', statusLabel: '+24 chars' },
+              { label: 'Open Graph', value: 'Complete', status: 'good', statusLabel: 'Map card' },
+              { label: 'Local Schema', value: 'Enabled', status: 'good', statusLabel: 'Rich results' },
+              { label: 'Page Speed', value: '82 (mobile)', status: 'caution', statusLabel: 'Map embed' },
+            ],
+          },
+          accessibility: {
+            subtitle: 'WCAG score 94 / 100',
+            metrics: [
+              { label: 'Form Labels', value: 'Pass', status: 'good', statusLabel: 'Explicit' },
+              { label: 'Error Messaging', value: 'Needs copy', status: 'issue', statusLabel: 'Add aria-live' },
+              { label: 'Keyboard Navigation', value: 'Pass', status: 'good', statusLabel: 'Focus order' },
+              { label: 'Color Contrast', value: 'AA', status: 'good', statusLabel: 'Verified' },
+              { label: 'Captcha', value: 'Accessible', status: 'good', statusLabel: 'v3' },
+            ],
+          },
+          traffic: {
+            subtitle: 'Conversion sources',
+            primary: {
+              value: '1.9k',
+              label: 'Form views 30d',
+              delta: '-2.4% vs prior',
+              direction: 'down',
+              context: 'Completion rate 42%',
+            },
+            metrics: [
+              { label: 'Unique visitors', value: '1.4k', status: 'neutral', statusLabel: 'Holding' },
+              { label: 'Top device', value: 'Mobile (71%)', status: 'good', statusLabel: 'Optimized' },
+              { label: 'Chat deflection', value: '112 sessions', status: 'caution', statusLabel: 'Watch' },
+              { label: 'Bounce rate', value: '28%', status: 'good', statusLabel: 'Strong' },
+            ],
+          },
+        },
+      };
+
+      const ANALYTICS_CARD_TITLES = {
+        info: 'Page Info',
+        seo: 'SEO',
+        accessibility: 'Accessibility',
+        traffic: 'Traffic',
+      };
+
+      const ANALYTICS_CARD_ORDER = ['info', 'seo', 'accessibility', 'traffic'];
+
+      let analyticsRowElement = null;
+      let analyticsActiveRow = null;
+      let analyticsActivePageId = '';
+      let analyticsColumnCount = 0;
+
       const dateFormatter = new Intl.DateTimeFormat(undefined, {
         month: 'short',
         day: '2-digit',
@@ -7757,6 +8345,466 @@
         return dateFormatter.format(date);
       }
 
+      function escapeHtml(value) {
+        if (value === undefined || value === null) {
+          return '';
+        }
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function getAnalyticsChipClass(status) {
+        switch (status) {
+          case 'good':
+            return 'is-good';
+          case 'caution':
+            return 'is-caution';
+          case 'issue':
+            return 'is-issue';
+          default:
+            return 'is-neutral';
+        }
+      }
+
+      function renderAnalyticsMetricList(metrics) {
+        if (!Array.isArray(metrics) || metrics.length === 0) {
+          return `
+            <li class="analytics-metric">
+              <div class="analytics-metric-main">
+                <span class="analytics-metric-label">Status</span>
+                <span class="analytics-metric-value">No data available</span>
+              </div>
+            </li>
+          `;
+        }
+        return metrics
+          .map((metric) => {
+            const label = escapeHtml(metric?.label ?? '');
+            const value = escapeHtml(metric?.value ?? '—');
+            const helper = metric?.helper ? `<span class="analytics-metric-helper">${escapeHtml(metric.helper)}</span>` : '';
+            const statusLabel = metric?.statusLabel
+              ? `<span class="analytics-chip ${getAnalyticsChipClass(metric.status)}">${escapeHtml(metric.statusLabel)}</span>`
+              : '';
+            return `
+              <li class="analytics-metric">
+                <div class="analytics-metric-main">
+                  <span class="analytics-metric-label">${label}</span>
+                  <span class="analytics-metric-value">${value}</span>
+                  ${helper}
+                </div>
+                ${statusLabel}
+              </li>
+            `;
+          })
+          .join('');
+      }
+
+      function renderTrafficCardBody(card) {
+        const primary = card?.primary;
+        const metrics = Array.isArray(card?.metrics) ? card.metrics : [];
+        const directionClass =
+          primary?.direction === 'down'
+            ? 'is-down'
+            : primary?.direction === 'up'
+            ? 'is-up'
+            : '';
+        const primaryHtml = primary
+          ? `
+            <div class="analytics-traffic-primary">
+              <span class="analytics-traffic-value">${escapeHtml(primary.value ?? '—')}</span>
+              ${primary.label ? `<span class="analytics-traffic-label">${escapeHtml(primary.label)}</span>` : ''}
+              ${
+                primary.delta
+                  ? `<span class="analytics-traffic-trend ${directionClass}">${escapeHtml(primary.delta)}</span>`
+                  : ''
+              }
+              ${
+                primary.context
+                  ? `<span class="analytics-traffic-context">${escapeHtml(primary.context)}</span>`
+                  : ''
+              }
+            </div>
+          `
+          : '';
+        const detailsHtml = metrics.length
+          ? `
+            <div class="analytics-traffic-details">
+              ${metrics
+                .map((metric) => {
+                  const chip = metric?.statusLabel
+                    ? `<span class="analytics-chip analytics-detail-chip ${getAnalyticsChipClass(metric.status)}">${escapeHtml(metric.statusLabel)}</span>`
+                    : '';
+                  return `
+                    <div class="analytics-detail">
+                      <span class="analytics-detail-label">${escapeHtml(metric?.label ?? '')}</span>
+                      <span class="analytics-detail-value">${escapeHtml(metric?.value ?? '—')}</span>
+                      ${chip}
+                    </div>
+                  `;
+                })
+                .join('')}
+            </div>
+          `
+          : '';
+        return `
+          <div class="analytics-card-body">
+            ${primaryHtml}
+            ${detailsHtml}
+          </div>
+        `;
+      }
+
+      function renderAnalyticsCard(key, card) {
+        const title = ANALYTICS_CARD_TITLES[key] || card?.title || 'Panel';
+        const subtitle = card?.subtitle ? `<span class="analytics-card-subtitle">${escapeHtml(card.subtitle)}</span>` : '';
+        const actionLabel = card?.actionLabel || (key === 'traffic' ? 'Open insights' : 'Audit');
+        const actionButton = actionLabel
+          ? `<button type="button" class="analytics-card-action" data-analytics-action="${escapeHtml(key)}">${escapeHtml(actionLabel)}</button>`
+          : '';
+        const body =
+          key === 'traffic'
+            ? renderTrafficCardBody(card)
+            : `<div class="analytics-card-body"><ul class="analytics-metric-list">${renderAnalyticsMetricList(card?.metrics)}</ul></div>`;
+        return `
+          <div class="analytics-card analytics-card--${escapeHtml(key)}">
+            <div class="analytics-card-header">
+              <div>
+                <span class="analytics-card-title">${escapeHtml(title)}</span>
+                ${subtitle}
+              </div>
+              ${actionButton}
+            </div>
+            ${body}
+          </div>
+        `;
+      }
+
+      function buildAnalyticsHeaderMeta(row, data) {
+        const chips = [];
+        const seen = new Set();
+        const statusValue = row.dataset.status || '';
+        const statusLabel = getStatusLabel(statusValue) || 'Status';
+        let tone = 'neutral';
+        let chipLabel = statusLabel;
+        switch (statusValue) {
+          case 'published':
+            tone = 'good';
+            chipLabel = 'Live';
+            break;
+          case 'draft':
+            tone = 'caution';
+            chipLabel = 'Draft';
+            break;
+          case 'scheduled':
+            tone = 'caution';
+            chipLabel = 'Scheduled';
+            break;
+          case 'unpublished':
+            tone = 'caution';
+            chipLabel = 'Offline';
+            break;
+          case 'trash':
+            tone = 'issue';
+            chipLabel = 'Trash';
+            break;
+          default:
+            tone = 'neutral';
+            chipLabel = statusLabel;
+        }
+        if (chipLabel) {
+          chips.push({ label: chipLabel, tone, isStatus: true });
+          seen.add(chipLabel);
+        }
+        const typeLabel = row.dataset.type || '';
+        if (typeLabel && !seen.has(typeLabel)) {
+          chips.push({ label: typeLabel, tone: 'neutral' });
+          seen.add(typeLabel);
+        }
+        const modified = formatDateForDisplay(row.dataset.modified || '');
+        if (modified) {
+          const label = `Updated ${modified}`;
+          if (!seen.has(label)) {
+            chips.push({ label, tone: 'neutral' });
+            seen.add(label);
+          }
+        }
+        if (Array.isArray(data?.meta)) {
+          data.meta.forEach((item) => {
+            const label = typeof item?.label === 'string' ? item.label : '';
+            if (!label || seen.has(label)) {
+              return;
+            }
+            chips.push({ label, tone: item?.tone || 'neutral', isStatus: item?.isStatus === true });
+            seen.add(label);
+          });
+        }
+        return chips;
+      }
+
+      function generateDefaultAnalytics(row) {
+        const title = row.dataset.title || 'Page analytics';
+        const statusValue = row.dataset.status || '';
+        const statusLabel = getStatusLabel(statusValue) || 'Status';
+        const typeLabel = row.dataset.type || '';
+        const author = row.dataset.author || '';
+        const template = row.dataset.template || 'Custom layout';
+        const modifiedRaw = row.dataset.modified || '';
+        const modified = formatDateForDisplay(modifiedRaw);
+        const reportValueRaw = row.dataset.reportValue ? Number(row.dataset.reportValue) : Number.NaN;
+        const trendRaw = row.dataset.reportTrend ? Number(row.dataset.reportTrend) : Number.NaN;
+        const hasReportValue = Number.isFinite(reportValueRaw);
+        const direction = row.dataset.reportDirection
+          ? row.dataset.reportDirection
+          : Number.isFinite(trendRaw) && trendRaw < 0
+          ? 'down'
+          : Number.isFinite(trendRaw) && trendRaw > 0
+          ? 'up'
+          : 'flat';
+        const viewValue = hasReportValue
+          ? reportValueRaw >= 1000
+            ? `${(reportValueRaw / 1000).toFixed(1)}k`
+            : reportValueRaw.toLocaleString()
+          : '—';
+        let statusTone = 'neutral';
+        let statusChipLabel = statusLabel;
+        switch (statusValue) {
+          case 'published':
+            statusTone = 'good';
+            statusChipLabel = 'Live';
+            break;
+          case 'draft':
+            statusTone = 'caution';
+            statusChipLabel = 'Draft';
+            break;
+          case 'scheduled':
+            statusTone = 'caution';
+            statusChipLabel = 'Scheduled';
+            break;
+          case 'unpublished':
+            statusTone = 'caution';
+            statusChipLabel = 'Offline';
+            break;
+          case 'trash':
+            statusTone = 'issue';
+            statusChipLabel = 'Trash';
+            break;
+          default:
+            statusTone = 'neutral';
+        }
+        const uniqueVisitors = hasReportValue ? Math.max(1, Math.round(reportValueRaw * 0.72)) : null;
+        const deltaText = Number.isFinite(trendRaw)
+          ? trendRaw === 0
+            ? 'No change from prior period'
+            : `${trendRaw > 0 ? '+' : ''}${trendRaw}% vs prior period`
+          : '';
+        const bounceRateValue = direction === 'down' ? '34%' : direction === 'up' ? '48%' : '42%';
+        const bounceRateTone = direction === 'down' ? 'good' : direction === 'up' ? 'caution' : 'neutral';
+
+        return {
+          headline: title,
+          summary: `${statusLabel}${typeLabel ? ` · ${typeLabel}` : ''}`,
+          info: {
+            subtitle: author ? `Owned by ${author}` : 'Assign an owner',
+            metrics: [
+              { label: 'Status', value: statusLabel, status: statusTone, statusLabel: statusChipLabel },
+              { label: 'Type', value: typeLabel || 'Not set', status: typeLabel ? 'neutral' : 'caution', statusLabel: typeLabel ? 'Content type' : 'Set type' },
+              { label: 'Template', value: template, status: 'neutral', statusLabel: 'Layout' },
+              { label: 'Owner', value: author || 'Unassigned', status: author ? 'good' : 'caution', statusLabel: author ? 'Assigned' : 'Assign owner' },
+              { label: 'Last Edited', value: modified || 'Not edited', status: modified ? 'caution' : 'issue', statusLabel: modified ? 'Review' : 'Update' },
+            ],
+          },
+          seo: {
+            subtitle: 'Automated checks pending',
+            metrics: [
+              { label: 'Meta title', value: 'Auto-generated', status: 'caution', statusLabel: 'Customize' },
+              { label: 'Meta description', value: 'Needs summary', status: 'caution', statusLabel: 'Add copy' },
+              { label: 'Open Graph', value: 'Fallback image', status: 'issue', statusLabel: 'Upload' },
+              { label: 'Schema', value: 'Not configured', status: 'issue', statusLabel: 'Add schema' },
+              { label: 'Page speed', value: 'Scan pending', status: 'neutral', statusLabel: 'Run test' },
+            ],
+          },
+          accessibility: {
+            subtitle: 'Accessibility checklist',
+            metrics: [
+              { label: 'Headings', value: 'Audit recommended', status: 'caution', statusLabel: 'Check structure' },
+              { label: 'Alt text', value: 'Add descriptions', status: 'caution', statusLabel: 'Audit' },
+              { label: 'Keyboard navigation', value: 'Not tested', status: 'neutral', statusLabel: 'Run check' },
+              { label: 'Color contrast', value: 'Not tested', status: 'neutral', statusLabel: 'Scan' },
+              { label: 'Interactive labels', value: 'Verify forms', status: 'caution', statusLabel: 'Review' },
+            ],
+          },
+          traffic: {
+            subtitle: 'Engagement overview',
+            primary: {
+              value: viewValue,
+              label: 'Views (30d)',
+              delta: deltaText,
+              direction,
+              context: hasReportValue ? 'Session duration 1m 48s' : 'No analytics collected yet',
+            },
+            metrics: [
+              {
+                label: 'Unique visitors',
+                value: uniqueVisitors ? uniqueVisitors.toLocaleString() : '—',
+                status: uniqueVisitors ? 'neutral' : 'caution',
+                statusLabel: uniqueVisitors ? 'Estimate' : 'No data',
+              },
+              { label: 'Bounce rate', value: bounceRateValue, status: bounceRateTone, statusLabel: bounceRateTone === 'good' ? 'Improving' : bounceRateTone === 'caution' ? 'Watch' : 'Stable' },
+              { label: 'Top device', value: 'Mobile first', status: 'neutral', statusLabel: 'Check layout' },
+              { label: 'Avg. time on page', value: '1m 48s', status: 'neutral', statusLabel: 'Baseline' },
+            ],
+          },
+        };
+      }
+
+      function mergeCardData(baseCard, overrideCard) {
+        if (!baseCard && !overrideCard) {
+          return {};
+        }
+        if (!overrideCard) {
+          return { ...baseCard };
+        }
+        if (!baseCard) {
+          return { ...overrideCard };
+        }
+        const merged = { ...baseCard, ...overrideCard };
+        if (overrideCard.metrics) {
+          merged.metrics = overrideCard.metrics;
+        } else if (baseCard.metrics) {
+          merged.metrics = baseCard.metrics;
+        }
+        if (overrideCard.primary !== undefined) {
+          merged.primary = overrideCard.primary;
+        } else if (baseCard.primary !== undefined && merged.primary === undefined) {
+          merged.primary = baseCard.primary;
+        }
+        return merged;
+      }
+
+      function mergeAnalyticsData(baseData, overrideData) {
+        if (!overrideData) {
+          return baseData;
+        }
+        return {
+          ...baseData,
+          ...overrideData,
+          info: mergeCardData(baseData.info, overrideData.info),
+          seo: mergeCardData(baseData.seo, overrideData.seo),
+          accessibility: mergeCardData(baseData.accessibility, overrideData.accessibility),
+          traffic: mergeCardData(baseData.traffic, overrideData.traffic),
+        };
+      }
+
+      function getAnalyticsDataForRow(row) {
+        const base = generateDefaultAnalytics(row);
+        const pageId = row.dataset.pageId || '';
+        const overrides = pageId ? PAGE_ANALYTICS_DATA[pageId] : undefined;
+        return mergeAnalyticsData(base, overrides);
+      }
+
+      function renderAnalyticsDrawerContent(row, data) {
+        const headline = data?.headline || row.dataset.title || 'Page analytics';
+        const summary = data?.summary || '';
+        const metaChips = buildAnalyticsHeaderMeta(row, data)
+          .map((chip) => {
+            const classes = ['analytics-chip', getAnalyticsChipClass(chip.tone)];
+            if (chip.isStatus) {
+              classes.push('is-status');
+            }
+            return `<span class="${classes.join(' ')}">${escapeHtml(chip.label)}</span>`;
+          })
+          .join('');
+        const cards = ANALYTICS_CARD_ORDER.map((key) => renderAnalyticsCard(key, data[key])).join('');
+        return `
+          <div class="page-analytics-drawer" data-analytics-drawer>
+            <div class="page-analytics-header">
+              <div class="page-analytics-heading">
+                <h3 class="page-analytics-title">${escapeHtml(headline)}</h3>
+                ${summary ? `<p class="page-analytics-subtitle">${escapeHtml(summary)}</p>` : ''}
+                ${metaChips ? `<div class="page-analytics-meta">${metaChips}</div>` : ''}
+              </div>
+              <button type="button" class="analytics-close" data-analytics-close aria-label="Close analytics panel">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="analytics-grid">
+              ${cards}
+            </div>
+          </div>
+        `;
+      }
+
+      function closeAnalyticsDrawer({ immediate = false } = {}) {
+        if (!analyticsRowElement || !analyticsRowElement.isConnected) {
+          if (analyticsActiveRow) {
+            analyticsActiveRow.classList.remove('has-analytics-open');
+          }
+          analyticsActiveRow = null;
+          analyticsActivePageId = '';
+          return;
+        }
+        const drawer = analyticsRowElement.querySelector('.page-analytics-drawer');
+        const finalize = () => {
+          analyticsRowElement.remove();
+          analyticsRowElement.classList.remove('is-open');
+          if (analyticsActiveRow) {
+            analyticsActiveRow.classList.remove('has-analytics-open');
+          }
+          analyticsActiveRow = null;
+          analyticsActivePageId = '';
+        };
+        if (immediate || !drawer) {
+          finalize();
+          return;
+        }
+        const handleTransitionEnd = (event) => {
+          if (event.target !== drawer) {
+            return;
+          }
+          drawer.removeEventListener('transitionend', handleTransitionEnd);
+          finalize();
+        };
+        drawer.addEventListener('transitionend', handleTransitionEnd);
+        analyticsRowElement.classList.remove('is-open');
+      }
+
+      function openAnalyticsDrawer(row) {
+        if (!(row instanceof HTMLElement)) {
+          return;
+        }
+        const pageId = row.dataset.pageId || '';
+        if (!pageId) {
+          return;
+        }
+        if (analyticsActivePageId === pageId && analyticsRowElement?.isConnected) {
+          return;
+        }
+        if (analyticsRowElement?.isConnected) {
+          closeAnalyticsDrawer({ immediate: true });
+        }
+        const data = getAnalyticsDataForRow(row);
+        const columnCount = Math.max(1, analyticsColumnCount || 1);
+        if (!analyticsRowElement) {
+          analyticsRowElement = document.createElement('tr');
+          analyticsRowElement.className = 'page-analytics-row';
+        }
+        analyticsRowElement.innerHTML = `<td colspan="${columnCount}">${renderAnalyticsDrawerContent(row, data)}</td>`;
+        analyticsRowElement.classList.remove('is-open');
+        row.insertAdjacentElement('afterend', analyticsRowElement);
+        if (analyticsActiveRow) {
+          analyticsActiveRow.classList.remove('has-analytics-open');
+        }
+        analyticsActiveRow = row;
+        analyticsActivePageId = pageId;
+        row.classList.add('has-analytics-open');
+        window.requestAnimationFrame(() => {
+          analyticsRowElement?.classList.add('is-open');
+        });
+      }
       function updateActiveFilterSummary(count) {
         if (!activeFilterCount) {
           return;
@@ -7771,6 +8819,12 @@
       }
 
       const selection = new Set();
+
+      const pagesTableElement = document.querySelector('.pages-table');
+      analyticsColumnCount = Math.max(
+        1,
+        pagesTableElement?.querySelectorAll('thead th').length || 9
+      );
 
       const searchInput = document.getElementById('pagesSearch');
       const filterChips = document.getElementById('filterChips');
@@ -9871,6 +10925,14 @@
         updateFolderCheckboxes();
         updateMasterCheckbox();
         updateBulkBar();
+        if (analyticsActiveRow) {
+          const shouldCollapse =
+            analyticsActiveRow.classList.contains('is-filter-hidden') ||
+            analyticsActiveRow.classList.contains('is-collapsed');
+          if (shouldCollapse) {
+            closeAnalyticsDrawer({ immediate: true });
+          }
+        }
       }
 
       function focusSearchInput() {
@@ -11469,6 +12531,20 @@
         if (!menuElement) {
           closeAllActionMenus();
         }
+        const analyticsCloseButton = event.target.closest('[data-analytics-close]');
+        if (analyticsCloseButton) {
+          closeAnalyticsDrawer();
+          return;
+        }
+
+        const analyticsActionButton = event.target.closest('[data-analytics-action]');
+        if (analyticsActionButton) {
+          const actionKey = analyticsActionButton.dataset.analyticsAction || '';
+          if (analyticsActivePageId) {
+            console.log('Analytics action', actionKey, analyticsActivePageId);
+          }
+          return;
+        }
         const pageSettingsTrigger = event.target.closest('[data-page-settings]');
         if (pageSettingsTrigger) {
           const row = pageSettingsTrigger.closest('.page-row');
@@ -11537,8 +12613,11 @@
         }
         const reportButton = event.target.closest('[data-report-drawer]');
         if (reportButton) {
-          const pageId = reportButton.dataset.reportDrawer;
-          console.log('Open analytics for', pageId);
+          const row = reportButton.closest('.page-row');
+          if (row) {
+            openAnalyticsDrawer(row);
+          }
+          return;
         }
         const folderActionButton = event.target.closest('[data-folder-action]');
         if (folderActionButton) {
@@ -11558,6 +12637,24 @@
             } else {
               console.log(`Folder ${action}`, folderId);
             }
+          }
+        }
+        if (event.target.closest('.page-analytics-row')) {
+          return;
+        }
+        const rowTarget = event.target.closest('.page-row');
+        if (rowTarget) {
+          if (
+            rowTarget.classList.contains('is-filter-hidden') ||
+            rowTarget.classList.contains('is-collapsed')
+          ) {
+            return;
+          }
+          const interactiveTarget = event.target.closest(
+            'button, a, input, label, .checkbox, [data-action-menu], .status-pill, .author-filter, .folder-header, .folder-actions'
+          );
+          if (!interactiveTarget) {
+            openAnalyticsDrawer(rowTarget);
           }
         }
       });
