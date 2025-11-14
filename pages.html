@@ -821,34 +821,6 @@
       transform: translateY(0);
     }
 
-    .page-analytics-heading {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 20px;
-      padding-right: 60px;
-    }
-
-    .page-analytics-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin: 0;
-    }
-
-    .page-analytics-subtitle {
-      margin: 0;
-      color: var(--pages-muted);
-      font-size: 14px;
-    }
-
-    .page-analytics-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
     .analytics-chip {
       display: inline-flex;
       align-items: center;
@@ -8484,68 +8456,6 @@
         `;
       }
 
-      function buildAnalyticsHeaderMeta(row, data) {
-        const chips = [];
-        const seen = new Set();
-        const statusValue = row.dataset.status || '';
-        const statusLabel = getStatusLabel(statusValue) || 'Status';
-        let tone = 'neutral';
-        let chipLabel = statusLabel;
-        switch (statusValue) {
-          case 'published':
-            tone = 'good';
-            chipLabel = 'Live';
-            break;
-          case 'draft':
-            tone = 'caution';
-            chipLabel = 'Draft';
-            break;
-          case 'scheduled':
-            tone = 'caution';
-            chipLabel = 'Scheduled';
-            break;
-          case 'unpublished':
-            tone = 'caution';
-            chipLabel = 'Offline';
-            break;
-          case 'trash':
-            tone = 'issue';
-            chipLabel = 'Trash';
-            break;
-          default:
-            tone = 'neutral';
-            chipLabel = statusLabel;
-        }
-        if (chipLabel) {
-          chips.push({ label: chipLabel, tone, isStatus: true });
-          seen.add(chipLabel);
-        }
-        const typeLabel = row.dataset.type || '';
-        if (typeLabel && !seen.has(typeLabel)) {
-          chips.push({ label: typeLabel, tone: 'neutral' });
-          seen.add(typeLabel);
-        }
-        const modified = formatDateForDisplay(row.dataset.modified || '');
-        if (modified) {
-          const label = `Updated ${modified}`;
-          if (!seen.has(label)) {
-            chips.push({ label, tone: 'neutral' });
-            seen.add(label);
-          }
-        }
-        if (Array.isArray(data?.meta)) {
-          data.meta.forEach((item) => {
-            const label = typeof item?.label === 'string' ? item.label : '';
-            if (!label || seen.has(label)) {
-              return;
-            }
-            chips.push({ label, tone: item?.tone || 'neutral', isStatus: item?.isStatus === true });
-            seen.add(label);
-          });
-        }
-        return chips;
-      }
-
       function generateDefaultAnalytics(row) {
         const title = row.dataset.title || 'Page analytics';
         const statusValue = row.dataset.status || '';
@@ -8708,25 +8618,9 @@
       }
 
       function renderAnalyticsDrawerContent(row, data) {
-        const headline = data?.headline || row.dataset.title || 'Page analytics';
-        const summary = data?.summary || '';
-        const metaChips = buildAnalyticsHeaderMeta(row, data)
-          .map((chip) => {
-            const classes = ['analytics-chip', getAnalyticsChipClass(chip.tone)];
-            if (chip.isStatus) {
-              classes.push('is-status');
-            }
-            return `<span class="${classes.join(' ')}">${escapeHtml(chip.label)}</span>`;
-          })
-          .join('');
         const cards = ANALYTICS_CARD_ORDER.map((key) => renderAnalyticsCard(key, data[key])).join('');
         return `
           <div class="page-analytics-drawer" data-analytics-drawer>
-            <div class="page-analytics-heading">
-              <h3 class="page-analytics-title">${escapeHtml(headline)}</h3>
-              ${summary ? `<p class="page-analytics-subtitle">${escapeHtml(summary)}</p>` : ''}
-              ${metaChips ? `<div class="page-analytics-meta">${metaChips}</div>` : ''}
-            </div>
             <button type="button" class="analytics-close" data-analytics-close aria-label="Close analytics panel">
               <i class="fa-solid fa-xmark" aria-hidden="true"></i>
             </button>
