@@ -14,18 +14,27 @@
   <style>
     :root {
       color-scheme: light;
+      --uikit-white: #ffffff;
+      --uikit-white-rgb: 255, 255, 255;
       --uikit-bg: #f5f7fb;
-      --uikit-card-bg: #ffffff;
+      --uikit-card-bg: var(--uikit-white);
       --uikit-border: #e0e6f1;
+      --uikit-border-rgb: 224, 230, 241;
       --uikit-muted: #6b7280;
       --uikit-text: #111827;
+      --uikit-shadow-rgb: 15, 23, 42;
       --uikit-primary: #2563eb;
+      --uikit-primary-rgb: 37, 99, 235;
       --uikit-secondary: #6366f1;
+      --uikit-secondary-rgb: 99, 102, 241;
       --uikit-success: #22c55e;
+      --uikit-success-rgb: 34, 197, 94;
       --uikit-warning: #f59e0b;
+      --uikit-warning-rgb: 245, 158, 11;
       --uikit-danger: #ef4444;
+      --uikit-danger-rgb: 239, 68, 68;
       --uikit-radius: 16px;
-      --uikit-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --uikit-shadow: 0 18px 40px rgba(var(--uikit-shadow-rgb), 0.12);
       --uikit-grid-gap: 20px;
     }
 
@@ -55,7 +64,7 @@
       background: var(--uikit-card-bg);
       border-radius: var(--uikit-radius);
       padding: 32px;
-      border: 1px solid rgba(99, 102, 241, 0.16);
+      border: 1px solid rgba(var(--uikit-secondary-rgb), 0.16);
       box-shadow: var(--uikit-shadow);
       display: flex;
       flex-direction: column;
@@ -87,7 +96,7 @@
       gap: 10px;
       padding: 10px 16px;
       border-radius: 999px;
-      background: rgba(37, 99, 235, 0.08);
+      background: rgba(var(--uikit-primary-rgb), 0.08);
       color: var(--uikit-primary);
       font-weight: 600;
       font-size: 14px;
@@ -107,7 +116,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 16px 30px rgba(var(--uikit-shadow-rgb), 0.08);
     }
 
     .section-card header {
@@ -137,11 +146,11 @@
       background: var(--color, #000);
       border-radius: 18px;
       padding: 18px;
-      color: #fff;
+      color: var(--uikit-white);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(var(--uikit-white-rgb), 0.2);
       min-height: 120px;
     }
 
@@ -188,20 +197,20 @@
     }
 
     .mw-button:focus-visible {
-      outline: 3px solid rgba(37, 99, 235, 0.25);
+      outline: 3px solid rgba(var(--uikit-primary-rgb), 0.25);
       outline-offset: 2px;
     }
 
     .mw-button.primary {
       background: var(--uikit-primary);
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.28);
+      color: var(--uikit-white);
+      box-shadow: 0 12px 24px rgba(var(--uikit-primary-rgb), 0.28);
     }
 
     .mw-button.secondary {
-      background: rgba(99, 102, 241, 0.12);
+      background: rgba(var(--uikit-secondary-rgb), 0.12);
       color: var(--uikit-secondary);
-      border-color: rgba(99, 102, 241, 0.35);
+      border-color: rgba(var(--uikit-secondary-rgb), 0.35);
     }
 
     .mw-button.ghost {
@@ -212,13 +221,13 @@
 
     .mw-button.danger {
       background: var(--uikit-danger);
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(239, 68, 68, 0.25);
+      color: var(--uikit-white);
+      box-shadow: 0 12px 24px rgba(var(--uikit-danger-rgb), 0.25);
     }
 
     .mw-button:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+      box-shadow: 0 14px 30px rgba(var(--uikit-shadow-rgb), 0.14);
     }
 
     .form-grid {
@@ -261,8 +270,8 @@
     select:focus,
     textarea:focus {
       outline: none;
-      border-color: rgba(37, 99, 235, 0.6);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+      border-color: rgba(var(--uikit-primary-rgb), 0.6);
+      box-shadow: 0 0 0 4px rgba(var(--uikit-primary-rgb), 0.15);
     }
 
     .badge-row {
@@ -282,17 +291,17 @@
     }
 
     .badge.success {
-      background: rgba(34, 197, 94, 0.18);
+      background: rgba(var(--uikit-success-rgb), 0.18);
       color: #166534;
     }
 
     .badge.warning {
-      background: rgba(245, 158, 11, 0.18);
+      background: rgba(var(--uikit-warning-rgb), 0.18);
       color: #92400e;
     }
 
     .badge.info {
-      background: rgba(37, 99, 235, 0.18);
+      background: rgba(var(--uikit-primary-rgb), 0.18);
       color: #1d4ed8;
     }
 
@@ -305,7 +314,7 @@
       border-radius: 18px;
       border: 1px solid var(--uikit-border);
       padding: 24px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.7));
+      background: linear-gradient(135deg, rgba(var(--uikit-white-rgb), 0.96), rgba(241, 245, 249, 0.7));
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -366,13 +375,13 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.25);
+      background: var(--uikit-white);
+      box-shadow: 0 6px 14px rgba(var(--uikit-shadow-rgb), 0.25);
       transition: transform 0.2s ease;
     }
 
     .toggle input:checked + .toggle-track {
-      background: rgba(37, 99, 235, 0.35);
+      background: rgba(var(--uikit-primary-rgb), 0.35);
     }
 
     .toggle input:checked + .toggle-track + .toggle-thumb {
@@ -385,11 +394,11 @@
       border-collapse: collapse;
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 16px 32px rgba(var(--uikit-shadow-rgb), 0.12);
     }
 
     .table thead {
-      background: rgba(37, 99, 235, 0.08);
+      background: rgba(var(--uikit-primary-rgb), 0.08);
     }
 
     .table th,
@@ -397,7 +406,7 @@
       padding: 14px 18px;
       text-align: left;
       font-size: 14px;
-      border-bottom: 1px solid rgba(224, 230, 241, 0.8);
+      border-bottom: 1px solid rgba(var(--uikit-border-rgb), 0.8);
     }
 
     .table tbody tr:last-child td {
