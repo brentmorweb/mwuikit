@@ -11598,19 +11598,28 @@
           const action = actionMenuItem.dataset.menuAction;
           const row = actionMenuItem.closest('.page-row');
           const pageId = row?.dataset.pageId;
+          const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
           if (action === 'settings' && pageId) {
-            const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
+            if (menuElement) {
+              closeActionMenu(menuElement);
+            }
             openPageSettingsDialog(pageId, triggerButton || actionMenuItem);
-          } else if (action === 'duplicate' && pageId) {
-            const triggerButton = menuElement?.querySelector('[data-action-menu-trigger]');
+            return;
+          }
+          if (action === 'duplicate' && pageId) {
+            if (menuElement) {
+              closeActionMenu(menuElement);
+            }
             openCopyPageDialog(pageId, triggerButton || actionMenuItem);
-          } else if (action && pageId) {
+            return;
+          }
+          if (action && pageId) {
             const controller = actionDialogs[action];
             if (controller) {
               if (menuElement) {
                 closeActionMenu(menuElement);
               }
-              controller.open(pageId, { trigger: actionMenuItem });
+              controller.open(pageId, { trigger: triggerButton || actionMenuItem });
               return;
             }
             console.log(`Page ${action}`, pageId);
