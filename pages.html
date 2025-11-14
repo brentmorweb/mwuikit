@@ -11373,7 +11373,9 @@
           }
         });
         dropdown.addEventListener('click', (event) => {
-          event.stopPropagation();
+          if (!event.target.closest('[data-menu-action]')) {
+            event.stopPropagation();
+          }
         });
         dropdown.addEventListener('keydown', (event) => {
           if (event.key === 'Escape') {
