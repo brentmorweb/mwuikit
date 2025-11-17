@@ -45,7 +45,7 @@
       padding: 32px 32px 80px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 0px;
       box-sizing: border-box;
     }
 
@@ -55,8 +55,8 @@
       z-index: 20;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      padding-bottom: 8px;
+      gap: 0px;
+      padding-bottom: 0px;
       background: linear-gradient(180deg, var(--pages-bg) 75%, rgba(245, 247, 251, 0));
       backdrop-filter: blur(6px);
     }
@@ -66,6 +66,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 24px;
+		padding-bottom:0px
     }
 
     .pages-header h1 {
@@ -254,8 +255,8 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      border-radius: 14px;
-      padding: 6px;
+      border-radius: 12px 12px 0 0 ;
+      padding: 6px 6px  0 6px;
       background: rgba(var(--pages-accent-rgb), 0.08);
       overflow-x: auto;
     }
@@ -265,7 +266,7 @@
       align-items: center;
       gap: 8px;
       padding: 10px 16px;
-      border-radius: 12px;
+      border-radius: 12px 12px 0 0 ;
       border: none;
       background: transparent;
       color: var(--pages-text);
@@ -303,6 +304,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+		background:#efefef; padding:8px
     }
 
     .filter-chips[hidden] {
@@ -349,10 +351,10 @@
       justify-content: space-between;
       gap: 16px;
       padding: 14px 20px;
-      border-radius: 14px;
-      border: 1px solid var(--pages-border);
+     /* border-radius: 14px;  
+      border: 1px solid var(--pages-border);*/
       background: var(--pages-white);
-      box-shadow: 0 14px 28px rgba(var(--pages-accent-rgb), 0.16);
+      /* box-shadow: 0 14px 28px rgba(var(--pages-accent-rgb), 0.16); */
     }
 
     .bulk-actions-bar.is-active {
@@ -6248,26 +6250,22 @@
             </div>
             <div class="date-hint">Filters by last modified date. Leave one field blank for an open range.</div>
           </div>
-        </div>
-        <div class="drawer-section">
+        
           <h3 class="drawer-section-title">Author</h3>
           <div class="section-content" id="authorFilterSection">
             <div class="author-filter-grid" id="authorFilterList" role="group" aria-label="Filter by author"></div>
           </div>
-        </div>
-        <div class="drawer-section">
+        
           <h3 class="drawer-section-title">Status</h3>
           <div class="section-content" id="statusFilterSection">
             <div class="filter-pill-group" id="statusFilterPills" role="group" aria-label="Filter by status"></div>
           </div>
-        </div>
-        <div class="drawer-section">
+        
           <h3 class="drawer-section-title">Type</h3>
           <div class="section-content" id="typeFilterSection">
             <div class="type-chip-group" id="typeFilterList" role="group" aria-label="Filter by type"></div>
           </div>
-        </div>
-        <div class="drawer-section">
+        
           <h3 class="drawer-section-title">Report Card</h3>
           <div class="section-content" id="reportFilterSection">
             <div class="report-checkboxes" id="reportFilterList"></div>
