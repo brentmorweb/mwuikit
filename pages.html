@@ -7927,6 +7927,40 @@
     </div>
   </div>
 
+  <div
+    class="dialog-backdrop"
+    id="bulkActionDialog"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="bulkActionDialogTitle"
+    aria-describedby="bulkActionDialogDescription"
+  >
+    <div class="dialog action-dialog" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="bulkActionDialogTitle">Confirm bulk action</h2>
+        <button
+          class="dialog-close"
+          type="button"
+          aria-label="Close bulk action dialog"
+          data-bulk-dialog-close
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="action-dialog-form">
+        <p class="action-dialog-description" id="bulkActionDialogDescription">
+          <span data-bulk-dialog-message>Select an action</span>
+        </p>
+        <p class="action-dialog-hint" data-bulk-dialog-hint hidden></p>
+        <div class="dialog-actions">
+          <button type="button" data-bulk-dialog-cancel>Cancel</button>
+          <button type="button" class="primary" data-bulk-dialog-primary>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function () {
       const folderStateStorageKey = 'mw-pages-folder-state';
@@ -8936,6 +8970,13 @@
       const deleteDialogPanel = deleteDialog?.querySelector('.dialog');
       const deleteDialogForm = deleteDialog?.querySelector('[data-delete-dialog-form]');
       const deletePageConfirmInput = document.getElementById('deletePageConfirmInput');
+      const bulkActionDialog = document.getElementById('bulkActionDialog');
+      const bulkActionDialogPanel = bulkActionDialog?.querySelector('.dialog');
+      const bulkActionDialogTitle = document.getElementById('bulkActionDialogTitle');
+      const bulkActionDialogDescription = document.getElementById('bulkActionDialogDescription');
+      const bulkActionDialogMessage = bulkActionDialog?.querySelector('[data-bulk-dialog-message]');
+      const bulkActionDialogHint = bulkActionDialog?.querySelector('[data-bulk-dialog-hint]');
+      const bulkActionDialogPrimary = bulkActionDialog?.querySelector('[data-bulk-dialog-primary]');
       const pageSettingsTabButtons = pageSettingsDialog
         ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-settings-tab]'))
         : [];
@@ -8948,6 +8989,162 @@
       const pageSettingsTypeButtons = pageSettingsDialog
         ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-type-option]'))
         : [];
+      const bulkActionDialogConfigs = {
+        publish: {
+          title: 'Publish pages',
+          getPrimaryLabel: ({ count }) => (count === 1 ? 'Publish page' : 'Publish pages'),
+          getMessage: ({ selectionLabel }) =>
+            `Publish ${selectionLabel}? Everyone with access to your site will be able to view them.`,
+          hint: 'We’ll notify collaborators who subscribe to publish updates.',
+        },
+        unpublish: {
+          title: 'Unpublish pages',
+          getPrimaryLabel: ({ count }) => (count === 1 ? 'Unpublish page' : 'Unpublish pages'),
+          getMessage: ({ selectionLabel }) =>
+            `Unpublish ${selectionLabel}? They will stay visible to teammates but hidden from visitors.`,
+          hint: 'Existing share links will stop working for viewers without edit access.',
+        },
+        move: {
+          title: 'Move to folder',
+          getPrimaryLabel: ({ count }) => (count === 1 ? 'Move page' : 'Move pages'),
+          getMessage: ({ selectionLabel }) =>
+            `Move ${selectionLabel} into a different folder? Use this to keep work organized.`,
+          hint: 'URLs, permissions, and analytics stay the same after moving.',
+        },
+        delete: {
+          title: 'Move to trash',
+          destructive: true,
+          getPrimaryLabel: ({ count }) => (count === 1 ? 'Move to trash' : 'Move pages to trash'),
+          getMessage: ({ selectionLabel }) =>
+            `Move ${selectionLabel} to the trash? You can restore them within 30 days.`,
+          hint: 'Trash is emptied automatically after 30 days.',
+        },
+      };
+      const bulkActionDialogController = (() => {
+        if (!(bulkActionDialog instanceof HTMLElement) || !(bulkActionDialogPanel instanceof HTMLElement)) {
+          return null;
+        }
+
+        const trap = createFocusTrap(bulkActionDialogPanel);
+        const closeButtons = Array.from(
+          bulkActionDialog.querySelectorAll('[data-bulk-dialog-close]')
+        );
+        const cancelButtons = Array.from(
+          bulkActionDialog.querySelectorAll('[data-bulk-dialog-cancel]')
+        );
+        let activeAction = null;
+        let lastTrigger = null;
+
+        const isOpen = () => bulkActionDialog.getAttribute('aria-hidden') === 'false';
+
+        const applyConfig = (config, count) => {
+          const noun = count === 1 ? 'page' : 'pages';
+          const selectionLabel = count === 1 ? 'the selected page' : `${count} selected pages`;
+          if (bulkActionDialogTitle) {
+            bulkActionDialogTitle.textContent = config.title;
+          }
+          if (bulkActionDialogMessage) {
+            const message =
+              typeof config.getMessage === 'function'
+                ? config.getMessage({ count, noun, selectionLabel })
+                : `Apply this action to ${selectionLabel}?`;
+            bulkActionDialogMessage.textContent = message;
+          }
+          if (bulkActionDialogPrimary) {
+            const label =
+              typeof config.getPrimaryLabel === 'function'
+                ? config.getPrimaryLabel({ count, noun, selectionLabel })
+                : config.primaryLabel || 'Continue';
+            bulkActionDialogPrimary.textContent = label;
+          }
+          if (bulkActionDialogHint) {
+            const hint =
+              typeof config.getHint === 'function'
+                ? config.getHint({ count, noun, selectionLabel })
+                : config.hint || '';
+            if (hint) {
+              bulkActionDialogHint.textContent = hint;
+              bulkActionDialogHint.hidden = false;
+            } else {
+              bulkActionDialogHint.textContent = '';
+              bulkActionDialogHint.hidden = true;
+            }
+          }
+          if (bulkActionDialogDescription) {
+            bulkActionDialogDescription.classList.toggle(
+              'action-dialog-warning',
+              Boolean(config.destructive)
+            );
+          }
+        };
+
+        const close = ({ focusTrigger = true } = {}) => {
+          if (!isOpen()) {
+            return;
+          }
+          trap.deactivate();
+          bulkActionDialog.setAttribute('aria-hidden', 'true');
+          syncBodyScrollState();
+          const trigger = lastTrigger;
+          activeAction = null;
+          lastTrigger = null;
+          if (focusTrigger && trigger instanceof HTMLElement) {
+            trigger.focus({ preventScroll: true });
+          }
+        };
+
+        const open = (action, { trigger = null } = {}) => {
+          const config = bulkActionDialogConfigs[action];
+          if (!config) {
+            return;
+          }
+          const count = state.selection.size;
+          if (count === 0) {
+            return;
+          }
+          applyConfig(config, count);
+          activeAction = action;
+          lastTrigger = trigger instanceof HTMLElement ? trigger : null;
+          bulkActionDialog.setAttribute('aria-hidden', 'false');
+          syncBodyScrollState();
+          window.requestAnimationFrame(() => {
+            const focusTarget =
+              bulkActionDialogPrimary instanceof HTMLElement ? bulkActionDialogPrimary : null;
+            trap.activate({ focusElement: focusTarget });
+          });
+        };
+
+        const handleRequestClose = () => {
+          close();
+        };
+
+        closeButtons.forEach((button) => {
+          button.addEventListener('click', handleRequestClose);
+        });
+
+        cancelButtons.forEach((button) => {
+          button.addEventListener('click', handleRequestClose);
+        });
+
+        bulkActionDialog.addEventListener('click', (event) => {
+          if (event.target === bulkActionDialog) {
+            close();
+          }
+        });
+
+        bulkActionDialogPrimary?.addEventListener('click', () => {
+          if (!activeAction) {
+            close();
+            return;
+          }
+          const selectedIds = Array.from(state.selection);
+          console.log(`Bulk ${activeAction}`, selectedIds);
+          clearSelection();
+          close({ focusTrigger: false });
+        });
+
+        return { open, close, isOpen };
+      })();
       const pageSettingsTemplateButtons = pageSettingsDialog
         ? Array.from(pageSettingsDialog.querySelectorAll('[data-page-template-option]'))
         : [];
@@ -12470,6 +12667,10 @@
           }
           const action = actionButton.dataset.bulkAction;
           if (!action || state.selection.size === 0) {
+            return;
+          }
+          if (bulkActionDialogController) {
+            bulkActionDialogController.open(action, { trigger: actionButton });
             return;
           }
           console.log(`Bulk ${action}`, Array.from(state.selection));
